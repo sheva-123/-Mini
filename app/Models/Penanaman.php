@@ -19,6 +19,7 @@ class Penanaman extends Model
     public function pemeliharaan(){
         return $this->hasMany(Pemeliharaan::class);
     }
-
-    
+    public function pemanenan(){
+        return $this->hasMany(Pemanenan::class);
+    }
 }
