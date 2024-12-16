@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('tanamen', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_tanaman');
+            $table->string('jenis');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }

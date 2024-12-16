@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('pertanians', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pertanian');
+            $table->string('lokasi_pertanian');
+            $table->string('luas_lahan');
             $table->timestamps();
         });
     }

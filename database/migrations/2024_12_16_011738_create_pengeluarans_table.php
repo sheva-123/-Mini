@@ -13,10 +13,10 @@ return new class extends Migration
 {
     Schema::create('pengeluarans', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('id_pertanian')->constrained('pertanians')->onDelete('restrict');
+        $table->foreignId('pertanian_id')->constrained()->onDelete('cascade');
         $table->date('tanggal_pengeluaran');
         $table->string('jenis_pengeluaran');
-        $table->decimal('biaya', 10, 2);
+        $table->string('biaya');
         $table->timestamps();
     });
 }
