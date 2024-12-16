@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengeluaran;
+use App\Models\Pertanian;
 use Illuminate\Http\Request;
 
 class PengeluaranController extends Controller
@@ -12,7 +13,8 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        //
+        $pengeluarans = Pengeluaran::with('pertanian')->get(); // Include related farm data
+        return view('pengeluarans.index', compact('pengeluarans'));
     }
 
     /**
@@ -20,7 +22,8 @@ class PengeluaranController extends Controller
      */
     public function create()
     {
-        //
+        $pertanian = Pertanian::all(); // Fetch all farms for dropdown
+        return view('pengeluarans.create', compact('pertanians'));
     }
 
     /**
@@ -28,7 +31,15 @@ class PengeluaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_pertanian' => 'required|exists:pertanians,id',
+            'tanggal_pengeluaran' => 'required|date',
+            'jenis_pengeluaran' => 'required|string|max:255',
+            'biaya' => 'required|numeric|min:0',
+        ]);
+
+        Pengeluaran::create($request->all());
+        return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil ditambahkan.');
     }
 
     /**
@@ -36,7 +47,7 @@ class PengeluaranController extends Controller
      */
     public function show(Pengeluaran $pengeluaran)
     {
-        //
+        return view('pengeluarans.show', compact('pengeluaran'));
     }
 
     /**
@@ -44,7 +55,8 @@ class PengeluaranController extends Controller
      */
     public function edit(Pengeluaran $pengeluaran)
     {
-        //
+        $pertanian = Pertanian::all(); // Fetch all farms for dropdown
+        return view('pengeluarans.edit', compact('pengeluaran', 'pertanian'));
     }
 
     /**
@@ -52,7 +64,15 @@ class PengeluaranController extends Controller
      */
     public function update(Request $request, Pengeluaran $pengeluaran)
     {
-        //
+        $request->validate([
+            'id_pertanian' => 'required|exists:pertanians,id',
+            'tanggal_pengeluaran' => 'required|date',
+            'jenis_pengeluaran' => 'required|string|max:255',
+            'biaya' => 'required|numeric|min:0',
+        ]);
+
+        $pengeluaran->update($request->all());
+        return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +80,7 @@ class PengeluaranController extends Controller
      */
     public function destroy(Pengeluaran $pengeluaran)
     {
-        //
+        $pengeluaran->delete();
+        return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil dihapus.');
     }
 }
