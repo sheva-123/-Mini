@@ -9,13 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('pengeluarans', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('pengeluarans', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('id_pertanian')->constrained('pertanians')->onDelete('restrict');
+        $table->date('tanggal_pengeluaran');
+        $table->string('jenis_pengeluaran');
+        $table->decimal('biaya', 10, 2);
+        $table->timestamps();
+    });
+}
+
 
     /**
      * Reverse the migrations.
