@@ -1,13 +1,13 @@
-<aside x-data="{ open: false }" class="bg-white border-r border-gray-100 w-59 min-h-screen flex flex-col">
-    <!-- Sidebar Header -->
-    <div class="h-16 flex items-center justify-center bg-gray-100 border-b border-gray-200">
+{{-- <aside x-data="{ open: false }" class="bg-white border-r border-gray-100 w-59 min-h-screen flex flex-col">
+    <!-- Sidebar Header --> --}}
+    {{-- <div class="h-16 flex items-center justify-center bg-gray-100 border-b border-gray-200">
         <a href="{{ route('dashboard') }}">
             <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
         </a>
-    </div>
+    </div> --}}
 
     <!-- Navigation Links -->
-    <nav class="mt-4 flex-1">
+    {{-- <nav class="mt-4 flex-1">
         <ul class="space-y-4 px-14">
             <!-- Dashboard Link -->
             <li>
@@ -17,78 +17,78 @@
                     </span>
                     <span>{{ __('Dashboard') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Farms Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('farms.index')" :active="request()->routeIs('farms.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Pertanian') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Crops Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('crops.index')" :active="request()->routeIs('crops.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Tanaman') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Plantings Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('plantings.index')" :active="request()->routeIs('plantings.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Penanaman') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Maintenances Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('maintenances.index')" :active="request()->routeIs('maintenances.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Pemeliharaan') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Harvests Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('pemanenans.index')" :active="request()->routeIs('pemanenans.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Pemanenan') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Expenses Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('pengeluarans.index')" :active="request()->routeIs('pengeluarans.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Pengeluaran') }}</span>
                 </x-nav-link>
-            </li>
+            </li> --}}
 
             <!-- Reports Link -->
-            <li>
+            {{-- <li>
                 <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
                     <span>{{ __('Laporan') }}</span>
                 </x-nav-link>
-            </li>
-        </ul>
+            </li> --}}
+        {{-- </ul>
     </nav>
 
     <!-- Logout Link at the Bottom -->
@@ -105,6 +105,6 @@
                 </span>
                 <span>{{ __('Log Out') }}</span>
             </x-nav-link>
-        </form>
-    </div>
-</aside>
+        </form> --}}
+    {{-- </div>
+</aside> --}}

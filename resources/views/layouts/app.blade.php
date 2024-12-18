@@ -17,12 +17,37 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-100">
-    <div class="flex">
-        @include('layouts.navigation')
+    <nav class="bg-white border-b border-gray-300 fixed w-full z-50 top-0 left-0">
+        <div class="flex justify-between items-center px-9">
+            <!-- Aumenté el padding aquí para añadir espacio en los lados -->
+            <!-- Ícono de Menú -->
+            <button id="menuBtn">
+                <i class="fas fa-bars text-cyan-500 text-lg"></i>
+            </button>
 
-        <!-- Page Content -->
-        <div class="flex-1 min-h-screen">
-            <!-- Page Heading -->
+            <!-- Logo -->
+            <div class="ml-1">
+                <img src="https://www.emprenderconactitud.com/img/POC%20WCS%20(1).png" alt="logo" class="h-20 w-28">
+            </div>
+
+            <!-- Ícono de Notificación y Perfil -->
+            <div class="space-x-4">
+                <button>
+                    <i class="fas fa-bell text-cyan-500 text-lg"></i>
+                </button>
+
+                <!-- Botón de Perfil -->
+                <button>
+                    <i class="fas fa-user text-cyan-500 text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="grid grid-cols-[0.5fr_2fr] h-screen mt-20">
+        <div>
+            <x-sidebar />
+        </div>
+        <div>
             @isset($header)
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
@@ -31,7 +56,7 @@
                 </header>
             @endisset
 
-            <main>
+            <main class="">
                 {{ $slot }}
             </main>
         </div>
