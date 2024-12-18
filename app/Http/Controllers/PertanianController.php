@@ -12,7 +12,8 @@ class PertanianController extends Controller
      */
     public function index()
     {
-        //
+        $pertanians = Pertanian::all();
+        return view('pertanians.index', compact('pertanians'));
     }
 
     /**
@@ -20,7 +21,7 @@ class PertanianController extends Controller
      */
     public function create()
     {
-        //
+        return view('pertanians.create');
     }
 
     /**
@@ -44,7 +45,8 @@ class PertanianController extends Controller
      */
     public function edit(Pertanian $pertanian)
     {
-        //
+        $pertanian = Pertanian::findOrFail($id);
+        return view('pertanians.edit', compact('pertanian'));
     }
 
     /**
