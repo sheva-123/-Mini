@@ -22,13 +22,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('farms', PertanianController::class);
-Route::resource('crops', TanamanController::class);
-Route::resource('plantings', PenanamanController::class);
-Route::resource('maintenances', PemeliharaanController::class);
+    Route::resource('pertanians', PertanianController::class);
+Route::resource('tanamans', TanamanController::class);
+Route::resource('Penanamans', PenanamanController::class);
+Route::resource('Pemeliharaans', PemeliharaanController::class);
 Route::resource('pemanenans', PemanenanController::class);
 Route::resource('pengeluarans', PengeluaranController::class);
-Route::resource('reports', LaporanController::class);
+Route::resource('laporans', LaporanController::class);
+
 });
 
 require __DIR__.'/auth.php';
