@@ -36,7 +36,7 @@
 
     <!-- Latar belakang video bergerak bertema pertanian -->
     <video class="background-video" autoplay loop muted>
-        <source src="https://www.pexels.com/id-id/video/pemandangan-udara-indah-dari-lanskap-hijau-29765630/"
+        <source src="12791395_1080_1920_30fps.mp4"
             type="video/mp4"> <!-- Ganti dengan URL video pertanian -->
         Video tidak didukung oleh browser Anda.
     </video>
@@ -72,7 +72,7 @@
 
 
     <!-- Hero Section -->
-    <section class="relative h-screen bg-cover bg-center flex items-center justify-center text-center"
+    <section id="hero" class="relative h-screen bg-cover bg-center flex items-center justify-center text-center"
         style="background-image: url('https://source.unsplash.com/1600x900/?farm,technology');">
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="relative z-10 px-6 md:px-12">
@@ -87,7 +87,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="py-24 bg-white" id="features">
+    <section id="features" class="py-24 bg-white" id="features">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold text-gray-800">Fitur Premium untuk Pertanian Modern</h2>
             <p class="mt-4 text-xl text-gray-600">Manfaatkan teknologi kami untuk mengelola pertanian Anda dengan lebih
@@ -125,20 +125,16 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-24 bg-gray-800 text-white" id="about">
+    <section id="about" class="py-24 bg-gray-800 text-white" id="about">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold">Tentang Kami</h2>
             <p class="mt-4 text-xl text-gray-400">Kami adalah pemimpin dalam solusi teknologi pertanian, menghadirkan
                 inovasi yang membantu petani untuk meningkatkan hasil dan keberlanjutan pertanian.</p>
-            <div class="mt-12">
-                <img src="https://source.unsplash.com/1600x900/?agriculture" alt="About Us"
-                    class="w-full rounded-xl shadow-xl">
-            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="py-24 bg-green-600 text-white" id="contact">
+    <section id="contact" class="py-24 bg-green-800 text-white" id="contact">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold">Hubungi Kami</h2>
             <p class="mt-4 text-xl">Kami siap membantu Anda meningkatkan manajemen pertanian Anda. Hubungi kami untuk
