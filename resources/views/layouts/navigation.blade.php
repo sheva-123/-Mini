@@ -61,7 +61,7 @@
 
             <!-- Harvests Link -->
             <li>
-                <x-nav-link :href="route('harvests.index')" :active="request()->routeIs('harvests.*')" class="flex items-center space-x-1">
+                <x-nav-link :href="route('pemanenans.index')" :active="request()->routeIs('pemanenans.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>
@@ -71,7 +71,7 @@
 
             <!-- Expenses Link -->
             <li>
-                <x-nav-link :href="route('expenses.index')" :active="request()->routeIs('expenses.*')" class="flex items-center space-x-1">
+                <x-nav-link :href="route('pengeluarans.index')" :active="request()->routeIs('pengeluarans.*')" class="flex items-center space-x-1">
                     <span class="text-gray-500">
                         <!-- Add an icon if needed -->
                     </span>

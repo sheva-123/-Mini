@@ -3,84 +3,72 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengeluaran;
-use App\Models\Pertanian;
+use App\Models\Pertenakan; // Model Pertanian
 use Illuminate\Http\Request;
 
 class PengeluaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Menampilkan daftar pengeluaran dengan fitur pencarian
+    public function index(Request $request)
     {
-        $pengeluarans = Pengeluaran::with('pertanian')->get(); // Include related farm data
-        return view('pengeluarans.index', compact('pengeluarans'));
+        $cari = $request->get('cari');
+        $pengeluarans = Pengeluaran::with('pertanian') // Relasi ke pertanian
+            ->when($cari, function ($query, $cari) {
+                return $query->where('jenis_pengeluaran', 'like', "%{$cari}%");
+            })
+            ->get();
+
+        return view('pengeluarans.index', compact('pengeluarans', 'cari'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Menampilkan form tambah pengeluaran
     public function create()
     {
-        $pertanian = Pertanian::all(); // Fetch all farms for dropdown
-        return view('pengeluarans.create', compact('pertanians'));
+        $pertanigans = Pertanian::all(); // Ambil semua pertanian
+        return view('pengeluarans.create', compact('pertanigans'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Menyimpan pengeluaran
     public function store(Request $request)
     {
         $request->validate([
-            'id_pertanian' => 'required|exists:pertanians,id',
+            'id_pertanian' => 'required|exists:pertanigans,id',
             'tanggal_pengeluaran' => 'required|date',
-            'jenis_pengeluaran' => 'required|string|max:255',
-            'biaya' => 'required|numeric|min:0',
+            'jenis_pengeluaran' => 'required|string',
+            'biaya' => 'required|numeric',
         ]);
 
         Pengeluaran::create($request->all());
-        return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil ditambahkan.');
+
+        return redirect()->route('pengeluarans.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pengeluaran $pengeluaran)
-    {
-        return view('pengeluarans.show', compact('pengeluaran'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Menampilkan form edit pengeluaran
     public function edit(Pengeluaran $pengeluaran)
     {
-        $pertanian = Pertanian::all(); // Fetch all farms for dropdown
-        return view('pengeluarans.edit', compact('pengeluaran', 'pertanian'));
+        $pertanigans = Pertanian::all();
+        return view('pengeluarans.edit', compact('pengeluaran', 'pertanigans'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Menyimpan perubahan pengeluaran
     public function update(Request $request, Pengeluaran $pengeluaran)
     {
         $request->validate([
-            'id_pertanian' => 'required|exists:pertanians,id',
+            'id_pertanian' => 'required|exists:pertanigans,id',
             'tanggal_pengeluaran' => 'required|date',
-            'jenis_pengeluaran' => 'required|string|max:255',
-            'biaya' => 'required|numeric|min:0',
+            'jenis_pengeluaran' => 'required|string',
+            'biaya' => 'required|numeric',
         ]);
 
         $pengeluaran->update($request->all());
-        return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil diperbarui.');
+
+        return redirect()->route('pengeluarans.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Menghapus pengeluaran
     public function destroy(Pengeluaran $pengeluaran)
     {
         $pengeluaran->delete();
-        return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil dihapus.');
+        return redirect()->route('pengeluarans.index');
     }
 }

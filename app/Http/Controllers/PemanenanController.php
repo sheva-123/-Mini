@@ -3,82 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemanenan;
-use App\Models\Penanaman;
+use App\Models\Penanaman; // Model Penanaman
 use Illuminate\Http\Request;
 
 class PemanenanController extends Controller
 {
-    /**
-     * Tampilkan daftar pemanenan.
-     */
-    public function index()
+    // Menampilkan daftar pemanenan dengan fitur pencarian
+    public function index(Request $request)
     {
-        $pemanenan = Pemanenan::with('penanaman')->get(); // Sertakan data penanaman terkait
-        return view('pemanenan.index', compact('pemanenan'));
+        $cari = $request->get('cari');
+        $pemanenans = Pemanenan::with('penanaman') // Relasi ke penanaman
+            ->when($cari, function ($query, $cari) {
+                return $query->where('tanggal_pemanenan', 'like', "%{$cari}%");
+            })
+            ->get();
+
+        return view('pemanenans.index', compact('pemanenans', 'cari'));
     }
 
-    /**
-     * Tampilkan form untuk menambahkan pemanenan baru.
-     */
+    // Menampilkan form tambah pemanenan
     public function create()
     {
-        $penanaman = Penanaman::all(); // Ambil semua data penanaman untuk dropdown
-        return view('pemanenan.create', compact('penanaman'));
+        $penanamans = Penanaman::all(); // Ambil semua penanaman
+        return view('pemanenans.create', compact('penanamans'));
     }
 
-    /**
-     * Simpan pemanenan baru ke dalam database.
-     */
+    // Menyimpan pemanenan
     public function store(Request $request)
     {
         $request->validate([
             'id_penanaman' => 'required|exists:penanamans,id',
             'tanggal_pemanenan' => 'required|date',
-            'jumlah_hasil' => 'required|integer|min:0',
+            'jumlah_hasil' => 'required|integer',
         ]);
 
         Pemanenan::create($request->all());
-        return redirect()->route('pemanenan.index')->with('success', 'Pemanenan berhasil ditambahkan.');
+
+        return redirect()->route('pemanenans.index');
     }
 
-    /**
-     * Tampilkan detail pemanenan tertentu.
-     */
-    public function show(Pemanenan $pemanenan)
-    {
-        return view('pemanenan.show', compact('pemanenan'));
-    }
-
-    /**
-     * Tampilkan form untuk mengedit pemanenan tertentu.
-     */
+    // Menampilkan form edit pemanenan
     public function edit(Pemanenan $pemanenan)
     {
-        $penanaman = Penanaman::all(); // Ambil semua data penanaman untuk dropdown
-        return view('pemanenan.edit', compact('pemanenan', 'penanaman'));
+        $penanamans = Penanaman::all();
+        return view('pemanenans.edit', compact('pemanenan', 'penanamans'));
     }
 
-    /**
-     * Perbarui data pemanenan di database.
-     */
+    // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
         $request->validate([
             'id_penanaman' => 'required|exists:penanamans,id',
             'tanggal_pemanenan' => 'required|date',
-            'jumlah_hasil' => 'required|integer|min:0',
+            'jumlah_hasil' => 'required|integer',
         ]);
 
         $pemanenan->update($request->all());
-        return redirect()->route('pemanenan.index')->with('success', 'Pemanenan berhasil diperbarui.');
+
+        return redirect()->route('pemanenans.index');
     }
 
-    /**
-     * Hapus pemanenan dari database.
-     */
+    // Menghapus pemanenan
     public function destroy(Pemanenan $pemanenan)
     {
         $pemanenan->delete();
-        return redirect()->route('pemanenan.index')->with('success', 'Pemanenan berhasil dihapus.');
+        return redirect()->route('pemanenans.index');
     }
 }
