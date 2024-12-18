@@ -9,11 +9,11 @@ class Pengeluaran extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_pertanian', 'tanggal_pengeluaran', 'jenis_pengeluaran', 'biaya'];
+    protected $fillable = ['pertanian_id', 'tanggal_pengeluaran', 'jenis_pengeluaran', 'biaya'];
 
-    public function farm()
+    public function pertanian()
     {
-        return $this->belongsTo(Pertanian::class, 'id_pertanian');
+        return $this->belongsTo(Pertanian::class);
     }
 }
 
