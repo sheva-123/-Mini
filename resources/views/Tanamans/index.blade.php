@@ -17,38 +17,41 @@
         <div class="overflow-hidden rounded-lg shadow-md">
             <table class="table-auto w-full bg-white text-gray-800">
                 <thead class="bg-gradient-to-r from-green-500 to-teal-600 text-white">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama Tanaman</th>
-                        <th>Jenis</th>
-                        <th>Deskripsi</th>
-                        <th>Aksi</th>
+                    <tr class="text-center">
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Nama Tanaman</th>
+                        <th class="px-4 py-2">Jenis</th>
+                        <th class="px-4 py-2">Deskripsi</th>
+                        <th class="px-4 py-2">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody>
                     @foreach ($tanamans as $tanaman)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">{{ $tanaman->id }}</td>
-                            <td class="px-6 py-4">{{ $tanaman->nama_tanaman }}</td>
-                            <td class="px-6 py-4">{{ $tanaman->jenis }}</td>
-                            <td class="px-6 py-4">{{ $tanaman->deskripsi }}</td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="{{ route('tanamans.edit', $tanaman) }}" class="inline-block bg-yellow-400 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-500 transition-transform transform hover:scale-105">
-                                    Edit
+                        <tr class="text-center border-b">
+                            <td class="px-4 py-2">{{ $tanaman->id }}</td>
+                            <td class="px-4 py-2">{{ $tanaman->nama_tanaman }}</td>
+                            <td class="px-4 py-2">{{ $tanaman->jenis }}</td>
+                            <td class="px-4 py-2">{{ $tanaman->deskripsi }}</td>
+                            <td class="px-4 py-2 flex justify-center items-center space-x-2">
+                                <a href="{{ route('tanamans.edit', $tanaman->id) }}" class="text-yellow-500 hover:text-yellow-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
+                                    </svg>
                                 </a>
+                                <form action="{{ route('tanamans.destroy', $tanaman->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
-
-        <div class="mt-6">
-            @if(session('success'))
-                <div class="p-4 bg-green-100 border border-green-300 text-green-800 rounded-lg">
-                    {{ session('success') }}
-                </div>
-            @endif
         </div>
     </div>
 </x-app-layout>
