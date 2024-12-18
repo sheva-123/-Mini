@@ -36,7 +36,7 @@
 
     <!-- Latar belakang video bergerak bertema pertanian -->
     <video class="background-video" autoplay loop muted>
-        <source src="https://www.pexels.com/id-id/video/pemandangan-udara-indah-dari-lanskap-hijau-29765630/"
+        <source src="12791395_1080_1920_30fps.mp4"
             type="video/mp4"> <!-- Ganti dengan URL video pertanian -->
         Video tidak didukung oleh browser Anda.
     </video>
