@@ -26,8 +26,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('crops', TanamanController::class);
 Route::resource('plantings', PenanamanController::class);
 Route::resource('maintenances', PemeliharaanController::class);
-Route::resource('harvests', PemanenanController::class);
-Route::resource('expenses', PengeluaranController::class);
+Route::resource('pemanenans', PemanenanController::class);
+Route::resource('pengeluarans', PengeluaranController::class);
 Route::resource('reports', LaporanController::class);
 });
 
