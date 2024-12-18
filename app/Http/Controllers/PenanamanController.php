@@ -3,63 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penanaman;
+use App\Models\Pertanian;
+use App\Models\Tanaman;
 use Illuminate\Http\Request;
 
 class PenanamanController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar penanaman.
      */
     public function index()
     {
-        //
+        $penanaman = Penanaman::all();
+        return view('penanamans.index', compact('penanaman'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form untuk membuat penanaman baru.
      */
     public function create()
     {
-        //
+        $pertanians = Pertanian::all();
+        $tanamans = Tanaman::all();
+        return view('penanamans.create', compact('pertanians', 'tanamans'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan penanaman baru.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pertanian_id' => 'required|exists:pertanians,id',
+            'tanaman_id' => 'required|exists:tanamans,id',
+            'tanggal_tanam' => 'required|date',
+            'jumlah_tanaman' => 'required|integer',
+        ]);
+
+        Penanaman::create([
+            'pertanian_id' => $request->pertanian_id,
+            'tanaman_id' => $request->tanaman_id,
+            'tanggal_tanam' => $request->tanggal_tanam,
+            'jumlah_tanaman' => $request->jumlah_tanaman,
+        ]);
+
+        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dibuat.');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Penanaman $penanaman)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengedit penanaman.
      */
     public function edit(Penanaman $penanaman)
     {
-        //
+        $pertanians = Pertanian::all();
+        $tanamans = Tanaman::all();
+        return view('penanamans.edit', compact('penanaman', 'pertanians', 'tanamans'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Mengupdate penanaman.
      */
     public function update(Request $request, Penanaman $penanaman)
     {
-        //
+        $request->validate([
+            'pertanian_id' => 'required|exists:pertanians,id',
+            'tanaman_id' => 'required|exists:tanamans,id',
+            'tanggal_tanam' => 'required|date',
+            'jumlah_tanaman' => 'required|integer',
+        ]);
+
+        $penanaman->update([
+            'pertanian_id' => $request->pertanian_id,
+            'tanaman_id' => $request->tanaman_id,
+            'tanggal_tanam' => $request->tanggal_tanam,
+            'jumlah_tanaman' => $request->jumlah_tanaman,
+        ]);
+
+        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil diupdate.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus penanaman.
      */
     public function destroy(Penanaman $penanaman)
     {
-        //
+        $penanaman->delete();
+
+        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dihapus.');
     }
 }
