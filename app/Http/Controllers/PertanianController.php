@@ -12,7 +12,8 @@ class PertanianController extends Controller
      */
     public function index()
     {
-        //
+        $pertanians = Pertanian::all();
+        return view('pertanians.index', compact('pertanians'));
     }
 
     /**
@@ -20,7 +21,7 @@ class PertanianController extends Controller
      */
     public function create()
     {
-        //
+        return view('pertanians.create');
     }
 
     /**
@@ -28,8 +29,16 @@ class PertanianController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'nama_pertanian' => 'required|string|max:255',
+            'lokasi_pertanian' => 'required|string|max:255',
+            'luas_lahan' => 'required|numeric|min:0',
+        ]);
+
+        Pertanian::create($validated);
+
+        return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil ditambahkan!');
+        }
 
     /**
      * Display the specified resource.
@@ -44,7 +53,7 @@ class PertanianController extends Controller
      */
     public function edit(Pertanian $pertanian)
     {
-        //
+        return view('pertanians.edit', compact('pertanian'));
     }
 
     /**
@@ -52,7 +61,15 @@ class PertanianController extends Controller
      */
     public function update(Request $request, Pertanian $pertanian)
     {
-        //
+        $validated = $request->validate([
+            'nama_pertanian' => 'required|string|max:255',
+            'lokasi_pertanian' => 'required|string|max:255',
+            'luas_lahan' => 'required|numeric|min:0',
+        ]);
+
+        $pertanian->update($validated);
+
+        return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil diperbarui!');
     }
 
     /**
@@ -60,6 +77,8 @@ class PertanianController extends Controller
      */
     public function destroy(Pertanian $pertanian)
     {
-        //
+        $pertanian->delete();
+
+        return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil dihapus!');
     }
 }

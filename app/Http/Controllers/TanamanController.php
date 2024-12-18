@@ -12,15 +12,15 @@ class TanamanController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $tanamans = Tanaman::all();
+        return view('tanamans.index', compact('tanamans'));    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('tanamans.create');
     }
 
     /**
@@ -28,8 +28,15 @@ class TanamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nama_tanaman' => 'required|string|max:255',
+            'jenis' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        Tanaman::create($request->all());
+        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil ditambahkan.');
+        }
 
     /**
      * Display the specified resource.
@@ -44,7 +51,7 @@ class TanamanController extends Controller
      */
     public function edit(Tanaman $tanaman)
     {
-        //
+        return view('tanamans.edit', compact('tanaman'));
     }
 
     /**
@@ -52,14 +59,22 @@ class TanamanController extends Controller
      */
     public function update(Request $request, Tanaman $tanaman)
     {
-        //
-    }
+        $request->validate([
+            'nama_tanaman' => 'required|string|max:255',
+            'jenis' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        $tanaman->update($request->all());
+        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil diperbarui.');
+        }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Tanaman $tanaman)
     {
-        //
-    }
+        $tanaman->delete();
+        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil dihapus.');
+       }
 }
