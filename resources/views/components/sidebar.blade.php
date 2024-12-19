@@ -34,6 +34,10 @@
                 <i class="fas fa-wallet"></i>
                 <span>Penanaman</span>
             </a>
+            <a href="{{ route('laporans.index') }}" class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('laporans.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' :  'rounded-md text-gray-500 ' }}">
+                <i class="fas fa-wallet"></i>
+                <span>Laporan</span>
+            </a>
         </div>
     </div>
 
