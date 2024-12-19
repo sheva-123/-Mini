@@ -12,6 +12,14 @@
                 <i class="fas fa-wallet"></i>
                 <span>Dashboard</span>
             </a>
+            <a href="{{ route('pertanians.index') }}" class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('Pertanians.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' :  'rounded-md text-gray-500 ' }}">
+                <i class="fas fa-wallet"></i>
+                <span>Pertanians</span>
+            </a>
+            <a href="{{ route('tanamans.index') }}" class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('Tanaamans.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' :  'rounded-md text-gray-500 ' }}">
+                <i class="fas fa-wallet"></i>
+                <span>Tanamans</span>
+            </a>
             <a href="{{ route('pemanenans.index') }}" class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('pemanenans.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' :  'rounded-md text-gray-500 ' }}">
                 <i class="fas fa-wallet"></i>
                 <span>Pemanenan</span>
