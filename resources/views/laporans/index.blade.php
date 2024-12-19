@@ -26,7 +26,7 @@
             <table class="table-auto w-full text-left border-collapse">
                 <thead class="bg-gray-100">
                     <tr>
-                        <th class="px-6 py-4 text-gray-700">Pertanian ID</th>
+                        <th class="px-6 py-4 text-gray-700">No</th>
                         <th class="px-6 py-4 text-gray-700">Tanggal Laporan</th>
                         <th class="px-6 py-4 text-gray-700">Deskripsi</th>
                         <th class="px-6 py-4 text-gray-700">Aksi</th>
@@ -35,7 +35,7 @@
                 <tbody>
                     @forelse ($laporans as $laporan)
                         <tr class="border-b hover:bg-gray-50">
-                            <td class="px-6 py-4 text-gray-700">{{ $laporan->pertanian_id }}</td>
+                            <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4 text-gray-700">{{ $laporan->tanggal_laporan }}</td>
                             <td class="px-6 py-4 text-gray-700">{{ $laporan->deskripsi }}</td>
                             <td class="px-6 py-4">
