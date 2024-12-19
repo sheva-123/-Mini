@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container mx-auto py-10">
         <div class="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-2xl">
-            <h1 class="text-4xl font-extrabold text-green-700 text-center mb-4">🌾 Edit Data Pertanian</h1>
+            <h1 class="text-4xl font-extrabold text-green-700 text-center mb-4">✏️ Edit Data Pertanian</h1>
             <p class="text-center text-gray-600 mb-8">Perbarui informasi pertanian dengan mudah dan cepat</p>
 
             <form action="{{ route('pertanians.update', $pertanian->id) }}" method="POST" class="space-y-6">
