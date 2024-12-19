@@ -18,7 +18,7 @@
             <table class="table-auto w-full bg-white text-gray-800">
                 <thead class="bg-gradient-to-r from-green-500 to-teal-600 text-white">
                     <tr class="text-center">
-                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">No</th>
                         <th class="px-4 py-2">Nama Pertanian</th>
                         <th class="px-4 py-2">Lokasi</th>
                         <th class="px-4 py-2">Luas Lahan</th>
@@ -29,7 +29,7 @@
                 <tbody>
                     @foreach ($pertanians as $pertanian)
                         <tr class="text-center border-b">
-                            <td class="px-4 py-2">{{ $pertanian->id }}</td>
+                            <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $pertanian->nama_pertanian }}</td>
                             <td class="px-4 py-2">{{ $pertanian->lokasi_pertanian }}</td>
                             <td class="px-4 py-2">{{ $pertanian->luas_lahan }} ha</td>

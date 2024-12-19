@@ -1,14 +1,16 @@
-<!-- Create View: resources/views/pemeliharaans/create.blade.php -->
 <x-app-layout>
     <x-slot name="title">Tambah Pemeliharaan</x-slot>
 
-    <div class="container">
-        <h1>Tambah Pemeliharaan</h1>
+    <div class="container mx-auto py-10">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">🌱 Tambah Pemeliharaan</h1>
+            <p class="text-gray-600 mt-2">Isi form di bawah untuk menambahkan data pemeliharaan</p>
+        </div>
 
-        <!-- Pesan error jika ada kesalahan validasi -->
+        <!-- Pesan error -->
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6">
+                <ul class="list-disc pl-5">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -16,14 +18,14 @@
             </div>
         @endif
 
-        <!-- Form untuk menambah pemeliharaan -->
-        <form action="{{ route('pemeliharaans.create') }}" method="POST">
+        <!-- Form -->
+        <form action="{{ route('pemeliharaans.store') }}" method="POST" class="bg-white rounded-lg shadow-md p-8 max-w-3xl mx-auto">
             @csrf
 
             <!-- Penanaman -->
-            <div class="form-group">
-                <label for="penanaman_id">Penanaman</label>
-                <select name="penanaman_id" id="penanaman_id" class="form-control" required>
+            <div class="mb-6">
+                <label for="penanaman_id" class="block text-gray-700 font-semibold mb-2">Penanaman</label>
+                <select name="penanaman_id" id="penanaman_id" class="form-select w-full border-gray-300 rounded p-2" required>
                     <option value="">Pilih Penanaman</option>
                     @foreach($penanaman as $item)
                         <option value="{{ $item->id }}" {{ old('penanaman_id') == $item->id ? 'selected' : '' }}>
@@ -34,40 +36,57 @@
             </div>
 
             <!-- Tanggal Pemeliharaan -->
-            <div class="form-group">
-                <label for="tanggal_pemeliharaan">Tanggal Pemeliharaan</label>
+            <div class="mb-6">
+                <label for="tanggal_pemeliharaan" class="block text-gray-700 font-semibold mb-2">Tanggal Pemeliharaan</label>
                 <input 
                     type="date" 
                     name="tanggal_pemeliharaan" 
-                    class="form-control" 
+                    id="tanggal_pemeliharaan" 
+                    class="form-input w-full border-gray-300 rounded p-2" 
                     value="{{ old('tanggal_pemeliharaan') }}" 
                     required>
             </div>
 
             <!-- Jenis Pemeliharaan -->
-            <div class="form-group">
-                <label for="jenis_pemeliharaan">Jenis Pemeliharaan</label>
+            <div class="mb-6">
+                <label for="jenis_pemeliharaan" class="block text-gray-700 font-semibold mb-2">Jenis Pemeliharaan</label>
                 <input 
                     type="text" 
                     name="jenis_pemeliharaan" 
-                    class="form-control" 
+                    id="jenis_pemeliharaan" 
+                    class="form-input w-full border-gray-300 rounded p-2" 
                     value="{{ old('jenis_pemeliharaan') }}" 
+                    placeholder="Masukkan jenis pemeliharaan" 
                     required>
             </div>
 
             <!-- Biaya -->
-            <div class="form-group">
-                <label for="biaya">Biaya</label>
+            <div class="mb-6">
+                <label for="biaya" class="block text-gray-700 font-semibold mb-2">Biaya</label>
                 <input 
                     type="text" 
                     name="biaya" 
-                    class="form-control" 
+                    id="biaya" 
+                    class="form-input w-full border-gray-300 rounded p-2" 
                     value="{{ old('biaya') }}" 
+                    placeholder="Masukkan biaya pemeliharaan" 
                     required>
             </div>
 
-            <!-- Tombol Simpan -->
-            <button type="submit" class="btn btn-primary">Simpan</button>
+                <!-- Tombol Simpan -->
+                <div class="text-center mt-8">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
+                        Simpan Data
+                    </button>
+                </div>
+
+            <!-- Tombol Kembali -->
+            <div class="text-center mt-4">
+                <a href="{{ route('pemeliharaans.index') }}" 
+                   class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
+                    Kembali
+                </a>
+            </div>
         </form>
     </div>
 </x-app-layout>

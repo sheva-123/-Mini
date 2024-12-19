@@ -28,11 +28,21 @@
                            placeholder="Masukkan luas lahan" required>
                 </div>
 
+                <!-- Tombol Simpan -->
                 <div class="text-center mt-8">
-                    <button type="submit" class="inline-block w-full bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
                         Simpan Data
                     </button>
                 </div>
+            </form>
+
+            <!-- Tombol Kembali -->
+            <div class="text-center mt-4">
+                <a href="{{ route('pertanians.index') }}" 
+                   class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
+                    Kembali
+                </a>
+            </div>
             </form>
         </div>
     </div>
