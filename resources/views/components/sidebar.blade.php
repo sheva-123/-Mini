@@ -3,7 +3,7 @@
 
 
     <!-- Barra lateral -->
-    <div id="sideNav" class="lg:block hidden bg-white w-64 h-screen fixed rounded-none border-none">
+    <div id="sideNav" class="lg:block hidden bg-white w-64 h-screen absolute rounded-none border-none">
         <!-- Items -->
         <div class="p-4 space-y-4">
             <!-- Inicio -->
