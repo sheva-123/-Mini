@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <div class="container">
         <h1>Edit Penanaman</h1>
         <form action="{{ route('penanamans.update', $penanamans->id) }}" method="POST">
@@ -35,4 +35,4 @@
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </div>
-</x-layout>
+</x-app-layout>
