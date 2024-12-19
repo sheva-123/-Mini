@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('pertanians', PertanianController::class);
 Route::resource('tanamans', TanamanController::class);
-Route::resource('Penanamans', PenanamanController::class);
+Route::resource('penanamans', PenanamanController::class);
 Route::resource('pemeliharaans', PemeliharaanController::class);
 Route::resource('pemanenans', PemanenanController::class);
 Route::resource('pengeluarans', PengeluaranController::class);
