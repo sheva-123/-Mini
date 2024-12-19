@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <h1>Tambah Pemanenan</h1>
 
@@ -30,4 +28,4 @@
 
         <a href="{{ route('pemanenans.index') }}" class="btn btn-secondary mt-4">Kembali</a>
     </div>
-@endsection
+</x-app-layout>

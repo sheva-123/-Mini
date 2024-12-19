@@ -1,38 +1,62 @@
-@extends('layouts.app')
+<x-app-layout>
+    <div class="container mx-auto py-12 px-6">
+        <div class="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-2xl">
+            <h1 class="text-4xl font-extrabold text-green-700 text-center mb-4">💸 Tambah Pengeluaran</h1>
+            <p class="text-center text-gray-600 mb-8">Isi formulir untuk menambahkan data pengeluaran baru</p>
 
-@section('content')
-    <div class="container">
-        <h1>Tambah Pengeluaran</h1>
+            <form action="{{ route('pengeluarans.store') }}" method="POST" class="space-y-6">
+                @csrf
 
-        <form action="{{ route('pengeluarans.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="id_pertanian">Pertanian</label>
-                <select name="id_pertanian" class="form-control" id="id_pertanian">
-                    @foreach ($pertanigans as $pertanian)
-                        <option value="{{ $pertanian->id }}">{{ $pertanian->nama }}</option>
-                    @endforeach
-                </select>
+                <!-- Pilih Pertanian -->
+                <div class="flex flex-col">
+                    <label for="nama_pertanian" class="text-lg font-medium text-gray-700">Pilih Pertanian</label>
+                    <select name="nama_pertanian" 
+                            class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition">
+                        @foreach ($pertanian as $pertanianItem)
+                            <option value="{{ $pertanianItem->nama_pertanian }}">{{ $pertanianItem->nama_pertanian }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Tanggal Pengeluaran -->
+                <div class="flex flex-col">
+                    <label for="tanggal_pengeluaran" class="text-lg font-medium text-gray-700">Tanggal Pengeluaran</label>
+                    <input type="date" name="tanggal_pengeluaran" 
+                           class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition" 
+                           required>
+                </div>
+
+                <!-- Jenis Pengeluaran -->
+                <div class="flex flex-col">
+                    <label for="jenis_pengeluaran" class="text-lg font-medium text-gray-700">Jenis Pengeluaran</label>
+                    <input type="text" name="jenis_pengeluaran" 
+                           class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition" 
+                           placeholder="Masukkan jenis pengeluaran" required>
+                </div>
+
+                <!-- Biaya -->
+                <div class="flex flex-col">
+                    <label for="biaya" class="text-lg font-medium text-gray-700">Biaya</label>
+                    <input type="text" name="biaya" 
+                           class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition" 
+                           placeholder="Masukkan jumlah biaya" required>
+                </div>
+
+                <!-- Tombol Simpan -->
+                <div class="text-center mt-8">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
+                        Simpan Data
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tombol Kembali -->
+            <div class="text-center mt-4">
+                <a href="{{ route('pengeluarans.index') }}" 
+                   class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
+                    Kembali
+                </a>
             </div>
-
-            <div class="form-group mt-3">
-                <label for="tanggal_pengeluaran">Tanggal Pengeluaran</label>
-                <input type="date" name="tanggal_pengeluaran" class="form-control" id="tanggal_pengeluaran" required>
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="jenis_pengeluaran">Jenis Pengeluaran</label>
-                <input type="text" name="jenis_pengeluaran" class="form-control" id="jenis_pengeluaran" required>
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="biaya">Biaya</label>
-                <input type="number" name="biaya" class="form-control" id="biaya" required>
-            </div>
-
-            <button type="submit" class="btn btn-success mt-4">Simpan</button>
-        </form>
-
-        <a href="{{ route('pengeluarans.index') }}" class="btn btn-secondary mt-4">Kembali</a>
+        </div>
     </div>
-@endsection
+</x-app-layout>

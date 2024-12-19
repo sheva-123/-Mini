@@ -18,7 +18,13 @@ class PemanenanController extends Controller
             })
             ->get();
 
-        return view('pemanenans.index', compact('pemanenans', 'cari'));
+            // Data untuk grafik
+    $dataGrafik = Pemanenan::selectRaw('DATE(tanggal_pemanenan) as tanggal, SUM(jumlah_hasil) as total_hasil')
+    ->groupBy('tanggal')
+    ->orderBy('tanggal', 'asc')
+    ->get();
+
+    return view('pemanenans.index', compact('pemanenans', 'cari', 'dataGrafik'));
     }
 
     // Menampilkan form tambah pemanenan

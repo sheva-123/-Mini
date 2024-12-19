@@ -1,6 +1,6 @@
 <!-- resources/views/penanamen/index.blade.php -->
 {{-- <x-layouts.app> --}}
-    <x-app-layout>
+<x-app-layout>
 
     <x-slot name="title">Daftar Penanaman</x-slot>
 
@@ -29,16 +29,18 @@
                 @foreach ($penanaman as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->pertanian->name }}</td>
-                        <td>{{ $item->tanaman->name }}</td>
+                        <td>{{ $item->pertanian->nama_pertanian }}</td>
+                        <td>{{ $item->tanaman->nama_tanaman }}</td>
                         <td>{{ $item->tanggal_tanam }}</td>
                         <td>{{ $item->jumlah_tanaman }}</td>
                         <td>
                             <a href="{{ route('Penanamans.edit', $item) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('Penanamans.destroy', $item) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('Penanamans.destroy', $item) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                             </form>
                         </td>
                     </tr>
