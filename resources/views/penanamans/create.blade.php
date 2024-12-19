@@ -21,9 +21,10 @@
             <div class="mb-3">
                 <label for="pertanian_id" class="form-label">Pertanian</label>
                 <select name="pertanian_id" id="pertanian_id" class="form-control">
-                    @foreach($pertanians as $pertanian)
-                        <option value="{{ $pertanian->id }}" {{ old('pertanian_id') == $pertanian->id ? 'selected' : '' }}>
-                            {{ $pertanian->nama }}
+                    @foreach ($pertanians as $pertanian)
+                        <option value="{{ $pertanian->id }}"
+                            {{ old('pertanian_id') == $pertanian->id ? 'selected' : '' }}>
+                            {{ $pertanian->nama_pertanian }}
                         </option>
                     @endforeach
                 </select>
@@ -33,9 +34,9 @@
             <div class="mb-3">
                 <label for="tanaman_id" class="form-label">Tanaman</label>
                 <select name="tanaman_id" id="tanaman_id" class="form-control">
-                    @foreach($tanamans as $tanaman)
+                    @foreach ($tanamans as $tanaman)
                         <option value="{{ $tanaman->id }}" {{ old('tanaman_id') == $tanaman->id ? 'selected' : '' }}>
-                            {{ $tanaman->nama }}
+                            {{ $tanaman->nama_tanaman }}
                         </option>
                     @endforeach
                 </select>
@@ -44,22 +45,14 @@
             <!-- Tanggal Tanam -->
             <div class="mb-3">
                 <label for="tanggal_tanam" class="form-label">Tanggal Tanam</label>
-                <input 
-                    type="date" 
-                    name="tanggal_tanam" 
-                    id="tanggal_tanam" 
-                    class="form-control" 
+                <input type="date" name="tanggal_tanam" id="tanggal_tanam" class="form-control"
                     value="{{ old('tanggal_tanam') }}">
             </div>
 
             <!-- Jumlah Tanaman -->
             <div class="mb-3">
                 <label for="jumlah_tanaman" class="form-label">Jumlah Tanaman</label>
-                <input 
-                    type="number" 
-                    name="jumlah_tanaman" 
-                    id="jumlah_tanaman" 
-                    class="form-control" 
+                <input type="number" name="jumlah_tanaman" id="jumlah_tanaman" class="form-control"
                     value="{{ old('jumlah_tanaman') }}">
             </div>
 

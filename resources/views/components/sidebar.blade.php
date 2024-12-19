@@ -36,8 +36,8 @@
                     class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('pemeliharaans.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' : 'rounded-md text-gray-500 ' }}">
                     <i class="fas fa-wallet"></i>
                     <span>Pemeliharaan</span>
-                    <a href="{{ route('penanamans.index') }}"
-                        class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('penanamans.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' : 'rounded-md text-gray-500 ' }}">
+                    <a href="{{ route('Penanamans.index') }}"
+                        class="px-4 py-3 flex items-center space-x-4 group {{ request()->routeIs('Penanamans.*') ? 'rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400' : 'rounded-md text-gray-500 ' }}">
                         <i class="fas fa-wallet"></i>
                         <span>Penanaman</span>
                     </a>

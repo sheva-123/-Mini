@@ -14,8 +14,8 @@ class PenanamanController extends Controller
      */
     public function index()
     {
-        $penanaman = Penanaman::all();
-        return view('penanamans.index', compact('penanaman'));
+        $penanamans = Penanaman::all();
+        return view('penanamans.index', compact('penanamans'));
     }
 
     /**
