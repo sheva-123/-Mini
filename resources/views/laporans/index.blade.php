@@ -1,74 +1,89 @@
 <x-app-layout>
-    <x-slot name="title">Laporan</x-slot>
+    <x-slot name="title">Tambah Laporan</x-slot>
 
-    <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-semibold mb-6 text-gray-800">📊 Laporan Pertanian</h1>
+    <div class="container mx-auto p-6" x-data="{ isLoading: false, isSuccess: false }">
+        <h1 class="text-3xl font-semibold mb-6 text-gray-800">📝 Tambah Laporan</h1>
 
-        <!-- Form Pencarian -->
-        <form action="{{ route('laporans.index') }}" method="GET" class="mb-6 flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
-            <div class="flex-1 mr-2">
-                <input type="text" name="cari" value="{{ request('cari') }}"
-                       class="form-input w-full border border-gray-300 rounded-lg p-2"
-                       placeholder="Cari Tanggal Laporan">
+        <!-- Form Tambah Laporan -->
+        <form
+            action="{{ route('laporans.store') }}"
+            method="POST"
+            class="space-y-6"
+            x-ref="form"
+            @submit.prevent="
+                isLoading = true;
+                $nextTick(() => {
+                    setTimeout(() => {
+                        isLoading = false;
+                        $refs.form.submit(); // Trigger the form submission
+                    }, 2000); // Simulate loading for 2 seconds
+                });
+            "
+        >
+            @csrf
+
+            <!-- Dropdown Pertanian -->
+            <div>
+                <label for="pertanian_id" class="block font-medium text-gray-700">Pertanian</label>
+                <select name="pertanian_id" id="pertanian_id" class="form-select w-full border border-gray-300 rounded-lg p-3">
+                    <option value="" disabled selected>Pilih Pertanian</option>
+                    @foreach ($pertanians as $pertanian)
+                        <option value="{{ $pertanian->id }}" {{ old('pertanian_id') == $pertanian->id ? 'selected' : '' }}>
+                            {{ $pertanian->nama }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('pertanian_id')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
-            <button type="submit" class="btn btn-primary bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">
-                Cari
-            </button>
+
+            <!-- Tanggal Laporan -->
+            <div>
+                <label for="tanggal_laporan" class="block font-medium text-gray-700">Tanggal Laporan</label>
+                <input type="date" name="tanggal_laporan" id="tanggal_laporan"
+                       class="form-input w-full border border-gray-300 rounded-lg p-3"
+                       value="{{ old('tanggal_laporan') }}">
+                @error('tanggal_laporan')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Deskripsi -->
+            <div>
+                <label for="deskripsi" class="block font-medium text-gray-700">Deskripsi</label>
+                <textarea name="deskripsi" id="deskripsi" rows="6"
+                          class="form-textarea w-full border border-gray-300 rounded-lg p-3">{{ old('deskripsi') }}</textarea>
+                @error('deskripsi')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Tombol Simpan -->
+            <div class="text-center mt-8">
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
+                    Simpan Data
+                </button>
+            </div>
         </form>
 
-        <!-- Tombol Tambah Laporan -->
-        <a href="{{ route('laporans.create') }}" class="inline-block mb-4 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">
-            Tambah Laporan
-        </a>
-
-        <!-- Tabel Data Laporan -->
-        <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
-            <table class="table-auto w-full text-left border-collapse">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-6 py-4 text-gray-700">No</th>
-                        <th class="px-6 py-4 text-gray-700">Tanggal Laporan</th>
-                        <th class="px-6 py-4 text-gray-700">Deskripsi</th>
-                        <th class="px-6 py-4 text-gray-700">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($laporans as $laporan)
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="px-4 py-2">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4 text-gray-700">{{ $laporan->tanggal_laporan }}</td>
-                            <td class="px-6 py-4 text-gray-700">{{ $laporan->deskripsi }}</td>
-                            <td class="px-6 py-4">
-                                <div class="flex justify-start items-center space-x-3">
-                                    <a href="{{ route('laporans.edit', $laporan) }}"
-                                       class="text-white bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg transition duration-200">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('laporans.destroy', $laporan) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                                class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition duration-200">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="text-center text-gray-500 py-4">
-                                Data tidak ditemukan.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+        <!-- Efek Loading -->
+        <div x-show="isLoading" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+            <div class="flex items-center space-x-2">
+                <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span class="text-white font-semibold text-lg">Sedang Memproses...</span>
+            </div>
         </div>
 
-        <!-- Pagination -->
-        <div class="mt-6">
-            {{ $laporans->links() }}
+        <!-- Tombol Kembali -->
+        <div class="text-center mt-4">
+            <a href="{{ route('laporans.index') }}"
+               class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
+                Kembali
+            </a>
         </div>
     </div>
 </x-app-layout>

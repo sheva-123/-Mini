@@ -5,6 +5,13 @@
             <p class="text-gray-600 mt-2">Kelola data pemeliharaan Anda dengan mudah dan cepat</p>
         </div>
 
+        <form method="GET" action="{{ route('pemeliharaans.index') }}">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan jenis pemeliharaan..." value="{{ request('search') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </form
+
         @if(session('success'))
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded" role="alert">
                 {{ session('success') }}

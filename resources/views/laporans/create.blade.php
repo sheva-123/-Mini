@@ -1,11 +1,16 @@
 <x-app-layout>
     <x-slot name="title">Tambah Laporan</x-slot>
 
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6" x-data="{ isLoading: false }">
         <h1 class="text-3xl font-semibold mb-6 text-gray-800">📝 Tambah Laporan</h1>
 
         <!-- Form Tambah Laporan -->
-        <form action="{{ route('laporans.store') }}" method="POST" class="space-y-6">
+        <form
+            action="{{ route('laporans.store') }}"
+            method="POST"
+            class="space-y-6"
+            @submit.prevent="isLoading = true; setTimeout(() => isLoading = false, 2000);"
+        >
             @csrf
 
             <!-- Dropdown Pertanian -->
@@ -53,13 +58,23 @@
             </div>
         </form>
 
+        <!-- Efek Loading -->
+        <div x-show="isLoading" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+            <div class="flex items-center space-x-2">
+                <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span class="text-white font-semibold text-lg">Sedang Memproses...</span>
+            </div>
+        </div>
+
         <!-- Tombol Kembali -->
         <div class="text-center mt-4">
-            <a href="{{ route('laporans.index') }}" 
+            <a href="{{ route('laporans.index') }}"
                class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
                 Kembali
             </a>
         </div>
-        </form>
     </div>
 </x-app-layout>

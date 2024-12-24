@@ -12,10 +12,8 @@
             <button type="submit" class="btn btn-primary ml-2">Cari</button>
         </form>
 
-        <!-- Tombol Tambah Pemanenan -->
         <a href="{{ route('pemanenans.create') }}" class="btn btn-success mb-4 inline-block">Tambah Pemanenan</a>
 
-        <!-- Tabel Data Pemanenan -->
         <div class="overflow-x-auto bg-white rounded-lg shadow-md">
             <table class="table-auto w-full text-left border-collapse">
                 <thead class="bg-gray-100">
