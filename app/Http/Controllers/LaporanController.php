@@ -45,7 +45,13 @@ class LaporanController extends Controller
             'deskripsi' => 'required|string|max:255',
         ]);
 
-        Laporan::create($request->all());
+        $validatedData = $request->validate([
+            'pertanian_id' => 'required',
+            'tanggal_laporan' => 'required|date',
+            'deskripsi' => 'required',
+        ]);
+
+        Laporan::create($validatedData);
 
         return redirect()->route('laporans.index')->with('success', 'Laporan berhasil dibuat.');
     }

@@ -14,6 +14,14 @@
             </a>
         </div>
 
+         <!-- Form Pencarian -->
+         <form action="{{ route('pengeluarans.index') }}" method="GET" class="mb-6 flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
+            <div class="flex-1 mr-2">
+                <input type="text" name="cari" value="{{ request('cari') }}"
+                       class="form-input w-full border border-gray-300 rounded-lg p-2"
+                       placeholder="Cari Tanggal Pengeluaran">
+            </div>
+
         <div class="overflow-hidden rounded-lg shadow-md">
             <table class="table-auto w-full bg-white text-gray-800">
                 <thead class="bg-gradient-to-r from-green-500 to-teal-600 text-white">

@@ -11,9 +11,20 @@ class PemeliharaanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pemeliharaans = Pemeliharaan::with('penanaman')->get();
+
+        $query = Pemeliharaan::with('penanaman');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('jenis_pemeliharaan', 'like', "%{$search}%")
+                  ->orWhereHas('penanamans', function ($q) use ($search) {
+                      $q->where('nama', 'like', "%{$search}%"); 
+                  });
+        }
+
+        $pemeliharaans = $query->get();
         return view('pemeliharaans.index', compact('pemeliharaans'));
     }
 
