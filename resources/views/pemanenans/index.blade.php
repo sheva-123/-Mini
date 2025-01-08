@@ -12,10 +12,8 @@
             <button type="submit" class="btn btn-primary ml-2">Cari</button>
         </form>
 
-        <!-- Tombol Tambah Pemanenan -->
         <a href="{{ route('pemanenans.create') }}" class="btn btn-success mb-4 inline-block">Tambah Pemanenan</a>
 
-        <!-- Tabel Data Pemanenan -->
         <div class="overflow-x-auto bg-white rounded-lg shadow-md">
             <table class="table-auto w-full text-left border-collapse">
                 <thead class="bg-gray-100">
@@ -47,15 +45,15 @@
             </table>
         </div>
 
-        <!-- Grafik Hasil Panen -->
+        {{-- <!-- Grafik Hasil Panen -->
         <div class="mt-8">
             <h2 class="text-xl font-bold mb-4">Grafik Hasil Panen</h2>
             <canvas id="grafikPanen" width="400" height="200"></canvas>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Chart.js Script -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('grafikPanen').getContext('2d');
         const data = @json($dataGrafik);
@@ -98,5 +96,5 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 </x-app-layout>

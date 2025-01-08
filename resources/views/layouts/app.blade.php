@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,8 +20,7 @@
 <body class="font-sans antialiased bg-gray-100">
     <nav class="bg-white border-b border-gray-300 fixed w-full z-50 top-0 left-0">
         <div class="flex justify-between items-center px-9">
-            <!-- Aumenté el padding aquí para añadir espacio en los lados -->
-            <!-- Ícono de Menú -->
+
             <button id="menuBtn">
                 <i class="fas fa-bars text-cyan-500 text-lg"></i>
             </button>
