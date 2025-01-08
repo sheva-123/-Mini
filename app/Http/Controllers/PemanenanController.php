@@ -76,3 +76,4 @@ class PemanenanController extends Controller
         return redirect()->route('pemanenans.index');
     }
 }
+ 
