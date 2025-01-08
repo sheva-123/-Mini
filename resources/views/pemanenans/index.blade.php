@@ -45,15 +45,15 @@
             </table>
         </div>
 
-        <!-- Grafik Hasil Panen -->
+        {{-- <!-- Grafik Hasil Panen -->
         <div class="mt-8">
             <h2 class="text-xl font-bold mb-4">Grafik Hasil Panen</h2>
             <canvas id="grafikPanen" width="400" height="200"></canvas>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Chart.js Script -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('grafikPanen').getContext('2d');
         const data = @json($dataGrafik);
@@ -96,5 +96,5 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 </x-app-layout>

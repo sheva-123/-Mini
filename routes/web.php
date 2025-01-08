@@ -30,6 +30,8 @@ Route::resource('pemanenans', PemanenanController::class);
 Route::resource('pengeluarans', PengeluaranController::class);
 Route::resource('laporans', LaporanController::class);
 
+
+
 });
 
 require __DIR__.'/auth.php';
