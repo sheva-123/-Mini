@@ -15,14 +15,14 @@ class LaporanController extends Controller
     {
         // Pencarian berdasarkan tanggal_laporan
         $cari = $request->input('cari');
+        $pertanians = Pertanian::with('laporan')->get();
         $laporans = Laporan::when($cari, function ($query, $cari) {
                 return $query->where('tanggal_laporan', 'like', "%$cari%");
             })
             ->with('pertanian') // Memuat relasi
             ->orderBy('tanggal_laporan', 'desc')
             ->paginate(10);
-
-        return view('laporans.index', compact('laporans', 'cari'));
+        return view('laporans.index', compact('pertanians','laporans', 'cari'));
     }
 
     /**
