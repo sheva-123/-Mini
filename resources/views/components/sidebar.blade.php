@@ -43,7 +43,7 @@
                     </a>
                     <a href="{{ route('laporans.index') }}"
                         class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('laporans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
-                        <i class="fas fa-book"></i>
+                        <i class="fa-solid fa-file-lines"></i>
                         <span>Laporan</span>
                     </a>
                     <a href=""
