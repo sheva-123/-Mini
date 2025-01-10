@@ -20,7 +20,7 @@ class PemeliharaanController extends Controller
             $search = $request->input('search');
             $query->where('jenis_pemeliharaan', 'like', "%{$search}%")
                   ->orWhereHas('penanamans', function ($q) use ($search) {
-                      $q->where('nama', 'like', "%{$search}%"); 
+                      $q->where('nama', 'like', "%{$search}%");
                   });
         }
 
@@ -42,7 +42,7 @@ class PemeliharaanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+            $request->validate([
             'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
