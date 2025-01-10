@@ -43,7 +43,7 @@ class TanamanController extends Controller
      */
     public function show(Tanaman $tanaman)
     {
-        //
+         //
     }
 
     /**
