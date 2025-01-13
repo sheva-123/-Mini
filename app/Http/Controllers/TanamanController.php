@@ -35,7 +35,7 @@ class TanamanController extends Controller
         ]);
 
         Tanaman::create($request->all());
-        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil ditambahkan.');
+        return redirect()->route('tanamans.index')->with('success', 'Data berhasil ditambahkan');
         }
 
     /**
