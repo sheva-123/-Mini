@@ -3,7 +3,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Data Pertanian</h1>
-                <p class="text-white text-sm mt-1">Kelola data pertanian dengan mudah dan efisien.</p>
+                <p class="text-white text-sm mt-1">Admin | Pertanian</p>
             </div>
         </div>
     </header>
