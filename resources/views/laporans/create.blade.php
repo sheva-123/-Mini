@@ -2,9 +2,7 @@
     <x-slot name="title">Tambah Laporan</x-slot>
 
     <div class="container mx-auto p-6" x-data="{ isLoading: false }">
-        <h1 class="text-3xl font-semibold mb-6 text-gray-800">📝 Tambah Laporan</h1>
-
-        <!-- Form Tambah Laporan -->
+       <!-- Form Tambah Laporan -->
         <form
             action="{{ route('laporans.store') }}"
             method="POST"
@@ -20,7 +18,7 @@
                     <option value="" disabled selected>Pilih Pertanian</option>
                     @foreach ($pertanians as $pertanian)
                         <option value="{{ $pertanian->id }}" {{ old('pertanian_id') == $pertanian->id ? 'selected' : '' }}>
-                            {{ $pertanian->nama }}
+                            {{ $pertanian->nama_pertanian }}
                         </option>
                     @endforeach
                 </select>

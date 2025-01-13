@@ -3,7 +3,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Data Laporan</h1>
-                <p class="text-white text-sm mt-1">Kelola data laporan dengan mudah dan efisien.</p>
+                <p class="text-white text-sm mt-1">Admin | Laporan</p>
             </div>
         </div>
     </header>

@@ -31,7 +31,7 @@
             </div> --}}
 
             <!-- Ícono de Notificación y Perfil -->
-            <div class="space-x-4">
+            {{-- <div class="space-x-4">
                 <button>
                     <i class="fas fa-bell text-cyan-500 text-lg"></i>
                 </button>
@@ -40,7 +40,7 @@
                 <button>
                     <i class="fas fa-user text-cyan-500 text-lg"></i>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </nav>
     <div class="grid grid-cols-[0.5fr_2fr] h-screen mt-20">
@@ -61,6 +61,32 @@
             </main>
         </div>
     </div>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        </script>
+    @endif
+
 </body>
 
 </html>

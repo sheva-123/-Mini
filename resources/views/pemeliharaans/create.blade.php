@@ -2,10 +2,7 @@
     <x-slot name="title">Tambah Pemeliharaan</x-slot>
 
     <div class="container mx-auto py-10">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">🌱 Tambah Pemeliharaan</h1>
-            <p class="text-gray-600 mt-2">Isi form di bawah untuk menambahkan data pemeliharaan</p>
-        </div>
+       
 
         <!-- Pesan error -->
         @if ($errors->any())
@@ -38,38 +35,38 @@
             <!-- Tanggal Pemeliharaan -->
             <div class="mb-6">
                 <label for="tanggal_pemeliharaan" class="block text-gray-700 font-semibold mb-2">Tanggal Pemeliharaan</label>
-                <input 
-                    type="date" 
-                    name="tanggal_pemeliharaan" 
-                    id="tanggal_pemeliharaan" 
-                    class="form-input w-full border-gray-300 rounded p-2" 
-                    value="{{ old('tanggal_pemeliharaan') }}" 
+                <input
+                    type="date"
+                    name="tanggal_pemeliharaan"
+                    id="tanggal_pemeliharaan"
+                    class="form-input w-full border-gray-300 rounded p-2"
+                    value="{{ old('tanggal_pemeliharaan') }}"
                     required>
             </div>
 
             <!-- Jenis Pemeliharaan -->
             <div class="mb-6">
                 <label for="jenis_pemeliharaan" class="block text-gray-700 font-semibold mb-2">Jenis Pemeliharaan</label>
-                <input 
-                    type="text" 
-                    name="jenis_pemeliharaan" 
-                    id="jenis_pemeliharaan" 
-                    class="form-input w-full border-gray-300 rounded p-2" 
-                    value="{{ old('jenis_pemeliharaan') }}" 
-                    placeholder="Masukkan jenis pemeliharaan" 
+                <input
+                    type="text"
+                    name="jenis_pemeliharaan"
+                    id="jenis_pemeliharaan"
+                    class="form-input w-full border-gray-300 rounded p-2"
+                    value="{{ old('jenis_pemeliharaan') }}"
+                    placeholder="Masukkan jenis pemeliharaan"
                     required>
             </div>
 
             <!-- Biaya -->
             <div class="mb-6">
                 <label for="biaya" class="block text-gray-700 font-semibold mb-2">Biaya</label>
-                <input 
-                    type="text" 
-                    name="biaya" 
-                    id="biaya" 
-                    class="form-input w-full border-gray-300 rounded p-2" 
-                    value="{{ old('biaya') }}" 
-                    placeholder="Masukkan biaya pemeliharaan" 
+                <input
+                    type="text"
+                    name="biaya"
+                    id="biaya"
+                    class="form-input w-full border-gray-300 rounded p-2"
+                    value="{{ old('biaya') }}"
+                    placeholder="Masukkan biaya pemeliharaan"
                     required>
             </div>
 
@@ -82,7 +79,7 @@
 
             <!-- Tombol Kembali -->
             <div class="text-center mt-4">
-                <a href="{{ route('pemeliharaans.index') }}" 
+                <a href="{{ route('pemeliharaans.index') }}"
                    class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
                     Kembali
                 </a>

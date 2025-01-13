@@ -2,10 +2,7 @@
     <x-slot name="title">Tambah Penanaman</x-slot>
 
     <div class="container mx-auto py-10 px-6">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900">🌱 Tambah Penanaman</h1>
-            <p class="text-gray-600 mt-2">Isi form berikut untuk menambah penanaman baru</p>
-        </div>
+       
 
         <!-- Pesan Error -->
         @if ($errors->any())
