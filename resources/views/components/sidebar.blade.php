@@ -32,15 +32,15 @@
                 class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('pengeluarans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
                 <i class="fas fa-hand-holding-usd"></i>
                 <span>Pengeluaran</span>
+                <a href="{{ route('Penanamans.index') }}"
+                    class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('Penanamans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
+                    <i class="fas fa-seedling"></i>
+                    <span>Penanaman</span>
+                </a>
                 <a href="{{ route('pemeliharaans.index') }}"
                     class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('pemeliharaans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
                     <i class="fas fa-hand-holding-water"></i>
                     <span>Pemeliharaan</span>
-                    <a href="{{ route('Penanamans.index') }}"
-                        class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('Penanamans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
-                        <i class="fas fa-seedling"></i>
-                        <span>Penanaman</span>
-                    </a>
                     <a href="{{ route('laporans.index') }}"
                         class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('laporans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
                         <i class="fa-solid fa-file-lines"></i>

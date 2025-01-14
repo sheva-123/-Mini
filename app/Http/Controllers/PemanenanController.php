@@ -24,14 +24,14 @@ class PemanenanController extends Controller
     // ->orderBy('tanggal', 'asc')
     // ->get();
 
-    return view('pemanenans.index', compact('pemanenans', 'cari'));
+    return view('admin.pemanenans.index', compact('pemanenans', 'cari'));
     }
 
     // Menampilkan form tambah pemanenan
     public function create()
     {
         $penanamans = Penanaman::all(); // Ambil semua penanaman
-        return view('pemanenans.create', compact('penanamans'));
+        return view('admin.pemanenans.create', compact('penanamans'));
     }
 
     // Menyimpan pemanenan
@@ -76,4 +76,3 @@ class PemanenanController extends Controller
         return redirect()->route('pemanenans.index');
     }
 }
- 
