@@ -19,16 +19,16 @@
 
 <body class="font-sans antialiased bg-gray-100">
     <nav class="bg-white border-b border-gray-300 fixed w-full z-50 top-0 left-0">
-        <div class="flex justify-between items-center px-9">
+        <div class="flex justify-between items-center px-9 h-20">
 
             <button id="menuBtn">
                 <i class="fas fa-bars text-cyan-500 text-lg"></i>
             </button>
 
-            <!-- Logo -->
+            {{-- <!-- Logo -->
             <div class="ml-1">
                 <img src="https://www.emprenderconactitud.com/img/POC%20WCS%20(1).png" alt="logo" class="h-20 w-28">
-            </div>
+            </div> --}}
 
             <!-- Ícono de Notificación y Perfil -->
             <div class="space-x-4">
