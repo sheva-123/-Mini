@@ -11,22 +11,18 @@ class PengeluaranController extends Controller
     // Menampilkan daftar pengeluaran dengan fitur pencarian
     public function index(Request $request)
     {
-        $cari = $request->get('cari');
-        $pengeluarans = Pengeluaran::with('pertanian') // Relasi ke model Pertanian
-            ->when($cari, function ($query, $cari) {
-                return $query->where('jenis_pengeluaran', 'like', "%{$cari}%");
-            })
-            ->get();
 
-        return view('pengeluarans.index', compact('pengeluarans', 'cari'));
+
+        $pengeluarans = Pengeluaran::with('pertanian'); // Relasi ke model Pertanian
+        return view('admin.pengeluarans.index', compact('pengeluarans'));
     }
 
     // Menampilkan form tambah pengeluaran
     public function create()
     {
-        $pertanian = Pertanian::all(); // Mengambil semua data Pertanian
-        return view('pengeluarans.create', compact('pertanian'));
-    
+        $pertanian = Pertanian::all();
+        return view('admin.pengeluarans.create', compact('pertanian'));
+
     }
 
     // Menyimpan pengeluaran
@@ -38,11 +34,11 @@ class PengeluaranController extends Controller
             'jenis_pengeluaran' => 'required|string',
             'biaya' => 'required|string',
         ]);
-        
+
 
         Pengeluaran::create($request->all());
 
-        return redirect()->route('pengeluarans.index');
+        return redirect()->route('pengeluarans.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     // Menampilkan form edit pengeluaran

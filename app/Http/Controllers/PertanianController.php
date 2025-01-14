@@ -11,13 +11,13 @@ class PertanianController extends Controller
     public function index()
     {
         $pertanians = Pertanian::all();
-        return view('pertanians.index', compact('pertanians'));
+        return view('admin.pertanians.index', compact('pertanians'));
     }
 
 
     public function create()
     {
-        return view('pertanians.create');
+        return view('admin.pertanians.create');
     }
 
 
@@ -58,7 +58,7 @@ class PertanianController extends Controller
 
     public function edit(Pertanian $pertanian)
     {
-        return view('pertanians.edit', compact('pertanian'));
+        return view('admin.pertanians.edit', compact('pertanian'));
     }
 
 

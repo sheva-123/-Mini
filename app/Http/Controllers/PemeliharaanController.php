@@ -25,7 +25,7 @@ class PemeliharaanController extends Controller
         }
 
         $pemeliharaans = $query->get();
-        return view('pemeliharaans.index', compact('pemeliharaans'));
+        return view('admin.pemeliharaans.index', compact('pemeliharaans'));
     }
 
     /**
@@ -34,7 +34,7 @@ class PemeliharaanController extends Controller
     public function create()
     {
         $penanaman = Penanaman::all();
-        return view('pemeliharaans.create', compact('penanaman'));
+        return view('admin.pemeliharaans.create', compact('penanaman'));
     }
 
     /**
