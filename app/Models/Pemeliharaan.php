@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pemeliharaan extends Model
 {
-    protected $fillable = ['penanaman_id', 'tanggal_pemeliharaan', 'jenis_pemeliharaan', 'biaya'];
-    public function penanaman()
+    protected $fillable = ['pertanian_id', 'tanggal_pemeliharaan', 'jenis_pemeliharaan', 'biaya'];
+    public function pertanian()
     {
-        return $this->belongsTo(Penanaman::class);
+        return $this->belongsTo(pertanian::class);
     }
 }

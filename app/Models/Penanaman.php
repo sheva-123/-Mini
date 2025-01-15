@@ -15,11 +15,4 @@ class Penanaman extends Model
     public function tanaman(){
         return $this->belongsTo(Tanaman::class);
     }
-
-    public function pemeliharaan(){
-        return $this->hasMany(Pemeliharaan::class);
-    }
-    public function pemanenan(){
-        return $this->hasMany(Pemanenan::class);
-    }
 }

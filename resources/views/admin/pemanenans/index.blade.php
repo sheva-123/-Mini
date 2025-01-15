@@ -21,7 +21,7 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Penanaman</th>
+                            <th scope="col" class="px-6 py-3">Pertanian</th>
                             <th scope="col" class="px-6 py-3">Tanggal Panen</th>
                             <th scope="col" class="px-6 py-3">Jumlah Hasil</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
@@ -31,9 +31,9 @@
                         @foreach ($pemanenans as $pemanenan)
                             <tr class="bg-white border-b hover:bg-gray-100">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->penanaman->nama }}</td>
+                                <td class="px-6 py-4">{{ $pemanenan->pertanian->nama_pertanian }}</td>
                                 <td class="px-6 py-4">{{ $pemanenan->tanggal_pemanenan }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }} ha</td>
+                                <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }} </td>
                                 <td class="px-6 py-4 flex items-center space-x-4">
                                     <a href="{{ route('pemanenans.edit', $pemanenan->id) }}"
                                         class="text-yellow-500 hover:text-yellow-700">

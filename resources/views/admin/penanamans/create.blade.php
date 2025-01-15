@@ -2,7 +2,7 @@
     <x-slot name="title">Tambah Penanaman</x-slot>
 
     <div class="container mx-auto py-10 px-6">
-       
+
 
         <!-- Pesan Error -->
         @if ($errors->any())

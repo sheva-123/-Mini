@@ -18,6 +18,9 @@ class Pertanian extends Model
     public function pemeliharaan(){
         return $this->hasMany(Pemeliharaan::class);
     }
+    public function pemanenan(){
+        return $this->hasMany(pemanenan::class);
+    }
     public function laporan()
     {
     return $this->belongsTo(Laporan::class);
