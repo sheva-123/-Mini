@@ -21,7 +21,7 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Penanaman</th>
+                            <th scope="col" class="px-6 py-3">Pertanian</th>
                             <th scope="col" class="px-6 py-3">Tanggal Pemeliharaan</th>
                             <th scope="col" class="px-6 py-3">Jenis Pemeliharaan</th>
                             <th scope="col" class="px-6 py-3">Biaya</th>
@@ -32,7 +32,7 @@
                         @foreach ($pemeliharaans as $pemeliharaan)
                             <tr class="bg-white border-b hover:bg-gray-100">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $pemeliharaan->penanaman->nama ?? 'Tidak diketahui' }}</td>
+                                <td class="px-6 py-4">{{ $pemeliharaan->pertanian->nama_pertanian ?? 'Tidak diketahui' }}</td>
                                 <td class="px-6 py-4">{{ $pemeliharaan->tanggal_pemeliharaan }}</td>
                                 <td class="px-6 py-4">{{ $pemeliharaan->jenis_pemeliharaan }} </td>
                                 <td class="px-6 py-4">{{ $pemeliharaan->biaya }} </td>

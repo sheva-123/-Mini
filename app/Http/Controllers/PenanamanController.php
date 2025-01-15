@@ -14,7 +14,7 @@ class PenanamanController extends Controller
      */
     public function index()
     {
-        $penanamans = Penanaman::all();
+        $penanamans = Penanaman::with('tanaman')->get();
         return view('admin.penanamans.index', compact('penanamans'));
     }
 
