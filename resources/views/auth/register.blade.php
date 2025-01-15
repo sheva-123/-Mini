@@ -3,14 +3,16 @@
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div class="max-w-screen-2xl bg-white shadow sm:rounded-lg flex justify-center flex-1">
             <!-- Left Side Image -->
-            <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
-                <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
-                    style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
-                </div>
+            <div class="flex-1 bg-indigo-100 text-center hidden lg:flex items-center justify-center">
+                <dotlottie-player class="align-middle" 
+                    src="https://lottie.host/d921c873-4bbc-4ed0-8f94-cf17a0b052f8/3T2RfVZuyy.lottie"
+                    background="transparent" speed="1" style="width: 300px; height: 300px" loop
+                    autoplay></dotlottie-player>
+                    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>    
             </div>
 
             <!-- Right Side Form -->
-            <div class="lg:w-1/2 xl:w-5/12 m-auto px-6">
+            <div class="lg:w-1/2 xl:w-1/2 m-auto px-6">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
