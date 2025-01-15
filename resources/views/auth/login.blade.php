@@ -1,4 +1,5 @@
-<x-guest-layout> 
+<x-guest-layout>
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
@@ -29,7 +30,9 @@
                                 <!-- Remember Me -->
                                 <div class="block mt-4">
                                     <label for="remember_me" class="inline-flex items-center">
-                                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                                        <input id="remember_me" type="checkbox"
+                                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                                            name="remember">
                                         <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                                     </label>
                                 </div>
@@ -40,12 +43,14 @@
 
                                 <div class="flex items-center justify-between mt-4">
                                     @if (Route::has('password.request'))
-                                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            href="{{ route('password.request') }}">
                                             {{ __('Forgot your password?') }}
                                         </a>
                                     @endif
 
-                                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        href="{{ route('register') }}">
                                         {{ __('Register') }}
                                     </a>
                                 </div>
@@ -53,9 +58,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
-                    <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
-                        style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
+                <div class="flex-1 bg-indigo-100 text-center hidden lg:flex items-center justify-center">
+                        <dotlottie-player class="align-middle" 
+                            src="https://lottie.host/d921c873-4bbc-4ed0-8f94-cf17a0b052f8/3T2RfVZuyy.lottie"
+                            background="transparent" speed="1" style="width: 300px; height: 300px" loop
+                            autoplay></dotlottie-player>
+                            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>    
                     </div>
                 </div>
             </div>
