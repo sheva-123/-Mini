@@ -1,9 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto py-12 px-6">
         <div class="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-2xl">
-            <h1 class="text-4xl font-extrabold text-green-700 text-center mb-4">🌿 Tambah Tanaman</h1>
-            <p class="text-center text-gray-600 mb-8">Isi formulir berikut untuk menambahkan data tanaman baru</p>
-
             <form action="{{ route('tanamans.store') }}" method="POST" class="space-y-6">
                 @csrf
 
@@ -35,7 +32,7 @@
 
             <!-- Tombol Kembali -->
             <div class="text-center mt-4">
-                <a href="{{ route('tanamans.index') }}" 
+                <a href="{{ route('tanamans.index') }}"
                    class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
                     Kembali
                 </a>
