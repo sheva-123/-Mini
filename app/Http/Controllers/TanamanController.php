@@ -13,14 +13,14 @@ class TanamanController extends Controller
     public function index()
     {
         $tanamans = Tanaman::all();
-        return view('tanamans.index', compact('tanamans'));    }
+        return view('admin.tanamans.index', compact('tanamans'));    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('tanamans.create');
+        return view('admin.tanamans.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class TanamanController extends Controller
         ]);
 
         Tanaman::create($request->all());
-        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil ditambahkan.');
+        return redirect()->route('tanamans.index')->with('success', 'Data berhasil ditambahkan');
         }
 
     /**
@@ -51,7 +51,7 @@ class TanamanController extends Controller
      */
     public function edit(Tanaman $tanaman)
     {
-        return view('tanamans.edit', compact('tanaman'));
+        return view('admin.tanamans.edit', compact('tanaman'));
     }
 
     /**

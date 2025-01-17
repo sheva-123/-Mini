@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemanenan;
 use App\Models\Penanaman; // Model Penanaman
+use App\Models\Pertanian;
 use Illuminate\Http\Request;
 
 class PemanenanController extends Controller
@@ -12,7 +13,7 @@ class PemanenanController extends Controller
     public function index(Request $request)
     {
         $cari = $request->get('cari');
-        $pemanenans = Pemanenan::with('penanaman') // Relasi ke penanaman
+        $pemanenans = Pemanenan::with('pertanian') // Relasi ke penanaman
             ->when($cari, function ($query, $cari) {
                 return $query->where('tanggal_pemanenan', 'like', "%{$cari}%");
             })
@@ -24,42 +25,42 @@ class PemanenanController extends Controller
     // ->orderBy('tanggal', 'asc')
     // ->get();
 
-    return view('pemanenans.index', compact('pemanenans', 'cari'));
+    return view('admin.pemanenans.index', compact('pemanenans', 'cari'));
     }
 
     // Menampilkan form tambah pemanenan
     public function create()
     {
-        $penanamans = Penanaman::all(); // Ambil semua penanaman
-        return view('pemanenans.create', compact('penanamans'));
+        $pertanians = Pertanian::all(); // Ambil semua penanaman
+        return view('admin.pemanenans.create', compact('pertanians'));
     }
 
     // Menyimpan pemanenan
     public function store(Request $request)
     {
         $request->validate([
-            'id_penanaman' => 'required|exists:penanamans,id',
+            'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
         ]);
 
         Pemanenan::create($request->all());
 
-        return redirect()->route('pemanenans.index');
+        return redirect()->route('pemanenans.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     // Menampilkan form edit pemanenan
     public function edit(Pemanenan $pemanenan)
     {
-        $penanamans = Penanaman::all();
-        return view('pemanenans.edit', compact('pemanenan', 'penanamans'));
+        $pertanians = Pertanian::all();
+        return view('pemanenans.edit', compact('pemanenan', 'pertanians'));
     }
 
     // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
         $request->validate([
-            'id_penanaman' => 'required|exists:penanamans,id',
+            'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
         ]);
@@ -76,4 +77,3 @@ class PemanenanController extends Controller
         return redirect()->route('pemanenans.index');
     }
 }
- 

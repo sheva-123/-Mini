@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemeliharaan;
 use App\Models\Penanaman;
+use App\Models\Pertanian;
 use Illuminate\Http\Request;
 
 class PemeliharaanController extends Controller
@@ -14,7 +15,7 @@ class PemeliharaanController extends Controller
     public function index(Request $request)
     {
 
-        $query = Pemeliharaan::with('penanaman');
+        $query = Pemeliharaan::with('pertanian');
 
         if ($request->has('search')) {
             $search = $request->input('search');
@@ -25,7 +26,7 @@ class PemeliharaanController extends Controller
         }
 
         $pemeliharaans = $query->get();
-        return view('pemeliharaans.index', compact('pemeliharaans'));
+        return view('admin.pemeliharaans.index', compact('pemeliharaans'));
     }
 
     /**
@@ -33,8 +34,8 @@ class PemeliharaanController extends Controller
      */
     public function create()
     {
-        $penanaman = Penanaman::all();
-        return view('pemeliharaans.create', compact('penanaman'));
+        $pertanian = Pertanian::all();
+        return view('admin.pemeliharaans.create', compact('pertanian'));
     }
 
     /**

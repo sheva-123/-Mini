@@ -10,10 +10,10 @@ class Pemanenan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['penanaman_id', 'tanggal_pemanenan', 'jumlah_hasil'];
+    protected $fillable = ['pertanian_id', 'tanggal_pemanenan', 'jumlah_hasil'];
 
-    public function penanaman()
+    public function pertanian()
     {
-        return $this->belongsTo(Penanaman::class);
+        return $this->belongsTo(pertanian::class);
     }
 }

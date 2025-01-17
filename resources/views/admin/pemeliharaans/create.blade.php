@@ -2,7 +2,7 @@
     <x-slot name="title">Tambah Pemeliharaan</x-slot>
 
     <div class="container mx-auto py-10">
-       
+
 
         <!-- Pesan error -->
         @if ($errors->any())
@@ -21,12 +21,12 @@
 
             <!-- Penanaman -->
             <div class="mb-6">
-                <label for="penanaman_id" class="block text-gray-700 font-semibold mb-2">Penanaman</label>
-                <select name="penanaman_id" id="penanaman_id" class="form-select w-full border-gray-300 rounded p-2" required>
+                <label for="pertanian_id" class="block text-gray-700 font-semibold mb-2">Pertanian</label>
+                <select name="pertanian_id" id="pertanian_id" class="form-select w-full border-gray-300 rounded p-2" required>
                     <option value="">Pilih Penanaman</option>
-                    @foreach($penanaman as $item)
-                        <option value="{{ $item->id }}" {{ old('penanaman_id') == $item->id ? 'selected' : '' }}>
-                            {{ $item->nama }}
+                    @foreach($pertanian as $p)
+                        <option value="{{ $p->id }}" {{ old('penanaman_id') == $p->id ? 'selected' : '' }}>
+                            {{ $p->nama_pertanian }}
                         </option>
                     @endforeach
                 </select>

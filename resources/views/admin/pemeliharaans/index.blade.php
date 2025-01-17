@@ -2,13 +2,13 @@
     <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold text-white">Data Pemanenan</h1>
-                <p class="text-white text-sm mt-1">Admin | Pemanenan</p>
+                <h1 class="text-2xl font-bold text-white">Data Pemeliharaan</h1>
+                <p class="text-white text-sm mt-1">Admin | Pemeliharaan</p>
             </div>
         </div>
     </header>
     <div class="flex justify-end pr-3 pt-2">
-        <a href="{{ route('pemanenans.create') }}"
+        <a href="{{ route('pemeliharaans.create') }}"
             class="inline-flex items-center bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-700 transition-transform transform hover:scale-95">
             Tambah
         </a>
@@ -21,21 +21,23 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Penanaman</th>
-                            <th scope="col" class="px-6 py-3">Tanggal Panen</th>
-                            <th scope="col" class="px-6 py-3">Jumlah Hasil</th>
+                            <th scope="col" class="px-6 py-3">Pertanian</th>
+                            <th scope="col" class="px-6 py-3">Tanggal Pemeliharaan</th>
+                            <th scope="col" class="px-6 py-3">Jenis Pemeliharaan</th>
+                            <th scope="col" class="px-6 py-3">Biaya</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pemanenans as $pemanenan)
+                        @foreach ($pemeliharaans as $pemeliharaan)
                             <tr class="bg-white border-b hover:bg-gray-100">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->penanaman->nama }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->tanggal_pemanenan }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }} ha</td>
+                                <td class="px-6 py-4">{{ $pemeliharaan->pertanian->nama_pertanian ?? 'Tidak diketahui' }}</td>
+                                <td class="px-6 py-4">{{ $pemeliharaan->tanggal_pemeliharaan }}</td>
+                                <td class="px-6 py-4">{{ $pemeliharaan->jenis_pemeliharaan }} </td>
+                                <td class="px-6 py-4">{{ $pemeliharaan->biaya }} </td>
                                 <td class="px-6 py-4 flex items-center space-x-4">
-                                    <a href="{{ route('pemanenans.edit', $pemanenan->id) }}"
+                                    <a href="{{ route('pemeliharaans.edit', $pemeliharaan) }}"
                                         class="text-yellow-500 hover:text-yellow-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +45,7 @@
                                                 d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('pemanenans.destroy', $pemanenan->id) }}" method="POST">
+                                    <form action="{{ route('pemeliharaans.destroy', $pemeliharaan) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"
@@ -66,3 +68,5 @@
         </div>
     </div>
 </x-app-layout>
+
+

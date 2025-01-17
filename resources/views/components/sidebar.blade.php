@@ -23,6 +23,11 @@
                 <i class="fas fa-seedling"></i>
                 <span>Tanaman</span>
             </a>
+            <a href="{{ route('Penanamans.index') }}"
+                class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('Penanamans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
+                <i class="fas fa-seedling"></i>
+                <span>Penanaman</span>
+            </a>
             <a href="{{ route('pemanenans.index') }}"
                 class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('pemanenans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
                 <i class="fas fa-tractor"></i>
@@ -36,11 +41,6 @@
                     class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('pemeliharaans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
                     <i class="fas fa-hand-holding-water"></i>
                     <span>Pemeliharaan</span>
-                    <a href="{{ route('Penanamans.index') }}"
-                        class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('Penanamans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
-                        <i class="fas fa-seedling"></i>
-                        <span>Penanaman</span>
-                    </a>
                     <a href="{{ route('laporans.index') }}"
                         class="px-4 py-2 flex items-center space-x-4 group {{ request()->routeIs('laporans.*') ? 'rounded-lg text-white bg-green-600' : 'rounded-md text-gray-500 ' }}">
                         <i class="fa-solid fa-file-lines"></i>
@@ -56,7 +56,8 @@
                     <form method="POST" action="{{ route('logout') }}"
                         class="px-4 py-2 flex items-center space-x-4 group">
                         @csrf
-                        <button type="submit" onclick="logout(event)" class="flex items-center space-x-4 text-gray-500 hover:text-red-600">
+                        <button type="submit" onclick="logout(event)"
+                            class="flex items-center space-x-4 text-gray-500 hover:text-red-600">
                             <i class="fas fa-sign-out-alt"></i>
                             <span>Logout</span>
                         </button>
