@@ -104,7 +104,7 @@ transition-delay: 0.2s;
 </style>
 <!-- nav bar section -->
 <nav class="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
-    <div class="text-xl">Bappa Flour mill</div>
+    <div class="text-xl">Manajemen Pertanian</div>
     <div class="flex md:hidden">
         <button id="hamburger">
             <img class="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png"
@@ -116,7 +116,7 @@ transition-delay: 0.2s;
     <div class="toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none">
         <a href="#home" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Beranda
         </a>
-        <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Layanan
+        <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Tanaman
         </a>
         <a href="#aboutus" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Tentang Kami
         </a>
@@ -125,24 +125,26 @@ transition-delay: 0.2s;
         <a href="#contactUs" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Hubungi Kami
         </a>
     </div>
-    
+
 
     <div class="toggle w-full text-end hidden md:flex md:w-auto px-4 py-2 md:rounded">
         <div class="flex space-x-4">
             <!-- Button Register -->
             <a href="/register" class="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 9A6.5 6.5 0 114 9m0 0v3.25m0-3.25h3.25" />
                 </svg>
-                <span class="ml-2">Daftar</span>
+
+                <span class="ml-2">Register</span>
             </a>
-        
+
             <!-- Button Login -->
             <a href="/login" class="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 5.25v13.5a2.25 2.25 0 002.25 2.25h6.75a2.25 2.25 0 002.25-2.25V15M18 12h3m0 0l-3-3m3 3l-3 3" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 006.75 21h6.75a2.25 2.25 0 002.25-2.25V15M18 12h3m0 0l-3-3m3 3l-3 3" />
                 </svg>
-                <span class="ml-2">Masuk</span>
+
+                <span class="ml-2">Login</span>
             </a>
         </div>
                 </div>
@@ -160,8 +162,8 @@ transition-delay: 0.2s;
 
     <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
         <div class="md:w-1/2 mb-4 md:mb-0">
-            <h1 class="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">Bappa Flour mill</h1>
-            <p class="font-regular text-xl mb-8 mt-4">One stop solution for flour grinding services</p>
+            <h1 class="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian</h1>
+            <p class="font-regular text-xl mb-8 mt-4">pengelolaan sumber daya dalam sektor pertanian untuk mencapai efisiensi dan produktivitas yang optimal.</p>
             <a href="#contactUs"
                 class="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200">Hubungi Kami</a>
         </div>
@@ -171,7 +173,7 @@ transition-delay: 0.2s;
 <!-- our services section -->
 <section class="py-10" id="services">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Services</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Tanaman</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/cc/e4/9b/cce49b06f6e0b15d119aa449d8a63d69.jpg"
@@ -531,10 +533,9 @@ transition-delay: 0.2s;
                             src=https://i.pinimg.com/736x/4a/f6/a2/4af6a21f36443b57d7c7b7d13067a487.jpg>
                     </div>
                     <div class=content>
-                        <h3>This is content</h3>
-                        <p>DIn publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-                            demonstrate the visual form of a document or a typeface without relying on meaningful
-                            content.</p>
+                        <h3>Jadwal Tanaman Dengan Teknologi Modern</h3>
+                        <p>Penjadwalan tanaman menggunakan aplikasi modern adalah pendekatan berbasis teknologi
+                            untuk mengatur waktu dan aktivitas yang diperlukan dalam budidaya tanaman.</p>
                     </div>
                 </div>
             </div>
@@ -548,10 +549,10 @@ transition-delay: 0.2s;
                             src=https://i.pinimg.com/736x/90/ea/36/90ea363b6381b8aa3431a661b5e11eb1.jpg>
                     </div>
                     <div class=content>
-                        <h3>This is content</h3>
-                        <p>DIn publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-                            demonstrate the visual form of a document or a typeface without relying on meaningful
-                            content.</p>
+                        <h3>Peyiraman Tanaman dengan Teknologi Modern</h3>
+                        <p>Penyiraman tanaman dengan teknologi modern
+                           adalah proses pemberian air ke tanaman
+                           menggunakan sistem yang dirancang untuk meningkatkan efisiensi penggunaan air.</p>
                     </div>
                 </div>
             </div>
@@ -565,10 +566,9 @@ transition-delay: 0.2s;
                             src=https://i.pinimg.com/736x/84/2a/85/842a85d843f5629ce9dfb46b6f78d325.jpg>
                     </div>
                     <div class=content>
-                        <h3>This is content</h3>
-                        <p>DIn publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-                            demonstrate the visual form of a document or a typeface without relying on meaningful
-                            content.</p>
+                        <h3>Pemerikasaan Tanaman</h3>
+                        <p>Pemeriksaan tanaman oleh prosesor adalah proses evaluasi mendalam terhadap kondisi
+                            tanaman untuk memahami faktor-faktor yang memengaruhi pertumbuhannya.</p>
                     </div>
                 </div>
             </div>
