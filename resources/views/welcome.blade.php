@@ -114,15 +114,15 @@ transition-delay: 0.2s;
         </button>
     </div>
     <div class="toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none">
-        <a href="#home" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Beranda
+        <a href="#home" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Beranda
         </a>
-        <a href="#services" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Tanaman
+        <a href="#services" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Tanaman
         </a>
-        <a href="#aboutus" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Tentang Kami
+        <a href="#aboutus" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Tentang Kami
         </a>
-        <a href="#gallery" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Galeri
+        <a href="#gallery" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Galeri
         </a>
-        <a href="#contactUs" class="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Hubungi Kami
+        <a href="#contactUs" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Hubungi Kami
         </a>
     </div>
 
@@ -506,7 +506,7 @@ transition-delay: 0.2s;
         Galeri
     </div>
 
-    <div class="flex px-10">
+    <div class="flex">
 
         <body>
             <div class="container1">

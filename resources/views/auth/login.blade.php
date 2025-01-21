@@ -13,7 +13,7 @@
                         </h1>
                         <div class="w-full flex-1 mt-8">
 
-                            <div class="w-full flex-1 mt-8 flex items-center justify-center">
+                            <div class="w-full flex-1 mt-5 flex items-center justify-center">
                                 <div class="bg-white shadow-lg rounded-lg p-6 max-w-sm w-full">
                                     <div>
                                         <x-input-label for="email" :value="__('Email')" />
