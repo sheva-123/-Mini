@@ -58,7 +58,7 @@
                                     </div>
                             
                                     <!-- Register Button -->
-                                    <x-primary-button class="mt-4 w-full">
+                                    <x-primary-button class="mt-4 w-full underline">
                                         {{ __('Daftar') }}
                                     </x-primary-button>
                             
