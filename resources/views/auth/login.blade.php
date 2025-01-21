@@ -6,10 +6,10 @@
         @csrf
         <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
             <div class=" max-w-screen-2xl  bg-white shadow sm:rounded-lg flex justify-center flex-1">
-                <div class="lg:w-1/2 xl:w-5/12 m-auto px-6">
+                <div class="lg:w-1/2 xl:w-1/2 m-auto px-6">
                     <div class=" flex flex-col items-center">
                         <h1 class="text-2xl xl:text-3xl font-extrabold">
-                            Sign up
+                            Masuk
                         </h1>
                         <div class="w-full flex-1 mt-8">
 
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 <div class="flex-1 bg-indigo-100 text-center hidden lg:flex items-center justify-center" 
-    style="background-image: url('assets/images/bg/logre.png'); background-size: cover; background-position: center;">
+    style="background-image: url('assets/images/bg/bglg.jpg'); background-size: cover; background-position: center;">
     <dotlottie-player class="align-middle" 
         src="https://lottie.host/d921c873-4bbc-4ed0-8f94-cf17a0b052f8/3T2RfVZuyy.lottie"
         speed="3" style="width: 300px; height: 300px" loop

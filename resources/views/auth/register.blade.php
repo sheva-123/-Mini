@@ -4,7 +4,7 @@
         <div class="max-w-screen-2xl bg-white shadow sm:rounded-lg flex justify-center flex-1">
             <!-- Left Side Image -->
             <div class="flex-1 bg-indigo-100 text-center hidden lg:flex items-center justify-center" 
-            style="background-image: url('assets/images/bg/logre.png'); background-size: cover; background-position: center;">
+            style="background-image: url('assets/images/bg/bglg.jpg'); background-size: cover; background-position: center;">
             <dotlottie-player class="align-middle" 
                 src="https://lottie.host/d921c873-4bbc-4ed0-8f94-cf17a0b052f8/3T2RfVZuyy.lottie"
                 speed="3" style="width: 300px; height: 300px" loop
@@ -23,12 +23,12 @@
                         </h1>
                         <div class="w-full flex-1 mt-8">
 
-                            <div class="w-full flex items-center justify-center mt-2">
-                                <div class="bg-white shadow-lg rounded-lg p-6">
+                            <div class="w-full flex flex-1 items-center justify-center mt-8">
+                                <div class="bg-white shadow-lg rounded-lg p-6 max-w-sm w-full">
                                     <!-- Name -->
                                     <div>
                                         <x-input-label for="name" :value="__('Name')" />
-                                        <x-text-input id="name" class="block mt-1 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
+                                        <x-text-input id="name" class="block mt-1 w-full rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
                                             type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
@@ -36,7 +36,7 @@
                                     <!-- Email Address -->
                                     <div class="mt-4">
                                         <x-input-label for="email" :value="__('Email')" />
-                                        <x-text-input id="email" class="block mt-1 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
+                                        <x-text-input id="email" class="block mt-1 w-full rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
                                             type="email" name="email" :value="old('email')" required autocomplete="username" />
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
@@ -44,7 +44,7 @@
                                     <!-- Password -->
                                     <div class="mt-4">
                                         <x-input-label for="password" :value="__('Password')" />
-                                        <x-text-input id="password" class="block mt-1 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
+                                        <x-text-input id="password" class="block mt-1 w-full rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
                                             type="password" name="password" required autocomplete="new-password" />
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
@@ -52,7 +52,7 @@
                                     <!-- Confirm Password -->
                                     <div class="mt-4">
                                         <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                                        <x-text-input id="password_confirmation" class="block mt-1 w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
+                                        <x-text-input id="password_confirmation" class="block mt-1 w-full rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" 
                                             type="password" name="password_confirmation" required autocomplete="new-password" />
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
