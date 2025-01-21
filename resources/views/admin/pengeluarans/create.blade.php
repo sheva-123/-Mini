@@ -10,7 +10,7 @@
                     <select name="nama_pertanian"
                             class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition">
                         @foreach ($pertanian as $pertanianItem)
-                            <option value="{{ $pertanianItem->nama_pertanian }}">{{ $pertanianItem->nama_pertanian }}</option>
+                            <option value="{{ $pertanianItem->id }}">{{ $pertanianItem->nama_pertanian }}</option>
                         @endforeach
                     </select>
                 </div>

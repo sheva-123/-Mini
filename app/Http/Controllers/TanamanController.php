@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TanamanController extends Controller
 {
@@ -28,11 +29,18 @@ class TanamanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_tanaman' => 'required|string|max:255',
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('tanamans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Tanaman::create($request->all());
         return redirect()->route('tanamans.index')->with('success', 'Data berhasil ditambahkan');
@@ -59,13 +67,21 @@ class TanamanController extends Controller
      */
     public function update(Request $request, Tanaman $tanaman)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_tanaman' => 'required|string|max:255',
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
 
+            if ($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('tanamans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
+
         $tanaman->update($request->all());
+
         return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil diperbarui.');
         }
 
@@ -76,5 +92,5 @@ class TanamanController extends Controller
     {
         $tanaman->delete();
         return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil dihapus.');
-       }
+    }
 }
