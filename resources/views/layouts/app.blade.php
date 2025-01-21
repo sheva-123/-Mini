@@ -24,7 +24,7 @@
 
             <h2 class="text-2xl font-semibold text-gray-700">Manajemen Pertanian</h2>
 
-            
+
         </div>
     </nav>
     <div class="grid grid-cols-[0.5fr_2fr] h-screen mt-20">
@@ -71,6 +71,26 @@
         </script>
     @endif
 
+    <script>
+        function deleteRecord(event) {
+            event.preventDefault();
+            const form = event.target.closest('form');
+            Swal.fire({
+                title: "Apakah kamu yakin menghapus data ini?",
+                text: "Anda tidak dapat mengembalikan data ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

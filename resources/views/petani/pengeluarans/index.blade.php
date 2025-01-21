@@ -49,7 +49,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            onclick="deleteRecord(event)">
                                             <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
