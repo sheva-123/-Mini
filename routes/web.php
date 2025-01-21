@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/pertanians', PertanianController::class);
+});
+
+Route::middleware(['auth', 'role:user|admin'])->group(function () {
     Route::resource('/tanamans', TanamanController::class);
     Route::resource('/Penanamans', PenanamanController::class);
     Route::resource('/pemeliharaans', PemeliharaanController::class);

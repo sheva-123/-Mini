@@ -11,9 +11,7 @@
     <div class="flex">
         <!-- Sidebar -->
         <div class="bg-white w-64 h-screen shadow-lg">
-            <div class="p-4">
-                <h2 class="text-2xl font-semibold text-gray-700">Sidebar</h2>
-            </div>
+            
             <div class="mt-6 space-y-2">
                 <a href="{{ route('dashboard') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
@@ -118,7 +116,7 @@
             const dropdown = document.getElementById('menuDropdown');
             const button = document.getElementById('menuButton');
             const isOpen = localStorage.getItem('dropdownState') === 'true';
-            
+
             if (isOpen) {
                 dropdown.classList.remove('hidden');
                 button.classList.add('bg-green-100');
