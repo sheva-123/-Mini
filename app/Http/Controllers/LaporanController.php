@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Laporan;
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LaporanController extends Controller
 {
@@ -39,11 +40,21 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_laporan' => 'required|date',
             'deskripsi' => 'required|string|max:255',
+        ],[
+            'tanggal_laporan.date' => 'Date Required',
+            'deskripsi.max:255' => 'Maximal string 255 character',
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('laporans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         $validatedData = $request->validate([
             'pertanian_id' => 'required',
@@ -78,11 +89,21 @@ class LaporanController extends Controller
      */
     public function update(Request $request, Laporan $laporan)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_laporan' => 'required|date',
             'deskripsi' => 'required|string|max:255',
+        ], [
+            'tanggal_laporan.date' => 'Date Required',
+            'deskripsi.max:255' => 'Maximal string 255 character',
         ]);
+
+            if ($validator->fails()) {
+                $error = $validator->error();
+                return redirect()->route('laporans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
 
         $laporan->update($request->all());
 

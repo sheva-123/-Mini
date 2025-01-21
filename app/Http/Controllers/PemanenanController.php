@@ -6,6 +6,7 @@ use App\Models\Pemanenan;
 use App\Models\Penanaman; // Model Penanaman
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PemanenanController extends Controller
 {
@@ -38,11 +39,20 @@ class PemanenanController extends Controller
     // Menyimpan pemanenan
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
+        ],[
+            'tanggal_pemanenan.date' => 'Date Lajwdnd'
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pemanenans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Pemanenan::create($request->all());
 
@@ -59,11 +69,20 @@ class PemanenanController extends Controller
     // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
+        ], [
+            'tanggal_pemanenan.date' => 'Date Lajwdnd'
         ]);
+
+            if ($validator->fails()) {
+                $error = $validator->error();
+                return redirect()->route('pemanenans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
 
         $pemanenan->update($request->all());
 

@@ -6,6 +6,7 @@ use App\Models\Pemeliharaan;
 use App\Models\Penanaman;
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PemeliharaanController extends Controller
 {
@@ -43,12 +44,22 @@ class PemeliharaanController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
+        $validator = Validator::make($request->all(), [
             'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|string|max:255',
+        ], [
+            'tanggal_pemeliharaan.max:255' => 'Character Maximal 255',
+            'biaya.max:255' => 'Character Maximal 255'
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pemeliharaans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Pemeliharaan::create($request->all());
 
@@ -69,12 +80,22 @@ class PemeliharaanController extends Controller
      */
     public function update(Request $request, Pemeliharaan $pemeliharaans)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|string|max:255',
+        ], [
+            'tanggal_pemeliharaan.max:255' => 'Character Maximal 255',
+            'biaya.max:255' => 'Character Maximal 255'
         ]);
+
+            if ($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pemeliharaans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
 
         $pemeliharaans->update($request->all());
 
