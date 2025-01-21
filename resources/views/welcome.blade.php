@@ -177,7 +177,7 @@ transition-delay: 0.2s;
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/cc/e4/9b/cce49b06f6e0b15d119aa449d8a63d69.jpg"
-                    alt="wheat flour grinding" class="w-full h-64 object-cover">
+                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Jagung</h3>
                     <p class="text-gray-700 text-base">Penanaman jagung (Zea mays) adalah salah satu bentuk budidaya
@@ -251,7 +251,7 @@ transition-delay: 0.2s;
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/1a/26/91/1a2691ad866e5919811b2bfe8ea151cd.jpg "
-                    alt="Coffee" class="w-full h-64 object-cover">
+                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Padi</h3>
                     <p class="text-gray-700 text-base">Pertanian padi adalah salah satu bentuk budidaya tanaman
@@ -290,7 +290,7 @@ transition-delay: 0.2s;
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/04/ac/41/04ac4145d4fdfb4b604514c2809188b3.jpg"
-                    alt="Coffee" class="w-full h-64 object-cover">
+                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Kebun Tomat</h3>
                     <p class="text-gray-700 text-base">Pertanian kebun tomat adalah salah satu bentuk budidaya
@@ -326,7 +326,7 @@ transition-delay: 0.2s;
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/25/66/ae/2566ae1718b54401762c06e6cbb695a6.jpg"
-                    alt="Coffee" class="w-full h-64 object-cover">
+                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Teh </h3>
                     <p class="text-gray-700 text-base">Penanaman teh (Camellia sinensis) adalah aktivitas budidaya
@@ -359,7 +359,7 @@ transition-delay: 0.2s;
             <div
                 class="bg-white rounded-lg bg-gradient-to-tr from-pink-300 to-blue-300 p-0.5 shadow-lg overflow-hidden min-h-full">
                 <img src="https://i.pinimg.com/736x/ac/a3/1c/aca31c33059f933ba3e74486da47b60c.jpg   "
-                    alt="Coffee" class="w-full h-64 object-cover rounded-t-lg">
+                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
                 <div class="p-6 bg-white text-center rounded-b-lg md:min-h-full">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Kubis</h3>
                     <p class="text-gray-700 text-base"><span class="font-medium underline"></span>
@@ -397,7 +397,7 @@ transition-delay: 0.2s;
 
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/fb/99/92/fb9992e1d8fa2bc1fbd67c60f2396da2.jpg"
-                    alt="papad" class="w-full h-64 object-cover">
+                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Bawang Merah</h3>
                     <p class="text-gray-700 text-base">Bawang merah (Allium cepa var. aggregatum) adalah tanaman
@@ -452,7 +452,7 @@ transition-delay: 0.2s;
 <!-- why us  -->
 <section class="text-gray-700 body-font mt-10">
     <div class="flex justify-center text-3xl font-bold text-gray-800 text-center">
-        Kenapa Kami?
+        Icons
     </div>
     <div class="container px-5 py-12 mx-auto">
         <div class="flex flex-wrap text-center justify-center">
@@ -567,8 +567,9 @@ transition-delay: 0.2s;
                     </div>
                     <div class=content>
                         <h3>Pemerikasaan Tanaman</h3>
-                        <p>Pemeriksaan tanaman oleh prosesor adalah proses evaluasi mendalam terhadap kondisi
-                            tanaman untuk memahami faktor-faktor yang memengaruhi pertumbuhannya.</p>
+                        <p>Pemeriksaan tanamanadalah proses evaluasi mendalam terhadap kondisi
+                            tanaman untuk memahami faktor-faktor
+                            yang memengaruhi pertumbuhannkesehatan dan adaptasi lingkungan.</p>
                     </div>
                 </div>
             </div>
@@ -584,7 +585,7 @@ transition-delay: 0.2s;
 <section class="bg-gray-100">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-20 lg:px-8">
         <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-extrabold text-gray-900" id="contactUs">Kunjingi Tempat Kami</h2>
+            <h2 class="text-3xl font-extrabold text-gray-900" id="contactUs">Kunjungi Tempat Kami</h2>
             <p class="mt-3 text-lg text-gray-500">Biarkan Kami Melayanimu Sebaik Mungkin</p>
         </div>
         <div class="mt-8 lg:mt-20">
