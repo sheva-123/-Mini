@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.userapp')
+
+@section('content')
     <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
         <div class="container mx-auto flex justify-between items-center">
             <div>
@@ -67,5 +69,5 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
 

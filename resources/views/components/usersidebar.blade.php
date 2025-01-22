@@ -37,7 +37,7 @@
                             <i class="fas fa-house-chimney-window"></i>
                             <span class="ml-2">Tanaman</span>
                         </a>
-                        <a href="{{ route('penanamans.index') }}"
+                        <a href="{{ route('Penanamans.index') }}"
                             class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
                             <i class="fas fa-user"></i>
                             <span class="ml-2">Penanaman</span>

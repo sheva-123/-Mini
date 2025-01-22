@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-usersidebar>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             te
@@ -30,7 +30,7 @@
                 <!-- Tanaman Table -->
                 <div class="mt-8">
                     <h2 class="text-xl font-bold mb-4">Your Plants</h2>
-                    
+
                         <div class="overflow-x-auto">
                             <table class="min-w-full border-collapse border border-gray-200">
                                 <thead>
@@ -42,26 +42,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                         <tr>
                                             <td class="border border-gray-200 px-4 py-2">34</td>
                                             <td class="border border-gray-200 px-4 py-2">fsg</td>
                                             <td class="border border-gray-200 px-4 py-2">fdfb</td>
                                             <td class="border border-gray-200 px-4 py-2">wefg</td>
                                         </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
-                    
+
                         <p class="text-gray-500">No plants available.</p>
-                    
+
                 </div>
 
                 <!-- Penanaman Table -->
                 <div class="mt-8">
                     <h2 class="text-xl font-bold mb-4">Planting Records</h2>
-                    
+
                         <div class="overflow-x-auto">
                             <table class="min-w-full border-collapse border border-gray-200">
                                 <thead>
@@ -73,27 +73,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                         <tr>
                                             <td class="border border-gray-200 px-4 py-2">123</td>
                                             <td class="border border-gray-200 px-4 py-2">dfsg</td>
                                             <td class="border border-gray-200 px-4 py-2">rfg</td>
                                             <td class="border border-gray-200 px-4 py-2">df</td>
                                         </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
-                    
+
                         <p class="text-gray-500">No planting records available.</p>
-                    
+
                 </div>
 
                 <!-- Pengeluaran Table -->
                 <div class="mt-8">
                     <h2 class="text-xl font-bold mb-4">Expenses</h2>
                     <p>Total Expenses: <strong>Rp </strong></p>
-                    
+
                         <div class="overflow-x-auto">
                             <table class="min-w-full border-collapse border border-gray-200">
                                 <thead>
@@ -105,22 +105,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                         <tr>
                                             <td class="border border-gray-200 px-4 py-2">23</td>
                                             <td class="border border-gray-200 px-4 py-2">dc</td>
                                             <td class="border border-gray-200 px-4 py-2">Rp dsd</td>
                                             <td class="border border-gray-200 px-4 py-2">ddv</td>
                                         </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
-                    
+
                         <p class="text-gray-500">No expenses recorded yet.</p>
-                    
+
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-usersidebar>

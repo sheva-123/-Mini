@@ -14,7 +14,7 @@ class TanamanController extends Controller
     public function index()
     {
         $tanamans = Tanaman::all();
-        return view('petani.tanamans.index', compact('tanamans'));    }
+        return view('petani.Tanamans.index', compact('tanamans'));    }
 
     /**
      * Show the form for creating a new resource.
