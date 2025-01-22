@@ -31,7 +31,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user|admin'])->group(function () {
     Route::get('/home', function () {
         return view('petani.dashboard');
-    })->name('user.dashboard');
+    })->name('user.home');
 
     Route::resource('/tanamans', TanamanController::class);
     Route::resource('/Penanamans', PenanamanController::class);
