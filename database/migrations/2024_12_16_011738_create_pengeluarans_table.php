@@ -16,7 +16,7 @@ return new class extends Migration
         $table->foreignId('pertanian_id')->constrained('pertanians')->onDelete('cascade');
         $table->date('tanggal_pengeluaran');
         $table->string('jenis_pengeluaran');
-        $table->string('biaya');
+        $table->integer('biaya');
         $table->timestamps();
     });
 }

@@ -33,15 +33,17 @@ class PengeluaranController extends Controller
             'nama_pertanian' => 'required|exists:pertanians,id',
             'tanggal_pengeluaran' => 'required|date',
             'jenis_pengeluaran' => 'required|string',
-            'biaya' => 'required|string',
+            'biaya' => 'required|numeric',
+        ],[
+            'biaya.numeric' => 'Inputan Biaya Harus Berupa Angka'
         ]);
 
-            // if($validator->fails()) {
-            //     $error = $validator->errors();
-            //     return redirect()->route('pengeluarans.index')
-            //                     ->withErrors($validator)
-            //                     ->withInput();
-            // }
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pengeluarans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Pengeluaran::create([
             'pertanian_id' => $request->nama_pertanian,
@@ -57,7 +59,7 @@ class PengeluaranController extends Controller
     public function edit(Pengeluaran $pengeluaran)
     {
         $pertanian = Pertanian::all(); // Mengambil semua data Pertanian
-        return view('pengeluarans.edit', compact('pengeluarans', 'pertanians'));
+        return view('admin.pengeluarans.edit', compact('pengeluaran', 'pertanian'));
     }
 
     // Menyimpan perubahan pengeluaran
@@ -67,7 +69,9 @@ class PengeluaranController extends Controller
             'pertanian_id' => 'required|exists:pertanian,id',
             'tanggal_pengeluaran' => 'required|date',
             'jenis_pengeluaran' => 'required|string',
-            'biaya' => 'required|string',
+            'biaya' => 'required|numeric',
+        ],[
+            'biaya.numeric' => 'Inputan Biaya Harus Berupa Jumlah Angka'
         ]);
 
         if ($validator->fails()) {

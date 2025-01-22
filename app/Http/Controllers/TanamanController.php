@@ -90,7 +90,13 @@ class TanamanController extends Controller
      */
     public function destroy(Tanaman $tanaman)
     {
-        $tanaman->delete();
-        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil dihapus.');
+        try {
+            $tanaman->delete();
+            return redirect()->route('tanamans.index')
+            ->with('success', 'Tanaman Delete Success');
+        } catch (\Exception $e) {
+            return redirect()->route('tanamans.index')
+            ->with('error', 'Tanaman Delete Error');
+        }
     }
 }

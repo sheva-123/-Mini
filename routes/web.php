@@ -25,10 +25,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+
     Route::resource('/pertanians', PertanianController::class);
 });
 
 Route::middleware(['auth', 'role:user|admin'])->group(function () {
+    Route::get('/home', function () {
+        return view('petani.dashboard');
+    })->name('user.dashboard');
+
     Route::resource('/tanamans', TanamanController::class);
     Route::resource('/Penanamans', PenanamanController::class);
     Route::resource('/pemeliharaans', PemeliharaanController::class);

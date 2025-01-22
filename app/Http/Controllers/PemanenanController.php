@@ -63,7 +63,8 @@ class PemanenanController extends Controller
     public function edit(Pemanenan $pemanenan)
     {
         $pertanians = Pertanian::all();
-        return view('pemanenans.edit', compact('pemanenan', 'pertanians'));
+        $penanaman = Penanaman::all();
+        return view('admin.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
     }
 
     // Menyimpan perubahan pemanenan
