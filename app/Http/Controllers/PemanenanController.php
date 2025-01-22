@@ -26,14 +26,14 @@ class PemanenanController extends Controller
     // ->orderBy('tanggal', 'asc')
     // ->get();
 
-    return view('admin.pemanenans.index', compact('pemanenans', 'cari'));
+    return view('petani.pemanenans.index', compact('pemanenans', 'cari'));
     }
 
     // Menampilkan form tambah pemanenan
     public function create()
     {
         $pertanians = Pertanian::all(); // Ambil semua penanaman
-        return view('admin.pemanenans.create', compact('pertanians'));
+        return view('petani.pemanenans.create', compact('pertanians'));
     }
 
     // Menyimpan pemanenan
@@ -64,7 +64,7 @@ class PemanenanController extends Controller
     {
         $pertanians = Pertanian::all();
         $penanaman = Penanaman::all();
-        return view('admin.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
+        return view('petani.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
     }
 
     // Menyimpan perubahan pemanenan

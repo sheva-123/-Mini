@@ -16,7 +16,7 @@ class PenanamanController extends Controller
     public function index()
     {
         $penanamans = Penanaman::with('tanaman')->get();
-        return view('admin.penanamans.index', compact('penanamans'));
+        return view('petani.penanamans.index', compact('penanamans'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PenanamanController extends Controller
     {
         $pertanians = Pertanian::all();
         $tanamans = Tanaman::all();
-        return view('admin.penanamans.create', compact('pertanians', 'tanamans'));
+        return view('petani.penanamans.create', compact('pertanians', 'tanamans'));
     }
 
     /**

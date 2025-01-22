@@ -27,7 +27,7 @@ class PemeliharaanController extends Controller
         }
 
         $pemeliharaans = $query->get();
-        return view('admin.pemeliharaans.index', compact('pemeliharaans'));
+        return view('petani.pemeliharaans.index', compact('pemeliharaans'));
     }
 
     /**
@@ -36,7 +36,7 @@ class PemeliharaanController extends Controller
     public function create()
     {
         $pertanian = Pertanian::all();
-        return view('admin.pemeliharaans.create', compact('pertanian'));
+        return view('petani.pemeliharaans.create', compact('pertanian'));
     }
 
     /**
@@ -72,7 +72,7 @@ class PemeliharaanController extends Controller
     public function edit(Pemeliharaan $pemeliharaans)
     {
         $penanaman = Penanaman::all();
-        return view('pemeliharaans.edit', compact('pemeliharaans', 'penanamans'));
+        return view('petani.pemeliharaans.edit', compact('pemeliharaans', 'penanamans'));
     }
 
     /**

@@ -23,7 +23,7 @@ class LaporanController extends Controller
             ->with('pertanian') // Memuat relasi
             ->orderBy('tanggal_laporan', 'desc')
             ->paginate(10);
-        return view('admin.laporans.index', compact('pertanians','laporans', 'cari'));
+        return view('petani.laporans.index', compact('pertanians','laporans', 'cari'));
     }
 
     /**
@@ -32,7 +32,7 @@ class LaporanController extends Controller
     public function create()
     {
         $pertanians = Pertanian::all(); // Fetch all related 'pertanian' data
-        return view('admin.laporans.create', compact('pertanians'));
+        return view('petani.laporans.create', compact('pertanians'));
     }
 
     /**
@@ -72,7 +72,7 @@ class LaporanController extends Controller
      */
     public function show(Laporan $laporan)
     {
-        return view('laporans.show', compact('laporan'));
+        return view('petani.laporans.show', compact('laporan'));
     }
 
     /**
@@ -81,7 +81,7 @@ class LaporanController extends Controller
     public function edit(Laporan $laporan)
     {
         $pertanians = Pertanian::all();
-        return view('laporans.edit', compact('laporan', 'pertanians'));
+        return view('petani.laporans.edit', compact('laporan', 'pertanians'));
     }
 
     /**

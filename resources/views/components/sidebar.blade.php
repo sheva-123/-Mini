@@ -13,7 +13,7 @@
         <div class="bg-white w-64 h-screen shadow-lg">
             
             <div class="mt-6 space-y-2">
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('user.dashboard') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
                     <i class="fas fa-gauge-simple-high"></i>
                     <span class="ml-3">Dashboard</span>
