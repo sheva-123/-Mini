@@ -15,14 +15,14 @@ class PengeluaranController extends Controller
 
 
         $pengeluarans = Pengeluaran::with('pertanian')->get(); // Relasi ke model Pertanian
-        return view('admin.pengeluarans.index', compact('pengeluarans'));
+        return view('petani.pengeluarans.index', compact('pengeluarans'));
     }
 
     // Menampilkan form tambah pengeluaran
     public function create()
     {
         $pertanian = Pertanian::all();
-        return view('admin.pengeluarans.create', compact('pertanian'));
+        return view('petani.pengeluarans.create', compact('pertanian'));
 
     }
 
@@ -59,7 +59,7 @@ class PengeluaranController extends Controller
     public function edit(Pengeluaran $pengeluaran)
     {
         $pertanian = Pertanian::all(); // Mengambil semua data Pertanian
-        return view('admin.pengeluarans.edit', compact('pengeluaran', 'pertanian'));
+        return view('petani.pengeluarans.edit', compact('pengeluaran', 'pertanian'));
     }
 
     // Menyimpan perubahan pengeluaran
