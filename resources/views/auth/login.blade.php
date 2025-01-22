@@ -27,7 +27,7 @@
                                             name="password" required autocomplete="current-password" />
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
-                            
+
                                     <!-- Remember Me -->
                                     <div class="block mt-4">
                                         <label for="remember_me" class="inline-flex items-center">
@@ -37,11 +37,11 @@
                                             <span class="ms-2 text-sm text-gray-600">{{ __('Ingat saya') }}</span>
                                         </label>
                                     </div>
-                            
+
                                     <x-primary-button class="mt-4 w-full">
                                         {{ __('Masuk') }}
                                     </x-primary-button>
-                            
+
                                     <div class="flex items-center justify-between mt-4">
                                         @if (Route::has('password.request'))
                                             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -49,7 +49,7 @@
                                                 {{ __('Lupa kata sandi?') }}
                                             </a>
                                         @endif
-                            
+
                                         <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
                                             href="{{ route('register') }}">
                                             {{ __('Daftar') }}
@@ -57,13 +57,13 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-<div class="flex-1 bg-indigo-100 text-center hidden lg:flex items-center justify-center" 
+<div class="flex-1 bg-indigo-100 text-center hidden lg:flex items-center justify-center"
     style="background-image: url('assets/images/bg/bglg.jpg'); background-size: cover; background-position: center;">
-    <dotlottie-player class="align-middle" 
+    <dotlottie-player class="align-middle"
         src="https://lottie.host/d921c873-4bbc-4ed0-8f94-cf17a0b052f8/3T2RfVZuyy.lottie"
         speed="3" style="width: 300px; height: 300px" loop
         autoplay>
