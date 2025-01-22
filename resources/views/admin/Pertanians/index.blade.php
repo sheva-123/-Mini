@@ -33,7 +33,7 @@
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $pertanian->nama_pertanian }}</td>
                                 <td class="px-6 py-4">{{ $pertanian->lokasi_pertanian }}</td>
-                                <td class="px-6 py-4">{{ $pertanian->luas_lahan }} ha</td>
+                                <td class="px-6 py-4">{{ $pertanian->luas_lahan }}</td>
                                 <td class="px-6 py-4 flex items-center space-x-4">
                                     <a href="{{ route('pertanians.edit', $pertanian->id) }}"
                                         class="text-yellow-500 hover:text-yellow-700">
@@ -47,7 +47,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            onclick="deleteRecord(event)">
                                             <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path

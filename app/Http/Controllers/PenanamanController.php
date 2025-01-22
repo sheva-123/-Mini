@@ -6,6 +6,7 @@ use App\Models\Penanaman;
 use App\Models\Pertanian;
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PenanamanController extends Controller
 {
@@ -15,7 +16,7 @@ class PenanamanController extends Controller
     public function index()
     {
         $penanamans = Penanaman::with('tanaman')->get();
-        return view('admin.penanamans.index', compact('penanamans'));
+        return view('petani.penanamans.index', compact('penanamans'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PenanamanController extends Controller
     {
         $pertanians = Pertanian::all();
         $tanamans = Tanaman::all();
-        return view('admin.penanamans.create', compact('pertanians', 'tanamans'));
+        return view('petani.penanamans.create', compact('pertanians', 'tanamans'));
     }
 
     /**
@@ -33,12 +34,21 @@ class PenanamanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
             'tanggal_tanam' => 'required|date',
             'jumlah_tanaman' => 'required|integer',
+        ],[
+            'tanggal_tanam.date' => 'Date Required',
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('penanamans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Penanaman::create([
             'pertanian_id' => $request->pertanian_id,
@@ -65,12 +75,21 @@ class PenanamanController extends Controller
      */
     public function update(Request $request, Penanaman $penanaman)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
             'tanggal_tanam' => 'required|date',
             'jumlah_tanaman' => 'required|integer',
+        ], [
+            'tanggal_tanam.date' => 'Date Required',
         ]);
+
+            if ($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('penanamans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
 
         $penanaman->update([
             'pertanian_id' => $request->pertanian_id,
@@ -87,8 +106,13 @@ class PenanamanController extends Controller
      */
     public function destroy(Penanaman $penanaman)
     {
-        $penanaman->delete();
-
-        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dihapus.');
+        try {
+            $penanaman->delete();
+            return redirect()->route('penanamans.index')
+            ->with('success', 'Penanaman Delete Success');
+        } catch (\Exception $e) {
+            return redirect()->route('penanamans.index')
+            ->with('error', 'Penanaman Delete Error');
+        }
     }
 }

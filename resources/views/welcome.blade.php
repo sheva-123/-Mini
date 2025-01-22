@@ -296,7 +296,7 @@ transition-delay: 0.2s;
 <!-- why us  -->
 <section class="text-gray-700 body-font mt-10">
     <div class="flex justify-center text-3xl font-bold text-gray-800 text-center">
-        Kenapa Kami?
+        Icons
     </div>
     <div class="container px-5 py-12 mx-auto">
         <div class="flex flex-wrap text-center justify-center">
@@ -406,8 +406,9 @@ transition-delay: 0.2s;
                     </div>
                     <div class=content>
                         <h3>Pemerikasaan Tanaman</h3>
-                        <p>Pemeriksaan tanaman oleh prosesor adalah proses evaluasi mendalam terhadap kondisi
-                            tanaman untuk memahami faktor-faktor yang memengaruhi pertumbuhannya.</p>
+                        <p>Pemeriksaan tanamanadalah proses evaluasi mendalam terhadap kondisi
+                            tanaman untuk memahami faktor-faktor
+                            yang memengaruhi pertumbuhannkesehatan dan adaptasi lingkungan.</p>
                     </div>
                 </div>
             </div>
@@ -423,7 +424,7 @@ transition-delay: 0.2s;
 <section class="bg-gray-100">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-20 lg:px-8">
         <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-extrabold text-gray-900" id="contactUs">Kunjingi Tempat Kami</h2>
+            <h2 class="text-3xl font-extrabold text-gray-900" id="contactUs">Kunjungi Tempat Kami</h2>
             <p class="mt-3 text-lg text-gray-500">Biarkan Kami Melayanimu Sebaik Mungkin</p>
         </div>
         <div class="mt-8 lg:mt-20">

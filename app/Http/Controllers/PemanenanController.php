@@ -6,6 +6,7 @@ use App\Models\Pemanenan;
 use App\Models\Penanaman; // Model Penanaman
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PemanenanController extends Controller
 {
@@ -25,24 +26,33 @@ class PemanenanController extends Controller
     // ->orderBy('tanggal', 'asc')
     // ->get();
 
-    return view('admin.pemanenans.index', compact('pemanenans', 'cari'));
+    return view('petani.pemanenans.index', compact('pemanenans', 'cari'));
     }
 
     // Menampilkan form tambah pemanenan
     public function create()
     {
         $pertanians = Pertanian::all(); // Ambil semua penanaman
-        return view('admin.pemanenans.create', compact('pertanians'));
+        return view('petani.pemanenans.create', compact('pertanians'));
     }
 
     // Menyimpan pemanenan
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
+        ],[
+            'tanggal_pemanenan.date' => 'Date Lajwdnd'
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pemanenans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Pemanenan::create($request->all());
 
@@ -53,17 +63,27 @@ class PemanenanController extends Controller
     public function edit(Pemanenan $pemanenan)
     {
         $pertanians = Pertanian::all();
-        return view('pemanenans.edit', compact('pemanenan', 'pertanians'));
+        $penanaman = Penanaman::all();
+        return view('petani.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
     }
 
     // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
+        ], [
+            'tanggal_pemanenan.date' => 'Date Lajwdnd'
         ]);
+
+            if ($validator->fails()) {
+                $error = $validator->error();
+                return redirect()->route('pemanenans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
 
         $pemanenan->update($request->all());
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TanamanController extends Controller
 {
@@ -13,14 +14,14 @@ class TanamanController extends Controller
     public function index()
     {
         $tanamans = Tanaman::all();
-        return view('admin.tanamans.index', compact('tanamans'));    }
+        return view('petani.tanamans.index', compact('tanamans'));    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.tanamans.create');
+        return view('petani.tanamans.create');
     }
 
     /**
@@ -28,11 +29,18 @@ class TanamanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_tanaman' => 'required|string|max:255',
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('tanamans.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
 
         Tanaman::create($request->all());
         return redirect()->route('tanamans.index')->with('success', 'Data berhasil ditambahkan');
@@ -51,7 +59,7 @@ class TanamanController extends Controller
      */
     public function edit(Tanaman $tanaman)
     {
-        return view('admin.tanamans.edit', compact('tanaman'));
+        return view('petani.tanamans.edit', compact('tanaman'));
     }
 
     /**
@@ -59,13 +67,21 @@ class TanamanController extends Controller
      */
     public function update(Request $request, Tanaman $tanaman)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_tanaman' => 'required|string|max:255',
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
 
+            if ($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('tanamans.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
+
         $tanaman->update($request->all());
+
         return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil diperbarui.');
         }
 
@@ -74,7 +90,13 @@ class TanamanController extends Controller
      */
     public function destroy(Tanaman $tanaman)
     {
-        $tanaman->delete();
-        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil dihapus.');
-       }
+        try {
+            $tanaman->delete();
+            return redirect()->route('tanamans.index')
+            ->with('success', 'Tanaman Delete Success');
+        } catch (\Exception $e) {
+            return redirect()->route('tanamans.index')
+            ->with('error', 'Tanaman Delete Error');
+        }
+    }
 }

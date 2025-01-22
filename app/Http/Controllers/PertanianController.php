@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PertanianController extends Controller
 {
@@ -23,11 +24,19 @@ class PertanianController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_pertanian' => 'required|string|max:255',
             'lokasi_pertanian' => 'required|string|max:255',
             'luas_lahan' => 'required|numeric',
         ]);
+
+            if($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pertanians.index')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
+
         $pertanian = Pertanian::firstWhere("nama_pertanian", $request->nama_pertanian);
         if($pertanian){
             return redirect()->back()->with('error', 'Data yang anda tambahkan sudah ada, masukkan data yang berbeda!') ->withInput();
@@ -64,13 +73,24 @@ class PertanianController extends Controller
 
     public function update(Request $request, Pertanian $pertanian)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_pertanian' => 'required|string|max:255',
             'lokasi_pertanian' => 'required|string|max:255',
-            'luas_lahan' => 'required|numeric|min:0',
+            'luas_lahan' => 'required|numeric',
         ]);
 
-        $pertanian->update($validated);
+            if ($validator->fails()) {
+                $error = $validator->errors();
+                return redirect()->route('pertanians.index')
+                ->withErrors($validator)
+                    ->withInput();
+            }
+
+        $pertanian->update([
+            'nama_pertanian' => $request->nama_pertanian,
+            'lokasi_pertanian' => $request->lokasi_pertanian,
+            'luas_lahan' => $request->luas_lahan,
+        ]);
 
         return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil diperbarui!');
     }
@@ -78,8 +98,13 @@ class PertanianController extends Controller
 
     public function destroy(Pertanian $pertanian)
     {
-        $pertanian->delete();
-
-        return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil dihapus!');
+        try {
+            $pertanian->delete();
+            return redirect()->route('pertanians.index')
+            ->with('success', 'Pertanian Delete Success');
+        } catch (\Exception $e) {
+            return redirect()->route('pertanians.index')
+            ->with('error', 'Pertanian Delete Error');
+        }
     }
 }

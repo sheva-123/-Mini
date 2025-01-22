@@ -21,26 +21,10 @@
     <nav class="bg-white border-b border-gray-300 fixed w-full z-50 top-0 left-0">
         <div class="flex justify-between items-center px-9 h-20">
 
-            <button id="menuBtn">
-                <i class="fas fa-bars text-cyan-500 text-lg"></i>
-            </button>
 
-            {{-- <!-- Logo -->
-            <div class="ml-1">
-                <img src="https://www.emprenderconactitud.com/img/POC%20WCS%20(1).png" alt="logo" class="h-20 w-28">
-            </div> --}}
+            <h2 class="text-2xl font-semibold text-gray-700">Manajemen Pertanian</h2>
 
-            <!-- Ícono de Notificación y Perfil -->
-            {{-- <div class="space-x-4">
-                <button>
-                    <i class="fas fa-bell text-cyan-500 text-lg"></i>
-                </button>
 
-                <!-- Botón de Perfil -->
-                <button>
-                    <i class="fas fa-user text-cyan-500 text-lg"></i>
-                </button>
-            </div> --}}
         </div>
     </nav>
     <div class="grid grid-cols-[0.5fr_2fr] h-screen mt-20">
@@ -87,6 +71,26 @@
         </script>
     @endif
 
+    <script>
+        function deleteRecord(event) {
+            event.preventDefault();
+            const form = event.target.closest('form');
+            Swal.fire({
+                title: "Apakah kamu yakin menghapus data ini?",
+                text: "Anda tidak dapat mengembalikan data ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
         <div class="bg-white w-64 h-screen shadow-lg">
 
             <div class="mt-6 space-y-2">
-                <a href="{{ route('user.home') }}"
+                <a href="{{ route('user.dashboard') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
                     <i class="fas fa-gauge-simple-high"></i>
                     <span class="ml-3">Dashboard</span>
@@ -32,15 +32,21 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div id="menuDropdown" class="hidden mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
-                        <a href="{{ route('pertanians.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-house-chimney-window"></i>
-                            <span class="ml-2">Pertanian</span>
-                        </a>
                         <a href="{{ route('tanamans.index') }}"
                             class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
+                            <i class="fas fa-house-chimney-window"></i>
+                            <span class="ml-2">Tanaman</span>
+                        </a>
+                        <a href="{{ route('penanamans.index') }}"
+                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
                             <i class="fas fa-user"></i>
-                            <span class="ml-2">Pengguna</span>
+                            <span class="ml-2">Penanaman</span>
+                        </a>
+
+                        <a href="{{ route('pengeluarans.index') }}"
+                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
+                            <i class="fas fa-user"></i>
+                            <span class="ml-2">Pengeluaran</span>
                         </a>
 
                     </div>
