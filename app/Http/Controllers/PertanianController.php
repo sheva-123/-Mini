@@ -86,7 +86,11 @@ class PertanianController extends Controller
                     ->withInput();
             }
 
-        $pertanian->update($request);
+        $pertanian->update([
+            'nama_pertanian' => $request->nama_pertanian,
+            'lokasi_pertanian' => $request->lokasi_pertanian,
+            'luas_lahan' => $request->luas_lahan,
+        ]);
 
         return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil diperbarui!');
     }
@@ -94,8 +98,13 @@ class PertanianController extends Controller
 
     public function destroy(Pertanian $pertanian)
     {
-        $pertanian->delete();
-
-        return redirect()->route('pertanians.index')->with('success', 'Data pertanian berhasil dihapus!');
+        try {
+            $pertanian->delete();
+            return redirect()->route('pertanians.index')
+            ->with('success', 'Pertanian Delete Success');
+        } catch (\Exception $e) {
+            return redirect()->route('pertanians.index')
+            ->with('error', 'Pertanian Delete Error');
+        }
     }
 }

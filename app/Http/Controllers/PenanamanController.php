@@ -106,8 +106,13 @@ class PenanamanController extends Controller
      */
     public function destroy(Penanaman $penanaman)
     {
-        $penanaman->delete();
-
-        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dihapus.');
+        try {
+            $penanaman->delete();
+            return redirect()->route('penanamans.index')
+            ->with('success', 'Penanaman Delete Success');
+        } catch (\Exception $e) {
+            return redirect()->route('penanamans.index')
+            ->with('error', 'Penanaman Delete Error');
+        }
     }
 }
