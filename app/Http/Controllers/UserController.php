@@ -13,11 +13,11 @@ class UserController extends Controller
             $query->where('name', 'admin');
         })->get();
 
-        return view('admin.Pengguna.index', compact('users'));
+        return view('admin.pengguna.index', compact('users'));
     }
 
     public function create()
     {
-        return view('admin.Pengguna.create');
+        return view('admin.pengguna.create');
     }
 }

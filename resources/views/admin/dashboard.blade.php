@@ -4,25 +4,22 @@
             <!-- Header -->
             <div class="bg-white shadow-sm rounded-lg p-6">
                 <h2 class="text-2xl font-bold text-gray-800">Admin Dashboard</h2>
-                <p class="text-sm text-gray-500">Welcome back! Here's an overview of your system's activity.</p>
+                <p class="text-sm text-gray-500">Selamat Datang Kembali!, selamat beraktifitas.</p>
             </div>
 
             <!-- Statistik -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                 <div class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md rounded-lg p-6">
-                    <h3 class="text-lg font-semibold">Total Users</h3>
-                    <p class="mt-2 text-4xl font-bold">1,234</p>
-                    <p class="mt-2 text-sm">+5.3% from last month</p>
+                    <h3 class="text-lg font-semibold">Jumlah Pengguna</h3>
+                    <p class="mt-2 text-4xl font-bold">{{ $users->count() }}</p>
                 </div>
                 <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white shadow-md rounded-lg p-6">
-                    <h3 class="text-lg font-semibold">Total Sales</h3>
-                    <p class="mt-2 text-4xl font-bold">$45,678</p>
-                    <p class="mt-2 text-sm">+12.1% from last month</p>
+                    <h3 class="text-lg font-semibold">Jumlah Lahan</h3>
+                    <p class="mt-2 text-4xl font-bold">{{ $lahan->count() }}</p>
                 </div>
                 <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-md rounded-lg p-6">
-                    <h3 class="text-lg font-semibold">Pending Orders</h3>
-                    <p class="mt-2 text-4xl font-bold">87</p>
-                    <p class="mt-2 text-sm">-8.4% from last month</p>
+                    <h3 class="text-lg font-semibold">Jumlah Tanaman</h3>
+                    <p class="mt-2 text-4xl font-bold">{{ $tanaman->count() }}</p>
                 </div>
             </div>
 
