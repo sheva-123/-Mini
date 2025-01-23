@@ -14,6 +14,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -28,17 +32,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/pertanians', PertanianController::class);
 });
 
-Route::middleware(['auth', 'role:user|admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return view('petani.dashboard');
-    })->name('user.home');
-
-    Route::resource('/tanamans', TanamanController::class);
-    Route::resource('/Penanamans', PenanamanController::class);
-    Route::resource('/pemeliharaans', PemeliharaanController::class);
-    Route::resource('/pemanenans', PemanenanController::class);
-    Route::resource('/pengeluarans', PengeluaranController::class);
-    Route::resource('/laporans', LaporanController::class);
+    })->name('user.dashboard');
+    Route::resource('tanamans', TanamanController::class);
+    Route::resource('Penanamans', PenanamanController::class);
+    Route::resource('pemeliharaans', PemeliharaanController::class);
+    Route::resource('pemanenans', PemanenanController::class);
+    Route::resource('pengeluarans', PengeluaranController::class);
+    Route::resource('laporans', LaporanController::class);
 });
 
 require __DIR__ . '/auth.php';
