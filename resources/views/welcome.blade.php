@@ -15,7 +15,7 @@ display: flex;
 flex-wrap: wrap; /* Allow wrapping to the next line when needed */
 justify-content: center;
 gap: 20px; /* Add space between cards */
-padding: 30px;
+padding: 20px;
 margin: auto;
 }
 
@@ -103,334 +103,178 @@ transition-delay: 0.2s;
 
 </style>
 <!-- nav bar section -->
-<nav class="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
-    <div class="text-xl">Manajemen Pertanian</div>
-    <div class="flex md:hidden">
+<nav class="flex items-center justify-between py-1 px-3 bg-white fixed w-full z-10 top-0 border-b-2">
+    <!-- Logo di kiri -->
+    <div class="flex items-center flex-shrink-0 text-white">
+        <a href="#home">
+        <img src="assets/images/bg/a.png" alt="logo nav" class="mix-blend-multiply" style="width: 50px; height: auto; object-fit: cover;"/>
+    </a>
+    </div
+
+    <!-- Navlinks di tengah -->
+    <div class="hidden md:flex flex-grow justify-center space-x-2 text-sm ml-7">
+        <a href="#home" class="hover:text-[#c8a876] px-1 py-2 border-b-2 border-transparent hover:border-[#c8a876]">Beranda</a>
+        <a href="#services" class="hover:text-[#c8a876] px-1 py-2 border-b-2 border-transparent hover:border-[#c8a876]">Tanaman</a>
+        <a href="#aboutus" class="hover:text-[#c8a876] px-1 py-2 border-b-2 border-transparent hover:border-[#c8a876]">Tentang Kami</a>
+        <a href="#gallery" class="hover:text-[#c8a876] px-1 py-2 border-b-2 border-transparent hover:border-[#c8a876]">Galeri</a>
+        <a href="#contactUs" class="hover:text-[#c8a876] px-1 py-2 border-b-2 border-transparent hover:border-[#c8a876]">Hubungi Kami</a>
+    </div>
+
+    <!-- Button Register & Login di kanan -->
+    <div class="hidden md:flex space-x-2">
+        <a href="/login" class="flex items-center h-10 text-[#c8a876] font-medium px-4 py-2 border border-[#c8a876] rounded-md">
+            <span>Masuk</span>
+        </a>
+        <a href="/register" class="flex items-center h-10 rounded-md bg-[#c8a876] hover:bg-[#b58a44] text-white font-medium px-4 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 9A6.5 6.5 0 114 9m0 0v3.25m0-3.25h3.25" />
+            </svg>
+            <span>Daftar</span>
+        </a>
+    </div>
+
+    <!-- Hamburger menu untuk mobile -->
+    <div class="md:hidden">
         <button id="hamburger">
-            <img class="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png"
-                width="40" height="40" />
-            <img class="toggle hidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png"
-                width="40" height="40" />
+            <img class="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" />
         </button>
     </div>
-    <div class="toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none">
-        <a href="#home" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Beranda
-        </a>
-        <a href="#services" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Tanaman
-        </a>
-        <a href="#aboutus" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Tentang Kami
-        </a>
-        <a href="#gallery" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Galeri
-        </a>
-        <a href="#contactUs" class="block md:inline-block hover:text-[#c8a876] px-3 py-3 md:border-none">Hubungi Kami
-        </a>
-    </div>
-
-
-    <div class="toggle w-full text-end hidden md:flex md:w-auto px-4 py-2 md:rounded">
-        <div class="flex space-x-4">
-            <!-- Button Register -->
-            <a href="/register" class="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 9A6.5 6.5 0 114 9m0 0v3.25m0-3.25h3.25" />
-                </svg>
-
-                <span class="ml-2">Register</span>
-            </a>
-
-            <!-- Button Login -->
-            <a href="/login" class="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 006.75 21h6.75a2.25 2.25 0 002.25-2.25V15M18 12h3m0 0l-3-3m3 3l-3 3" />
-                </svg>
-
-                <span class="ml-2">Login</span>
-            </a>
-        </div>
-                </div>
-            </div>
-        </a>
-    </div>
-
 </nav>
+
 <!-- hero seciton -->
-<div class="relative" style="width: 100%; height: 320px;" id="home">
-    <div class="absolute inset-0" style="opacity: 0.7;">
-        <img src="https://i.pinimg.com/736x/35/cf/7f/35cf7f3af38bc579205997da1c82e33e.jpg"
-            alt="Background Image" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+<div class="relative" style="width: 100%; height: 590px;" id="home">
+    <div class="absolute inset-0">
+        <img src="assets/images/bg/bglg.jpg"
+            alt="Background Image" style="width: 100%; height: 100%; object-fit: cover; object-position: top;" />
     </div>
 
     <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
-        <div class="md:w-1/2 mb-4 md:mb-0">
-            <h1 class="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian</h1>
-            <p class="font-regular text-xl mb-8 mt-4">pengelolaan sumber daya dalam sektor pertanian untuk mencapai efisiensi dan produktivitas yang optimal.</p>
+        <div class="md:w-1/2 mb-4 md:mb-0 mt-10">
+            <h1 class="text-[#000000] font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian Cerdas dan Berkelanjutan</h1>
+            <p class="font-regular text-sm mt-4 text-[#2e2f2e]">Pengelolaan sumber daya dalam sektor pertanian untuk mencapai efisiensi dan produktivitas yang optimal. Kami menghadirkan inovasi teknologi terkini, metode pertanian berkelanjutan, dan dukungan ahli untuk meningkatkan hasil panen Anda secara signifikan.</p>
+            <br>
             <a href="#contactUs"
-                class="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200">Hubungi Kami</a>
+                class="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-3xl hover:bg-[#b58a44] transition duration-200">Hubungi Kami</a>
         </div>
-    </div>
+    </div>    
 </div>
 
 <!-- our services section -->
 <section class="py-10" id="services">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Tanaman</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center mt-10">Tanaman</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://i.pinimg.com/736x/cc/e4/9b/cce49b06f6e0b15d119aa449d8a63d69.jpg"
-                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/cc/e4/9b/cce49b06f6e0b15d119aa449d8a63d69.jpg" alt="wheat flour grinding" class="w-full h-64 object-cover">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Jagung</h3>
-                    <p class="text-gray-700 text-base">Penanaman jagung (Zea mays) adalah salah satu bentuk budidaya
-                        tanaman pangan yang penting di dunia, terutama di negara tropis seperti Indonesia. Jagung
-                        memiliki banyak kegunaan, baik sebagai makanan pokok, pakan ternak, maupun bahan baku
-                        industri. Jagung termasuk tanaman biji-bijian (serealia) yang memiliki kemampuan adaptasi
-                        tinggi terhadap berbagai kondisi lingkungan.
-                    <details>
-                        <summary>Read More</summary>
-                        <h3 class="text-xl font-medium text-gray-800 mb-2"> Tahapan Penanaman Jagung</h3>
-                        <p>1.Pemilihan Varietas:
-
-                            -Pilih varietas jagung berdasarkan tujuan budidaya, seperti jagung manis (sweet corn),
-                            jagung hibrida (untuk hasil tinggi), atau jagung pulut (glutinous corn).
-                            -Varietas juga dipilih sesuai kondisi lingkungan, seperti tahan kering atau serangan
-                            hama.</p>
-
-                        <p> 2.Persiapan Lahan:
-
-                            Bersihkan lahan dari gulma dan sisa-sisa tanaman sebelumnya.
-                            Lakukan pengolahan tanah dengan cara dicangkul atau dibajak untuk menggemburkan tanah.
-                            Buat bedengan jika diperlukan untuk mengatur drainase, terutama di area dengan curah
-                            hujan tinggi.</p>
-                        <p> 3.Penanaman:
-
-                            Jarak Tanam: Umumnya, jarak tanam untuk jagung adalah 70 x 20 cm atau 75 x 25 cm,
-                            tergantung pada varietas.
-                            Cara Penanaman: Tanam benih jagung pada lubang tanam sedalam 3-5 cm, kemudian tutup
-                            dengan tanah.
-                            Kepadatan Tanam: Untuk hasil optimal, tanam 1-2 benih per lubang.</p>
-
-                        <p> 4.Pemupukan:
-
-                            Pupuk Dasar: Gunakan pupuk organik seperti kompos atau pupuk kandang saat persiapan
-                            lahan.
-                            Pupuk Tambahan: Tambahkan pupuk kimia seperti Urea, TSP, dan KCl dalam tahap pertumbuhan
-                            tanaman.</p>
-
-                        <p>5.Perawatan:
-
-                            Penyiraman: Pastikan tanaman mendapatkan cukup air, terutama saat fase awal pertumbuhan
-                            dan pembentukan tongkol.
-                            Penyiangan: Bersihkan gulma di sekitar tanaman secara rutin untuk mengurangi persaingan
-                            nutrisi.
-                            Pengendalian Hama dan Penyakit: Hama seperti ulat grayak dan penyakit seperti hawar daun
-                            perlu dikendalikan dengan insektisida atau fungisida yang tepat.
-                        </p>
-
-                        <p>6.Panen:
-
-                            Jagung siap dipanen 85-110 hari setelah tanam, tergantung varietas.
-                            Panen dilakukan saat kulit tongkol mengering dan biji jagung keras (untuk jagung biji)
-                            atau saat tongkol masih muda (untuk jagung manis).</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2"> Syarat Tumbuh Jagung </h3>
-                        <p>1.Iklim dan Suhu:</p>
-                        <p>-Tanaman harus memiliki cukup air untuk menjaga kesehatan dan keamanan tanaman.</p>
-                        <p>-Curah hujan ideal adalah 85-200 mm per bulan, terutama saat fase pertumbuhan vegetatif.
-                        </p>
-
-                        <p>2.Tanah</p>
-                        <p> -Tanaman jagung memerlukan tanah yang subur, gembur, dan kaya bahan organik.</P>
-                        <P>-PH tanah ideal adalah 5,5-7,0.</p>
-
-                        <p>3.Cahaya</p>
-                        <p>-Jagung memerlukan sinar matahari penuh selama 8-10 jam per hari untuk fotosintesis
-                            optimal.</p>
-                    </details>
+                    <p class="text-gray-700 text-base">Penanaman jagung (Zea mays) adalah salah satu bentuk budidaya tanaman pangan yang penting di dunia.
+                        <span class="hidden" id="moreText1">
+                            Jagung memiliki banyak kegunaan, baik sebagai makanan pokok, pakan ternak, maupun bahan baku industri.
+                        </span>
                     </p>
+                    <button onclick="toggleReadMore('moreText1', this)" class="mt-3 text-[#c8a876] font-semibold hover:text-[#b58a44] transition duration-300">Baca Selengkapnya</button>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://i.pinimg.com/736x/1a/26/91/1a2691ad866e5919811b2bfe8ea151cd.jpg "
-                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/1a/26/91/1a2691ad866e5919811b2bfe8ea151cd.jpg" alt="Coffee" class="w-full h-64 object-cover">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Padi</h3>
-                    <p class="text-gray-700 text-base">Pertanian padi adalah salah satu bentuk budidaya tanaman
-                        pangan yang berfokus pada penanaman padi (Oryza sativa) sebagai bahan baku utama untuk
-                        menghasilkan beras, makanan pokok bagi lebih dari setengah populasi dunia, terutama di Asia.
-                        Pertanian padi memiliki nilai strategis karena perannya dalam ketahanan pangan dan ekonomi
-                        masyarakat, khususnya di negara-negara agraris seperti Indonesia.
-                    <details>
-                        <summary>Read More</summary>
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">Ciri Utama Pertanian Padi</h3>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">1.Jenis Tanaman Padi</h3>
-                        <p>-Padi adalah tanaman serealia yang tumbuh baik di iklim tropis dan subtropis.
-                            Terdapat beberapa varietas padi, seperti padi sawah, padi gogo (ladang), dan padi pasang
-                            surut, yang disesuaikan dengan kondisi lahan dan lingkungan.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">2.Media Dan Kondisi Tanam</h3>
-                        <p>-Tanah: Padi memerlukan tanah subur dengan kadar bahan organik tinggi, seperti tanah
-                            aluvial atau tanah lempung.</p>
-                        <p>-Air: Tanaman ini membutuhkan banyak air, terutama dalam sistem irigasi sawah, tetapi ada
-                            juga padi gogo yang tidak memerlukan genangan.</p>
-                        <p>-Iklim: Idealnya tumbuh di wilayah dengan suhu 20-35°C dan curah hujan tahunan sekitar
-                            1.500-2.000 mm.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">3.Perawatan Padi</h3>
-                        <p>-Pengendalian Hama dan Penyakit: Hama utama adalah wereng, tikus, dan penggerek batang,
-                            sedangkan penyakit seperti blas dan hawar daun bakteri sering menyerang padi.</p>
-                        <p>-Penyiangan: Gulma harus dibersihkan secara rutin untuk mencegah persaingan nutrisi.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">4.Panen</h3>
-                        <p>-Padi biasanya dipanen setelah 90-120 hari sejak tanam, tergantung varietasnya.</p>
-                        <p>-Tanda padi siap panen adalah bulir menguning dan batang mulai mengering.</P>
-                    </details>
+                    <p class="text-gray-700 text-base">Pertanian padi adalah salah satu bentuk budidaya tanaman pangan yang berfokus pada penanaman padi.
+                        <span class="hidden" id="moreText2">
+                            Padi merupakan bahan pokok bagi lebih dari setengah populasi dunia.
+                        </span>
                     </p>
+                    <button onclick="toggleReadMore('moreText2', this)" class="mt-3 text-[#c8a876] font-semibold hover:text-[#b58a44] transition duration-300">Baca Selengkapnya</button>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://i.pinimg.com/736x/04/ac/41/04ac4145d4fdfb4b604514c2809188b3.jpg"
-                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/04/ac/41/04ac4145d4fdfb4b604514c2809188b3.jpg" alt="Coffee" class="w-full h-64 object-cover">
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-medium text-gray-800 mb-2">Kebun Tomat</h3>
-                    <p class="text-gray-700 text-base">Pertanian kebun tomat adalah salah satu bentuk budidaya
-                        hortikultura yang fokus pada penanaman tanaman tomat (Solanum lycopersicum). Kebun tomat
-                        dapat dikelola dalam skala kecil untuk kebutuhan rumah tangga atau skala besar untuk tujuan
-                        komersial. Tomat merupakan tanaman yang populer karena nilai ekonomisnya tinggi, mudah
-                        dibudidayakan, dan memiliki banyak manfaat gizi.
-                    <details>
-                        <summary>Read More</summary>
-                        <h3 class="text-xl font-medium text-gray-800 mb-2"> Ciri Utama Pertanian Kebun Tomat</h3>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2"> 1.Jenis Tanaman</h3>
-                        <p>Tomat adalah tanaman semusim yang dapat tumbuh di dataran rendah hingga dataran tinggi.
-                            Varietas tomat bervariasi, seperti tomat buah, tomat cherry, atau tomat plum, yang
-                            disesuaikan dengan tujuan panen (konsumsi segar, bahan baku saus, atau olahan lain).</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">2.Perawatan</h3>
-                        <p>-Penyiraman: Dilakukan secara rutin, terutama saat tanaman sedang berbunga dan berbuah.
-                        </p>
-                        <p>-Pemupukan: Menggunakan pupuk organik atau anorganik, seperti NPK, untuk menunjang
-                            pertumbuhan dan hasil panen.</p>
-                        <p>-Pengendalian Hama dan Penyakit: Masalah umum meliputi kutu daun, ulat grayak, dan
-                            penyakit layu fusarium.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">3Pemanenan</h3>
-                        <p>-Tomat dapat dipanen 60-100 hari setelah tanam, tergantung varietasnya.</p>
-                        <p>-Buah dipetik saat matang fisiologis (mulai berwarna merah) untuk pasar lokal atau
-                            setengah matang untuk distribusi jarak jauh.</p>
-
-                    </details>
+                    <p class="text-gray-700 text-base">Pertanian kebun tomat adalah salah satu bentuk budidaya hortikultura yang fokus pada penanaman tanaman tomat.
+                        <span class="hidden" id="moreText3">
+                            Tomat memiliki nilai ekonomis tinggi dan mudah dibudidayakan.
+                        </span>
                     </p>
+                    <button onclick="toggleReadMore('moreText3', this)" class="mt-3 text-[#c8a876] font-semibold hover:text-[#b58a44] transition duration-300">Baca Selengkapnya</button>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://i.pinimg.com/736x/25/66/ae/2566ae1718b54401762c06e6cbb695a6.jpg"
-                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/25/66/ae/2566ae1718b54401762c06e6cbb695a6.jpg" alt="Coffee" class="w-full h-64 object-cover">
                 <div class="p-6 text-center">
-                    <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Teh </h3>
-                    <p class="text-gray-700 text-base">Penanaman teh (Camellia sinensis) adalah aktivitas budidaya
-                        tanaman yang menghasilkan daun teh, yang digunakan untuk membuat minuman teh. Teh merupakan
-                        salah satu komoditas perkebunan yang penting secara ekonomi dan populer secara global.
-                        Tanaman teh tumbuh baik di wilayah beriklim tropis dan subtropis dengan ketinggian tertentu.
-                    <details>
-                        <summary>Read More</summary>
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">Syarat Tumbuh Tanaman Teh</h3>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">1.Iklim</h3>
-                        <p>-Curah hujan: 2.000-3.000 mm per tahun, dengan distribusi merata sepanjang tahun.</p>
-                        <p>-Kelembapan tinggi dan angin yang tidak terlalu kencang mendukung pertumbuhan teh.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">2.Ketinggian</h3>
-                        <p>Teh tumbuh optimal di dataran tinggi, dengan ketinggian antara 200-2.000 meter di atas
-                            permukaan laut (mdpl).
-                            Ketinggian berpengaruh pada kualitas rasa daun teh.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">3.Cahaya Matahari</h3>
-                        <p>-Teh membutuhkan cahaya matahari yang cukup, tetapi tidak langsung terpapar terlalu lama.
-                        </p>
-                        <p>Area dengan kabut ringan mendukung pertumbuhan optimal.</p>
-
-                    </details>
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Perkebunan Teh</h3>
+                    <p class="text-gray-700 text-base">Teh adalah tanaman yang populer di berbagai negara tropis dan subtropis.
+                        <span class="hidden" id="moreText4">
+                            Perkebunan teh menghasilkan berbagai jenis teh yang banyak dikonsumsi masyarakat dunia.
+                        </span>
                     </p>
+                    <button onclick="toggleReadMore('moreText4', this)" class="mt-3 text-[#c8a876] font-semibold hover:text-[#b58a44] transition duration-300">Baca Selengkapnya</button>
                 </div>
             </div>
-            <!-- special card -->
-            <div
-                class="bg-white rounded-lg bg-gradient-to-tr from-pink-300 to-blue-300 p-0.5 shadow-lg overflow-hidden min-h-full">
-                <img src="https://i.pinimg.com/736x/ac/a3/1c/aca31c33059f933ba3e74486da47b60c.jpg   "
-                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
-                <div class="p-6 bg-white text-center rounded-b-lg md:min-h-full">
-                    <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Kubis</h3>
-                    <p class="text-gray-700 text-base"><span class="font-medium underline"></span>
-                        Kol (Brassica oleracea var. capitata) adalah tanaman sayuran daun yang memiliki kepala
-                        berbentuk bulat yang tersusun dari daun-daun rapat. Tanaman ini termasuk dalam keluarga
-                        Cruciferae (atau Brassicaceae) dan merupakan salah satu tanaman hortikultura yang populer
-                        untuk konsumsi domestik maupun ekspor.
-                        Kol kaya akan nutrisi seperti vitamin C, K, serat, dan mineral, sehingga memiliki manfaat
-                        kesehatan yang tinggi. Selain itu, kol memiliki nilai ekonomi yang baik, terutama di wilayah
-                        dataran tinggi.
-                    <details>
-                        <summary>Read More</summary>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">Tahap Penanaman Kol</h3>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">1.Pemilihan Varietas</h3>
-                        <p>-Kol hijau: Jenis umum dengan daun hijau muda.</p>
-                        <p>-Kol ungu: Memiliki daun berwarna ungu dan sering digunakan untuk salad.</p>
-                        <p>-Kol mini (baby cabbage): Varietas kecil untuk pasar khusus.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">2Perawatan</h3>
-                        <p>-Pengendalian Hama dan Penyaki</p>
-                        <p>Hama utama: Ulat grayak, kutu daun, dan belalang.
-                            Penyakit: Busuk hitam (Black rot) dan bercak daun.
-                            Gunakan pestisida organik atau kimia dengan dosis yang tepat.</p>
-
-                        <h3 class="text-xl font-medium text-gray-800 mb-2">Pemupukan, Penyiramanl</h3>
-
-
-                    </details>
-                    </p>
-                </div>
-            </div>
-
-
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://i.pinimg.com/736x/fb/99/92/fb9992e1d8fa2bc1fbd67c60f2396da2.jpg"
-                alt="wheat flour grinding" class="w-full h-64 object-cover hover:transform hover:scale-105 transition-transform duration-300">
+                <img src="https://i.pinimg.com/736x/ac/a3/1c/aca31c33059f933ba3e74486da47b60c.jpg" alt="Coffee" class="w-full h-64 object-cover">
                 <div class="p-6 text-center">
-                    <h3 class="text-xl font-medium text-gray-800 mb-2">Penanaman Bawang Merah</h3>
-                    <p class="text-gray-700 text-base">Bawang merah (Allium cepa var. aggregatum) adalah tanaman
-                        hortikultura yang memiliki nilai ekonomi tinggi. Tanaman ini sering dibudidayakan sebagai
-                        bahan pokok dalam masakan karena memberikan cita rasa khas. Selain itu, bawang merah juga
-                        mengandung berbagai manfaat kesehatan, seperti meningkatkan daya tahan tubuh dan menjaga
-                        kesehatan jantung.
-
-                        Bawang merah umumnya dibudidayakan di wilayah tropis dan subtropis, terutama di tanah
-                        dataran rendah hingga menengah.
-                    <details>
-                        <summary>Read More</summary>
-                        <p> We offer a variety of rice papad flavors, including plain, salted, spicy, and flavored.
-                            We
-                            also
-                            offer a variety of sizes and shapes to choose from. Our papad is available in bulk or in
-                            individual packages.</p>
-                    </details>
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Perkebunan Kopi</h3>
+                    <p class="text-gray-700 text-base">Kopi merupakan salah satu komoditas ekspor unggulan di banyak negara.
+                        <span class="hidden" id="moreText5">
+                            Kopi memiliki banyak varietas yang unik dan khas dari tiap daerah penghasilnya.
+                        </span>
                     </p>
+                    <button onclick="toggleReadMore('moreText5', this)" class="mt-3 text-[#c8a876] font-semibold hover:text-[#b58a44] transition duration-300">Baca Selengkapnya</button>
                 </div>
             </div>
-
-
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://i.pinimg.com/736x/fb/99/92/fb9992e1d8fa2bc1fbd67c60f2396da2.jpg" alt="Coffee" class="w-full h-64 object-cover">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Perkebunan Kelapa Sawit</h3>
+                    <p class="text-gray-700 text-base">Kelapa sawit adalah tanaman penghasil minyak yang penting dalam industri pangan.
+                        <span class="hidden" id="moreText6">
+                            Minyak kelapa sawit banyak digunakan dalam makanan, kosmetik, dan produk rumah tangga.
+                        </span>
+                    </p>
+                    <button onclick="toggleReadMore('moreText6', this)" class="mt-3 text-[#c8a876] font-semibold hover:text-[#b58a44] transition duration-300">Baca Selengkapnya</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<script>
+    function toggleReadMore(id, button) {
+        var content = document.getElementById(id);
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            button.textContent = 'Tutup';
+        } else {
+            content.classList.add('hidden');
+            button.textContent = 'Baca Selengkapnya';
+        }
+    }
+</script>
+    
+
+<script>
+    function toggleReadMore(id) {
+        var content = document.getElementById(id);
+        var button = content.previousElementSibling;
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            button.textContent = 'Tutup';
+        } else {
+            content.classList.add('hidden');
+            button.textContent = 'Baca Selengkapnya';
+        }
+    }
+</script>
+
 
 <!-- about us -->
 <section class="bg-gray-100" id="aboutus">
     <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div class="max-w-lg">
-                <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Tentang Kami</h1>
+                <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center mt-5">Tentang Kami</h1>
                 <p class="mt-4 text-gray-600 text-lg">
                     Manajemen Pertanian adalah penyedia layanan dan solusi manajemen pertanian yang
                     berfokus pada pengelolaan sumber daya pertanian secara efisien dan berkelanjutan. Kami hadir
@@ -495,18 +339,13 @@ transition-delay: 0.2s;
     </div>
 </section>
 
-
-        </div>
-    </div>
-</section>
-
 <!-- gallery -->
-<section class="text-gray-700 body-font" id="gallery">
-    <div class="flex justify-center text-3xl font-bold text-gray-800 text-center py-10">
+<section class="text-gray-700 body-font mt-20" id="gallery">
+    <div class="flex justify-center text-3xl font-bold text-gray-800 text-center py-10 mt-20">
         Galeri
     </div>
 
-    <div class="flex">
+    <div class="flex px-10">
 
         <body>
             <div class="container1">
@@ -599,7 +438,7 @@ transition-delay: 0.2s;
                             <a class="flex m-1" href="tel:+919823331842">
                                 <div class="flex-shrink-0">
                                     <div
-                                        class="flex items-center justify-between h-10 w-30 rounded-md bg-indigo-500 text-white p-2">
+                                        class="flex items-center justify-between h-10 w-30 rounded-md bg-[#c8a876] text-white p-2">
                                         <!-- Heroicon name: phone -->
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
