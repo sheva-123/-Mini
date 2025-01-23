@@ -5,7 +5,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Data Tanaman</h1>
-                <p class="text-white text-sm mt-1"> | Tanaman</p>
+                <p class="text-white text-sm mt-1">User | Tanaman</p>
             </div>
         </div>
     </header>
