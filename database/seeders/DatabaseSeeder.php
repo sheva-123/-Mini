@@ -35,12 +35,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
+            'avatar' => 'images/default-avatar.png',
         ]);
 
         $user = User::factory()->create([
             'name' => 'User',
             'email' => 'user@gmail.com',
             'password' => bcrypt('12345678'),
+            'avatar' => 'images/default-avatar.png',
+
         ]);
 
         $adminUser->assignRole($adminRole);
