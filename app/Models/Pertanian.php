@@ -15,14 +15,22 @@ class Pertanian extends Model
     public function penanaman(){
         return $this->hasMany(Penanaman::class);
     }
+
     public function pemeliharaan(){
         return $this->hasMany(Pemeliharaan::class);
     }
+
     public function pemanenan(){
         return $this->hasMany(pemanenan::class);
     }
+
     public function laporan()
     {
-    return $this->belongsTo(Laporan::class);
+        return $this->belongsTo(Laporan::class);
+    }
+
+    public function userLand()
+    {
+        return $this->hasMany(Petani_Lahan::class, 'petani_id', 'id');
     }
 }
