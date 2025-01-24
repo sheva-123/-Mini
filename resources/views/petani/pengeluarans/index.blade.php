@@ -5,7 +5,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Data Pengeluaran</h1>
-                <p class="text-white text-sm mt-1">Admin | Pengeluaran</p>
+                <p class="text-white text-sm mt-1">User | Pengeluaran</p>
             </div>
         </div>
     </header>
