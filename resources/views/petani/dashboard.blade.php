@@ -1,124 +1,115 @@
 <x-usersidebar>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            te
+            Dashboard Pengguna
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h1 class="text-2xl font-bold mb-4">Welcome, {{ Auth::user()->name }}!</h1>
-                <p class="text-gray-600 mb-6">Here is an overview of your plants, plantings, and expenses.</p>
+                <h1 class="text-2xl font-bold mb-4">Selamat Datang, {{ Auth::user()->name }}!</h1>
+                <p class="text-gray-600 mb-6">Berikut adalah ringkasan tanaman, penanaman, dan pengeluaran Anda.</p>
 
-                <!-- Summary Cards -->
+                <!-- Kartu Ringkasan -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-blue-100 p-4 rounded-lg shadow">
-                        <h3 class="text-lg font-semibold">Total Plants</h3>
+                        <h3 class="text-lg font-semibold">Total Tanaman</h3>
                         <p class="text-2xl font-bold text-blue-600">12334</p>
                     </div>
                     <div class="bg-green-100 p-4 rounded-lg shadow">
-                        <h3 class="text-lg font-semibold">Total Plantings</h3>
+                        <h3 class="text-lg font-semibold">Total Penanaman</h3>
                         <p class="text-2xl font-bold text-green-600">13243</p>
                     </div>
                     <div class="bg-red-100 p-4 rounded-lg shadow">
-                        <h3 class="text-lg font-semibold">Total Expenses</h3>
+                        <h3 class="text-lg font-semibold">Total Pengeluaran</h3>
                         <p class="text-2xl font-bold text-red-600">Rp 12432</p>
                     </div>
                 </div>
 
-                <!-- Tanaman Table -->
+                <!-- Tabel Tanaman -->
                 <div class="mt-8">
-                    <h2 class="text-xl font-bold mb-4">Your Plants</h2>
+                    <h2 class="text-xl font-bold mb-4">Tanaman Anda</h2>
 
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="border border-gray-200 px-4 py-2 text-left">#</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Plant Name</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Type</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Date Added</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border-collapse border border-gray-200">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-200 px-4 py-2 text-left">#</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Nama Tanaman</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Jenis</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Tanggal Ditambahkan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-200 px-4 py-2">34</td>
+                                    <td class="border border-gray-200 px-4 py-2">Mawar</td>
+                                    <td class="border border-gray-200 px-4 py-2">Hias</td>
+                                    <td class="border border-gray-200 px-4 py-2">20 Januari 2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                        <tr>
-                                            <td class="border border-gray-200 px-4 py-2">34</td>
-                                            <td class="border border-gray-200 px-4 py-2">fsg</td>
-                                            <td class="border border-gray-200 px-4 py-2">fdfb</td>
-                                            <td class="border border-gray-200 px-4 py-2">wefg</td>
-                                        </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p class="text-gray-500">No plants available.</p>
-
+                    <p class="text-gray-500">Tidak ada tanaman yang tersedia.</p>
                 </div>
 
-                <!-- Penanaman Table -->
+                <!-- Tabel Penanaman -->
                 <div class="mt-8">
-                    <h2 class="text-xl font-bold mb-4">Planting Records</h2>
+                    <h2 class="text-xl font-bold mb-4">Catatan Penanaman</h2>
 
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="border border-gray-200 px-4 py-2 text-left">#</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Plant Name</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Date Planted</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Location</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border-collapse border border-gray-200">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-200 px-4 py-2 text-left">#</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Nama Tanaman</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Tanggal Ditanam</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Lokasi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-200 px-4 py-2">123</td>
+                                    <td class="border border-gray-200 px-4 py-2">Anggrek</td>
+                                    <td class="border border-gray-200 px-4 py-2">15 Januari 2025</td>
+                                    <td class="border border-gray-200 px-4 py-2">Kebun Belakang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                        <tr>
-                                            <td class="border border-gray-200 px-4 py-2">123</td>
-                                            <td class="border border-gray-200 px-4 py-2">dfsg</td>
-                                            <td class="border border-gray-200 px-4 py-2">rfg</td>
-                                            <td class="border border-gray-200 px-4 py-2">df</td>
-                                        </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p class="text-gray-500">No planting records available.</p>
-
+                    <p class="text-gray-500">Belum ada catatan penanaman.</p>
                 </div>
 
-                <!-- Pengeluaran Table -->
+                <!-- Tabel Pengeluaran -->
                 <div class="mt-8">
-                    <h2 class="text-xl font-bold mb-4">Expenses</h2>
-                    <p>Total Expenses: <strong>Rp </strong></p>
+                    <h2 class="text-xl font-bold mb-4">Pengeluaran</h2>
+                    <p>Total Pengeluaran: <strong>Rp 12,432</strong></p>
 
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="border border-gray-200 px-4 py-2 text-left">#</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Description</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Amount</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border-collapse border border-gray-200">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-200 px-4 py-2 text-left">#</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Deskripsi</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Jumlah</th>
+                                    <th class="border border-gray-200 px-4 py-2 text-left">Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-200 px-4 py-2">23</td>
+                                    <td class="border border-gray-200 px-4 py-2">Pupuk</td>
+                                    <td class="border border-gray-200 px-4 py-2">Rp 50,000</td>
+                                    <td class="border border-gray-200 px-4 py-2">18 Januari 2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                        <tr>
-                                            <td class="border border-gray-200 px-4 py-2">23</td>
-                                            <td class="border border-gray-200 px-4 py-2">dc</td>
-                                            <td class="border border-gray-200 px-4 py-2">Rp dsd</td>
-                                            <td class="border border-gray-200 px-4 py-2">ddv</td>
-                                        </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p class="text-gray-500">No expenses recorded yet.</p>
-
+                    <p class="text-gray-500">Belum ada pengeluaran yang tercatat.</p>
                 </div>
             </div>
         </div>
