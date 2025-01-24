@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Traits\HasRoles;
 
 class RegisteredUserController extends Controller
 {
@@ -38,14 +37,9 @@ class RegisteredUserController extends Controller
             'avatar' => ['nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
         ]);
 
-        $avatarPath = null;
-
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-        } else {
-            // Set default avatar if no file uploaded
-            $avatarPath = 'images/default-avatar.png';
-        }
+        $avatarPath = $request->file('avatar')
+            ? $request->file('avatar')->store('avatars', 'public')
+            : 'avatars/default-avatar.png';
 
         $user = User::create([
             'name' => $request->name,
@@ -60,6 +54,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('user.home', absolute: false));
+        return redirect()->route('user.home');
     }
 }
