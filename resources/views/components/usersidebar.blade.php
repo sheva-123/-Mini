@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Dashboard</title>
 </head>
+
 <body class="bg-gray-100">
     <div class="flex">
         <!-- Sidebar -->
         <div class="bg-white w-64 h-screen shadow-lg">
-
             <div class="mt-6 space-y-2">
+                <!-- Dashboard -->
                 <a href="{{ route('user.home') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
                     <i class="fas fa-gauge-simple-high"></i>
                     <span class="ml-3">Dashboard</span>
                 </a>
 
-                <!-- Dropdown -->
+                <!-- Dropdown Menu -->
                 <div id="menuDropdownContainer" class="relative">
                     <button
                         onclick="toggleDropdown()"
@@ -33,21 +37,19 @@
                     <div id="menuDropdown" class="hidden mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
                         <a href="{{ route('tanamans.index') }}"
                             class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-house-chimney-window"></i>
+                            <i class="fas fa-seedling"></i>
                             <span class="ml-2">Tanaman</span>
                         </a>
                         <a href="{{ route('Penanamans.index') }}"
                             class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-hand-holding-water"></i>
                             <span class="ml-2">Penanaman</span>
                         </a>
-
                         <a href="{{ route('pengeluarans.index') }}"
                             class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-wallet"></i>
                             <span class="ml-2">Pengeluaran</span>
                         </a>
-
                     </div>
                 </div>
 
@@ -62,26 +64,21 @@
             </div>
         </div>
 
-        <!-- Main Content -->
+        {{-- <!-- Main Content -->
         <div class="flex-1 p-6">
-            <h1 class="text-3xl font-semibold text-gray-700"></h1>
-        </div>
+            <h1 class="text-3xl font-semibold text-gray-700">Konten Utama</h1>
+        </div> --}}
     </div>
-
-    
 
     <!-- Scripts -->
     <script>
-        // Function to toggle the dropdown visibility and store its state in localStorage
         function toggleDropdown() {
             const dropdown = document.getElementById('menuDropdown');
             const button = document.getElementById('menuButton');
             const isOpen = dropdown.classList.contains('hidden');
 
-            // Toggle dropdown visibility
             dropdown.classList.toggle('hidden', !isOpen);
 
-            // Change button style or icon based on dropdown state
             if (isOpen) {
                 button.classList.add('bg-green-100');
                 button.classList.remove('hover:bg-green-100');
@@ -90,12 +87,10 @@
                 button.classList.add('hover:bg-green-100');
             }
 
-            // Store the state of the dropdown
             localStorage.setItem('dropdownState', isOpen ? 'true' : 'false');
         }
 
-        // Set initial dropdown state based on localStorage
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const dropdown = document.getElementById('menuDropdown');
             const button = document.getElementById('menuButton');
             const isOpen = localStorage.getItem('dropdownState') === 'true';
@@ -107,7 +102,6 @@
             }
         });
 
-        // Add event listener to handle the active state of sidebar items
         document.querySelectorAll('.sidebar-item').forEach(item => {
             const currentUrl = window.location.href;
             if (currentUrl.includes(item.getAttribute('href'))) {
@@ -116,7 +110,6 @@
             }
         });
 
-        // Logout confirmation
         function logout(event) {
             event.preventDefault();
             const form = event.target.closest('form');
@@ -136,4 +129,5 @@
         }
     </script>
 </body>
+
 </html>
