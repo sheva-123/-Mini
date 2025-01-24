@@ -29,7 +29,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
+<<<<<<< HEAD
     Route::resource('/pertanians', PertanianController::class);
+=======
+    Route::resource('pertanians', PertanianController::class);
+    Route::resource('pengguna', UserController::class)->names('pengguna');
+
+    Route::get('/assign-land', [UserController::class, 'tambahlahan'])->name('admin.tambahlahanpetani');
+>>>>>>> 0a1db172825a36ae65e553b84e4c267e89e81ec8
 });
 
 Route::middleware(['auth'])->group(function () {
