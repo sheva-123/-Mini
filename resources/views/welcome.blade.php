@@ -7,6 +7,13 @@ box-sizing: border-box;
 font-family: "Poppins", sans-serif;
 }
 
+    h1 {
+        font-family: 'Playfair Display', serif;
+    }
+    p {
+        font-family: 'Roboto', sans-serif;
+    }
+
 .container1 {
 position: relative;
 width: 100%;
@@ -122,14 +129,14 @@ transition-delay: 0.2s;
 
     <!-- Button Register & Login di kanan -->
     <div class="hidden md:flex space-x-2">
-        <a href="/login" class="flex items-center h-10 text-[#c8a876] font-medium px-4 py-2 border border-[#c8a876] rounded-md">
-            <span>Masuk</span>
-        </a>
         <a href="/register" class="flex items-center h-10 rounded-md bg-[#c8a876] hover:bg-[#b58a44] text-white font-medium px-4 py-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 9A6.5 6.5 0 114 9m0 0v3.25m0-3.25h3.25" />
             </svg>
             <span>Daftar</span>
+        </a>
+        <a href="/login" class="flex items-center h-10 text-[#c8a876] hover:text-[#b58a44] font-medium px-4 py-2 border border-[#c8a876] hover:border-[#b58a44] rounded-md">
+            <span>Masuk</span>
         </a>
     </div>
 
@@ -150,8 +157,9 @@ transition-delay: 0.2s;
 
     <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
         <div class="md:w-1/2 mb-4 md:mb-0 mt-10">
-            <h1 class="text-[#000000] font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian Cerdas dan Berkelanjutan</h1>
-            <p class="font-regular text-sm mt-4 text-[#2e2f2e]">Pengelolaan sumber daya dalam sektor pertanian untuk mencapai efisiensi dan produktivitas yang optimal. Kami menghadirkan inovasi teknologi terkini, metode pertanian berkelanjutan, dan dukungan ahli untuk meningkatkan hasil panen Anda secara signifikan.</p>
+            <h1 class="text-[#c8a876] font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian</h1>
+            <h1 class="text-[#000000] font-medium text-4xl md:text-5xl leading-tight mb-2">Pertanian Cerdas dan Berkelanjutan</h1>
+            <p class="font-regular text-xs mt-2 text-[#2e2f2e]">Pengelolaan sumber daya dalam sektor pertanian untuk mencapai efisiensi dan produktivitas yang optimal. Kami menghadirkan inovasi teknologi terkini, metode pertanian berkelanjutan, dan dukungan ahli untuk meningkatkan hasil panen Anda secara signifikan.</p>
             <br>
             <a href="#contactUs"
                 class="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-3xl hover:bg-[#b58a44] transition duration-200">Hubungi Kami</a>
@@ -162,7 +170,7 @@ transition-delay: 0.2s;
 <!-- our services section -->
 <section class="py-10" id="services">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center mt-10">Tanaman</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center mt-10">Tanaman</h2>      
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <img src="https://i.pinimg.com/736x/cc/e4/9b/cce49b06f6e0b15d119aa449d8a63d69.jpg" alt="wheat flour grinding" class="w-full h-64 object-cover">
@@ -438,7 +446,7 @@ transition-delay: 0.2s;
                             <a class="flex m-1" href="tel:+919823331842">
                                 <div class="flex-shrink-0">
                                     <div
-                                        class="flex items-center justify-between h-10 w-30 rounded-md bg-[#c8a876] text-white p-2">
+                                        class="flex items-center justify-between h-10 w-30 rounded-md bg-[#c8a876] hover:bg-[#b58a44] text-white p-2">
                                         <!-- Heroicon name: phone -->
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
