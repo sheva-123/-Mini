@@ -13,24 +13,33 @@ class UserController extends Controller
     {
         $users = User::whereDoesntHave('roles', function ($query) {
             $query->where('name', 'admin');
-        })->get();
+        })
+        ->with('pertanian')
+        ->get();
 
-        // Ambil data lahan dari model Pertanian (sesuaikan dengan model Anda)
-        $lahan = Pertanian::all();
+        $lahan = Pertanian::whereDoesntHave('users')->get(); 
 
-        return view('admin.pengguna.index', compact('users', 'lahan'));
+        $addUsers = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })
+        ->doesntHave('pertanian')
+        ->get();
+
+        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers'));
     }
 
-    public function tambahlahan(Request $request)
+    public function store(Request $request)
     {
+        // dd($request->all());
+
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'pertanian_id' => 'required|exists:pertanians,id'
+            'user_id' => 'required',
+            'pertanian_id' => 'required',
         ]);
 
         Petani_Lahan::create([
-            'user_id' => $request->user_id,
-            'petanian_id' => $request->pertanian_id
+            'user_id' => (int) $request->input('user_id'),
+            'pertanian_id' => (int) $request->input('pertanian_id'),
         ]);
 
         return redirect()->route('pengguna.index')

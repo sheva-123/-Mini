@@ -32,8 +32,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('pertanians', PertanianController::class);
     Route::resource('pengguna', UserController::class)->names('pengguna');
-
-    Route::get('/assign-land', [UserController::class, 'tambahlahan'])->name('admin.tambahlahanpetani');
 });
 
 Route::middleware(['auth'])->group(function () {

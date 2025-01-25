@@ -29,8 +29,8 @@ class Pertanian extends Model
         return $this->belongsTo(Laporan::class);
     }
 
-    public function userLand()
+    public function users()
     {
-        return $this->hasMany(Petani_Lahan::class, 'petani_id', 'id');
+        return $this->belongsToMany(User::class, 'petani_lahan', 'pertanian_id', 'user_id');
     }
 }
