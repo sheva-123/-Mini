@@ -19,13 +19,13 @@
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
             <h2 class="text-xl font-bold mb-4">Tambah Data Petani</h2>
-            <form action="{{ route('admin.tambahlahanpetani') }}" method="POST">
+            <form action="{{ route('pengguna.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="user_id" class="block text-sm font-medium text-gray-700">Nama Pengguna</label>
                     <select id="user_id" name="user_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @foreach ($addUsers as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -33,7 +33,7 @@
                     <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Lahan</label>
                     <select id="pertanian_id" name="pertanian_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                         @foreach ($lahan as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option> <!-- Sesuaikan dengan field yang ada di model Pertanian -->
+                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option> <!-- Sesuaikan dengan field yang ada di model Pertanian -->
                         @endforeach
                     </select>
                 </div>
@@ -63,22 +63,23 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr class="bg-white border-b hover:bg-gray-100">
-                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $user->name }}</td>
-                                <td class="px-6 py-4">{{ $user->email }}</td>
-                                <td class="px-6 py-4">
-                                    @if ($user->lahan)
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                            Sudah Diberikan
-                                        </span>
-                                    @else
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                            Belum Diberikan
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
+                        <tr class="bg-white border-b hover:bg-gray-100">
+                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $user->name }}</td>
+                            <td class="px-6 py-4">{{ $user->email }}</td>
+                            <td class="px-6 py-4">
+                                @if ($user->pertanian->isEmpty())
+
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                    Belum Diberikan
+                                </span>
+                                @else
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                    Sudah Diberikan
+                                </span>
+                                @endif
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

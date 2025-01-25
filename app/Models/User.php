@@ -47,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pertanian()
+    {
+        return $this->belongsToMany(Pertanian::class, 'petani_lahan', 'user_id' , 'pertanian_id');
+    }
 }
