@@ -1,5 +1,7 @@
-<x-app-layout>
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
+@extends('layouts.userapp')
+
+@section('content')    
+<header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Data Pemanenan</h1>
@@ -65,4 +67,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

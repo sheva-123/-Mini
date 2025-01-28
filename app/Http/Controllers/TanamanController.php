@@ -14,7 +14,8 @@ class TanamanController extends Controller
     public function index()
     {
         $tanamans = Tanaman::all();
-        return view('petani.Tanamans.index', compact('tanamans'));    }
+        return view('petani.tanamans.index', compact('tanamans'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -33,25 +34,28 @@ class TanamanController extends Controller
             'nama_tanaman' => 'required|string|max:255',
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
+        ], [
+            'nama_tanaman.required' => 'Nama tanaman wajib diisi.',
+            'jenis.required' => 'Jenis tanaman wajib diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);
 
-            if($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('tanamans.index')
-                                ->withErrors($validator)
-                                ->withInput();
-            }
+        if ($validator->fails()) {
+            return redirect()->route('tanamans.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         Tanaman::create($request->all());
-        return redirect()->route('tanamans.index')->with('success', 'Data berhasil ditambahkan');
-        }
+        return redirect()->route('tanamans.index')->with('success', 'Data tanaman berhasil ditambahkan.');
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(Tanaman $tanaman)
     {
-         //
+        // Add functionality if needed
     }
 
     /**
@@ -71,19 +75,21 @@ class TanamanController extends Controller
             'nama_tanaman' => 'required|string|max:255',
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
+        ], [
+            'nama_tanaman.required' => 'Nama tanaman wajib diisi.',
+            'jenis.required' => 'Jenis tanaman wajib diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);
 
-            if ($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('tanamans.index')
+        if ($validator->fails()) {
+            return redirect()->route('tanamans.edit', $tanaman->id)
                 ->withErrors($validator)
-                    ->withInput();
-            }
+                ->withInput();
+        }
 
         $tanaman->update($request->all());
-
-        return redirect()->route('tanamans.index')->with('success', 'Tanaman berhasil diperbarui.');
-        }
+        return redirect()->route('tanamans.index')->with('success', 'Data tanaman berhasil diperbarui.');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -92,11 +98,9 @@ class TanamanController extends Controller
     {
         try {
             $tanaman->delete();
-            return redirect()->route('tanamans.index')
-            ->with('success', 'Tanaman Delete Success');
+            return redirect()->route('tanamans.index')->with('success', 'Data tanaman berhasil dihapus.');
         } catch (\Exception $e) {
-            return redirect()->route('tanamans.index')
-            ->with('error', 'Tanaman Delete Error');
+            return redirect()->route('tanamans.index')->with('error', 'Gagal menghapus data tanaman.');
         }
     }
 }

@@ -35,7 +35,7 @@
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $tanaman->nama_tanaman }}</td>
                                 <td class="px-6 py-4">{{ $tanaman->jenis }}</td>
-                                <td class="px-6 py-4">{{ $tanaman->deskripsi }} ha</td>
+                                <td class="px-6 py-4">{{ $tanaman->deskripsi }}</td>
                                 <td class="px-6 py-4 flex items-center space-x-4">
                                     <a href="{{ route('tanamans.edit', $tanaman->id) }}"
                                         class="text-yellow-500 hover:text-yellow-700">
