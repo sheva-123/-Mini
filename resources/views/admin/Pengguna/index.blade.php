@@ -8,12 +8,30 @@
         </div>
     </header>
 
-    <!-- Tombol Tambah Data Petani -->
-    <div class="container mx-auto mt-4 pr-3">
-        <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Tambah Data Petani
-        </button>
-    </div>
+    <form action="{{ route('pengguna.index') }}" method="GET">
+        @csrf
+        <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
+            <div class="flex items-center space-x-2">
+            <!-- Search Input -->
+            <input type="text" id="search" placeholder="Cari pengguna..." class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
+
+            <!-- Filter by Lahan Dropdown -->
+            <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm">
+                <option value="">Filter berdasarkan Lahan</option>
+                @foreach ($lahan as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
+                @endforeach
+            </select>
+            </div>
+
+            <div class="flex items-center space-x-4">
+            <!-- Tombol Tambah Data Petani -->
+            <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Tambah Data Petani
+            </button>
+            </div>
+        </div>
+    </form>
 
     <!-- Modal -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
@@ -25,7 +43,7 @@
                     <label for="user_id" class="block text-sm font-medium text-gray-700">Nama Pengguna</label>
                     <select id="user_id" name="user_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                         @foreach ($addUsers as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -33,7 +51,7 @@
                     <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Lahan</label>
                     <select id="pertanian_id" name="pertanian_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                         @foreach ($lahan as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option> <!-- Sesuaikan dengan field yang ada di model Pertanian -->
+                            <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -52,7 +70,7 @@
     <div class="container mx-auto mt-8 pr-3">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
             <div class="relative overflow-x-auto">
-                <table class="w-full text-md text-left rtl:text-right text-gray-500">
+                <table class="w-full text-md text-left rtl:text-right text-gray-500" id="userTable">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
@@ -63,23 +81,22 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                        <tr class="bg-white border-b hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $user->name }}</td>
-                            <td class="px-6 py-4">{{ $user->email }}</td>
-                            <td class="px-6 py-4">
-                                @if ($user->pertanian->isEmpty())
-
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                    Belum Diberikan
-                                </span>
-                                @else
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                    Sudah Diberikan
-                                </span>
-                                @endif
-                            </td>
-                        </tr>
+                            <tr class="bg-white border-b hover:bg-gray-100">
+                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                <td class="px-6 py-4">{{ $user->name }}</td>
+                                <td class="px-6 py-4">{{ $user->email }}</td>
+                                <td class="px-6 py-4">
+                                    @if ($user->pertanian->isEmpty())
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                            Belum Diberikan
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                            Sudah Diberikan
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -91,13 +108,52 @@
         function openModal() {
             const modal = document.getElementById('modal');
             modal.classList.remove('hidden');
-            modal.classList.add('flex'); // Tambahkan class flex saat modal ditampilkan
+            modal.classList.add('flex');
         }
 
         function closeModal() {
             const modal = document.getElementById('modal');
-            modal.classList.remove('flex'); // Hapus class flex saat modal disembunyikan
+            modal.classList.remove('flex');
             modal.classList.add('hidden');
         }
+
+        // Fitur pencarian dan filter
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("search");
+            const filterLahan = document.getElementById("filterLahan");
+            const userTableRows = document.querySelectorAll("#userTable tbody tr");
+
+            // Fitur pencarian
+            searchInput.addEventListener("keyup", function() {
+                filterRows();
+            });
+
+            // Fitur filter berdasarkan Lahan
+            filterLahan.addEventListener("change", function() {
+                filterRows();
+            });
+
+            // Function to filter rows based on search input and selected filter
+            function filterRows() {
+                let searchValue = searchInput.value.toLowerCase();
+                let selectedLahan = filterLahan.value;
+
+                userTableRows.forEach(row => {
+                    let userName = row.cells[1].textContent.toLowerCase();
+                    let userEmail = row.cells[2].textContent.toLowerCase();
+                    let lahanCell = row.cells[3];
+                    let lahanText = lahanCell.textContent.trim().toLowerCase();
+
+                    let matchesSearch = userName.includes(searchValue) || userEmail.includes(searchValue);
+                    let matchesLahan = !selectedLahan || lahanText.includes(selectedLahan.toLowerCase());
+
+                    if (matchesSearch && matchesLahan) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            }
+        });
     </script>
 </x-app-layout>
