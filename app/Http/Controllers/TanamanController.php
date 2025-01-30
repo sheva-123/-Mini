@@ -76,7 +76,7 @@ class TanamanController extends Controller
             'jenis' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ], [
-            'nama_tanaman.required' => 'Nama tanaman wajib diisii.',
+            'nama_tanaman.required' => 'Nama tanaman wajib diisi.',
             'jenis.required' => 'Jenis tanaman wajib diisi.',
             'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);

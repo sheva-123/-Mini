@@ -25,7 +25,7 @@
                             <th scope="col" class="px-6 py-3">No</th>
                             <th scope="col" class="px-6 py-3">Pertanian</th>
                             <th scope="col" class="px-6 py-3">Tanaman</th>
-                            <th scope="col" class="px-6 py-3">Tanggal Tanamm</th>
+                            <th scope="col" class="px-6 py-3">Tanggal Tanam</th>
                             <th scope="col" class="px-6 py-3">Jumlah Tanaman</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
