@@ -50,6 +50,21 @@
                             <i class="fas fa-wallet"></i>
                             <span class="ml-2">Pengeluaran</span>
                         </a>
+                        <a href="{{ route('pemeliharaans.index') }}"
+                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
+                            <i class="fas fa-wallet"></i>
+                            <span class="ml-2">Pemeliharaan</span>
+                        </a>
+                        <a href="{{ route('pemeliharaans.index') }}"
+                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
+                            <i class="fas fa-wallet"></i>
+                            <span class="ml-2">Pemeliharaan</span>
+                        </a>
+                        <a href="{{ route('laporans.index') }}"
+                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
+                            <i class="fas fa-wallet"></i>
+                            <span class="ml-2">Laporan</span>
+                        </a>
                     </div>
                 </div>
 
