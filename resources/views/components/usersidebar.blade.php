@@ -63,7 +63,7 @@
                         <a href="{{ route('laporans.index') }}"
                             class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
                             <i class="fas fa-wallet"></i>
-                            <span class="ml-2">Laporan</span>
+                            <span class="ml-2">Laporann</span>
                         </a>
                     </div>
                 </div>

@@ -69,7 +69,7 @@ class PenanamanController extends Controller
             'jumlah_tanaman' => $request->jumlah_tanaman,
         ]);
 
-        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dibuat.');
+        return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dibuatt.');
     }
 
     /**
