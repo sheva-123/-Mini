@@ -13,11 +13,23 @@ class PenanamanController extends Controller
     /**
      * Menampilkan daftar penanaman.
      */
-    public function index()
-    {
-        $penanamans = Penanaman::with('tanaman')->get();
-        return view('petani.penanamans.index', compact('penanamans'));
+    public function index(Request $request)
+{
+    $query = Penanaman::with('tanaman', 'pertanian');
+
+    if ($request->has('search')) {
+        $search = $request->search;
+        $query->whereHas('pertanian', function ($q) use ($search) {
+            $q->where('nama_pertanian', 'like', "%$search%");
+        })->orWhereHas('tanaman', function ($q) use ($search) {
+            $q->where('nama_tanaman', 'like', "%$search%");
+        })->orWhere('tanggal_tanam', 'like', "%$search%");
     }
+
+    $penanamans = $query->get();
+    return view('petani.penanamans.index', compact('penanamans'));
+}
+
 
     /**
      * Menampilkan form untuk membuat penanaman baru.
