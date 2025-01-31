@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
+    Route::get('/pengguna/{id}', [UserController::class, 'verifikasi'])->name('pengguna.verifikasi');
     Route::resource('pertanians', PertanianController::class);
     Route::resource('pengguna', UserController::class)->names('pengguna');
 });
