@@ -45,4 +45,27 @@ class UserController extends Controller
         return redirect()->route('pengguna.index')
                         ->with('success', 'Berhasil Menambah Lahan Ke Petani');
     }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'keyword' => ['required', 'string', 'max:255']
+        ]);
+
+        $keyword = $request->keyword;
+
+        $users = User::where('name', 'like', "%$keyword%")
+                            ->orWhere('email', 'like', "%$keyword%")
+                            ->paginate(3);
+
+        $lahan = Pertanian::whereDoesntHave('users')->get();
+
+        $addUsers = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })
+            ->doesntHave('pertanian')
+            ->get();
+
+        return view('admin.pengguna.search', compact('users', 'lahan', 'addUsers'));
+    }
 }

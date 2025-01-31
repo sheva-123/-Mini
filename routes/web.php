@@ -21,6 +21,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/pending', function () {
+    return view('pending');
+})->middleware(['auth', 'verified'])->name('pending');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -30,11 +34,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
+    Route::get('/pengguna/search', [UserController::class, 'search'])->name('pengguna.search');
     Route::resource('pertanians', PertanianController::class);
     Route::resource('pengguna', UserController::class)->names('pengguna');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:user|admin'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('user.home');
     Route::resource('tanamans', TanamanController::class);
     Route::resource('Penanamans', PenanamanController::class);
