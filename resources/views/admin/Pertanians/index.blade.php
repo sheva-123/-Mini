@@ -14,13 +14,14 @@
             <div class="flex items-center space-x-2">
             <input type="text" id="search" placeholder="Cari pertanian..."
                 class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2" onkeyup="filterTable()">
-
-            <select id="filterLokasi" onchange="filterTable()" class="p-2 border border-gray-300 rounded-md shadow-sm">
-                <option value="">Pilih Lokasi</option>
-                @foreach ($pertanians->unique('lokasi_pertanian') as $pertanian)
-                    <option value="{{ $pertanian->lokasi_pertanian }}">{{ $pertanian->lokasi_pertanian }}</option>
-                @endforeach
-            </select>
+                <div class="relative">
+                    <select id="filterLokasi" onchange="filterTable()" class="p-2 border border-gray-300 rounded-md shadow-sm pr-10">
+                        <option value="">Pilih Lokasi</option>
+                        @foreach ($pertanians->unique('lokasi_pertanian') as $pertanian)
+                            <option value="{{ $pertanian->lokasi_pertanian }}">{{ $pertanian->lokasi_pertanian }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="flex items-center space-x-4">
