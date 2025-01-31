@@ -16,12 +16,15 @@
             <input type="text" id="search" placeholder="Cari pengguna..." class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
 
             <!-- Filter by Lahan Dropdown -->
-            <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm">
-                <option value="">Filter berdasarkan Lahan</option>
-                @foreach ($lahan as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
-                @endforeach
-            </select>
+            <div class="relative">
+                <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm pr-10">
+                    <option value="">Filter berdasarkan Lahan</option>
+                    @foreach ($lahan as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
             </div>
 
             <div class="flex items-center space-x-4">
