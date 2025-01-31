@@ -8,12 +8,12 @@
         </div>
     </header>
 
-<<<<<<< HEAD
     <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
         <div class="flex items-center space-x-2">
             <!-- Search Input -->
             <form action="{{ route('pengguna.search') }}" method="GET">
-                <input type="text" name="keyword" id="search" placeholder="Cari pengguna..." class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
+                <input type="text" name="keyword" id="search" placeholder="Cari pengguna..."
+                    class="p-2 border border-gray-300 rounded-md shadow-sm w-45">
             </form>
 
             <!-- Filter by Lahan Dropdown -->
@@ -26,42 +26,20 @@
         </div>
 
         <div class="flex items-center space-x-4">
+            <!-- Tombol Verifikasi Data Petani -->
+            <button type="button" onclick="openModalVerifikasi()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Verifikasi Data Petani
+            </button>
+
             <!-- Tombol Tambah Data Petani -->
-            <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button type="button" onclick="openModal()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Tambah Data Petani
             </button>
-=======
-    <form action="{{ route('pengguna.index') }}" method="GET">
-        @csrf
-        <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
-            <div class="flex items-center space-x-2">
-                <!-- Search Input -->
-                <input type="text" id="search" placeholder="Cari pengguna..."
-                    class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
-
-                <!-- Filter by Lahan Dropdown -->
-                <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm">
-                    <option value="">Filter berdasarkan Lahan</option>
-                    @foreach ($lahan as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="flex items-center space-x-4">
-                <!-- Tombol Tambah Data Petani -->
-                <button type="button" onclick="openModalVerifikasi()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Verifikasi data petani
-                </button>
-                <button type="button" onclick="openModal()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Tambah Data Petani
-                </button>
-            </div>
->>>>>>> 295f9302c6f62cf7e9247279020430197355fade
         </div>
     </div>
+
 
     <div id="modalverifikasi" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
@@ -71,17 +49,17 @@
             <div class="mb-4 max-h-60 overflow-y-auto border border-gray-300 rounded-md p-2">
                 <ul>
                     <!-- Contoh daftar user -->
-                    @foreach ($users as $us)
-                        <li class="flex justify-between items-center py-2 border-b">
-                            <span class="text-gray-800">{{ $us->name }} ({{ $us->email }})</span>
-                            <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
-                                @csrf
-                                <button
-                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">
-                                    Verifikasi
-                                </button>
-                            </form>
-                    @endforeach
+                    @foreach ($userVerif as $us)
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-800">{{ $us->name }} ({{ $us->email }})</span>
+                        <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
+                            @csrf
+                            <button
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">
+                                Verifikasi
+                            </button>
+                        </form>
+                        @endforeach
                     </li>
                 </ul>
             </div>
@@ -146,7 +124,6 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-<<<<<<< HEAD
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $user->name }}</td>
@@ -163,26 +140,6 @@
                                 @endif
                             </td>
                         </tr>
-=======
-                            <tr class="bg-white border-b hover:bg-gray-100">
-                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $user->name }}</td>
-                                <td class="px-6 py-4">{{ $user->email }}</td>
-                                <td class="px-6 py-4">
-                                    @if ($user->pertanian->isEmpty())
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                            Belum Diberikan
-                                        </span>
-                                    @else
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                            Sudah Diberikan
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
->>>>>>> 295f9302c6f62cf7e9247279020430197355fade
                         @endforeach
                     </tbody>
                 </table>
@@ -214,7 +171,5 @@
             modal.classList.remove('flex');
             modal.classList.add('hidden');
         }
-
-        
     </script>
 </x-app-layout>

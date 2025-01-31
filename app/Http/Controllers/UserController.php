@@ -11,21 +11,23 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'admin');
+        $users = User::wherehas('roles', function ($query) {
+            $query->where('name', 'user');
         })
         ->with('pertanian')
         ->get();
 
         $lahan = Pertanian::whereDoesntHave('users')->get();
 
-        $addUsers = User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'admin');
+        $addUsers = User::whereHas('roles', function ($query) {
+            $query->where('name', 'user');
         })
         ->doesntHave('pertanian')
         ->get();
 
-        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers'));
+        $userVerif = User::doesntHave('roles')->get();
+
+        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers', 'userVerif'));
     }
 
     public function verifikasi($id)
@@ -36,7 +38,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Pengguna tidak ditemukan atau sudah memiliki role.');
         }
 
-        $user->assignRole('petani');
+        $user->assignRole('user');
         $user->update(['is_verified' => true]);
 
         return redirect()->back()->with('success', 'Pengguna berhasil diverifikasi.');
