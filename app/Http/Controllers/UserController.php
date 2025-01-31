@@ -17,7 +17,7 @@ class UserController extends Controller
         ->with('pertanian')
         ->get();
 
-        $lahan = Pertanian::whereDoesntHave('users')->get(); 
+        $lahan = Pertanian::whereDoesntHave('users')->get();
 
         $addUsers = User::whereDoesntHave('roles', function ($query) {
             $query->where('name', 'admin');
@@ -26,6 +26,20 @@ class UserController extends Controller
         ->get();
 
         return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers'));
+    }
+
+    public function verifikasi($id)
+    {
+        $user = User::find($id);
+
+        if (!$user || $user->roles->isNotEmpty()) {
+            return redirect()->back()->with('error', 'Pengguna tidak ditemukan atau sudah memiliki role.');
+        }
+
+        $user->assignRole('petani');
+        $user->update(['is_verified' => true]);
+
+        return redirect()->back()->with('success', 'Pengguna berhasil diverifikasi.');
     }
 
     public function store(Request $request)
