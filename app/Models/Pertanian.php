@@ -12,15 +12,18 @@ class Pertanian extends Model
         'luas_lahan',
     ];
 
-    public function penanaman(){
+    public function penanaman()
+    {
         return $this->hasMany(Penanaman::class);
     }
 
-    public function pemeliharaan(){
+    public function pemeliharaan()
+    {
         return $this->hasMany(Pemeliharaan::class);
     }
 
-    public function pemanenan(){
+    public function pemanenan()
+    {
         return $this->hasMany(pemanenan::class);
     }
 
