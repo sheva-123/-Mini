@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
 
         $avatarPath = $request->file('avatar')
             ? $request->file('avatar')->store('avatars', 'public')
-            : 'avatars/default-avatar.png';
+            : 'images/default-avatar.png';
 
         $user = User::create([
             'name' => $request->name,
@@ -48,12 +48,10 @@ class RegisteredUserController extends Controller
             'avatar' => $avatarPath,
         ]);
 
-        $user->assignRole('user');
-
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect()->route('user.home');
+        return redirect()->route('pending');
     }
 }
