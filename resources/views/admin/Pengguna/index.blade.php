@@ -8,7 +8,7 @@
         </div>
     </header>
 
-<<<<<<< HEAD
+
     <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
         <div class="flex items-center space-x-2">
             <!-- Search Input -->
@@ -17,6 +17,7 @@
             </form>
 
             <!-- Filter by Lahan Dropdown -->
+
             <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm">
                 <option value="">Filter berdasarkan Lahan</option>
                 @foreach ($lahan as $item)
@@ -25,12 +26,13 @@
             </select>
         </div>
 
+
         <div class="flex items-center space-x-4">
             <!-- Tombol Tambah Data Petani -->
             <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Tambah Data Petani
             </button>
-=======
+
     <form action="{{ route('pengguna.index') }}" method="GET">
         @csrf
         <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
@@ -59,7 +61,7 @@
                     Tambah Data Petani
                 </button>
             </div>
->>>>>>> 295f9302c6f62cf7e9247279020430197355fade
+
         </div>
     </div>
 
@@ -146,7 +148,7 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-<<<<<<< HEAD
+
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $user->name }}</td>
@@ -163,26 +165,7 @@
                                 @endif
                             </td>
                         </tr>
-=======
-                            <tr class="bg-white border-b hover:bg-gray-100">
-                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $user->name }}</td>
-                                <td class="px-6 py-4">{{ $user->email }}</td>
-                                <td class="px-6 py-4">
-                                    @if ($user->pertanian->isEmpty())
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                            Belum Diberikan
-                                        </span>
-                                    @else
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                            Sudah Diberikan
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
->>>>>>> 295f9302c6f62cf7e9247279020430197355fade
+
                         @endforeach
                     </tbody>
                 </table>
