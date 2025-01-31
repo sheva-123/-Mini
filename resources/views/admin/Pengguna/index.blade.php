@@ -8,12 +8,12 @@
         </div>
     </header>
 
-
     <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
         <div class="flex items-center space-x-2">
             <!-- Search Input -->
             <form action="{{ route('pengguna.search') }}" method="GET">
-                <input type="text" name="keyword" id="search" placeholder="Cari pengguna..." class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
+                <input type="text" name="keyword" id="search" placeholder="Cari pengguna..."
+                    class="p-2 border border-gray-300 rounded-md shadow-sm w-45">
             </form>
 
             <!-- Filter by Lahan Dropdown -->
@@ -28,8 +28,15 @@
 
 
         <div class="flex items-center space-x-4">
+            <!-- Tombol Verifikasi Data Petani -->
+            <button type="button" onclick="openModalVerifikasi()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Verifikasi Data Petani
+            </button>
+
             <!-- Tombol Tambah Data Petani -->
-            <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button type="button" onclick="openModal()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Tambah Data Petani
             </button>
 
@@ -61,9 +68,9 @@
                     Tambah Data Petani
                 </button>
             </div>
-
         </div>
     </div>
+
 
     <div id="modalverifikasi" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
@@ -73,17 +80,17 @@
             <div class="mb-4 max-h-60 overflow-y-auto border border-gray-300 rounded-md p-2">
                 <ul>
                     <!-- Contoh daftar user -->
-                    @foreach ($users as $us)
-                        <li class="flex justify-between items-center py-2 border-b">
-                            <span class="text-gray-800">{{ $us->name }} ({{ $us->email }})</span>
-                            <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
-                                @csrf
-                                <button
-                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">
-                                    Verifikasi
-                                </button>
-                            </form>
-                    @endforeach
+                    @foreach ($userVerif as $us)
+                    <li class="flex justify-between items-center py-2 border-b">
+                        <span class="text-gray-800">{{ $us->name }} ({{ $us->email }})</span>
+                        <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
+                            @csrf
+                            <button
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">
+                                Verifikasi
+                            </button>
+                        </form>
+                        @endforeach
                     </li>
                 </ul>
             </div>
@@ -148,7 +155,6 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $user->name }}</td>
@@ -165,7 +171,6 @@
                                 @endif
                             </td>
                         </tr>
-
                         @endforeach
                     </tbody>
                 </table>
@@ -197,7 +202,5 @@
             modal.classList.remove('flex');
             modal.classList.add('hidden');
         }
-
-        
     </script>
 </x-app-layout>
