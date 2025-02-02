@@ -36,12 +36,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/pengguna/search', [UserController::class, 'search'])->name('pengguna.search');
     Route::get('/pengguna/{id}', [UserController::class, 'verifikasi'])->name('pengguna.verifikasi');
     Route::resource('pertanians', PertanianController::class);
+    Route::resource('tanamans', TanamanController::class);
     Route::resource('pengguna', UserController::class)->names('pengguna');
 });
 
 Route::middleware(['auth', 'role:user|admin'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('user.home');
-    Route::resource('tanamans', TanamanController::class);
     Route::resource('Penanamans', PenanamanController::class);
     Route::resource('pemeliharaans', PemeliharaanController::class);
     Route::resource('pemanenans', PemanenanController::class);

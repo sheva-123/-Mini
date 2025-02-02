@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_pertanian');
             $table->string('lokasi_pertanian');
             $table->string('luas_lahan');
+            $table->foreignId('tanaman_id')->constrained('tanamans');
             $table->timestamps();
         });
     }

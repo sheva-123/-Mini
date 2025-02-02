@@ -30,7 +30,7 @@
                                         <div class="relative">
                                             <img id="avatar-preview"
                                                 class="w-24 h-24 rounded-full object-cover border-2 border-gray-300 mx-auto"
-                                                src="{{ asset('images/default-avatar.png') }}"
+                                                src="{{ asset('storage/images/default-avatar.png') }}"
                                                 alt="Avatar Preview">
                                             <label for="avatar" class="absolute bottom-0 right-0 bg-blue-500 text-white rounded-full p-1 cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">

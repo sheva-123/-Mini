@@ -71,7 +71,6 @@
         </div>
     </div>
 
-
     <div id="modalverifikasi" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
             <h2 class="text-xl font-bold mb-4">Verifikasi Pengguna</h2>

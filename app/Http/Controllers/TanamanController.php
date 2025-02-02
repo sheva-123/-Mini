@@ -14,7 +14,7 @@ class TanamanController extends Controller
     public function index()
     {
         $tanamans = Tanaman::all();
-        return view('petani.tanamans.index', compact('tanamans'));
+        return view('admin.tanamans.index', compact('tanamans'));
     }
 
     /**
@@ -22,7 +22,7 @@ class TanamanController extends Controller
      */
     public function create()
     {
-        return view('petani.tanamans.create');
+        return view('admin.tanamans.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class TanamanController extends Controller
      */
     public function edit(Tanaman $tanaman)
     {
-        return view('petani.tanamans.edit', compact('tanaman'));
+        return view('admin.tanamans.edit', compact('tanaman'));
     }
 
     /**
