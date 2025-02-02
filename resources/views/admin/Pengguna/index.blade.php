@@ -17,6 +17,7 @@
             </form>
 
             <!-- Filter by Lahan Dropdown -->
+
             <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm">
                 <option value="">Filter berdasarkan Lahan</option>
                 @foreach ($lahan as $item)
@@ -24,6 +25,7 @@
                 @endforeach
             </select>
         </div>
+
 
         <div class="flex items-center space-x-4">
             <!-- Tombol Verifikasi Data Petani -->
@@ -37,6 +39,35 @@
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Tambah Data Petani
             </button>
+
+    <form action="{{ route('pengguna.index') }}" method="GET">
+        @csrf
+        <div class="container mx-auto mt-4 pr-3 flex justify-between items-center space-x-2">
+            <div class="flex items-center space-x-2">
+                <!-- Search Input -->
+                <input type="text" id="search" placeholder="Cari pengguna..."
+                    class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
+
+                <!-- Filter by Lahan Dropdown -->
+                <select id="filterLahan" class="p-2 border border-gray-300 rounded-md shadow-sm">
+                    <option value="">Filter berdasarkan Lahan</option>
+                    @foreach ($lahan as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- Tombol Tambah Data Petani -->
+                <button type="button" onclick="openModalVerifikasi()"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Verifikasi data petani
+                </button>
+                <button type="button" onclick="openModal()"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Tambah Data Petani
+                </button>
+            </div>
         </div>
     </div>
 
