@@ -10,7 +10,13 @@
 
     <div class="container mx-auto mt-8 pr-3">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <form action="{{ route('tanamans.store') }}" method="POST">
+            <div id="loadingOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+                <div class="flex flex-col items-center">
+                    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
+                    <p class="text-white mt-4 text-lg">Sedang menyimpan...</p>
+                </div>
+            </div>
+            <form action="{{ route('tanamans.store') }}" method="POST" onsubmit="showLoading()">
                 @csrf
                 <div class="mb-4">
                     <label for="nama_tanaman" class="block text-gray-700">Nama Tanaman</label>
@@ -40,4 +46,10 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById("loadingOverlay").classList.remove("hidden");
+        }
+    </script>
 </x-app-layout>
