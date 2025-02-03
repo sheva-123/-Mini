@@ -2,20 +2,24 @@
     <header class="bg-gradient-to-r from-green-700 to-lime-500 py-6 px-8 shadow-lg rounded-lg mb-6 mt-4 mx-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-extrabold">🌿 Data Pertanian</h1>
+                <h1 class="text-3xl font-extrabold">Data Pertanian</h1>
                 <p class="text-sm mt-1">Admin | Manajemen Pertanian</p>
             </div>
         </div>
     </header>
 
     <div class="container mx-auto px-6 flex justify-between items-center">
-        <div class="flex w-2/3 gap-4">
-            <select id="filterLokasi" class="p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
+        <div class="flex w-2/2 gap-3">
+            <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full">
                 <option value="">Pilih Lokasi</option>
                 @foreach ($pertanians->unique('lokasi_pertanian') as $pertanian)
                     <option value="{{ $pertanian->lokasi_pertanian }}">{{ $pertanian->lokasi_pertanian }}</option>
                 @endforeach
             </select>
+            <!-- Dropdown icon -->
+            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                <i class="fas fa-chevron-down"></i>
+            </span>
             <input type="text" name="search" id="search" placeholder="🔍 Cari pertanian..." class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500" onkeyup="filterTable()">
         </div>
         <a href="{{ route('pertanians.create') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-800 transition-all duration-300 flex items-center gap-2" onclick="showLoading()">
