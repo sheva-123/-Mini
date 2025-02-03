@@ -22,101 +22,52 @@
                     <span class="ml-3">Dashboard</span>
                 </a>
 
-                <!-- Dropdown Menu -->
-                <div id="menuDropdownContainer" class="relative">
-                    <button
-                        onclick="toggleDropdown()"
-                        id="menuButton"
-                        class="w-full px-4 py-2 flex items-center justify-between text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
-                        <div class="flex items-center">
-                            <i class="fas fa-list"></i>
-                            <span class="ml-3">Menu</span>
-                        </div>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="menuDropdown" class="hidden mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
-                        <a href="{{ route('tanamans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-seedling"></i>
-                            <span class="ml-2">Tanaman</span>
-                        </a>
-                        <a href="{{ route('Penanamans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-hand-holding-water"></i>
-                            <span class="ml-2">Penanaman</span>
-                        </a>
-                        <a href="{{ route('pengeluarans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-wallet"></i>
-                            <span class="ml-2">Pengeluaran</span>
-                        </a>
-                        <a href="{{ route('pemeliharaans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-wallet"></i>
-                            <span class="ml-2">Pemeliharaan</span>
-                        </a>
-                        <a href="{{ route('pemanenans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-wallet"></i>
-                            <span class="ml-2">Pemanenans</span>
-                        </a>
-                        <a href="{{ route('laporans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-wallet"></i>
-                            <span class="ml-2">Laporan</span>
-                        </a>
-                    </div>
-                </div>
+                <!-- Menu Items -->
+                <a href="{{ route('Penanamans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    <i class="fas fa-hand-holding-water"></i>
+                    <span class="ml-3">Penanaman</span>
+                </a>
+
+                <a href="{{ route('pengeluarans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    <i class="fas fa-wallet"></i>
+                    <span class="ml-3">Pengeluaran</span>
+                </a>
+
+                <a href="{{ route('pemeliharaans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    <i class="fas fa-tools"></i>
+                    <span class="ml-3">Pemeliharaan</span>
+                </a>
+
+                <a href="{{ route('pemanenans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    <i class="fas fa-apple-alt"></i>
+                    <span class="ml-3">Pemanenan</span>
+                </a>
+
+                <a href="{{ route('laporans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="ml-3">Laporan</span>
+                </a>
 
                 <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}" class="px-4 py-2 flex items-center">
                     @csrf
-                    <button type="submit" onclick="logout(event)" class="flex items-center text-gray-700 hover:text-red-600">
+                    <button type="submit" onclick="logout(event)" class="flex items-center w-full text-gray-700 hover:text-red-600">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="ml-3">Logout</span>
                     </button>
                 </form>
             </div>
         </div>
-
-        {{-- <!-- Main Content -->
-        <div class="flex-1 p-6">
-            <h1 class="text-3xl font-semibold text-gray-700">Konten Utama</h1>
-        </div> --}}
     </div>
 
     <!-- Scripts -->
     <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById('menuDropdown');
-            const button = document.getElementById('menuButton');
-            const isOpen = dropdown.classList.contains('hidden');
-
-            dropdown.classList.toggle('hidden', !isOpen);
-
-            if (isOpen) {
-                button.classList.add('bg-green-100');
-                button.classList.remove('hover:bg-green-100');
-            } else {
-                button.classList.remove('bg-green-100');
-                button.classList.add('hover:bg-green-100');
-            }
-
-            localStorage.setItem('dropdownState', isOpen ? 'true' : 'false');
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const dropdown = document.getElementById('menuDropdown');
-            const button = document.getElementById('menuButton');
-            const isOpen = localStorage.getItem('dropdownState') === 'true';
-
-            if (isOpen) {
-                dropdown.classList.remove('hidden');
-                button.classList.add('bg-green-100');
-                button.classList.remove('hover:bg-green-100');
-            }
-        });
-
+        // Remove dropdown related scripts
         document.querySelectorAll('.sidebar-item').forEach(item => {
             const currentUrl = window.location.href;
             if (currentUrl.includes(item.getAttribute('href'))) {
@@ -144,6 +95,4 @@
         }
     </script>
 </body>
-    
 </html>
- 
