@@ -2,16 +2,16 @@
     <header class="bg-gradient-to-r from-green-700 to-lime-500 py-6 px-8 shadow-lg rounded-lg mb-6 mt-4 mx-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-extrabold">🌿 Data Tanaman</h1>
+                <h1 class="text-3xl font-extrabold">Data Tanaman</h1>
                 <p class="text-sm mt-1">Admin | Manajemen Tanaman</p>
             </div>
         </div>
     </header>
 
     <div class="container mx-auto px-6 flex justify-between items-center">
-        <div class="flex w-2/3 gap-4">
-            <select id="filterType" class="p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
-                <option value="all">Semua</option>
+        <div class="flex w-2/2 gap-3">
+            <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full">
+                <option value="">Pilih Jenis</option>
                 <option value="herbal">Herbal</option>
                 <option value="buah">Buah</option>
                 <option value="sayur">Sayur</option>

@@ -5,55 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Agri Management Dashboard</title>
 </head>
-<body class="bg-gray-100">
+<body class="bg-green-50">
+
     <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-white w-64 h-screen shadow-lg">
+        <div class="bg-green-700 text-white w-64 h-screen shadow-lg px-4 py-6">
+            <h2 class="text-2xl font-semibold mb-8 text-center text-white">Agri Management</h2>
 
-            <div class="mt-6 space-y-2">
+            <div class="space-y-4">
                 <a href="{{ route('admin.dashboard') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-gauge-simple-high"></i>
                     <span class="ml-3">Dashboard</span>
                 </a>
 
-                <!-- Dropdown -->
-                <div id="menuDropdownContainer" class="relative">
-                    <button
-                        onclick="toggleDropdown()"
-                        id="menuButton"
-                        class="w-full px-4 py-2 flex items-center justify-between text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
-                        <div class="flex items-center">
-                            <i class="fas fa-list"></i>
-                            <span class="ml-3">Menu</span>
-                        </div>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="menuDropdown" class="hidden mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
-                        <a href="{{ route('pertanians.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-house-chimney-window"></i>
-                            <span class="ml-2">Pertanian</span>
-                        </a>
-                        <a href="{{ route('pengguna.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-user"></i>
-                            <span class="ml-2">Pengguna</span>
-                        </a>
-                        <a href="{{ route('tanamans.index') }}"
-                            class="menu-item sidebar-item block px-4 py-2 text-gray-700 hover:bg-green-100 hover:text-green-600">
-                            <i class="fas fa-leaf"></i>
-                            <span class="ml-2">Tanaman</span>
-                        </a>
+                <a href="{{ route('pertanians.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
+                    <i class="fas fa-house-chimney-window"></i>
+                    <span class="ml-3">Pertanian</span>
+                </a>
 
-                    </div>
-                </div>
+                <a href="{{ route('pengguna.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
+                    <i class="fas fa-user"></i>
+                    <span class="ml-3">Pengguna</span>
+                </a>
+
+                <a href="{{ route('tanamans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
+                    <i class="fas fa-leaf"></i>
+                    <span class="ml-3">Tanaman</span>
+                </a>
 
                 <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}" class="px-4 py-2 flex items-center">
                     @csrf
-                    <button type="submit" onclick="logout(event)" class="flex items-center text-gray-700 hover:text-red-600">
+                    <button type="submit" onclick="logout(event)" class="flex items-center text-white hover:text-red-500">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="ml-3">Logout</span>
                     </button>
@@ -62,54 +51,17 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-6">
-            <h1 class="text-3xl font-semibold text-gray-700"></h1>
-        </div>
+        
     </div>
 
     <!-- Scripts -->
     <script>
-        // Function to toggle the dropdown visibility and store its state in localStorage
-        function toggleDropdown() {
-            const dropdown = document.getElementById('menuDropdown');
-            const button = document.getElementById('menuButton');
-            const isOpen = dropdown.classList.contains('hidden');
-
-            // Toggle dropdown visibility
-            dropdown.classList.toggle('hidden', !isOpen);
-
-            // Change button style or icon based on dropdown state
-            if (isOpen) {
-                button.classList.add('bg-green-100');
-                button.classList.remove('hover:bg-green-100');
-            } else {
-                button.classList.remove('bg-green-100');
-                button.classList.add('hover:bg-green-100');
-            }
-
-            // Store the state of the dropdown
-            localStorage.setItem('dropdownState', isOpen ? 'true' : 'false');
-        }
-
-        // Set initial dropdown state based on localStorage
-        document.addEventListener("DOMContentLoaded", function() {
-            const dropdown = document.getElementById('menuDropdown');
-            const button = document.getElementById('menuButton');
-            const isOpen = localStorage.getItem('dropdownState') === 'true';
-
-            if (isOpen) {
-                dropdown.classList.remove('hidden');
-                button.classList.add('bg-green-100');
-                button.classList.remove('hover:bg-green-100');
-            }
-        });
-
         // Add event listener to handle the active state of sidebar items
         document.querySelectorAll('.sidebar-item').forEach(item => {
             const currentUrl = window.location.href;
             if (currentUrl.includes(item.getAttribute('href'))) {
-                item.classList.add('bg-green-200');
-                item.classList.remove('hover:bg-green-100');
+                item.classList.add('bg-green-600');
+                item.classList.remove('hover:bg-green-600');
             }
         });
 
@@ -132,5 +84,6 @@
             });
         }
     </script>
+
 </body>
 </html>
