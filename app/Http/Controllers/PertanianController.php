@@ -12,8 +12,13 @@ class PertanianController extends Controller
 
     public function index()
     {
-        $pertanians = Pertanian::all();
-        $tanaman = Tanaman::all();
+        $search = request()->input('search');
+        if($search){
+            $pertanians = Pertanian::where('nama_pertanian', 'like', '%'. $search . '%')->get();
+        }else{
+            $pertanians = Pertanian::all();
+            $tanaman = Tanaman::all();
+        }
         return view('admin.pertanians.index', compact('pertanians', 'tanaman'));
     }
 

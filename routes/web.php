@@ -33,12 +33,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/pengguna/search', [UserController::class, 'search'])->name('pengguna.search');
+    // Route::get('/pengguna/search', [UserController::class, 'search'])->name('pengguna.search');
     Route::get('/pengguna/{id}', [UserController::class, 'verifikasi'])->name('pengguna.verifikasi');
     Route::get('/pengguna/filter', [UserController::class], 'filter')->name('pengguna.filter');
     Route::resource('pertanians', PertanianController::class);
     Route::resource('tanamans', TanamanController::class);
-    Route::resource('pengguna', UserController::class)->names('pengguna');
+    Route::resource('pengguna', UserController::class);
 });
 
 Route::middleware(['auth', 'role:user|admin'])->group(function () {

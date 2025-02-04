@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout>
     <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
         <div class="container mx-auto flex justify-between items-center">
             <div>
@@ -117,4 +117,4 @@
             modal.classList.add('hidden');
         }
     </script>
-</x-app-layout>
+</x-app-layout> --}}

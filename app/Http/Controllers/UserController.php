@@ -11,11 +11,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::wherehas('roles', function ($query) {
-            $query->where('name', 'user');
-        })
-        ->with('pertanian')
-        ->get();
+
+        $search = request()->input('search');
+        if ($search) {
+            $users = User::where('name', 'like', '%' . $search . '%')->get();
+        } else {
+            $users = User::wherehas('roles', function ($query) {
+                $query->where('name', 'user');
+            })
+            ->with('pertanian')
+            ->get();
+        }
 
         $lahan = Pertanian::whereDoesntHave('users')->get();
 
@@ -65,28 +71,28 @@ class UserController extends Controller
                         ->with('success', 'Berhasil Menambah Lahan Ke Petani');
     }
 
-    public function search(Request $request)
-    {
-        $request->validate([
-            'keyword' => ['required', 'string', 'max:255']
-        ]);
+    // public function search(Request $request)
+    // {
+    //     $request->validate([
+    //         'keyword' => ['required', 'string', 'max:255']
+    //     ]);
 
-        $keyword = $request->keyword;
+    //     $keyword = $request->keyword;
 
-        $users = User::where('name', 'like', "%$keyword%")
-                            ->orWhere('email', 'like', "%$keyword%")
-                            ->paginate(3);
+    //     $users = User::where('name', 'like', "%$keyword%")
+    //                         ->orWhere('email', 'like', "%$keyword%")
+    //                         ->paginate(3);
 
-        $lahan = Pertanian::whereDoesntHave('users')->get();
+    //     $lahan = Pertanian::whereDoesntHave('users')->get();
 
-        $addUsers = User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'admin');
-        })
-            ->doesntHave('pertanian')
-            ->get();
+    //     $addUsers = User::whereDoesntHave('roles', function ($query) {
+    //         $query->where('name', 'admin');
+    //     })
+    //         ->doesntHave('pertanian')
+    //         ->get();
 
-        return view('admin.pengguna.search', compact('users', 'lahan', 'addUsers'));
-    }
+    //     return view('admin.pengguna.search', compact('users', 'lahan', 'addUsers'));
+    // }
 
     public function filter(Request $request)
     {
@@ -114,7 +120,7 @@ class UserController extends Controller
             })
                 ->doesntHave('pertanian')
                 ->get();
-            
+
             $userSudah = User::whereHas('roles', function ($query) {
                 $query->where('name', 'user');
             })

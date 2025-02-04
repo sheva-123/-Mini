@@ -13,7 +13,12 @@ class TanamanController extends Controller
      */
     public function index()
     {
-        $tanamans = Tanaman::all();
+        $search = request()->input('search');
+        if ($search) {
+            $tanamans = Tanaman::where('nama_tanaman', 'like', '%' . $search . '%')->get();
+        } else {
+            $tanamans = Tanaman::all();
+        }
         return view('admin.tanamans.index', compact('tanamans'));
     }
 
@@ -104,4 +109,3 @@ class TanamanController extends Controller
         }
     }
 }
-

@@ -16,7 +16,11 @@
                 <option value="buah">Buah</option>
                 <option value="sayur">Sayur</option>
             </select>
-            <input type="text" name="search" id="search" placeholder="🔍 Cari tanaman..." class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500" onkeyup="filterTable()">
+            <form action="{{ route('tanamans.index') }}" method="GET" class="flex gap-2 w-full">
+                <input type="text" name="search" placeholder="🔍 Cari tanaman..."
+                value="{{ request()->get('search') }}"
+                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
+            </form>
         </div>
         <a href="{{ route('tanamans.create') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-800 transition-all duration-300 flex items-center gap-2">
             ➕ Tambah Tanaman
