@@ -19,8 +19,9 @@
             </form>
 
             <!-- Search Input (Now Second) -->
-            <form action="{{ route('pengguna.search') }}" method="GET" class="flex gap-2 w-full">
-                <input type="text" name="keyword" id="search" placeholder="🔍 Cari pengguna..."
+            <form action="{{ route('pengguna.index') }}" method="GET" class="flex gap-2 w-full">
+                <input type="text" name="search" placeholder="🔍 Cari pengguna..."
+                value="{{ request()->get('search') }}"
                     class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
             </form>
         </div>
