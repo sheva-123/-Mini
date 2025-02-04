@@ -27,7 +27,10 @@ class UserController extends Controller
 
         $userVerif = User::doesntHave('roles')->get();
 
-        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers', 'userVerif'));
+        $belum = 0;
+        $sudah = 1;
+
+        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers', 'userVerif', 'belum', 'sudah'));
     }
 
     public function verifikasi($id)
@@ -83,5 +86,42 @@ class UserController extends Controller
             ->get();
 
         return view('admin.pengguna.search', compact('users', 'lahan', 'addUsers'));
+    }
+
+    public function filter(Request $request)
+    {
+        if(empty($request)) {
+            $lahan = Pertanian::whereDoesntHave('users')->get();
+
+            $addUsers = User::whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+            })
+                ->doesntHave('pertanian')
+                ->get();
+
+            $userBelum = User::whereHas('roles', function ($query) {
+                $query->where('name', 'user');
+            })
+                ->doesntHave('pertanian')
+                ->get();
+
+            return view('admin.pengguna.filter', compact('userBelum', 'lahan', 'addUsers'));
+        } else {
+            $lahan = Pertanian::whereDoesntHave('users')->get();
+
+            $addUsers = User::whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+            })
+                ->doesntHave('pertanian')
+                ->get();
+            
+            $userSudah = User::whereHas('roles', function ($query) {
+                $query->where('name', 'user');
+            })
+                ->whereHas('pertanian')
+                ->get();
+
+            return view('admin.pengguna.filter', compact('userSudah', 'lahan', 'addUsers'));
+        }
     }
 }

@@ -12,7 +12,8 @@
         <div class="flex items-center space-x-2">
             <!-- Search Input -->
             <form action="{{ route('pengguna.search') }}" method="GET">
-                <input type="text" name="keyword" id="search" placeholder="Cari pengguna..." class="p-2 border border-gray-300 rounded-md shadow-sm w-1/2">
+                <input type="text" name="keyword" id="search" placeholder="Cari pengguna..."
+                    class="p-2 border border-gray-300 rounded-md shadow-sm w-45">
             </form>
 
             <!-- Filter by Lahan Dropdown -->

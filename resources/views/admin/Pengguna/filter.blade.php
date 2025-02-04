@@ -10,13 +10,12 @@
 
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="flex w-2/2 gap-3">
-            <form action="{{ route('pengguna.filter') }}" method="get">
-                <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full" onchange="this.form.submit()">
-                    <option value="">Pilih Status Lahan</option>
-                    <option value="{{ $belum }}">Belum Diberikan</option>
-                    <option value="{{ $sudah }}">Sudah Diberikan</option>
-                </select>
-            </form>
+
+            <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full">
+                <option value="">Pilih Status Lahan</option>
+                <option value="{{ $belum }}">Belum Diberikan</option>
+                <option value="{{ $sudah }}">Sudah Diberikan</option>
+            </select>
 
             <!-- Search Input (Now Second) -->
             <form action="{{ route('pengguna.search') }}" method="GET" class="flex gap-2 w-full">
@@ -123,7 +122,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @if (!is_null($userBelum))
+                        @foreach ($userBelum as $user)
                         <tr class="bg-white border-b hover:bg-green-50 transition-all">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4 font-semibold">{{ $user->name }}</td>
@@ -141,6 +141,30 @@
                             </td>
                         </tr>
                         @endforeach
+                        @elseif (!is_null($userSudah))
+                            @foreach ($userSudah as $user)
+                                <tr class="bg-white border-b hover:bg-green-50 transition-all">
+                                    <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                    <td class="px-6 py-4 font-semibold">{{ $user->name }}</td>
+                                    <td class="px-6 py-4">{{ $user->email }}</td>
+                                    <td class="px-6 py-4">
+                                        @if ($user->pertanian->isEmpty())
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                            Belum Diberikan
+                                        </span>
+                                        @else
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                            Sudah Diberikan
+                                        </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                        Data Tidak Ditemukan
+                        @endif
+
+                        @i
                     </tbody>
                 </table>
             </div>
