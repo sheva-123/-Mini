@@ -1,5 +1,5 @@
 <x-app-layout>
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
+    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mx-4">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Tambah Tanaman</h1>
@@ -8,7 +8,7 @@
         </div>
     </header>
 
-    <div class="container mx-auto mt-8 pr-3">
+    <div class="container mx-auto mt-8 px-4">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
             <div id="loadingOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
                 <div class="flex flex-col items-center">
@@ -37,8 +37,8 @@
                         <option value="lokasi_4">Lokasi 4</option>
                     </select>
                 </div>
-                
-                
+
+
 
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-gray-700">Deskripsi (Opsional)</label>

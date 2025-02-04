@@ -11,7 +11,7 @@
 
     <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-green-700 text-white w-64 h-full fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4">
+        <div class="bg-green-700 text-white w-64 h-[530px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4">
             <h2 class="text-2xl font-semibold mb-8 text-center text-white">Agri Management</h2>
 
             <div class="space-y-4">
