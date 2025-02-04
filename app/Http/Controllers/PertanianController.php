@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pertanian;
+use App\Models\Tanaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,7 +13,8 @@ class PertanianController extends Controller
     public function index()
     {
         $pertanians = Pertanian::all();
-        return view('admin.pertanians.index', compact('pertanians'));
+        $tanaman = Tanaman::all();
+        return view('admin.pertanians.index', compact('pertanians', 'tanaman'));
     }
 
 
@@ -28,6 +30,7 @@ class PertanianController extends Controller
             'nama_pertanian' => 'required|string|max:255',
             'lokasi_pertanian' => 'required|string|max:255',
             'luas_lahan' => 'required|numeric',
+            'tanaman_id' => 'required|exists:tanamans,id'
         ]);
 
             if($validator->fails()) {
