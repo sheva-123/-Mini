@@ -24,6 +24,12 @@
                            class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
                            placeholder="Masukkan luas lahan" required>
                 </div>
+                 <div class="flex flex-col">
+                    <label for="lokasi_pertanian" class="text-lg font-medium text-gray-700">Tanaman</label>
+                    <input type="text" name="lokasi_pertanian" id="lokasi_pertanian"
+                           class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
+                           placeholder="Masukkan lokasi pertanian" required>
+                </div>
 
                 <!-- Tombol Simpan -->
                 <div class="text-center mt-8">
