@@ -26,13 +26,19 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
-                    <label for="jenis" class="block text-gray-700">Jenis Tanaman</label>
-                    <input type="text" name="jenis" id="jenis" class="p-2 border border-gray-300 rounded-md w-full" required>
-                    @error('jenis')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                <div class="flex flex-col">
+                    <label for="lokasi_pertanian" class="text-lg font-medium text-gray-700">Tanaman</label>
+                    <select name="lokasi_pertanian" id="lokasi_pertanian"
+                            class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg" required>
+                        <option value="" disabled selected>Pilih lokasi pertanian</option>
+                        <option value="lokasi_1">Lokasi 1</option>
+                        <option value="lokasi_2">Lokasi 2</option>
+                        <option value="lokasi_3">Lokasi 3</option>
+                        <option value="lokasi_4">Lokasi 4</option>
+                    </select>
                 </div>
+                
+                
 
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-gray-700">Deskripsi (Opsional)</label>
