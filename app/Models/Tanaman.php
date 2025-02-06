@@ -17,4 +17,8 @@ class Tanaman extends Model
     public function penanaman(){
         return $this->hasMany(Penanaman::class);
     }
+
+    public function pertanian(){
+        return $this->hasMany(Pertanian::class);
+    }
 }

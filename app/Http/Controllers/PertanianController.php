@@ -16,16 +16,16 @@ class PertanianController extends Controller
         if($search){
             $pertanians = Pertanian::where('nama_pertanian', 'like', '%'. $search . '%')->get();
         }else{
-            $pertanians = Pertanian::all();
-            $tanaman = Tanaman::all();
+            $pertanians = Pertanian::with('tanamans')->get();
         }
-        return view('admin.pertanians.index', compact('pertanians', 'tanaman'));
+        return view('admin.pertanians.index', compact('pertanians'));
     }
 
 
     public function create()
     {
-        return view('admin.pertanians.create');
+        $tanamans = Tanaman::all();
+        return view('admin.pertanians.create', compact('tanamans'));
     }
 
 
