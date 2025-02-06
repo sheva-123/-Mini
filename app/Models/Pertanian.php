@@ -10,6 +10,7 @@ class Pertanian extends Model
         'nama_pertanian',
         'lokasi_pertanian',
         'luas_lahan',
+        'tanaman_id',
     ];
 
     public function penanaman()
@@ -29,7 +30,12 @@ class Pertanian extends Model
 
     public function laporan()
     {
-        return $this->belongsTo(Laporan::class);
+        return $this->hasMany(Laporan::class);
+    }
+
+    public function tanamans()
+    {
+        return $this->belongsTo(Tanaman::class);
     }
 
     public function users()

@@ -10,7 +10,8 @@
 
     <div class="container mx-auto mt-8 px-4">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <div id="loadingOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+            <div id="loadingOverlay"
+                class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
                 <div class="flex flex-col items-center">
                     <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
                     <p class="text-white mt-4 text-lg">Sedang menyimpan...</p>
@@ -18,37 +19,39 @@
             </div>
             <form action="{{ route('tanamans.store') }}" method="POST" onsubmit="showLoading()">
                 @csrf
-                <div class="mb-4">
-                    <label for="nama_tanaman" class="block text-gray-700">Nama Tanaman</label>
-                    <input type="text" name="nama_tanaman" id="nama_tanaman" class="p-2 border border-gray-300 rounded-md w-full" required>
-                    @error('nama_tanaman')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-
                 <div class="flex flex-col">
-                    <label for="lokasi_pertanian" class="text-lg font-medium text-gray-700">Tanaman</label>
-                    <select name="lokasi_pertanian" id="lokasi_pertanian"
-                            class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg" required>
-                        <option value="" disabled selected>Pilih lokasi pertanian</option>
-                        <option value="lokasi_1">Lokasi 1</option>
-                        <option value="lokasi_2">Lokasi 2</option>
-                        <option value="lokasi_3">Lokasi 3</option>
-                        <option value="lokasi_4">Lokasi 4</option>
-                    </select>
+                    <label for="nama_tanaman" class="text-lg font-medium text-gray-700">Nama Tanaman</label>
+                    <input type="text" name="nama_tanaman" id="nama_tanaman"
+                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
+                        placeholder="Masukkan nama tanaman" required>
+                </div>
+                <div class="flex flex-col">
+                    <label for="jenis" class="text-lg font-medium text-gray-700">Jenis</label>
+                    <input type="text" name="jenis" id="jenis"
+                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
+                        placeholder="Masukkan jenis tanaman" required>
+                </div>
+                <div class="flex flex-col">
+                    <label for="deskripsi" class="text-lg font-medium text-gray-700">Deskripsi</label>
+                    <textarea textarea rows="4"
+                        class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#98c01d]"
+                        type="text" name="deskripsi" required> </textarea>
                 </div>
 
 
-
-                <div class="mb-4">
-                    <label for="deskripsi" class="block text-gray-700">Deskripsi (Opsional)</label>
-                    <textarea name="deskripsi" id="deskripsi" rows="3" class="p-2 border border-gray-300 rounded-md w-full"></textarea>
-                    @error('deskripsi')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                <div class="text-center mt-8">
+                    <button type="submit"
+                        class="w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
+                        Simpan Data
+                    </button>
                 </div>
 
-                <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg">Simpan</button>
+                <div class="text-center mt-4">
+                    <a href="{{ route('tanamans.index') }}"
+                        class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
+                        Kembali
+                    </a>
+                </div>
             </form>
         </div>
     </div>
