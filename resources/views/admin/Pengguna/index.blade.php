@@ -10,18 +10,19 @@
 
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="flex w-2/2 gap-3">
-            <form action="{{ route('pengguna.filter') }}" method="get">
-                <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full" onchange="this.form.submit()">
-                    <option value="">Pilih Status Lahan</option>
-                    <option value="{{ $belum }}">Belum Diberikan</option>
-                    <option value="{{ $sudah }}">Sudah Diberikan</option>
+            <form action="{{ route('pengguna.index') }}" method="get">
+                <select name="filter" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full" onchange="this.form.submit()">
+                    <option value="">Semua</option>
+                    <option value="false">Belum Diberikan</option>
+                    <option value="true">Sudah Diberikan</option>
+                    <option value="verif">Verifikasi</option>
                 </select>
             </form>
 
             <!-- Search Input (Now Second) -->
             <form action="{{ route('pengguna.index') }}" method="GET" class="flex gap-2 w-full">
                 <input type="text" name="search" placeholder="🔍 Cari pengguna..."
-                value="{{ request()->get('search') }}"
+                    value="{{ request()->get('search') }}"
                     class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
             </form>
         </div>
@@ -121,6 +122,7 @@
                             <th class="px-6 py-3">Nama Pengguna</th>
                             <th class="px-6 py-3">Email</th>
                             <th class="px-6 py-3">Lahan</th>
+                            <th class="px-6 py-3">Verifikasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,6 +140,15 @@
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                                     Sudah Diberikan
                                 </span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                @if ($user->roles->isEmpty())
+                                <form action="{{ route('pengguna.verifikasi', $us->id) }}" gmethod="GET" enctype="multipart/form-data">
+                                    @csrf
+                                    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Verifikasi</button>
+                                </form>
+
                                 @endif
                             </td>
                         </tr>
