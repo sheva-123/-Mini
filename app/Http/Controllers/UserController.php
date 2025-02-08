@@ -16,11 +16,30 @@ class UserController extends Controller
         if ($search) {
             $users = User::where('name', 'like', '%' . $search . '%')->get();
         } else {
-            $users = User::wherehas('roles', function ($query) {
-                $query->where('name', 'user');
+            $users = User::whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
             })
             ->with('pertanian')
             ->get();
+        }
+
+        $filter = request()->input('filter');
+        if($filter) {
+            if($filter === 'false') {
+                $users = User::whereDoesntHave('roles', function ($query) {
+                    $query->where('name', 'admin');
+                })
+                ->where('status_lahan', false)
+                ->get();
+            } elseif ($filter === 'true') {
+                $users = User::whereDoesntHave('roles', function ($query) {
+                    $query->where('name', 'admin');
+                })
+                ->where('status_lahan', true)
+                ->get();
+            } elseif ($filter === 'verif') {
+                $users = User::doesntHave('roles')->get();
+            }
         }
 
         $lahan = Pertanian::whereDoesntHave('users')->get();
@@ -28,7 +47,7 @@ class UserController extends Controller
         $addUsers = User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })
-        ->doesntHave('pertanian')
+        ->where('status_lahan', false)
         ->get();
 
         $userVerif = User::doesntHave('roles')->get();
@@ -66,6 +85,13 @@ class UserController extends Controller
             'user_id' => (int) $request->input('user_id'),
             'pertanian_id' => (int) $request->input('pertanian_id'),
         ]);
+
+        $userid = $request->user_id;
+        $user = user::findOrFail($userid);
+        $user->status_lahan = true;
+        $user->save();
+
+
 
         return redirect()->route('pengguna.index')
                         ->with('success', 'Berhasil Menambah Lahan Ke Petani');
