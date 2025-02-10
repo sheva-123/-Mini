@@ -26,10 +26,22 @@
                         placeholder="Masukkan nama tanaman" required>
                 </div>
                 <div class="flex flex-col">
-                    <label for="jenis" class="text-lg font-medium text-gray-700">Jenis</label>
-                    <input type="text" name="jenis" id="jenis"
+                    <label for="umur_panen" class="text-lg font-medium text-gray-700">Umur Panen Tanaman</label>
+                    <input type="number" name="umur_panen" id="umur_panen"
                         class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
-                        placeholder="Masukkan jenis tanaman" required>
+                        placeholder="Masukkan Hari Umur Panen" required>
+                </div>
+                <div class="flex flex-col">
+                    <label for="jenis" class="text-lg font-medium text-gray-700">Jenis</label>
+                    <select name="jenis" id="jenis"
+                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
+                        required>
+                        <option value="" disabled selected>Pilih jenis tanaman</option>
+                        @foreach (\App\Models\Tanaman::getJenisOptions() as $jenis)
+                        <option value="{{ $jenis }}">{{ $jenis }}</option>
+                        @endforeach
+
+                    </select>
                 </div>
                 <div class="flex flex-col">
                     <label for="deskripsi" class="text-lg font-medium text-gray-700">Deskripsi</label>

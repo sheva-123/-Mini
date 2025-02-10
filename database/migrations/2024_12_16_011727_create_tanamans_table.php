@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('tanamans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_tanaman');
-            $table->string('jenis');
+            $table->enum('jenis', ['Sayuran', 'Buah', 'Herbal']);
+            $table->integer('umur_panen');
             $table->string('deskripsi')->nullable();
             $table->timestamps();
         });

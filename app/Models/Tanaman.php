@@ -12,7 +12,13 @@ class Tanaman extends Model
         'nama_tanaman',
         'jenis',
         'deskripsi',
+        'umur_panen',
     ];
+
+    public static function getJenisOptions()
+    {
+        return ['Sayuran', 'Buah', 'Herbal'];
+    }
 
     public function penanaman(){
         return $this->hasMany(Penanaman::class);

@@ -10,15 +10,17 @@
 
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="flex w-2/2 gap-3">
-            <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full">
-                <option value="">Pilih Jenis</option>
-                <option value="herbal">Herbal</option>
-                <option value="buah">Buah</option>
-                <option value="sayur">Sayur</option>
-            </select>
+            <form action="{{ route('tanamans.index') }}" method="get">
+                <select id="filterLokasi" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full">
+                    <option value="">Pilih Jenis</option>
+                    <option value="Herbal">Herbal</option>
+                    <option value="Buah">Buah</option>
+                    <option value="Sayuran">Sayuran</option>
+                </select>
+            </form>
             <form action="{{ route('tanamans.index') }}" method="GET" class="flex gap-2 w-full">
                 <input type="text" name="search" placeholder="🔍 Cari tanaman..."
-                value="{{ request()->get('search') }}"
+                    value="{{ request()->get('search') }}"
                     class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
             </form>
         </div>
@@ -48,20 +50,20 @@
                 </thead>
                 <tbody>
                     @foreach ($tanamans as $tanaman)
-                        <tr class="border-b hover:bg-green-50 transition-all">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4 font-semibold">{{ $tanaman->nama_tanaman }}</td>
-                            <td class="px-6 py-4">{{ $tanaman->jenis }}</td>
-                            <td class="px-6 py-4">{{ $tanaman->deskripsi }}</td>
-                            <td class="px-6 py-4 flex justify-center gap-4">
-                                <a href="{{ route('tanamans.edit', $tanaman->id) }}" class="text-yellow-500 hover:text-yellow-700 text-lg">✏️</a>
-                                <form action="{{ route('tanamans.destroy', $tanaman->id) }}" method="POST" onsubmit="showLoading()">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 text-lg" onclick="return confirm('Yakin ingin menghapus?')">🗑️</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr class="border-b hover:bg-green-50 transition-all">
+                        <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 font-semibold">{{ $tanaman->nama_tanaman }}</td>
+                        <td class="px-6 py-4">{{ $tanaman->jenis }}</td>
+                        <td class="px-6 py-4">{{ $tanaman->deskripsi }}</td>
+                        <td class="px-6 py-4 flex justify-center gap-4">
+                            <a href="{{ route('tanamans.edit', $tanaman->id) }}" class="text-yellow-500 hover:text-yellow-700 text-lg">✏️</a>
+                            <form action="{{ route('tanamans.destroy', $tanaman->id) }}" method="POST" onsubmit="showLoading()">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-700 text-lg" onclick="return confirm('Yakin ingin menghapus?')">🗑️</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
