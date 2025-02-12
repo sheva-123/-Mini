@@ -57,7 +57,7 @@
                             <td class="px-6 py-4 font-semibold">{{ $pertanian->nama_pertanian }}</td>
                             <td class="px-6 py-4 lokasi">{{ $pertanian->lokasi_pertanian }}</td>
                             <td class="px-6 py-4 luas">{{ $pertanian->luas_lahan }}</td>
-                            <td class="px-6 py-4 tanaman">{{ $pertanian->tanaman_id }}</td>
+                            <td class="px-6 py-4 tanaman">{{ $pertanian->tanamans->nama_tanaman }}</td>
                             <td class="px-6 py-4 flex justify-center gap-4">
                                 <a href="{{ route('pertanians.edit', $pertanian->id) }}" class="text-yellow-500 hover:text-yellow-700 text-lg">✏️</a>
                                 <form action="{{ route('pertanians.destroy', $pertanian->id) }}" method="POST" onsubmit="showLoading()">

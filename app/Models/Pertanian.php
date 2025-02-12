@@ -35,7 +35,7 @@ class Pertanian extends Model
 
     public function tanamans()
     {
-        return $this->belongsTo(Tanaman::class);
+        return $this->belongsTo(Tanaman::class, 'tanaman_id');
     }
 
     public function users()

@@ -23,7 +23,7 @@
                 </a>
 
                 <!-- Menu Items -->
-                <a href="{{ route('Penanamans.index') }}"
+                <a href="{{ route('penanamans.index') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
                     <i class="fas fa-hand-holding-water"></i>
                     <span class="ml-3">Penanaman</span>

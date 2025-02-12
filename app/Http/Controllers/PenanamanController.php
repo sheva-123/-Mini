@@ -6,6 +6,7 @@ use App\Models\Penanaman;
 use App\Models\Pertanian;
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PenanamanController extends Controller
@@ -14,21 +15,28 @@ class PenanamanController extends Controller
      * Menampilkan daftar penanaman.
      */
     public function index(Request $request)
-{
-    $query = Penanaman::with('tanaman', 'pertanian');
+    {
+        $user = Auth::user();
 
-    if ($request->has('search')) {
-        $search = $request->search;
-        $query->whereHas('pertanian', function ($q) use ($search) {
-            $q->where('nama_pertanian', 'like', "%$search%");
-        })->orWhereHas('tanaman', function ($q) use ($search) {
-            $q->where('nama_tanaman', 'like', "%$search%");
-        })->orWhere('tanggal_tanam', 'like', "%$search%");
+        $query = Penanaman::whereHas('pertanian', function ($query) use ($user) {
+                    $query->whereHas('users', function ($q) use ($user) {
+                        $q->where('users.id', $user->id);
+                    });
+                });
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->whereHas('pertanian', function ($q) use ($search) {
+                $q->where('nama_pertanian', 'like', "%$search%");
+            })->orWhereHas('tanaman', function ($q) use ($search) {
+                $q->where('nama_tanaman', 'like', "%$search%");
+            })->orWhere('tanggal_tanam', 'like', "%$search%");
+        }
+
+        $penanamans = $query->get();
+            
+        return view('petani.penanamans.index', compact('penanamans'));
     }
-
-    $penanamans = $query->get();
-    return view('petani.penanamans.index', compact('penanamans'));
-}
 
 
     /**
@@ -36,8 +44,16 @@ class PenanamanController extends Controller
      */
     public function create()
     {
-        $pertanians = Pertanian::all();
-        $tanamans = Tanaman::all();
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->get();
+        $tanamans = Tanaman::whereHas('pertanian', function ($query) use ($user) {
+            $query->whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        })->get();
         return view('petani.penanamans.create', compact('pertanians', 'tanamans'));
     }
 
@@ -54,6 +70,8 @@ class PenanamanController extends Controller
         ],[
             'tanggal_tanam.date' => 'Date Required',
         ]);
+
+        // dd($validator);
 
             if($validator->fails()) {
                 $error = $validator->errors();
@@ -96,12 +114,12 @@ class PenanamanController extends Controller
             'tanggal_tanam.date' => 'Date Required',
         ]);
 
-            if ($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('penanamans.index')
-                ->withErrors($validator)
-                    ->withInput();
-            }
+            // if ($validator->fails()) {
+            //     $error = $validator->errors();
+            //     return redirect()->route('penanamans.index')
+            //     ->withErrors($validator)
+            //         ->withInput();
+            // }
 
         $penanaman->update([
             'pertanian_id' => $request->pertanian_id,
