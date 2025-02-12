@@ -33,7 +33,7 @@
         </div>
     
         <!-- Tambah Button -->
-        <a href="{{ route('Penanamans.create') }}"
+        <a href="{{ route('penanamans.create') }}"
             class="inline-flex items-center bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-700 transition-transform transform hover:scale-95 w-full md:w-auto justify-center">
             Tambah
         </a>
@@ -46,9 +46,9 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Pertanian</th>
                             <th scope="col" class="px-6 py-3">Tanaman</th>
                             <th scope="col" class="px-6 py-3">Tanggal Tanam</th>
+                            <th scope="col" class="px-6 py-3">Perkiraan Panen</th>
                             <th scope="col" class="px-6 py-3">Jumlah Tanaman</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
@@ -57,12 +57,12 @@
                         @foreach ($penanamans as $p)
                             <tr class="bg-white border-b hover:bg-gray-100">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $p->pertanian->nama_pertanian }}</td>
                                 <td class="px-6 py-4">{{ $p->tanaman->nama_tanaman }}</td>
                                 <td class="px-6 py-4">{{ $p->tanggal_tanam }} </td>
+                                <td class="px-6 py-4">{{ $p->expired }} </td>
                                 <td class="px-6 py-4">{{ $p->jumlah_tanaman }} </td>
                                 <td class="px-6 py-4 flex items-center space-x-4">
-                                    <a href="{{ route('Penanamans.edit', $p) }}"
+                                    <a href="{{ route('penanamans.edit', $p) }}"
                                         class="text-yellow-500 hover:text-yellow-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -70,7 +70,7 @@
                                                 d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('Penanamans.destroy', $p) }}" method="POST">
+                                    <form action="{{ route('penanamans.destroy', $p) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"

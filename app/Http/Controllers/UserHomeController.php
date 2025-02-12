@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Petani_Lahan;
 
 class UserHomeController extends Controller
 {
     public function index()
     {
-        return view('petani.dashboard');
+        $user = auth()->user();
+
+        $lahan = $user->pertanian;
+
+        return view('petani.dashboard', compact('lahan'));
     }
 }

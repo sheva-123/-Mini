@@ -11,7 +11,7 @@
     </header>
     <div class="container mx-auto mt-8 pr-3">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <form action="{{ route('Penanamans.store') }}" method="POST">
+            <form action="{{ route('penanamans.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
