@@ -6,6 +6,7 @@ use App\Models\Pemeliharaan;
 use App\Models\Penanaman;
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PemeliharaanController extends Controller
@@ -35,8 +36,12 @@ class PemeliharaanController extends Controller
      */
     public function create()
     {
-        $pertanian = Pertanian::all();
-        return view('petani.pemeliharaans.create', compact('pertanian'));
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->get();
+        return view('petani.pemeliharaans.create', compact('pertanians'));
     }
 
     /**
@@ -44,8 +49,9 @@ class PemeliharaanController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'penanaman_id' => 'required|exists:penanamans,id',
+            'pertanian_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|string|max:255',

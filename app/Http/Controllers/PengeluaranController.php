@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengeluaran;
 use App\Models\Pertanian; // Model Pertanian
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PengeluaranController extends Controller
@@ -21,8 +22,14 @@ class PengeluaranController extends Controller
     // Menampilkan form tambah pengeluaran
     public function create()
     {
-        $pertanian = Pertanian::all();
-        return view('petani.pengeluarans.create', compact('pertanian'));
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->get();
+
+        // dd($pertanians);
+        return view('petani.pengeluarans.create', compact('pertanians'));
 
     }
 
@@ -30,7 +37,7 @@ class PengeluaranController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama_pertanian' => 'required|exists:pertanians,id',
+            'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pengeluaran' => 'required|date',
             'jenis_pengeluaran' => 'required|string',
             'biaya' => 'required|numeric',
@@ -46,7 +53,7 @@ class PengeluaranController extends Controller
             }
 
         Pengeluaran::create([
-            'pertanian_id' => $request->nama_pertanian,
+            'pertanian_id' => $request->pertanian_id,
             'tanggal_pengeluaran' => $request->tanggal_pengeluaran,
             'jenis_pengeluaran' => $request->jenis_pengeluaran,
             'biaya' => $request->biaya,
