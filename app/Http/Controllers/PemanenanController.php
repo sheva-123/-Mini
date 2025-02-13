@@ -6,6 +6,7 @@ use App\Models\Pemanenan;
 use App\Models\Penanaman; // Model Penanaman
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PemanenanController extends Controller
@@ -32,29 +33,42 @@ class PemanenanController extends Controller
     // Menampilkan form tambah pemanenan
     public function create()
     {
-        $pertanians = Pertanian::all(); // Ambil semua penanaman
+        $user = Auth::user();
+
+        $pertanians= Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })
+        ->with('tanamans')
+        ->get();
         return view('petani.pemanenans.create', compact('pertanians'));
     }
 
     // Menyimpan pemanenan
     public function store(Request $request)
     {
+        // dd($request->toArray());
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
+            'tanaman_id' => 'required|exists:tanamans,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
         ],[
             'tanggal_pemanenan.date' => 'Date Lajwdnd'
         ]);
 
-            if($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('pemanenans.index')
-                                ->withErrors($validator)
-                                ->withInput();
-            }
+            // if($validator->fails()) {
+            //     $error = $validator->errors();
+            //     return redirect()->route('pemanenans.index')
+            //                     ->withErrors($validator)
+            //                     ->withInput();
+            // }
 
-        Pemanenan::create($request->all());
+        Pemanenan::create([
+            'pertanian_id' => $request->pertanian_id,
+            'tanaman_id' => $request->tanaman_id,
+            'tanggal_pemanenan' => $request->tanggal_pemanenan,
+            'jumlah_hasil' => $request->jumlah_hasil,
+        ]);
 
         return redirect()->route('pemanenans.index')->with('success', 'Data berhasil ditambahkan');
     }

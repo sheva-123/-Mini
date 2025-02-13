@@ -46,7 +46,6 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Pertanian</th>
                             <th scope="col" class="px-6 py-3">Tanggal Pengeluaran</th>
                             <th scope="col" class="px-6 py-3">Jenis Pengeluaran</th>
                             <th scope="col" class="px-6 py-3">Biaya</th>
@@ -57,7 +56,6 @@
                         @foreach ($pengeluarans as $pengeluaran)
                             <tr class="bg-white border-b hover:bg-gray-100">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $pengeluaran->pertanian->nama }}</td>
                                 <td class="px-6 py-4">{{ $pengeluaran->tanggal_pengeluaran }}</td>
                                 <td class="px-6 py-4">{{ $pengeluaran->jenis_pengeluaran }} </td>
                                 <td class="px-6 py-4">{{ $pengeluaran->biaya }} </td>
@@ -70,7 +68,7 @@
                                                 d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('pengeluarans.destroy', $pertanian->id) }}" method="POST">
+                                    <form action="{{ route('pengeluarans.destroy', $pengeluaran->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"
