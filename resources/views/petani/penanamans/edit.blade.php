@@ -11,7 +11,7 @@
     </header>
     <div class="container mx-auto mt-8 pr-3">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <form action="{{ route('Penanamans.update', $penanaman) }}" method="POST">
+            <form action="{{ route('penanamans.update', $penanaman) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">

@@ -22,6 +22,7 @@ class AdminDashboardController extends Controller
         $activityLogs = ActivityLog::with('user')
                         ->with('user')
                         ->latest()
+                        ->take(5)
                         ->get();
 
         return view('admin.dashboard', compact('users', 'lahan', 'tanaman', 'activityLogs'));

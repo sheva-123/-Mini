@@ -7,10 +7,12 @@ use App\Models\Penanaman; // Model Penanaman
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\LogsActivity;
 use Illuminate\Support\Facades\Validator;
 
 class PemanenanController extends Controller
 {
+    use LogsActivity;
     // Menampilkan daftar pemanenan dengan fitur pencarian
     public function index(Request $request)
     {
@@ -46,6 +48,8 @@ class PemanenanController extends Controller
     // Menyimpan pemanenan
     public function store(Request $request)
     {
+        $id = Auth::user();
+
         // dd($request->toArray());
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
@@ -70,13 +74,21 @@ class PemanenanController extends Controller
             'jumlah_hasil' => $request->jumlah_hasil,
         ]);
 
+        $this->logActivity('Menambah Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menambahkan data pemanenan pada lahan miliknya.');
+
         return redirect()->route('pemanenans.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     // Menampilkan form edit pemanenan
     public function edit(Pemanenan $pemanenan)
     {
-        $pertanians = Pertanian::all();
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })
+        ->with('tanamans')
+        ->get();
         $penanaman = Penanaman::all();
         return view('petani.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
     }
@@ -84,6 +96,8 @@ class PemanenanController extends Controller
     // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
+        $id = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
@@ -101,13 +115,19 @@ class PemanenanController extends Controller
 
         $pemanenan->update($request->all());
 
+        $this->logActivity('Edit Pemanenan', 'Pengguna dengan nama ' . $id->name . ' mengedit data pemenenan lahan miliknya.');
+
         return redirect()->route('pemanenans.index');
     }
 
     // Menghapus pemanenan
     public function destroy(Pemanenan $pemanenan)
     {
+        $id = Auth::user();
+
         $pemanenan->delete();
+
+        $this->logActivity('Menghapus Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemanenan lahan miliknya.');
         return redirect()->route('pemanenans.index');
     }
 }

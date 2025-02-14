@@ -29,6 +29,17 @@
             </div>
 
             <div class="mb-4">
+                <label for="tanaman_id" class="block text-sm font-medium text-gray-700">Tanaman</label>
+                <select name="tanaman_id" id="tanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
+                    @foreach ($penanaman as $penam)
+                        <option value="{{ $penam->tanaman->id }}">
+                            {{ $penam->tanaman->nama_tanaman }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-4">
                 <label for="tanggal_pemanenan" class="block text-sm font-medium text-gray-700">Tanggal Pemanenan</label>
                 <input type="date" name="tanggal_pemanenan" id="tanggal_pemanenan" value="{{ $pemanenan->tanggal_pemanenan }}"
                        class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
