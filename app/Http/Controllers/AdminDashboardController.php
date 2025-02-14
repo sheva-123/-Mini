@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pertanian;
 use App\Models\Tanaman;
+use App\Models\ActivityLog;
 
 class AdminDashboardController extends Controller
 {
@@ -18,6 +19,11 @@ class AdminDashboardController extends Controller
         $lahan = Pertanian::all();
         $tanaman = Tanaman::all();
 
-        return view('admin.dashboard', compact('users', 'lahan', 'tanaman'));
+        $activityLogs = ActivityLog::with('user')
+                        ->with('user')
+                        ->latest()
+                        ->get();
+
+        return view('admin.dashboard', compact('users', 'lahan', 'tanaman', 'activityLogs'));
     }
 }

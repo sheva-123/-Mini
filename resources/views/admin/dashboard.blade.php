@@ -40,33 +40,27 @@
 
             <!-- Tabel Data -->
             <div class="mt-6 bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-lg font-bold text-gray-800">Recent Orders</h3>
+                <h3 class="text-lg font-bold text-gray-800">Aktifitas Pengguna</h3>
                 <div class="mt-4 overflow-x-auto">
                     <table class="min-w-full bg-white border">
                         <thead class="bg-gray-200">
                             <tr>
-                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Order ID</th>
-                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Customer</th>
-                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Amount</th>
-                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Status</th>
-                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Date</th>
+                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nama Pengguna</th>
+                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Aktifitas</th>
+                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Deskripsi</th>
+                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($activityLogs as $log)
                             <tr class="border-t">
-                                <td class="px-4 py-2 text-sm text-gray-700">#12345</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">John Doe</td>
-                                <td class="px-4 py-2 text-sm text-green-500">$123.45</td>
-                                <td class="px-4 py-2 text-sm text-yellow-500">Pending</td>
-                                <td class="px-4 py-2 text-sm text-gray-500">Jan 20, 2025</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ $log->user->name }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700">{{ $log->activity }}</td>
+                                <td class="px-4 py-2 text-sm text-green-500">{{ $log->description }}</td>
+                                <td class="px-4 py-2 text-sm text-yellow-500">{{ $log->created_at }}</td>
                             </tr>
-                            <tr class="border-t">
-                                <td class="px-4 py-2 text-sm text-gray-700">#12346</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">Jane Smith</td>
-                                <td class="px-4 py-2 text-sm text-green-500">$456.78</td>
-                                <td class="px-4 py-2 text-sm text-green-500">Completed</td>
-                                <td class="px-4 py-2 text-sm text-gray-500">Jan 18, 2025</td>
-                            </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>

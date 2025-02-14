@@ -7,10 +7,12 @@ use App\Models\Pertanian;
 use App\Models\Tanaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\LogsActivity;
 use Illuminate\Support\Facades\Validator;
 
 class PenanamanController extends Controller
 {
+    use LogsActivity;
     /**
      * Menampilkan daftar penanaman.
      */
@@ -62,6 +64,8 @@ class PenanamanController extends Controller
      */
     public function store(Request $request)
     {
+        $id = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
@@ -87,6 +91,8 @@ class PenanamanController extends Controller
             'jumlah_tanaman' => $request->jumlah_tanaman,
         ]);
 
+        $this->logActivity('Menanam Tanaman', 'User dengan nama ' . $id->name . ' menanam tanaman di lahan yang dikelolanya.');
+
         return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dibuat.');
     }
 
@@ -105,6 +111,8 @@ class PenanamanController extends Controller
      */
     public function update(Request $request, Penanaman $penanaman)
     {
+        $id = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
@@ -128,6 +136,8 @@ class PenanamanController extends Controller
             'jumlah_tanaman' => $request->jumlah_tanaman,
         ]);
 
+        $this->logActivity('Edit Tanaman Yang Di Tananm', 'User dengan nama ' . $id->name . ' mengedit tanaman yang ditanam pada lahan yang dikelolanya.');
+
         return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil diupdate.');
     }
 
@@ -137,7 +147,10 @@ class PenanamanController extends Controller
     public function destroy(Penanaman $penanaman)
     {
         try {
+            $id = Auth::user();
             $penanaman->delete();
+
+            $this->logActivity('Menghapus Tanaman Yang Di Tanam', 'User dengan nama' . $id->name . 'menghapus tanaman yang ditanam pada lahan yang dikelolanya');
             return redirect()->route('penanamans.index')
             ->with('success', 'Penanaman Delete Success');
         } catch (\Exception $e) {
