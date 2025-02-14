@@ -10,45 +10,46 @@
     <title>Dashboard</title>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-green-50">
     <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-white w-64 h-screen shadow-lg">
-            <div class="mt-6 space-y-2">
-                <!-- Dashboard -->
+        <div <div class="bg-green-700 text-white w-64 h-[530px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4">
+            <h2 class="text-2xl font-semibold mb-8 text-center text-white">Agri Management</h2>
+            <!-- Dashboard -->
+            <div class="space-y-4">
                 <a href="{{ route('user.home') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-gauge-simple-high"></i>
                     <span class="ml-3">Dashboard</span>
                 </a>
 
                 <!-- Menu Items -->
                 <a href="{{ route('penanamans.index') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-hand-holding-water"></i>
                     <span class="ml-3">Penanaman</span>
                 </a>
 
                 <a href="{{ route('pengeluarans.index') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-wallet"></i>
                     <span class="ml-3">Pengeluaran</span>
                 </a>
 
                 <a href="{{ route('pemeliharaans.index') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-tools"></i>
                     <span class="ml-3">Pemeliharaan</span>
                 </a>
 
                 <a href="{{ route('pemanenans.index') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-apple-alt"></i>
                     <span class="ml-3">Pemanenan</span>
                 </a>
 
                 <a href="{{ route('laporans.index') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-gray-700 hover:bg-green-100 hover:text-green-600 transition">
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-file-alt"></i>
                     <span class="ml-3">Laporan</span>
                 </a>
@@ -56,7 +57,8 @@
                 <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}" class="px-4 py-2 flex items-center">
                     @csrf
-                    <button type="submit" onclick="logout(event)" class="flex items-center w-full text-gray-700 hover:text-red-600">
+                    <button type="submit" onclick="logout(event)"
+                        class="flex items-center text-white hover:text-red-500">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="ml-3">Logout</span>
                     </button>
@@ -65,14 +67,15 @@
         </div>
     </div>
 
+
     <!-- Scripts -->
     <script>
         // Remove dropdown related scripts
         document.querySelectorAll('.sidebar-item').forEach(item => {
             const currentUrl = window.location.href;
             if (currentUrl.includes(item.getAttribute('href'))) {
-                item.classList.add('bg-green-200');
-                item.classList.remove('hover:bg-green-100');
+                item.classList.add('bg-green-600');
+                item.classList.remove('hover:bg-green-600');
             }
         });
 
@@ -95,4 +98,5 @@
         }
     </script>
 </body>
+
 </html>
