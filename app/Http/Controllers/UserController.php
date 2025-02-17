@@ -25,15 +25,15 @@ class UserController extends Controller
 
         $filter = request()->input('filter');
         if($filter) {
-            if ($filter === 'false') {
-                $users = User::whereHas('roles', function ($query) {
-                    $query->where('name', 'user');
+            if($filter === 'false') {
+                $users = User::whereDoesntHave('roles', function ($query) {
+                    $query->where('name', 'admin');
                 })
                 ->where('status_lahan', false)
                 ->get();
             } elseif ($filter === 'true') {
-                $users = User::whereHas('roles', function ($query) {
-                    $query->where('name', 'user');
+                $users = User::whereDoesntHave('roles', function ($query) {
+                    $query->where('name', 'admin');
                 })
                 ->where('status_lahan', true)
                 ->get();
@@ -47,7 +47,7 @@ class UserController extends Controller
         $addUsers = User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })
-        ->doesntHave('pertanian')
+        ->where('status_lahan', false)
         ->get();
 
         $userVerif = User::doesntHave('roles')->get();
@@ -90,6 +90,8 @@ class UserController extends Controller
         $user = user::findOrFail($userid);
         $user->status_lahan = true;
         $user->save();
+
+
 
         return redirect()->route('pengguna.index')
                         ->with('success', 'Berhasil Menambah Lahan Ke Petani');

@@ -12,9 +12,9 @@
         <div class="flex w-2/2 gap-3">
             <form action="{{ route('pengguna.index') }}" method="get">
                 <select name="filter" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full" onchange="this.form.submit()">
-                    <option value="all">Semua</option>
-                    <option value="false">Belum Diberikan Lahan</option>
-                    <option value="true">Sudah Diberikan Lahan</option>
+                    <option value="">Semua</option>
+                    <option value="false">Belum Diberikan</option>
+                    <option value="true">Sudah Diberikan</option>
                     <option value="verif">Verifikasi</option>
                 </select>
             </form>
