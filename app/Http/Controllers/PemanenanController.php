@@ -74,7 +74,7 @@ class PemanenanController extends Controller
             'jumlah_hasil' => $request->jumlah_hasil,
         ]);
 
-        $this->logActivity('Menambah Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menambahkan data pemanenan pada lahan miliknya.');
+        $this->logActivity('Tambah Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menambahkan data pemanenan pada lahan miliknya.');
 
         return redirect()->route('pemanenans.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -127,7 +127,7 @@ class PemanenanController extends Controller
 
         $pemanenan->delete();
 
-        $this->logActivity('Menghapus Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemanenan lahan miliknya.');
+        $this->logActivity('Hapus Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemanenan lahan miliknya.');
         return redirect()->route('pemanenans.index');
     }
 }
