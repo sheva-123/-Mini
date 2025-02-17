@@ -57,7 +57,7 @@
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $log->user->name }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $log->activity }}</td>
                                 <td class="px-4 py-2 text-sm text-green-500">{{ $log->description }}</td>
-                                <td class="px-4 py-2 text-sm text-yellow-500">{{ $log->created_at }}</td>
+                                <td class="px-4 py-2 text-sm text-yellow-500">{{ $log->created_at->diffForHumans() }}</td>
                             </tr>
                             @endforeach
 
