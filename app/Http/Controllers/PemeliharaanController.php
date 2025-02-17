@@ -7,10 +7,12 @@ use App\Models\Penanaman;
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\LogsActivity;
 use Illuminate\Support\Facades\Validator;
 
 class PemeliharaanController extends Controller
 {
+    use LogsActivity;
     /**
      * Display a listing of the resource.
      */
@@ -49,6 +51,7 @@ class PemeliharaanController extends Controller
      */
     public function store(Request $request)
     {
+        $id = Auth::user();
 
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:penanamans,id',
@@ -69,16 +72,23 @@ class PemeliharaanController extends Controller
 
         Pemeliharaan::create($request->all());
 
+        $this->logActivity('Menambah Pemeliharaan', 'Pengguna dengan nama ' . $id->name . 'menambahkan pemeliharaan pada lahan yang dikelolanya');
+
         return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil ditambahkan.');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pemeliharaan $pemeliharaans)
+    public function edit(Pemeliharaan $pemeliharaan)
     {
-        $penanaman = Penanaman::all();
-        return view('petani.pemeliharaans.edit', compact('pemeliharaans', 'penanamans'));
+        // dd($pemeliharaan);
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->get();
+        return view('petani.pemeliharaans.edit', compact('pertanians', 'pemeliharaan'));
     }
 
     /**
@@ -86,6 +96,8 @@ class PemeliharaanController extends Controller
      */
     public function update(Request $request, Pemeliharaan $pemeliharaans)
     {
+        $id = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
@@ -105,6 +117,8 @@ class PemeliharaanController extends Controller
 
         $pemeliharaans->update($request->all());
 
+        $this->logActivity('Edit Pemeliharaan', 'Pengguna dengan nama' . $id->name . 'mengedit data pemeliharaan lahan yang dikelolanya');
+
         return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil diperbarui.');
     }
 
@@ -113,8 +127,11 @@ class PemeliharaanController extends Controller
      */
     public function destroy(Pemeliharaan $pemeliharaans)
     {
+        $id = Auth::user();
+
         $pemeliharaans->delete();
 
+        $this->logActivity('Menghapus Pemeliharaan', 'Pengguna dengan nama ' . $id->name . 'menghapus data pemeliharaan pada lahannya.');
         return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil dihapus.');
     }
 }
