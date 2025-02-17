@@ -1,7 +1,7 @@
 @extends('layouts.userapp')
 
 @section('content')
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
+    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Data Penanaman</h1>
@@ -9,20 +9,20 @@
             </div>
         </div>
     </header>
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-3 pt-2 gap-3">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-4 pt-2 gap-3">
         <!-- Search and Filter Section -->
         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <!-- Search Input -->
             <div class="relative flex-1">
-                <input type="text" 
-                       placeholder="Cari..." 
+                <input type="text"
+                       placeholder="Cari..."
                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none shadow-sm"
                 >
                 <svg class="absolute right-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </div>
-    
+
             <!-- Filter Dropdown -->
             <select class="w-full sm:w-40 px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none shadow-sm hover:bg-gray-50">
                 <option value="">Semua Kategori</option>
@@ -31,14 +31,14 @@
                 <option>Kategori 3</option>
             </select>
         </div>
-    
+
         <!-- Tambah Button -->
-        <a href="{{ route('Penanamans.create') }}"
+        <a href="{{ route('penanamans.create') }}"
             class="inline-flex items-center bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-700 transition-transform transform hover:scale-95 w-full md:w-auto justify-center">
             Tambah
         </a>
     </div>
-    <div class="container mx-auto mt-8 pr-3">
+    <div class="container mx-auto mt-4 px-4">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
 
             <div class="relative overflow-x-auto">
@@ -46,9 +46,9 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Pertanian</th>
                             <th scope="col" class="px-6 py-3">Tanaman</th>
                             <th scope="col" class="px-6 py-3">Tanggal Tanam</th>
+                            <th scope="col" class="px-6 py-3">Perkiraan Panen</th>
                             <th scope="col" class="px-6 py-3">Jumlah Tanaman</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
@@ -57,12 +57,12 @@
                         @foreach ($penanamans as $p)
                             <tr class="bg-white border-b hover:bg-gray-100">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $p->pertanian->nama_pertanian }}</td>
                                 <td class="px-6 py-4">{{ $p->tanaman->nama_tanaman }}</td>
                                 <td class="px-6 py-4">{{ $p->tanggal_tanam }} </td>
+                                <td class="px-6 py-4">{{ $p->expired }} </td>
                                 <td class="px-6 py-4">{{ $p->jumlah_tanaman }} </td>
                                 <td class="px-6 py-4 flex items-center space-x-4">
-                                    <a href="{{ route('Penanamans.edit', $p) }}"
+                                    <a href="{{ route('penanamans.edit', $p) }}"
                                         class="text-yellow-500 hover:text-yellow-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -70,7 +70,7 @@
                                                 d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('Penanamans.destroy', $p) }}" method="POST">
+                                    <form action="{{ route('penanamans.destroy', $p) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"

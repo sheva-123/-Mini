@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pertanian extends Model
 {
+    protected $table = 'pertanians';
+
     protected $fillable = [
         'nama_pertanian',
         'lokasi_pertanian',
@@ -35,7 +37,7 @@ class Pertanian extends Model
 
     public function tanamans()
     {
-        return $this->belongsTo(Tanaman::class);
+        return $this->belongsTo(Tanaman::class, 'tanaman_id');
     }
 
     public function users()

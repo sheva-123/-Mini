@@ -1,22 +1,21 @@
 @extends('layouts.userapp')
 
 @section('content')
-<header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
+<header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold text-white">Tambah Data Pengeluaran</h1>
     </div>
 </header>
 
-<div class="container mx-auto mt-8 pr-3">
+<div class="container mx-auto mt-4 px-4">
     <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
         <form action="{{ route('pengeluarans.store') }}" method="POST">
             @csrf
             <div class="mb-4">
                 <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
                 <select name="pertanian_id" id="pertanian_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                    <option value="" disabled selected>Pilih Pertanian</option>
                     @foreach ($pertanians as $pertanian)
-                        <option value="{{ $pertanian->id }}">{{ $pertanian->nama }}</option>
+                    <option value="{{ $pertanian->id }}">{{ $pertanian->nama_pertanian }}</option>
                     @endforeach
                 </select>
             </div>

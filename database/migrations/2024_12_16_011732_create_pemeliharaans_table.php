@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('pertanian_id')->constrained()->onDelete('cascade');
             $table->date('tanggal_pemeliharaan');
             $table->string('jenis_pemeliharaan');
-            $table->string('biaya');
+            $table->integer('biaya');
             $table->timestamps();
         });
     }

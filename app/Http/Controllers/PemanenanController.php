@@ -6,10 +6,13 @@ use App\Models\Pemanenan;
 use App\Models\Penanaman; // Model Penanaman
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Traits\LogsActivity;
 use Illuminate\Support\Facades\Validator;
 
 class PemanenanController extends Controller
 {
+    use LogsActivity;
     // Menampilkan daftar pemanenan dengan fitur pencarian
     public function index(Request $request)
     {
@@ -32,29 +35,46 @@ class PemanenanController extends Controller
     // Menampilkan form tambah pemanenan
     public function create()
     {
-        $pertanians = Pertanian::all(); // Ambil semua penanaman
+        $user = Auth::user();
+
+        $pertanians= Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })
+        ->with('tanamans')
+        ->get();
         return view('petani.pemanenans.create', compact('pertanians'));
     }
 
     // Menyimpan pemanenan
     public function store(Request $request)
     {
+        $id = Auth::user();
+
+        // dd($request->toArray());
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
+            'tanaman_id' => 'required|exists:tanamans,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer',
         ],[
             'tanggal_pemanenan.date' => 'Date Lajwdnd'
         ]);
 
-            if($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('pemanenans.index')
-                                ->withErrors($validator)
-                                ->withInput();
-            }
+            // if($validator->fails()) {
+            //     $error = $validator->errors();
+            //     return redirect()->route('pemanenans.index')
+            //                     ->withErrors($validator)
+            //                     ->withInput();
+            // }
 
-        Pemanenan::create($request->all());
+        Pemanenan::create([
+            'pertanian_id' => $request->pertanian_id,
+            'tanaman_id' => $request->tanaman_id,
+            'tanggal_pemanenan' => $request->tanggal_pemanenan,
+            'jumlah_hasil' => $request->jumlah_hasil,
+        ]);
+
+        $this->logActivity('Menambah Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menambahkan data pemanenan pada lahan miliknya.');
 
         return redirect()->route('pemanenans.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -62,7 +82,13 @@ class PemanenanController extends Controller
     // Menampilkan form edit pemanenan
     public function edit(Pemanenan $pemanenan)
     {
-        $pertanians = Pertanian::all();
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })
+        ->with('tanamans')
+        ->get();
         $penanaman = Penanaman::all();
         return view('petani.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
     }
@@ -70,6 +96,8 @@ class PemanenanController extends Controller
     // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
+        $id = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
@@ -87,13 +115,19 @@ class PemanenanController extends Controller
 
         $pemanenan->update($request->all());
 
+        $this->logActivity('Edit Pemanenan', 'Pengguna dengan nama ' . $id->name . ' mengedit data pemenenan lahan miliknya.');
+
         return redirect()->route('pemanenans.index');
     }
 
     // Menghapus pemanenan
     public function destroy(Pemanenan $pemanenan)
     {
+        $id = Auth::user();
+
         $pemanenan->delete();
+
+        $this->logActivity('Menghapus Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemanenan lahan miliknya.');
         return redirect()->route('pemanenans.index');
     }
 }

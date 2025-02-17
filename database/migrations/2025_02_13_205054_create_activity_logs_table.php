@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tanamans', function (Blueprint $table) {
+        Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_tanaman');
-            $table->enum('jenis', ['Sayuran', 'Buah', 'Herbal']);
-            $table->integer('umur_panen');
-            $table->string('deskripsi')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('activity');
+            $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tanamans');
+        Schema::dropIfExists('activity_logs');
     }
 };

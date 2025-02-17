@@ -10,7 +10,7 @@ class Pemanenan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pertanian_id', 'tanggal_pemanenan', 'jumlah_hasil'];
+    protected $fillable = ['pertanian_id', 'tanaman_id', 'tanggal_pemanenan', 'jumlah_hasil'];
 
     public function pertanian()
     {

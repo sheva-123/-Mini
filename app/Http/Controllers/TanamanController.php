@@ -27,7 +27,9 @@ class TanamanController extends Controller
      */
     public function create()
     {
-        return view('admin.tanamans.create');
+        $tanaman = Tanaman::getJenisOptions();
+
+        return view('admin.tanamans.create', compact('tanaman'));
     }
 
     /**
@@ -37,8 +39,9 @@ class TanamanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_tanaman' => 'required|string|max:255',
-            'jenis' => 'required|string|max:255',
+            'jenis' => 'required|',
             'deskripsi' => 'nullable|string',
+            'umur_panen' => 'required|integer|max:365'
         ], [
             'nama_tanaman.required' => 'Nama tanaman wajib diisi.',
             'jenis.required' => 'Jenis tanaman wajib diisi.',
