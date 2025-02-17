@@ -21,6 +21,12 @@ class PertanianController extends Controller
         return view('admin.pertanians.index', compact('pertanians'));
     }
 
+    public function show(Pertanian $pertanian)
+    {
+        $pertanians = Pertanian::with('tanamans')->get();
+        return view('admin.pertanians.show', compact('pertanian'));
+    }
+
 
     public function create()
     {
@@ -64,11 +70,6 @@ class PertanianController extends Controller
         //         'luas_lahan' => $pertanian->luas_lahan ?? '',
         //         'created_at' => $pertanian->created_at ? $pertanian->created_at->format('Y-m-d H:i:s') : '',
         //     ]);
-        //
-    }
-
-    public function show(Pertanian $pertanian)
-    {
         //
     }
 
