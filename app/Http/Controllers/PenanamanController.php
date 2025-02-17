@@ -91,7 +91,7 @@ class PenanamanController extends Controller
             'jumlah_tanaman' => $request->jumlah_tanaman,
         ]);
 
-        $this->logActivity('Menanam Tanaman', 'Pengguna dengan nama ' . $id->name . ' menanam tanaman di lahan yang dikelolanya.');
+        $this->logActivity('Tambah Penanaman', 'Pengguna dengan nama ' . $id->name . ' menanam tanaman di lahan yang dikelolanya.');
 
         return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil dibuat.');
     }
@@ -136,7 +136,7 @@ class PenanamanController extends Controller
             'jumlah_tanaman' => $request->jumlah_tanaman,
         ]);
 
-        $this->logActivity('Edit Tanaman Yang Di Tananm', 'Pengguna dengan nama ' . $id->name . ' mengedit tanaman yang ditanam pada lahan yang dikelolanya.');
+        $this->logActivity('Edit Penanaman', 'Pengguna dengan nama ' . $id->name . ' mengedit tanaman yang ditanam pada lahan yang dikelolanya.');
 
         return redirect()->route('penanamans.index')->with('success', 'Penanaman berhasil diupdate.');
     }
@@ -150,7 +150,7 @@ class PenanamanController extends Controller
             $id = Auth::user();
             $penanaman->delete();
 
-            $this->logActivity('Menghapus Tanaman Yang Ditanam', 'Pengguna dengan nama' . $id->name . 'menghapus tanaman yang ditanam pada lahan yang dikelolanya');
+            $this->logActivity('Hapus Penanaman', 'Pengguna dengan nama' . $id->name . 'menghapus tanaman yang ditanam pada lahan yang dikelolanya');
             return redirect()->route('penanamans.index')
             ->with('success', 'Penanaman Delete Success');
         } catch (\Exception $e) {

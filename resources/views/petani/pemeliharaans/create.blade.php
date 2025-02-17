@@ -1,7 +1,7 @@
 @extends('layouts.userapp')
 
 @section('content')
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mr-3">
+    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-white">Tambah Pemeliharaan</h1>
@@ -9,7 +9,7 @@
             </div>
         </div>
     </header>
-    <div class="container mx-auto mt-8 pr-3">
+    <div class="container mx-auto mt-4 px-4">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
             <form action="{{ route('pemeliharaans.store') }}" method="POST">
                 @csrf
