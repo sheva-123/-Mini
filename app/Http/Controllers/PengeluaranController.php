@@ -63,7 +63,7 @@ class PengeluaranController extends Controller
             'biaya' => $request->biaya,
         ]);
 
-        $this->logActivity('Menambah Pengeluaran', 'Pengguna dengan nama'. $id->name . 'menambahkan pengeleuaran pada lahan yang dikelolanya');
+        $this->logActivity('Menambah Pengeluaran', 'Pengguna dengan nama'. $id->name . ' menambahkan pengeleuaran pada lahan yang dikelolanya');
 
         return redirect()->route('pengeluarans.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -107,7 +107,7 @@ class PengeluaranController extends Controller
             'biaya' => $request->biaya,
         ]);
 
-        $this->logActivity('Edit Pengeluaran', 'Penggunana dengan nama ' . $id->name . 'mengedit pengeluaran lahan yang dikelolanya');
+        $this->logActivity('Edit Pengeluaran', 'Penggunana dengan nama ' . $id->name . ' mengedit pengeluaran lahan yang dikelolanya');
 
         return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil diperbarui.');
     }
@@ -118,7 +118,7 @@ class PengeluaranController extends Controller
         $id = Auth::user();
 
         $pengeluaran->delete();
-        $this->logActivity('Hapus Pengeluaran', 'Pengguna dengan nama ' . $id->name . 'menghapus data pengeluaran lahan yang dikelolanya');
+        $this->logActivity('Hapus Pengeluaran', 'Pengguna dengan nama ' . $id->name . ' menghapus data pengeluaran lahan yang dikelolanya');
         return redirect()->route('pengeluarans.index')->with('success', 'Pengeluaran berhasil dihapus.');
     }
 }

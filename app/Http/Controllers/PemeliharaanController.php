@@ -72,7 +72,7 @@ class PemeliharaanController extends Controller
 
         Pemeliharaan::create($request->all());
 
-        $this->logActivity('Tambah Pemeliharaan', 'Pengguna dengan nama ' . $id->name . 'menambahkan pemeliharaan pada lahan yang dikelolanya');
+        $this->logActivity('Tambah Pemeliharaan', 'Pengguna dengan nama ' . $id->name . ' menambahkan pemeliharaan pada lahan yang dikelolanya');
 
         return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil ditambahkan.');
     }
@@ -117,7 +117,7 @@ class PemeliharaanController extends Controller
 
         $pemeliharaans->update($request->all());
 
-        $this->logActivity('Edit Pemeliharaan', 'Pengguna dengan nama' . $id->name . 'mengedit data pemeliharaan lahan yang dikelolanya');
+        $this->logActivity('Edit Pemeliharaan', 'Pengguna dengan nama' . $id->name . ' mengedit data pemeliharaan lahan yang dikelolanya');
 
         return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil diperbarui.');
     }
@@ -131,7 +131,7 @@ class PemeliharaanController extends Controller
 
         $pemeliharaans->delete();
 
-        $this->logActivity('Hapus Pemeliharaan', 'Pengguna dengan nama ' . $id->name . 'menghapus data pemeliharaan pada lahannya.');
+        $this->logActivity('Hapus Pemeliharaan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemeliharaan pada lahannya.');
         return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil dihapus.');
     }
 }

@@ -150,7 +150,7 @@ class PenanamanController extends Controller
             $id = Auth::user();
             $penanaman->delete();
 
-            $this->logActivity('Hapus Penanaman', 'Pengguna dengan nama' . $id->name . 'menghapus tanaman yang ditanam pada lahan yang dikelolanya');
+            $this->logActivity('Hapus Penanaman', 'Pengguna dengan nama' . $id->name . ' menghapus tanaman yang ditanam pada lahan yang dikelolanya');
             return redirect()->route('penanamans.index')
             ->with('success', 'Penanaman Delete Success');
         } catch (\Exception $e) {
