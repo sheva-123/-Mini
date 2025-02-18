@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Agri Management Dashboard</title>
 </head>
+
 <body class="bg-green-50">
 
     <div class="flex">
@@ -21,6 +23,12 @@
                     <span class="ml-3">Dashboard</span>
                 </a>
 
+                <a href="{{ route('tanamans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
+                    <i class="fas fa-leaf"></i>
+                    <span class="ml-3">Tanaman</span>
+                </a>
+
                 <a href="{{ route('pertanians.index') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-house-chimney-window"></i>
@@ -33,16 +41,12 @@
                     <span class="ml-3">Pengguna</span>
                 </a>
 
-                <a href="{{ route('tanamans.index') }}"
-                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
-                    <i class="fas fa-leaf"></i>
-                    <span class="ml-3">Tanaman</span>
-                </a>
 
                 <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}" class="px-4 py-2 flex items-center">
                     @csrf
-                    <button type="submit" onclick="logout(event)" class="flex items-center text-white hover:text-red-500">
+                    <button type="submit" onclick="logout(event)"
+                        class="flex items-center text-white hover:text-red-500">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="ml-3">Logout</span>
                     </button>
@@ -86,4 +90,5 @@
     </script>
 
 </body>
+
 </html>

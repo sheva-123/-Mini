@@ -28,11 +28,7 @@
         </div>
 
         <div class="flex items-center space-x-4">
-            <!-- Verifikasi Data Button -->
-            <button type="button" onclick="openModalVerifikasi()"
-                class="bg-green-600 hover:bg-green-800 text-white px-5 py-3 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2 text-sm">
-                ✔️ Verifikasi
-            </button>
+
 
             <!-- Add Data Button -->
             <button type="button" onclick="openModal()"
@@ -42,37 +38,7 @@
         </div>
     </div>
 
-    <!-- Modal Verifikasi -->
-    <div id="modalverifikasi" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <h2 class="text-xl font-extrabold mb-4">Verifikasi Pengguna</h2>
-            <p class="text-gray-600 mb-4">Pilih pengguna yang belum memiliki role dan membutuhkan verifikasi:</p>
-
-            <div class="mb-4 max-h-60 overflow-y-auto border border-gray-300 rounded-md p-2">
-                <ul>
-                    @foreach ($userVerif as $us)
-                    <li class="flex justify-between items-center py-2 border-b">
-                        <span class="text-gray-800">{{ $us->name }} ({{ $us->email }})</span>
-                        <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
-                            @csrf
-                            <button
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-sm">
-                                Verifikasi
-                            </button>
-                        </form>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-
-            <div class="flex justify-end">
-                <button type="button" onclick="closeModalVerifikasi()"
-                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                    Tutup
-                </button>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Modal Add User -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
@@ -122,7 +88,7 @@
                             <th class="px-6 py-3">Nama Pengguna</th>
                             <th class="px-6 py-3">Email</th>
                             <th class="px-6 py-3">Lahan</th>
-                            <th class="px-6 py-3">Verifikasi</th>
+                            <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,6 +109,7 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4">
+                                @foreach ($userVerif as $us)
                                 @if ($user->roles->isEmpty())
                                 <form action="{{ route('pengguna.verifikasi', $us->id) }}" gmethod="GET" enctype="multipart/form-data">
                                     @csrf
@@ -150,6 +117,7 @@
                                 </form>
 
                                 @endif
+                                @endforeach
                             </td>
                         </tr>
                         @endforeach
@@ -160,17 +128,7 @@
     </div>
 
     <script>
-        function openModalVerifikasi() {
-            const modal = document.getElementById('modalverifikasi');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
 
-        function closeModalVerifikasi() {
-            const modal = document.getElementById('modalverifikasi');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
 
         function openModal() {
             const modal = document.getElementById('modal');
