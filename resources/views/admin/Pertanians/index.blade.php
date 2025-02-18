@@ -59,6 +59,7 @@
                             <td class="px-6 py-4 luas">{{ $pertanian->luas_lahan }}</td>
                             <td class="px-6 py-4 tanaman">{{ $pertanian->tanamans->nama_tanaman }}</td>
                             <td class="px-6 py-4 flex justify-center gap-4">
+                                <a href="{{ route('pertanians.show', $pertanian->id) }}" class="text-blue-500 hover:text-blue-700 text-lg">🔍</a>
                                 <a href="{{ route('pertanians.edit', $pertanian->id) }}" class="text-yellow-500 hover:text-yellow-700 text-lg">✏️</a>
                                 <form action="{{ route('pertanians.destroy', $pertanian->id) }}" method="POST" onsubmit="showLoading()">
                                     @csrf
@@ -66,6 +67,7 @@
                                     <button type="submit" class="text-red-500 hover:text-red-700 text-lg" onclick="return confirm('Yakin ingin menghapus?')">🗑️</button>
                                 </form>
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>
