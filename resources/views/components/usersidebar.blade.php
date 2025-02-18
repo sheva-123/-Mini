@@ -13,9 +13,18 @@
 <body class="bg-green-50">
     <div class="flex">
         <!-- Sidebar -->
-        <div <div class="bg-green-700 text-white w-64 h-[530px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4">
+        <div class="bg-green-700 text-white w-64 h-screen fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4 overflow-y-auto">
+            <!-- Profile Section -->
+            <div class="flex items-center space-x-4 mb-6">
+                <img src="{{ auth()->user()->profile_photo_url ?? 'https://via.placeholder.com/150' }}" alt="Profile" class="w-16 h-16 rounded-full">
+                <div>
+                    <p class="text-lg font-semibold">{{ auth()->user()->name }}</p>
+                    <p class="text-sm">{{ auth()->user()->email }}</p>
+                </div>
+            </div>
+
             <h2 class="text-2xl font-semibold mb-8 text-center text-white">Agri Management</h2>
-            <!-- Dashboard -->
+            <!-- Sidebar Menu Items -->
             <div class="space-y-4">
                 <a href="{{ route('user.home') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
@@ -23,7 +32,6 @@
                     <span class="ml-3">Dashboard</span>
                 </a>
 
-                <!-- Menu Items -->
                 <a href="{{ route('penanamans.index') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-hand-holding-water"></i>
@@ -67,10 +75,9 @@
         </div>
     </div>
 
-
     <!-- Scripts -->
     <script>
-        // Remove dropdown related scripts
+        // Highlight the active sidebar item
         document.querySelectorAll('.sidebar-item').forEach(item => {
             const currentUrl = window.location.href;
             if (currentUrl.includes(item.getAttribute('href'))) {

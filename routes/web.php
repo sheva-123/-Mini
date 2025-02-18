@@ -42,7 +42,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('user.home');
-    Route::resource('penanamans', PenanamanController::class)->names('penanamans');
+    Route::resource('penanamans', PenanamanController::class);
     Route::resource('pemeliharaans', PemeliharaanController::class);
     Route::resource('pemanenans', PemanenanController::class);
     Route::resource('pengeluarans', PengeluaranController::class);

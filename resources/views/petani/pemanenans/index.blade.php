@@ -53,39 +53,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pemanenans as $pemanenan)
-                            <tr class="bg-white border-b hover:bg-gray-100">
-                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->pertanian->nama_pertanian }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->tanggal_pemanenan }}</td>
-                                <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }} </td>
-                                <td class="px-6 py-4 flex items-center space-x-4">
-                                    <a href="{{ route('pemanenans.edit', $pemanenan->id) }}"
-                                        class="text-yellow-500 hover:text-yellow-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
-                                        </svg>
-                                    </a>
-                                    <form action="{{ route('pemanenans.destroy', $pemanenan->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-700"
-                                            onclick="deleteRecord(event)">
-                                            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17"
-                                                    stroke="#ff0000" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
+                        @if ($pemanenans->count() > 0)
+                            @foreach ($pemanenans as $pemanenan)
+                                <tr class="bg-white border-b hover:bg-gray-100">
+                                    <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                    <td class="px-6 py-4">{{ $pemanenan->pertanian->nama_pertanian ?? 'Tidak diketahui' }}</td>
+                                    <td class="px-6 py-4">{{ $pemanenan->tanggal_pemanenan }}</td>
+                                    <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }} </td>
+                                    <td class="px-6 py-4 flex items-center space-x-4">
+                                        <a href="{{ route('pemanenans.edit', $pemanenan->id) }}" class="text-yellow-500 hover:text-yellow-700">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
                                             </svg>
-                                        </button>
-                                    </form>
+                                        </a>
+                                        <form action="{{ route('pemanenans.destroy', $pemanenan->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-700" onclick="deleteRecord(event)">
+                                                <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M18 6L6 6M12 6v12m6 0H6" stroke="#ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5" class="px-6 py-8 text-center">
+                                    <div class="flex flex-col items-center justify-center">
+                                        <svg class="w-24 h-24 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 14l2-2 4 4m0 0l6-6m-6 6V10M6 18V6c0-1.1.9-2 2-2h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2z" />
+                                        </svg>
+                                        <h3 class="text-xl font-semibold text-gray-600 mt-2">Tidak ada data pemanenan</h3>
+                                    </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endif
                     </tbody>
+                    
                 </table>
             </div>
         </div>
