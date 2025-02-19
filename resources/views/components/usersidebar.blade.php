@@ -13,10 +13,10 @@
 <body class="bg-green-50">
     <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-green-700 text-white w-64 h-screen fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4 overflow-y-auto">
+        <div class="bg-green-700 text-white w-64 h-[580px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4 overflow-y-auto">
             <!-- Profile Section -->
             <div class="flex items-center space-x-4 mb-6">
-                <img src="{{ auth()->user()->profile_photo_url ?? 'https://via.placeholder.com/150' }}" alt="Profile" class="w-16 h-16 rounded-full">
+                <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Profile" class="w-16 h-16 rounded-full object-cover">
                 <div>
                     <p class="text-lg font-semibold">{{ auth()->user()->name }}</p>
                     <p class="text-sm">{{ auth()->user()->email }}</p>
