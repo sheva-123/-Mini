@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    
+
 
     <!-- Modal Add User -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
@@ -110,15 +110,16 @@
                             </td>
                             <td class="px-6 py-4">
                                 @foreach ($userVerif as $us)
-                                @if ($user->roles->isEmpty())
-                                <form action="{{ route('pengguna.verifikasi', $us->id) }}" gmethod="GET" enctype="multipart/form-data">
-                                    @csrf
-                                    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Verifikasi</button>
-                                </form>
-
-                                @endif
+                                    @if ($user->roles->isEmpty())
+                                        <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Verifikasi</button>
+                                        </form>
+                                        @break {{-- Hentikan loop setelah tombol pertama --}}
+                                    @endif
                                 @endforeach
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>
