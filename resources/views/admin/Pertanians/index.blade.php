@@ -11,7 +11,7 @@
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="flex w-2/2 gap-3">
             <select id="filterLokasi"
-                class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full">
+                class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full">
                 <option value="">Pilih Lokasi</option>
                 @foreach ($pertanians->unique('lokasi_pertanian') as $pertanian)
                     <option value="{{ $pertanian->lokasi_pertanian }}">{{ $pertanian->lokasi_pertanian }}</option>
@@ -21,10 +21,20 @@
             <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
                 <i class="fas fa-chevron-down"></i>
             </span>
-            <form action="{{ route('pertanians.index') }}" method="GET" class="flex gap-2 w-full">
-                <input type="text" name="search" placeholder="🔍 Cari pertanian..."
-                    value="{{ request()->get('search') }}"
-                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
+            <div class="flex border-1 border-gray-200 rounded-md focus-within:ring-2 ring-gray-500">
+                <form action="{{ route('pertanians.index') }}" method="GET" class="flex gap-2 w-full">
+                    <input type="text" name="search" placeholder=" Cari pertanian..."
+                        value="{{ request()->get('search') }}"
+                        class="w-[150px] p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500">
+                    <button type="submit" class="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block">
+                        <svg class="w-4 h-4 fill-current" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+            </div>
             </form>
         </div>
         <a href="{{ route('pertanians.create') }}"
@@ -65,8 +75,8 @@
                             <td class="px-6 py-4 flex justify-center gap-4">
                                 <a href="{{ route('pertanians.show', $pertanian->id) }}"
                                     class="text-blue-500 hover:text-blue-700">
-                                    <svg fill="none" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" stroke="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg" class="h-6 w-6">
+                                    <svg fill="none" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
+                                        stroke="currentColor" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
                                         </g>
