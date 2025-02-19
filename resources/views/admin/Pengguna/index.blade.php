@@ -11,7 +11,9 @@
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="flex w-2/2 gap-3">
             <form action="{{ route('pengguna.index') }}" method="get">
-                <select name="filter" class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 appearance-none w-full" onchange="this.form.submit()">
+                <select name="filter"
+                    class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full"
+                    onchange="this.form.submit()">
                     <option value="">Semua</option>
                     <option value="false">Belum Diberikan</option>
                     <option value="true">Sudah Diberikan</option>
@@ -20,28 +22,36 @@
             </form>
 
             <!-- Search Input (Now Second) -->
-            <form action="{{ route('pengguna.index') }}" method="GET" class="flex gap-2 w-full">
-                <input type="text" name="search" placeholder="🔍 Cari pengguna..."
-                    value="{{ request()->get('search') }}"
-                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
+            <div class="flex border-1 border-gray-200 rounded-md focus-within:ring-2 ring-gray-500">
+                <form action="{{ route('pengguna.index') }}" method="GET" class="flex gap-2 w-full">
+                    <input type="text" name="search" placeholder=" Cari pengguna..."
+                        value="{{ request()->get('search') }}"
+                        class="w-[150px] p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500">
+                    <button type="submit" class="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block">
+                        <svg class="w-4 h-4 fill-current" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+            </div>
             </form>
         </div>
+    </div>
 
-        <div class="flex items-center space-x-4">
-
-
+    {{-- <div class="flex items-center space-x-4">
             <!-- Add Data Button -->
             <button type="button" onclick="openModal()"
                 class="bg-green-600 hover:bg-green-800 text-white px-5 py-3 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2 text-sm">
-                ➕ Tambah
+                Tambah
             </button>
-        </div>
-    </div>
+        </div> --}}
 
 
 
     <!-- Modal Add User -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
+    {{-- <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
             <h2 class="text-xl font-extrabold mb-4">Tambah Data Pengguna</h2>
             <form action="{{ route('pengguna.store') }}" method="POST">
@@ -51,7 +61,7 @@
                     <select id="user_id" name="user_id"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                         @foreach ($addUsers as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -60,7 +70,7 @@
                     <select id="pertanian_id" name="pertanian_id"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                         @foreach ($lahan as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
+                            <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -69,13 +79,14 @@
                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
                         Batal
                     </button>
-                    <button type="submit" class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                    <button type="submit"
+                        class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
                         Simpan
                     </button>
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 
     <!-- User Table -->
     <div class="container mx-auto mt-8 px-6">
@@ -88,60 +99,98 @@
                             <th class="px-6 py-3">Nama Pengguna</th>
                             <th class="px-6 py-3">Email</th>
                             <th class="px-6 py-3">Lahan</th>
-                            <th class="px-6 py-3">Aksi</th>
+                            <th class="px-6 py-3 flex justify-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                        <tr class="bg-white border-b hover:bg-green-50 transition-all">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4 font-semibold">{{ $user->name }}</td>
-                            <td class="px-6 py-4">{{ $user->email }}</td>
-                            <td class="px-6 py-4">
-                                @if ($user->pertanian->isEmpty())
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                    Belum Diberikan
-                                </span>
-                                @else
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                    Sudah Diberikan
-                                </span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4">
-                                @foreach ($userVerif as $us)
-                                    @if ($user->roles->isEmpty())
-                                        <form action="{{ route('pengguna.verifikasi', $us->id) }}" method="GET" enctype="multipart/form-data">
-                                            @csrf
-                                            <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Verifikasi</button>
-                                        </form>
-                                        @break {{-- Hentikan loop setelah tombol pertama --}}
+                            <tr class="bg-white border-b hover:bg-green-50 transition-all">
+                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                <td class="px-6 py-4 font-semibold">{{ $user->name }}</td>
+                                <td class="px-6 py-4">{{ $user->email }}</td>
+                                <td class="px-6 py-4">
+                                    @if ($user->pertanian->isEmpty())
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                            Belum Diberikan
+                                        </span>
+                                    @else
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                            Sudah Diberikan
+                                        </span>
                                     @endif
-                                @endforeach
-                            </td>
+                                </td>
 
-                        </tr>
+                                <td class="px-6 py-4 flex justify-center gap-2">
+                                    @if ($user->roles->isEmpty())
+                                        <form action="{{ route('pengguna.verifikasi', $user->id) }}" method="GET">
+                                            @csrf
+                                            <button type="submit"
+                                                class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
+                                                Verifikasi
+                                            </button>
+                                        </form>
+                                    @endif
+
+                                    <!-- Tombol beri lahan -->
+                                    <button type="button" onclick="openModal({{ $user->id }})"
+                                        class="bg-green-600 hover:bg-green-800 text-white px-5 py-2.5 rounded-full shadow-md transition-all duration-300 text-sm">
+                                        Beri lahan
+                                    </button>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <!-- Modal Beri Lahan -->
+<div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+        <h2 class="text-xl font-extrabold mb-4">Berikan lahan</h2>
+        <form action="{{ route('pengguna.store') }}" method="POST">
+            @csrf
 
-    <script>
+            <!-- Input hidden untuk user_id -->
+            <input type="hidden" id="modal_user_id" name="user_id">
+
+            <div class="mb-4">
+                <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Lahan</label>
+                <select id="pertanian_id" name="pertanian_id"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                    @foreach ($lahan as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button type="button" onclick="closeModal()"
+                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
+                    Batal
+                </button>
+                <button type="submit"
+                    class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 
-        function openModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
 
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-    </script>
+<script>
+    function openModal(userId) {
+        document.getElementById('modal').classList.remove('hidden');
+        document.getElementById('modal_user_id').value = userId;
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+</script>
+
 
 </x-app-layout>
