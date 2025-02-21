@@ -44,9 +44,10 @@ class PengeluaranController extends Controller
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pengeluaran' => 'required|date',
             'jenis_pengeluaran' => 'required|string',
-            'biaya' => 'required|numeric',
+            'biaya' => 'required|numeric|min:0',
         ],[
-            'biaya.numeric' => 'Inputan Biaya Harus Berupa Angka'
+            'biaya.numeric' => 'Inputan Biaya Harus Berupa Angka',
+            'biaya.min' => 'Biaya Tidak Boleh Minus'
         ]);
 
             if($validator->fails()) {
@@ -88,9 +89,10 @@ class PengeluaranController extends Controller
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pengeluaran' => 'required|date',
             'jenis_pengeluaran' => 'required|string',
-            'biaya' => 'required|numeric',
+            'biaya' => 'required|numeric|min:0',
         ],[
-            'biaya.numeric' => 'Inputan Biaya Harus Berupa Jumlah Angka'
+            'biaya.numeric' => 'Inputan Biaya Harus Berupa Jumlah Angka',
+            'biaya.min' => 'Biaya Tidak Boleh Minus'
         ]);
 
         if ($validator->fails()) {

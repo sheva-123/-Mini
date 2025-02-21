@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/pengguna/{id}', [UserController::class, 'verifikasi'])->name('pengguna.verifikasi');
     Route::get('/pengguna/filter', [UserController::class], 'filter')->name('pengguna.filter');
-    Route::resource('pertanians', PertanianController::class);
+    Route::resource('pertanians', PertanianController::class)->names('pertanians');
     Route::resource('tanamans', TanamanController::class);
     Route::resource('pengguna', UserController::class);
 });
@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(function () {
     Route::get('/home', [UserHomeController::class, 'index'])->name('user.home');
     Route::resource('penanamans', PenanamanController::class);
-    Route::resource('pemeliharaans', PemeliharaanController::class);
+    Route::resource('pemeliharaans', PemeliharaanController::class)->names('pemeliharaans');
     Route::resource('pemanenans', PemanenanController::class);
     Route::resource('pengeluarans', PengeluaranController::class);
     Route::resource('laporans', LaporanController::class);

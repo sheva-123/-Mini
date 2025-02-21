@@ -55,9 +55,10 @@ class PemanenanController extends Controller
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
             'tanggal_pemanenan' => 'required|date',
-            'jumlah_hasil' => 'required|integer',
+            'jumlah_hasil' => 'required|integer|min:0',
         ],[
-            'tanggal_pemanenan.date' => 'Date Lajwdnd'
+            'tanggal_pemanenan.date' => 'Tanggal Wajib Di Isi',
+            'jumlah_hasil' => 'Jumlah Hasil Tidak Boleh Minus',
         ]);
 
             // if($validator->fails()) {
@@ -101,9 +102,10 @@ class PemanenanController extends Controller
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemanenan' => 'required|date',
-            'jumlah_hasil' => 'required|integer',
+            'jumlah_hasil' => 'required|integer|min:0',
         ], [
-            'tanggal_pemanenan.date' => 'Date Lajwdnd'
+            'tanggal_pemanenan.date' => 'Tanggal Wajib Di Isi',
+            'jumlah_hasil' => 'Jumlah Hasil Tidak Boleh Minus',
         ]);
 
             if ($validator->fails()) {

@@ -19,6 +19,18 @@ class TanamanController extends Controller
         } else {
             $tanamans = Tanaman::all();
         }
+
+        $filter = request()->input('filter');
+        if($filter === 'Herbal') {
+            $tanamans = Tanaman::where('jenis', 'Herbal')
+                                    ->get();
+        } elseif ($filter === 'Sayuran') {
+            $tanamans = Tanaman::where('jenis', 'Sayuran')
+                                    ->get();
+        } elseif ($filter === 'Buah') {
+            $tanamans = Tanaman::where('jenis', 'Buah')
+                                    ->get();
+        }
         return view('admin.tanamans.index', compact('tanamans'));
     }
 

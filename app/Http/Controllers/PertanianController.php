@@ -18,7 +18,15 @@ class PertanianController extends Controller
         }else{
             $pertanians = Pertanian::with('tanamans')->get();
         }
-        return view('admin.pertanians.index', compact('pertanians'));
+
+        $filter = request()->input('filter');
+        if ($filter) {
+            $pertanians = Pertanian::where('lokasi_pertanian', $filter )
+                                        ->get();
+        }
+
+        $dataFilter = Pertanian::all();
+        return view('admin.pertanians.index', compact('pertanians', 'dataFilter'));
     }
 
     public function show(Pertanian $pertanian)

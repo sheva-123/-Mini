@@ -8,11 +8,12 @@ use App\Models\Pertanian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Validator;
 
 class PemeliharaanController extends Controller
 {
-    use LogsActivity;
+    use LogsActivity, SoftDeletes;
     /**
      * Display a listing of the resource.
      */
@@ -57,10 +58,9 @@ class PemeliharaanController extends Controller
             'pertanian_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
-            'biaya' => 'required|string|max:255',
+            'biaya' => 'required|integer|min:0',
         ], [
-            'tanggal_pemeliharaan.max:255' => 'Character Maximal 255',
-            'biaya.max:255' => 'Character Maximal 255'
+            'biaya.main' => 'Biaya Tidak Boleh Minus',
         ]);
 
             if($validator->fails()) {
@@ -102,10 +102,9 @@ class PemeliharaanController extends Controller
             'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
-            'biaya' => 'required|string|max:255',
+            'biaya' => 'required|integer|min:0',
         ], [
-            'tanggal_pemeliharaan.max:255' => 'Character Maximal 255',
-            'biaya.max:255' => 'Character Maximal 255'
+            'biaya.min' => 'Biaya Tidak Boleh Minus',
         ]);
 
             if ($validator->fails()) {
@@ -125,13 +124,21 @@ class PemeliharaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pemeliharaan $pemeliharaans)
+    public function destroy(Pemeliharaan $pemeliharaan)
     {
-        $id = Auth::user();
+        // dd($pemeliharaan);
 
-        $pemeliharaans->delete();
+        try {
+            $id = Auth::user();
+            $pemeliharaan->forceDelete();
 
-        $this->logActivity('Hapus Pemeliharaan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemeliharaan pada lahannya.');
-        return redirect()->route('pemeliharaans.index')->with('success', 'Pemeliharaan berhasil dihapus.');
+            $this->logActivity('Hapus Pemeliharaan', 'Pengguna dengan nama ' . $id->name . ' menghapus data pemeliharaan lahannya');
+
+            return redirect()->route('pemeliharaans.index')
+            ->with('error', 'Pemeliharaan Berhasil Di Hapus!');
+        } catch (\Exception $e) {
+            return redirect()->route('pemeliharaans.index')
+            ->with('error', 'Pemeliharaan Gagal Di Hapus!');
+        }
     }
 }

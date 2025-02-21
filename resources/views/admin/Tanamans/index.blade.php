@@ -11,9 +11,10 @@
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="flex w-2/2 gap-3">
             <form action="{{ route('tanamans.index') }}" method="get">
-                <select id="filterLokasi"
-                    class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full">
-                    <option value="">Pilih Jenis</option>
+                <select name="filter" id="filterLokasi"
+                    class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full"
+                    onchange="this.form.submit()">
+                    <option value="">Semua Jenis</option>
                     <option value="Herbal">Herbal</option>
                     <option value="Buah">Buah</option>
                     <option value="Sayuran">Sayuran</option>

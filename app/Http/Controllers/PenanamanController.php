@@ -35,6 +35,19 @@ class PenanamanController extends Controller
             })->orWhere('tanggal_tanam', 'like', "%$search%");
         }
 
+        $filter = request()->input();
+        if ($filter) {
+            if ($request->filled('tanggal_tanam')) {
+                $query->where('tanggal_tanam', '>=', $request->tanggal_tanam);
+            }
+
+            if ($request->filled('tanggal_panen')) {
+                $query->where('expired', '>=', $request->tanggal_panen);
+            }
+
+            $query->get();
+        }
+
         $penanamans = $query->get();
             
         return view('petani.penanamans.index', compact('penanamans'));
@@ -70,9 +83,10 @@ class PenanamanController extends Controller
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
             'tanggal_tanam' => 'required|date',
-            'jumlah_tanaman' => 'required|integer',
+            'jumlah_tanaman' => 'required|integer|min:0',
         ],[
-            'tanggal_tanam.date' => 'Date Required',
+            'tanggal_tanam.date' => 'Tanggal Wajib Di Isi',
+            'jumlah_tanaman.min' => 'Jumlah Tidak Boleh Minus',
         ]);
 
         // dd($validator);
@@ -152,10 +166,10 @@ class PenanamanController extends Controller
 
             $this->logActivity('Hapus Penanaman', 'Pengguna dengan nama' . $id->name . ' menghapus tanaman yang ditanam pada lahan yang dikelolanya');
             return redirect()->route('penanamans.index')
-            ->with('success', 'Penanaman Delete Success');
+            ->with('success', 'Penanaman Berhasil Di Hapus');
         } catch (\Exception $e) {
             return redirect()->route('penanamans.index')
-            ->with('error', 'Penanaman Delete Error');
+            ->with('error', 'Penanaman Gagal Di Hapus!');
         }
     }
 }
