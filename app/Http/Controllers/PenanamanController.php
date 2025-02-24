@@ -18,6 +18,8 @@ class PenanamanController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->toArray());
+
         $user = Auth::user();
 
         $query = Penanaman::whereHas('pertanian', function ($query) use ($user) {
@@ -26,29 +28,29 @@ class PenanamanController extends Controller
                     });
                 });
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $search = $request->search;
-            $query->whereHas('pertanian', function ($q) use ($search) {
-                $q->where('nama_pertanian', 'like', "%$search%");
-            })->orWhereHas('tanaman', function ($q) use ($search) {
-                $q->where('nama_tanaman', 'like', "%$search%");
-            })->orWhere('tanggal_tanam', 'like', "%$search%");
+            $query->where(function ($q) use ($search, $user) {
+                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
+                    $subQ->where('nama_pertanian', 'like', "%$search%")
+                    ->whereHas('users', function ($userQ) use ($user) {
+                        $userQ->where('users.id', $user->id);
+                    });
+                })->orWhereHas('tanaman', function ($subQ) use ($search) {
+                    $subQ->where('nama_tanaman', 'like', "%$search%");
+                })->orWhere('jumlah_tanaman', 'like', "%$search%");
+            });
+            
         }
 
-        $filter = request()->input();
-        if ($filter) {
-            if ($request->filled('tanggal_tanam')) {
-                $query->where('tanggal_tanam', '>=', $request->tanggal_tanam);
-            }
-
-            if ($request->filled('tanggal_panen')) {
-                $query->where('expired', '>=', $request->tanggal_panen);
-            }
-
-            $query->get();
+        if ($request->filled('tanggal_tanam_awal') && $request->filled('tanggal_tanam_akhir')) {
+            $query->whereBetween('tanggal_tanam', [$request->tanggal_tanam_awal, $request->tanggal_tanam_akhir]);
         }
 
         $penanamans = $query->get();
+
+
+        // dd($penanamans);
             
         return view('petani.penanamans.index', compact('penanamans'));
     }

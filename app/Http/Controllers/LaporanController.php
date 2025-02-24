@@ -5,25 +5,47 @@ namespace App\Http\Controllers;
 use App\Models\Laporan;
 use App\Models\Pertanian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Traits\LogsActivity;
 use Illuminate\Support\Facades\Validator;
 
 class LaporanController extends Controller
 {
+    use LogsActivity;
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
+
+        $query = Laporan::whereHas('pertanian', function ($query) use ($user) {
+            $query->whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        });
+
         // Pencarian berdasarkan tanggal_laporan
-        $cari = $request->input('cari');
-        $pertanians = Pertanian::with('laporan')->get();
-        $laporans = Laporan::when($cari, function ($query, $cari) {
-                return $query->where('tanggal_laporan', 'like', "%$cari%");
-            })
-            ->with('pertanian') // Memuat relasi
-            ->orderBy('tanggal_laporan', 'desc')
-            ->paginate(10);
-        return view('petani.laporans.index', compact('pertanians','laporans', 'cari'));
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search, $user) {
+                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
+                    $subQ->where('nama_pertanian', 'like', "%$search%")
+                    ->whereHas('users', function ($userQ) use ($user) {
+                        $userQ->where('users.id', $user->id);
+                    });
+                })
+                ->orWhere('jdeskripsi', 'like', "%$search%");
+            });
+        }
+
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $query->whereBetween('tanggal_laporan', [$request->tanggal_awal, $request->tanggal_akhir]);
+        }
+
+        $laporans = $query->get();
+
+        return view('petani.laporans.index', compact('laporans'));
     }
 
     /**
@@ -31,7 +53,12 @@ class LaporanController extends Controller
      */
     public function create()
     {
-        $pertanians = Pertanian::all(); // Fetch all related 'pertanian' data
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })
+        ->get();
         return view('petani.laporans.create', compact('pertanians'));
     }
 

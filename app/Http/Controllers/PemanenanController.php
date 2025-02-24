@@ -16,20 +16,34 @@ class PemanenanController extends Controller
     // Menampilkan daftar pemanenan dengan fitur pencarian
     public function index(Request $request)
     {
-        $cari = $request->get('cari');
-        $pemanenans = Pemanenan::with('pertanian') // Relasi ke penanaman
-            ->when($cari, function ($query, $cari) {
-                return $query->where('tanggal_pemanenan', 'like', "%{$cari}%");
-            })
-            ->get();
+        $user = Auth::user();
 
-    //         // Data untuk grafik
-    // $dataGrafik = Pemanenan::selectRaw('DATE(tanggal_pemanenan) as tanggal, SUM(jumlah_hasil) as total_hasil')
-    // ->groupBy('tanggal')
-    // ->orderBy('tanggal', 'asc')
-    // ->get();
+        $query = Pemanenan::whereHas('pertanian', function ($query) use ($user) {
+            $query->whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        });
 
-    return view('petani.pemanenans.index', compact('pemanenans', 'cari'));
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search, $user) {
+                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
+                    $subQ->where('nama_pertanian', 'like', "%$search%")
+                    ->whereHas('users', function ($userQ) use ($user) {
+                        $userQ->where('users.id', $user->id);
+                    });
+                })
+                    ->orWhere('jumlah_hasil', 'like', "%$search%");
+            });
+        }
+
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $query->whereBetween('tanggal_pemanenan', [$request->tanggal_awal, $request->tanggal_akhir]);
+        }
+
+        $pemanenans = $query->get();
+
+    return view('petani.pemanenans.index', compact('pemanenans'));
     }
 
     // Menampilkan form tambah pemanenan

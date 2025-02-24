@@ -14,26 +14,29 @@
     <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
         <!-- Search Input -->
         <div class="relative flex-1">
-            <input type="text"
-                placeholder="Cari..."
-                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none shadow-sm">
-            <svg class="absolute right-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+            <form action="{{ route('penanamans.index') }}" method="get">
+                <input type="text"
+                    placeholder="Cari..." name="search" value="{{ request()->get('search') }}" onchange="this.form.submit()"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none shadow-sm">
+                <svg class="absolute right-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </form>
+
         </div>
 
-        <form method="GET" action="{{ route('penanamans.index') }}" class="flex flex-wrap gap-3">
+        <form method="GET" action="{{ route('pemeliharaans.index') }}" class="flex flex-wrap gap-3">
             <!-- Tanggal Tanam -->
             <div>
-                <label for="tanggal_tanam" class="text-sm text-gray-600">Tanggal Tanam:</label>
-                <input type="date" name="tanggal_tanam" id="tanggal_tanam" value="{{ request('tanggal_tanam') }}"
+                <label for="tanggal_awal" class="text-sm text-gray-600">Tanggal Awal :</label>
+                <input type="date" name="tanggal_awal" id="tanggal_tanam_awal" value="{{ request('tanggal_awal') }}"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
             </div>
 
             <!-- Tanggal Panen -->
             <div>
-                <label for="tanggal_panen" class="text-sm text-gray-600">Tanggal Panen:</label>
-                <input type="date" name="tanggal_panen" id="tanggal_panen" value="{{ request('tanggal_panen') }}"
+                <label for="tanggal_akhir" class="text-sm text-gray-600">Tanggal Akhir :</label>
+                <input type="date" name="tanggal_akhir" id="tanggal_akhir" value="{{ request('tanggal_akhir') }}"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
             </div>
 
@@ -58,6 +61,7 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                     <tr>
                         <th scope="col" class="px-6 py-3">No</th>
+                        <th scope="col" class="px-6 py-3">Lahan</th>
                         <th scope="col" class="px-6 py-3">Tanaman</th>
                         <th scope="col" class="px-6 py-3">Tanggal Tanam</th>
                         <th scope="col" class="px-6 py-3">Perkiraan Panen</th>
@@ -70,6 +74,7 @@
                     @foreach ($penanamans as $p)
                     <tr class="bg-white border-b hover:bg-gray-100">
                         <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4">{{ $p->pertanian->nama_pertanian }}</td>
                         <td class="px-6 py-4">{{ $p->tanaman->nama_tanaman }}</td>
                         <td class="px-6 py-4">{{ $p->tanggal_tanam }}</td>
                         <td class="px-6 py-4">{{ $p->expired }}</td>

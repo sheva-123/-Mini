@@ -19,15 +19,30 @@ class PemeliharaanController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
 
-        $query = Pemeliharaan::with('pertanian');
+        $query = Pemeliharaan::whereHas('pertanian', function ($query) use ($user) {
+                    $query->whereHas('users', function ($q) use ($user) {
+                        $q->where('users.id', $user->id);
+                    });
+                });
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('jenis_pemeliharaan', 'like', "%{$search}%")
-                  ->orWhereHas('penanamans', function ($q) use ($search) {
-                      $q->where('nama', 'like', "%{$search}%");
-                  });
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search, $user) {
+                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
+                    $subQ->where('nama_pertanian', 'like', "%$search%")
+                    ->whereHas('users', function ($userQ) use ($user) {
+                        $userQ->where('users.id', $user->id);
+                    });
+                })
+                ->orWhere('jenis_pemeliharaan', 'like', "%$search%")
+                ->orWhere('biaya', 'like', "%$search%");
+            });
+        }
+
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $query->whereBetween('tanggal_pemeliharaan', [$request->tanggal_awal, $request->tanggal_akhir]);
         }
 
         $pemeliharaans = $query->get();
@@ -52,15 +67,17 @@ class PemeliharaanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->toArray());
+
         $id = Auth::user();
 
         $validator = Validator::make($request->all(), [
-            'pertanian_id' => 'required|exists:penanamans,id',
+            'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|integer|min:0',
         ], [
-            'biaya.main' => 'Biaya Tidak Boleh Minus',
+            'biaya.min' => 'Biaya Tidak Boleh Minus',
         ]);
 
             if($validator->fails()) {
@@ -94,12 +111,13 @@ class PemeliharaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pemeliharaan $pemeliharaans)
+    public function update(Request $request, Pemeliharaan $pemeliharaan)
     {
+        // dd($pemeliharaan);
         $id = Auth::user();
 
         $validator = Validator::make($request->all(), [
-            'penanaman_id' => 'required|exists:penanamans,id',
+            'pertanian_id' => 'required|exists:pertanians,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|integer|min:0',
@@ -107,14 +125,16 @@ class PemeliharaanController extends Controller
             'biaya.min' => 'Biaya Tidak Boleh Minus',
         ]);
 
-            if ($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('pemeliharaans.index')
-                ->withErrors($validator)
-                    ->withInput();
-            }
+            // if ($validator->fails()) {
+            //     $error = $validator->errors();
+            //     return redirect()->route('pemeliharaans.edit')
+            //     ->withErrors($validator)
+            //         ->withInput();
+            // }
 
-        $pemeliharaans->update($request->all());
+            // dd($pemeliharaan);
+
+        $pemeliharaan->update($request->all());
 
         $this->logActivity('Edit Pemeliharaan', 'Pengguna dengan nama' . $id->name . ' mengedit data pemeliharaan lahan yang dikelolanya');
 

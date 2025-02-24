@@ -15,7 +15,6 @@
             <div class="mb-4">
                 <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
                 <select name="pertanian_id" id="pertanian_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
-                    <option value="" disabled selected>Pilih Pertanian</option>
                     @foreach ($pertanians as $pertanian)
                         <option value="{{ $pertanian->id }}">{{ $pertanian->nama_pertanian }}</option>
                     @endforeach

@@ -15,9 +15,36 @@ class PengeluaranController extends Controller
     // Menampilkan daftar pengeluaran dengan fitur pencarian
     public function index(Request $request)
     {
+        $user = Auth::user();
+
+        $query = Pengeluaran::whereHas('pertanian', function ($query) use ($user) {
+                    $query->whereHas('users', function ($q) use ($user) {
+                        $q->where('users.id', $user->id);
+                    });
+                });
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search, $user) {
+                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
+                    $subQ->where('nama_pertanian', 'like', "%$search%")
+                    ->whereHas('users', function ($userQ) use ($user) {
+                        $userQ->where('users.id', $user->id);
+                    });
+                })
+                ->orWhere('jenis_pengeluaran', 'like', "%$search%")
+                ->orWhere('biaya', 'like', "%$search%");
+            });
+        }
+
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $query->whereBetween('tanggal_pengeluaran', [$request->tanggal_awal, $request->tanggal_akhir]);
+        }
 
 
-        $pengeluarans = Pengeluaran::with('pertanian')->get(); // Relasi ke model Pertanian
+
+        $pengeluarans = $query->get();
+
         return view('petani.pengeluarans.index', compact('pengeluarans'));
     }
 
