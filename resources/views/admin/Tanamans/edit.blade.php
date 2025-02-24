@@ -36,8 +36,10 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
-
-                <button type="submit" class="bg-yellow-600 text-white px-6 py-2 rounded-lg">Perbarui</button>
+                <div class="flex items-center space-x-4">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg">Perbarui</button>
+                <a href="{{ route('tanamans.index') }}" class="bg-red-500 text-white px-6 py-2 rounded-lg">Kembali</a>
+                </div>
             </form>
         </div>
     </div>

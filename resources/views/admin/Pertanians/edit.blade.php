@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container mx-auto py-10">
         <div class="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-2xl">
-           
+
             <form action="{{ route('pertanians.update', $pertanian->id) }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
@@ -27,10 +27,9 @@
                            placeholder="Masukkan luas lahan" required>
                 </div>
 
-                <div class="text-center mt-8">
-                    <button type="submit" class="inline-block w-full bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
-                        Simpan Perubahan
-                    </button>
+                <div class="flex items-center space-x-4">
+                    <button type="submit" class="bg-blue-500 text-white font-bold px-6 py-2 rounded-lg">Simpan Perubahan</button>
+                    <a href="{{ route('pertanians.index') }}" class="bg-red-500 text-white px-6 py-2 rounded-lg">Kembali</a>
                 </div>
             </form>
         </div>
