@@ -18,10 +18,10 @@
                 <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
                 <select name="pertanian_id" id="pertanian_id" class="w-full p-2 border rounded-lg">
                     @foreach ($pertanians as $pertanian)
-                        <option value="{{ $pertanian->id }}"
-                            {{ $pemeliharaan->pertanian_id == $pertanian->id ? 'selected' : '' }}>
-                            {{ $pertanian->nama_pertanian }}
-                        </option>
+                    <option value="{{ $pertanian->id }}"
+                        {{ $pemeliharaan->pertanian_id == $pertanian->id ? 'selected' : '' }}>
+                        {{ $pertanian->nama_pertanian }}
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -41,9 +41,15 @@
                     class="w-full p-2 border rounded-lg" required>
             </div>
             <button type="submit"
-                class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-transform transform hover:scale-95">
-                Update
+                class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
+                Simpan
             </button>
+            <a href="{{ route('pemeliharaans.index') }}">
+                <button type="button"
+                    class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
+                    Kembali
+                </button>
+            </a>
         </form>
     </div>
 </div>

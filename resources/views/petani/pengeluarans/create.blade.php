@@ -31,9 +31,16 @@
                 <label for="biaya" class="block text-sm font-medium text-gray-700">Biaya</label>
                 <input type="number" name="biaya" id="biaya" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Masukkan biaya">
             </div>
-            <div class="flex justify-end">
-                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-700">Simpan</button>
-            </div>
+            <button type="submit"
+                class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
+                Simpan
+            </button>
+            <a href="{{ route('pengeluarans.index') }}">
+                <button type="button"
+                    class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
+                    Kembali
+                </button>
+            </a>
         </form>
     </div>
 </div>
