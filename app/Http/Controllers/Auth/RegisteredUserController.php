@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
 
         $avatarPath = $request->file('avatar')
             ? $request->file('avatar')->store('avatars', 'public')
-            : 'images/default-avatar.png';
+            : 'avatars/default-avatar.png';
 
         $user = User::create([
             'name' => $request->name,
@@ -47,6 +47,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'avatar' => $avatarPath,
         ]);
+
+        // dd($user);
 
         event(new Registered($user));
 

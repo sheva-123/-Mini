@@ -17,7 +17,7 @@
                     <label for="nama_tanaman" class="block text-gray-700">Nama Tanaman</label>
                     <input type="text" name="nama_tanaman" id="nama_tanaman" class="p-2 border border-gray-300 rounded-md w-full" value="{{ old('nama_tanaman', $tanaman->nama_tanaman) }}" required>
                     @error('nama_tanaman')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -25,7 +25,7 @@
                     <label for="jenis" class="block text-gray-700">Jenis Tanaman</label>
                     <input type="text" name="jenis" id="jenis" class="p-2 border border-gray-300 rounded-md w-full" value="{{ old('jenis', $tanaman->jenis) }}" required>
                     @error('jenis')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -33,13 +33,19 @@
                     <label for="deskripsi" class="block text-gray-700">Deskripsi (Opsional)</label>
                     <textarea name="deskripsi" id="deskripsi" rows="3" class="p-2 border border-gray-300 rounded-md w-full">{{ old('deskripsi', $tanaman->deskripsi) }}</textarea>
                     @error('deskripsi')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="flex items-center space-x-4">
-                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg">Perbarui</button>
-                <a href="{{ route('tanamans.index') }}" class="bg-red-500 text-white px-6 py-2 rounded-lg">Kembali</a>
-                </div>
+                <button type="submit"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
+                    Simpan
+                </button>
+                <a href="{{ route('tanamans.index') }}">
+                    <button type="button"
+                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
+                        Kembali
+                    </button>
+                </a>
             </form>
         </div>
     </div>

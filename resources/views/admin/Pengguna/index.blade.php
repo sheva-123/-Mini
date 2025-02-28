@@ -139,7 +139,7 @@
                                     Beri lahan
                                 </button>
                                 @else
-                                <button type="button""
+                                <button type="button"
                                     class="bg-green-200 hover:bg-green-200 text-grey px-5 py-2.5 rounded-full text-sm">
                                     Beri lahan
                                 </button>

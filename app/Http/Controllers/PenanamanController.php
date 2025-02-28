@@ -43,8 +43,8 @@ class PenanamanController extends Controller
             
         }
 
-        if ($request->filled('tanggal_tanam_awal') && $request->filled('tanggal_tanam_akhir')) {
-            $query->whereBetween('tanggal_tanam', [$request->tanggal_tanam_awal, $request->tanggal_tanam_akhir]);
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $query->whereBetween('tanggal_tanam', [$request->tanggal_awal, $request->tanggal_akhir]);
         }
 
         $penanamans = $query->get();

@@ -51,19 +51,16 @@
                 </div>
 
 
-                <div class="text-center mt-8">
-                    <button type="submit"
-                        class="w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition-transform transform hover:scale-105">
-                        Simpan Data
-                    </button>
-                </div>
-
-                <div class="text-center mt-4">
-                    <a href="{{ route('tanamans.index') }}"
-                        class="inline-block w-full py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-transform transform hover:scale-105">
+                <button type="submit"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
+                    Simpan
+                </button>
+                <a href="{{ route('tanamans.index') }}">
+                    <button type="button"
+                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
                         Kembali
-                    </a>
-                </div>
+                    </button>
+                </a>
             </form>
         </div>
     </div>

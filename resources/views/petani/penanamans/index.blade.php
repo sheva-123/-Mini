@@ -25,7 +25,7 @@
 
         </div>
 
-        <form method="GET" action="{{ route('pemeliharaans.index') }}" class="flex flex-wrap gap-3">
+        <form method="GET" action="{{ route('penanamans.index') }}" class="flex flex-wrap gap-3">
             <!-- Tanggal Tanam -->
             <div>
                 <label for="tanggal_awal" class="text-sm text-gray-600">Tanggal Awal :</label>
