@@ -40,6 +40,11 @@
                     <i class="fas fa-user"></i>
                     <span class="ml-3">Pengguna</span>
                 </a>
+                <a href="{{ route('admin.laporans.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
+                    <i class="fas fa-user"></i>
+                    <span class="ml-3">Laporan</span>
+                </a>
 
 
                 <!-- Logout -->

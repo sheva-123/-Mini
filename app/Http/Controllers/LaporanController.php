@@ -19,6 +19,7 @@ class LaporanController extends Controller
     {
         $user = Auth::user();
 
+
         $query = Laporan::whereHas('pertanian', function ($query) use ($user) {
             $query->whereHas('users', function ($q) use ($user) {
                 $q->where('users.id', $user->id);
@@ -54,6 +55,7 @@ class LaporanController extends Controller
     public function create()
     {
         $user = Auth::user();
+        
 
         $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
             $query->where('users.id', $user->id);
