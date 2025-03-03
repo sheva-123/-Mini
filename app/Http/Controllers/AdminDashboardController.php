@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\Pertanian;
 use App\Models\Tanaman;
 use App\Models\ActivityLog;
+use App\Models\Pemeliharaan;
+use App\Models\Pemanenan;
+use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
 {

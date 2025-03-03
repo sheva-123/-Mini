@@ -12,33 +12,35 @@
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-4 pt-2 gap-3">
     <!-- Search and Filter Section -->
     <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-        <!-- Search Input -->
-        <div class="relative flex-1">
-            <form action="{{ route('pemanenans.index') }}" method="get">
+        <form action="{{ route('penanamans.index') }}" method="get">
+            <div class="relative flex-1">
                 <input type="text"
-                    placeholder="Cari..." name="search" value="{{ request()->get('search') }}" onchange="this.form.submit()"
+                    placeholder="Cari..." name="search" value="{{ request()->get('search') }}"
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none shadow-sm">
                 <svg class="absolute right-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-            </form>
+            </div>
 
-        </div>
-
-        <form method="GET" action="{{ route('pemanenans.index') }}" class="flex flex-wrap gap-3">
             <!-- Tanggal Tanam -->
             <div>
                 <label for="tanggal_awal" class="text-sm text-gray-600">Tanggal Awal :</label>
-                <input type="date" name="tanggal_awal" id="tanggal_awal" value="{{ request('tanggal_awal') }}"
+                <input type="date" name="tanggal_awal" id="tanggal_tanam_awal" value="{{ request('tanggal_awal') }}"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
             </div>
 
             <!-- Tanggal Panen -->
             <div>
-                <label for="tanggal_akhir" class="text-sm text-gray-600">Tanggal Akhir : </label>
+                <label for="tanggal_akhir" class="text-sm text-gray-600">Tanggal Akhir :</label>
                 <input type="date" name="tanggal_akhir" id="tanggal_akhir" value="{{ request('tanggal_akhir') }}"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
             </div>
+
+            <select class="w-full sm:w-40 px-4 py-2 rounded-lg border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none shadow-sm hover:bg-gray-50">
+                <option value="" selected disabled>Urutan Data</option>
+                <option value="new">Terbaru</option>
+                <option value="old">Terlama</option>
+            </select>
 
             <!-- Tombol Filter -->
             <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-green-700 transition">

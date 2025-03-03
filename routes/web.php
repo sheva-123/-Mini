@@ -49,4 +49,6 @@ Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(funct
     Route::resource('laporans', LaporanController::class);
 });
 
+Route::get('/api/pemeliharaan-bulanan', [AdminDashboardController::class, 'pemeliharaanBulanan']);
+Route::get('/api/pemanenan-bulanan', [AdminDashboardController::class, 'pemanenanBulanan']);
 require __DIR__ . '/auth.php';

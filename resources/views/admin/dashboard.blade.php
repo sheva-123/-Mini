@@ -27,14 +27,14 @@
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Line Chart -->
                 <div class="bg-white shadow-md rounded-lg p-6">
-                    <h3 class="text-lg font-bold text-gray-800">Monthly Revenue</h3>
-                    <canvas id="revenueChart" class="mt-4"></canvas>
+                    <h3 class="text-lg font-bold text-gray-800">Pemeliharaan Bulanan</h3>
+                    <canvas id="pemeliharaanChart" class="mt-4"></canvas>
                 </div>
 
                 <!-- Doughnut Chart -->
                 <div class="bg-white shadow-md rounded-lg p-6">
-                    <h3 class="text-lg font-bold text-gray-800">Top Categories</h3>
-                    <canvas id="categoryChart" class="mt-4"></canvas>
+                    <h3 class="text-lg font-bold text-gray-800">Pemanenan Bulanan</h3>
+                    <canvas id="pemanenanChart" class="mt-4"></canvas>
                 </div>
             </div>
 
@@ -72,55 +72,36 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Revenue Line Chart
-        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-        const revenueChart = new Chart(revenueCtx, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                datasets: [{
-                    label: 'Revenue',
-                    data: [10000, 12000, 14000, 13000, 15000, 16000],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    tension: 0.4,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
-            },
-        });
+        fetch('/api/pemeliharaan-bulanan')
+            .then(response => response.json())
+            .then(data => {
+                const months = data.map(d => d.month);
+                const pemeliharaan = data.map(d => d.hasil_pemeliharaan);
 
-        // Category Doughnut Chart
-        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-        const categoryChart = new Chart(categoryCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Electronics', 'Clothing', 'Home Appliances', 'Books'],
-                datasets: [{
-                    data: [300, 200, 150, 100],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)', // Red
-                        'rgba(54, 162, 235, 0.6)', // Blue
-                        'rgba(75, 192, 192, 0.6)', // Green
-                        'rgba(255, 206, 86, 0.6)', // Yellow
-                    ],
-                    hoverOffset: 4,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
+                const ctx = document.getElementById('pemeliharaanChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Total Pemeliharaan',
+                            data: pemeliharaan,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 2,
+                            fill: true
+                        }]
                     },
-                },
-            },
-        });
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
     </script>
     @endpush
 </x-app-layout>
