@@ -10,6 +10,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\UserHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('pertanians', PertanianController::class)->names('pertanians');
     Route::resource('tanamans', TanamanController::class);
     Route::resource('pengguna', UserController::class);
+    Route::get('/admin/laporans', [AdminLaporanController::class, 'index'])->name('admin.laporans.index');
+    Route::get('/admin/laporans/{id}', [AdminLaporanController::class, 'show'])->name('admin.laporans.show');
 });
 
 Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(function () {
@@ -47,6 +50,7 @@ Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(funct
     Route::resource('pemanenans', PemanenanController::class);
     Route::resource('pengeluarans', PengeluaranController::class);
     Route::resource('laporans', LaporanController::class);
+    Route::get('/laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
 });
 
 require __DIR__ . '/auth.php';

@@ -150,6 +150,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if ($users->isEmpty())
+                <div class="text-center py-6">
+                    <p class="text-gray-500">Tidak ada data yang tersedia.</p>
+                </div>
+                @endif
             </div>
         </div>
     </div>
