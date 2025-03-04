@@ -15,24 +15,35 @@
                             <th scope="col" class="px-6 py-3">Nama Pengguna</th>
                             <th scope="col" class="px-6 py-3">Lahan</th>
                             <th scope="col" class="px-6 py-3">Laporan</th>
-                            <th scope="col" class="px-6 py-3">waktu</th>
+                            <th scope="col" class="px-6 py-3">Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($user->pertanian as $pertanian)
-                        @foreach ($pertanian->laporan as $laporan)
-                        <tr class="bg-white border-b hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $user->name }}</td>
-                            <td class="px-6 py-4">{{ $pertanian->nama_pertanian }}</td>
-                            <td class="px-6 py-4">{{ $laporan->deskripsi }}</td>
-                            <td class="px-6 py-4">{{ $laporan->created_at }}</td>
-                        </tr>
-                        @endforeach
+                            @foreach ($pertanian->laporan as $laporan)
+                                <tr class="bg-white border-b hover:bg-gray-100">
+                                    <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                    <td class="px-6 py-4">{{ $user->name }}</td>
+                                    <td class="px-6 py-4">{{ $pertanian->nama_pertanian }}</td>
+                                    <td class="px-6 py-4">{{ $laporan->deskripsi }}</td>
+                                    <td class="px-6 py-4">{{ $laporan->created_at }}</td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            <!-- Tombol kembali di bawah tabel, sisi kiri -->
+            <div class="mt-4">
+                <a href="{{ route('admin.laporans.index') }}">
+                    <button type="button"
+                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
+                        Kembali
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
+
+
 </x-app-layout>

@@ -40,53 +40,6 @@
         </div>
     </div>
 
-    {{-- <div class="flex items-center space-x-4">
-            <!-- Add Data Button -->
-            <button type="button" onclick="openModal()"
-                class="bg-green-600 hover:bg-green-800 text-white px-5 py-3 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2 text-sm">
-                Tambah
-            </button>
-        </div> --}}
-
-
-
-    <!-- Modal Add User -->
-    {{-- <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <h2 class="text-xl font-extrabold mb-4">Tambah Data Pengguna</h2>
-            <form action="{{ route('pengguna.store') }}" method="POST">
-    @csrf
-    <div class="mb-4">
-        <label for="user_id" class="block text-sm font-medium text-gray-700">Nama Pengguna</label>
-        <select id="user_id" name="user_id"
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-            @foreach ($addUsers as $user)
-            <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="mb-4">
-        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Lahan</label>
-        <select id="pertanian_id" name="pertanian_id"
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-            @foreach ($lahan as $item)
-            <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="flex justify-end">
-        <button type="button" onclick="closeModal()"
-            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
-            Batal
-        </button>
-        <button type="submit"
-            class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-            Simpan
-        </button>
-    </div>
-    </form>
-    </div>
-    </div> --}}
 
     <!-- User Table -->
     <div class="container mx-auto mt-8 px-6">
