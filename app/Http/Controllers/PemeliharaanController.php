@@ -45,6 +45,15 @@ class PemeliharaanController extends Controller
             $query->whereBetween('tanggal_pemeliharaan', [$request->tanggal_awal, $request->tanggal_akhir]);
         }
 
+        if ($request->filled('sort')) {
+            $sort = $request->sort;
+            if ($sort === 'a-z') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'z-a') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
+
         $pemeliharaans = $query->get();
         return view('petani.pemeliharaans.index', compact('pemeliharaans'));
     }

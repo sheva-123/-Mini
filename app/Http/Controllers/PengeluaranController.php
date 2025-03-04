@@ -41,7 +41,14 @@ class PengeluaranController extends Controller
             $query->whereBetween('tanggal_pengeluaran', [$request->tanggal_awal, $request->tanggal_akhir]);
         }
 
-
+        if ($request->filled('sort')) {
+            $sort = $request->sort;
+            if ($sort === 'a-z') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'z-a') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
 
         $pengeluarans = $query->get();
 
