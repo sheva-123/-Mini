@@ -7,14 +7,32 @@
 
     <div class="container mx-auto px-4">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <h2 class="text-xl font-semibold mb-4">Laporan: {{ $laporan->tanggal_laporan }}</h2>
-            <p class="mb-2"><strong>Deskripsi:</strong> {{ $laporan->deskripsi }}</p>
-            <p><strong>Lokasi Pertanian:</strong> {{ $laporan->pertanian->lokasi_pertanian }}</p>
-            <p><strong>Nama Pengguna:</strong> {{ $laporan->pertanian->users->name }}</p>
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-md text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">No</th>
+                            <th scope="col" class="px-6 py-3">Nama Pengguna</th>
+                            <th scope="col" class="px-6 py-3">Lahan</th>
+                            <th scope="col" class="px-6 py-3">Laporan</th>
+                            <th scope="col" class="px-6 py-3">waktu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($user->pertanian as $pertanian)
+                        @foreach ($pertanian->laporan as $laporan)
+                        <tr class="bg-white border-b hover:bg-gray-100">
+                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $user->name }}</td>
+                            <td class="px-6 py-4">{{ $pertanian->nama_pertanian }}</td>
+                            <td class="px-6 py-4">{{ $laporan->deskripsi }}</td>
+                            <td class="px-6 py-4">{{ $laporan->created_at }}</td>
+                        </tr>
+                        @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <a href="{{ route('admin.laporans.index') }}"
-            class="mt-4 inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-            Kembali
-        </a>
     </div>
 </x-app-layout>
