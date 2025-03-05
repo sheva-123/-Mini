@@ -55,6 +55,8 @@ class LaporanController extends Controller
 
         $laporans = $query->get();
 
+        // dd($laporans);
+
         return view('petani.laporans.index', compact('laporans'));
     }
 

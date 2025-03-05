@@ -22,7 +22,8 @@ class PemanenanController extends Controller
             $query->whereHas('users', function ($q) use ($user) {
                 $q->where('users.id', $user->id);
             });
-        });
+        })
+        ->with('tanaman');
 
         if ($request->filled('search')) {
             $search = $request->search;

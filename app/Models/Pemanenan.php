@@ -16,4 +16,9 @@ class Pemanenan extends Model
     {
         return $this->belongsTo(pertanian::class);
     }
+
+    public function tanaman()
+    {
+        return $this->belongsTo(Tanaman::class);
+    }
 }
