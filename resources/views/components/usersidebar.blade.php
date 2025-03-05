@@ -76,6 +76,32 @@
     </div>
 
     <!-- Scripts -->
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        </script>
+    @endif
+
     <script>
         // Highlight the active sidebar item
         document.querySelectorAll('.sidebar-item').forEach(item => {
@@ -103,6 +129,25 @@
                 }
             });
         }
+
+        function deleteRecord(event) {
+        event.preventDefault();
+        const form = event.target.closest('form');
+        Swal.fire({
+            title: "Apakah kamu yakin menghapus data ini?",
+            text: "Anda tidak dapat mengembalikan data ini!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit()
+            }
+        });
+    }
     </script>
 </body>
 
