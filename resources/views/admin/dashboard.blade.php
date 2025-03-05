@@ -24,19 +24,17 @@
             </div>
 
             <!-- Grafik -->
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Line Chart -->
+            <!-- <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white shadow-md rounded-lg p-6">
                     <h3 class="text-lg font-bold text-gray-800">Pemeliharaan Bulanan</h3>
                     <canvas id="pemeliharaanChart" class="mt-4"></canvas>
                 </div>
 
-                <!-- Doughnut Chart -->
                 <div class="bg-white shadow-md rounded-lg p-6">
                     <h3 class="text-lg font-bold text-gray-800">Pemanenan Bulanan</h3>
                     <canvas id="pemanenanChart" class="mt-4"></canvas>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Tabel Data -->
             <div class="mt-6 bg-white shadow-md rounded-lg p-6">

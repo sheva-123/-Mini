@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Penanaman extends Model
 {
@@ -14,7 +15,7 @@ class Penanaman extends Model
     {
         parent::boot();
         static::creating(function ($penanaman) {
-            $penanaman->expired = now()->addDays($penanaman->tanaman->umur_panen);
+            $penanaman->expired = Carbon::parse($penanaman->tanggal_tanam)->addDays($penanaman->tanaman->umur_panen);
         });
     }
 

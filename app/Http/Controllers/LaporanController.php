@@ -36,7 +36,7 @@ class LaporanController extends Controller
                         $userQ->where('users.id', $user->id);
                     });
                 })
-                ->orWhere('jdeskripsi', 'like', "%$search%");
+                ->orWhere('deskripsi', 'like', "%$search%");
             });
         }
 
