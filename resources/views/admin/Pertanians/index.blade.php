@@ -1,9 +1,9 @@
 <x-app-layout>
-    <header class="bg-gradient-to-r from-green-700 to-lime-500 py-6 px-8 shadow-lg rounded-lg mb-6 mt-4 mx-4 text-white">
+    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-extrabold">Data Pertanian</h1>
-                <p class="text-sm mt-1">Admin | Manajemen Pertanian</p>
+                <h1 class="text-2xl font-bold text-white">Data Pertanian</h1>
+                <p class="text-white text-sm mt-1">Admin | Pertanian</p>
             </div>
         </div>
     </header>

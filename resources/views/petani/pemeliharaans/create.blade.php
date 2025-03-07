@@ -36,6 +36,14 @@
                         </select>
                     </div>
                     <div class="mb-4">
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <select name="penanaman_id" id="penanaman_id" class="w-full p-2 border rounded-lg">
+                            @foreach ($penanaman as $penanaman)
+                            <option value="{{ $penanaman->id }}">{{ $penanaman->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label for="tanggal_pemeliharaan" class="block text-sm font-medium text-gray-700">Tanggal Pemeliharaan</label>
                         <input type="date" name="tanggal_pemeliharaan" id="tanggal_pemeliharaan"
                             class="w-full p-2 border rounded-lg" required>
@@ -48,6 +56,24 @@
                     <div class="mb-4">
                         <label for="biaya" class="block text-sm font-medium text-gray-700">Biaya</label>
                         <input type="number" name="biaya" id="biaya" class="w-full p-2 border rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="kondisi" class="block text-sm font-medium text-gray-700">Kondisi Tanaman</label>
+                        <select name="kondisi" id="kondisi" class="w-full p-2 border rounded-lg" required>
+                            <option value="" disabled selected>Pilih Kondisi</option>
+                            <option value="Baik">Baik</option>
+                            <option value="Cukup">Cukup</option>
+                            <option value="Buruk">Buruk</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="kondisiLahan" class="block text-sm font-medium text-gray-700">Kondisi Lahan</label>
+                        <select name="kondisiLahan" id="kondisiLahan" class="w-full p-2 border rounded-lg" required>
+                            <option value="" disabled selected>Pilih Kondisi</option>
+                            <option value="Kering">Kering</option>
+                            <option value="Basah">Basah</option>
+                            <option value="Lembab">Lembab</option>
+                        </select>
                     </div>
                     <button type="submit"
                         class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">

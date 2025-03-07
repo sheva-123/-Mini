@@ -47,10 +47,11 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th class="px-6 py-3">No</th>
-                            <th class="px-6 py-3">Lahan</th>
-                            <th class="px-6 py-3">Tanaman</th>
-                            <th class="px-6 py-3">Jumlah</th>
+                            <th class="px-6 py-3">Penanaman</th>
+                            <th class="px-6 py-3">Jenis</th>
+                            <th class="px-6 py-3">Biaya</th>
                             <th class="px-6 py-3">Tanggal</th>
+                            <th class="px-6 py-3">Kondisi</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -58,10 +59,28 @@
                         @foreach ($pemeliharaans as $pemeliharaan)
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $pemeliharaan->pertanian->nama_pertanian }}</td>
-                            <td class="px-6 py-4">{{ $pemeliharaan->tanggal_pemeliharaan }}</td>
+                            <td class="px-6 py-4">{{ $pemeliharaan->penanaman->nama }}</td>
                             <td class="px-6 py-4">{{ $pemeliharaan->jenis_pemeliharaan }}</td>
                             <td class="px-6 py-4">Rp {{ number_format($pemeliharaan->biaya, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4">{{ $pemeliharaan->tanggal_pemeliharaan }}</td>
+                            <td class="px-6 py-4">
+                                @if($pemeliharaan->kondisi_tanaman === 'Baik')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                    Baik
+                                </span>
+                                @elseif($pemeliharaan->kondisi_tanaman === 'Cukup')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                    Cukup
+                                </span>
+                                @elseif($pemeliharaan->kondisi_tanaman === 'Buruk')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                    Buruk
+                                </span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 flex gap-3">
                                 <a href="{{ route('pemeliharaans.edit', $pemeliharaan->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fas fa-edit"></i>

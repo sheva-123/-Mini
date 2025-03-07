@@ -9,7 +9,7 @@ class Penanaman extends Model
 {
     protected $table = 'penanamans';
 
-    protected $fillable = ['pertanian_id', 'tanaman_id', 'tanggal_tanam', 'jumlah_tanaman'];
+    protected $fillable = ['pertanian_id', 'tanaman_id', 'nama','tanggal_tanam', 'jumlah_tanaman', 'status'];
 
     protected static function boot()
     {

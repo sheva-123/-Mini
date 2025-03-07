@@ -88,11 +88,13 @@ class PenanamanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->toArray());
         $id = Auth::user();
 
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
+            'namaPenanaman' => 'required|string|max:225',
             'tanggal_tanam' => 'required|date',
             'jumlah_tanaman' => 'required|integer|min:0',
         ],[
@@ -112,8 +114,10 @@ class PenanamanController extends Controller
         Penanaman::create([
             'pertanian_id' => $request->pertanian_id,
             'tanaman_id' => $request->tanaman_id,
+            'nama' => $request->namaPenanaman,
             'tanggal_tanam' => $request->tanggal_tanam,
             'jumlah_tanaman' => $request->jumlah_tanaman,
+            'status' => 'Proses',
         ]);
 
         $this->logActivity('Tambah Penanaman', 'Pengguna dengan nama ' . $id->name . ' menanam tanaman di lahan yang dikelolanya.');

@@ -37,10 +37,10 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tanaman_id" class="block text-sm font-medium text-gray-700">Tanaman</label>
-                        <select name="tanaman_id" id="tanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
-                            @foreach ($pertanians as $pertanian)
-                            <option value="{{ $pertanian->tanamans->id }}">{{ $pertanian->tanamans->nama_tanaman }}</option>
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Penanaman</label>
+                        <select name="penanaman_id" id="penanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
+                            @foreach ($penanaman as $penanaman)
+                            <option value="{{ $penanaman->id }}">{{ $penanaman->nama }}, {{ $penanaman->jumlah_tanaman }} Tanaman</option>
                             @endforeach
                         </select>
                     </div>
@@ -53,6 +53,15 @@
                     <div class="mb-4">
                         <label for="jumlah_hasil" class="block text-sm font-medium text-gray-700">Jumlah Hasil</label>
                         <input type="number" name="jumlah_hasil" id="jumlah_hasil" class="w-full p-2 border rounded-lg" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="status_panen" class="block text-sm font-medium text-gray-700">Status Panen</label>
+                        <select name="status_panen" id="status_panen" class="w-full p-2 border rounded-lg" required>
+                            <option value="" disabled selected>Pilih Status</option>
+                            <option value="Berhasil">Berhasil</option>
+                            <option value="Gagal">Gagal</option>
+                        </select>
                     </div>
 
                     <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">

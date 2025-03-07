@@ -42,7 +42,7 @@
                 </a>
                 <a href="{{ route('admin.laporans.index') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
-                    <i class="fas fa-marker"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span class="ml-3">Laporan</span>
                 </a>
 
@@ -85,6 +85,25 @@
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Ya, keluar!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+
+        // Verification confirmation
+        function confirmUser(event) {
+            event.preventDefault();
+            const form = event.target.closest('form');
+            Swal.fire({
+                title: "Apakah kamu yakin ingin Verifikasi user ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Verifikasi!",
                 cancelButtonText: "Batal"
             }).then((result) => {
                 if (result.isConfirmed) {

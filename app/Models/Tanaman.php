@@ -20,10 +20,6 @@ class Tanaman extends Model
         return ['Sayuran', 'Buah', 'Herbal'];
     }
 
-    public function penanaman(){
-        return $this->hasMany(Penanaman::class);
-    }
-
     public function pertanian(){
         return $this->hasMany(Pertanian::class);
     }

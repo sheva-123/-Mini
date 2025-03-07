@@ -22,13 +22,15 @@ class UserHomeController extends Controller
                         $query->whereHas('users', function ($q) use ($user) {
                             $q->where('users.id', $user->id);
                         });
-                    });
+                    })
+                    ->sum('jumlah_tanaman');
 
         $pemanenan = Pemanenan::whereHas('pertanian', function ($query) use ($user) {
                         $query->whereHas('users', function ($q) use ($user) {
                             $q->where('users.id', $user->id);
                         });
-                    });
+                    })
+                    ->sum('jumlah_hasil');
 
         $pengeluaran = Pengeluaran::whereHas('pertanian', function ($query) use ($user) {
                         $query->whereHas('users', function ($q) use ($user) {

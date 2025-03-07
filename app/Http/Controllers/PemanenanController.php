@@ -23,7 +23,7 @@ class PemanenanController extends Controller
                 $q->where('users.id', $user->id);
             });
         })
-        ->with('tanaman');
+        ;
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -66,7 +66,15 @@ class PemanenanController extends Controller
         })
         ->with('tanamans')
         ->get();
-        return view('petani.pemanenans.create', compact('pertanians'));
+
+        $penanaman = Penanaman::whereHas('pertanian', function ($query) use ($user) {
+            $query->whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        })
+            ->where('status', 'Proses')
+            ->get();
+        return view('petani.pemanenans.create', compact('pertanians', 'penanaman'));
     }
 
     // Menyimpan pemanenan
@@ -77,9 +85,10 @@ class PemanenanController extends Controller
         // dd($request->toArray());
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
-            'tanaman_id' => 'required|exists:tanamans,id',
+            'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer|min:0',
+            'status_panen' => 'required|in:Berhasil,Gagal'
         ],[
             'tanggal_pemanenan.date' => 'Tanggal Wajib Di Isi',
             'jumlah_hasil' => 'Jumlah Hasil Tidak Boleh Minus',
@@ -94,10 +103,20 @@ class PemanenanController extends Controller
 
         Pemanenan::create([
             'pertanian_id' => $request->pertanian_id,
-            'tanaman_id' => $request->tanaman_id,
+            'penanaman_id' => $request->penanaman_id,
             'tanggal_pemanenan' => $request->tanggal_pemanenan,
             'jumlah_hasil' => $request->jumlah_hasil,
+            'status_panen' => $request->status_panen,
         ]);
+
+        $penanaman = Penanaman::find($request->penanaman_id);
+        if ($penanaman) {
+            $penanaman->update([
+                'status' => 'Selesai',
+            ]);
+        }
+
+        // dd($penanaman);
 
         $this->logActivity('Tambah Pemanenan', 'Pengguna dengan nama ' . $id->name . ' menambahkan data pemanenan pada lahan miliknya.');
 
@@ -121,6 +140,8 @@ class PemanenanController extends Controller
     // Menyimpan perubahan pemanenan
     public function update(Request $request, Pemanenan $pemanenan)
     {
+        // dd($request->toArray());
+
         $id = Auth::user();
 
         $validator = Validator::make($request->all(), [

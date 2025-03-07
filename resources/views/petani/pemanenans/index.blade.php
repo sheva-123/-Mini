@@ -48,9 +48,10 @@
                         <tr>
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Lahan</th>
-                            <th class="px-6 py-3">Tanaman</th>
+                            <th class="px-6 py-3">Penanaman</th>
                             <th class="px-6 py-3">Jumlah</th>
-                            <th class="px-6 py-3">Tanggal</th>
+                            <th class="px-6 py-3">Tanggal Panen</th>
+                            <th class="px-6 py-3">Status</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -59,9 +60,22 @@
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $pemanenan->pertanian->nama_pertanian }}</td>
-                            <td class="px-6 py-4">{{ $pemanenan->tanaman->nama_tanaman }}</td>
+                            <td class="px-6 py-4">{{ $pemanenan->penanaman->nama }}</td>
                             <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }}</td>
                             <td class="px-6 py-4">{{ $pemanenan->tanggal_pemanenan }}</td>
+                            <td class="px-6 py-4">
+                                @if ($pemanenan->status_panen === 'Berhasil')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                    Berhasil
+                                </span>
+                                @else
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                    Gagal
+                                </span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 flex gap-3">
                                 <a href="{{ route('pemanenans.edit', $pemanenan->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fas fa-edit"></i>

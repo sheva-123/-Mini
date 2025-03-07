@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Pengeluaran</title>
+    <title>User Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,11 +27,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-blue-100 p-4 rounded-lg shadow">
                             <h3 class="text-lg font-semibold">Total Penanaman</h3>
-                            <p class="text-2xl font-bold text-blue-600">{{ $penanaman->count() }}</p>
+                            <p class="text-2xl font-bold text-blue-600">{{ $penanaman }}</p>
                         </div>
                         <div class="bg-green-100 p-4 rounded-lg shadow">
                             <h3 class="text-lg font-semibold">Total Pemanenan</h3>
-                            <p class="text-2xl font-bold text-green-600">{{ $pemanenan->count() }}</p>
+                            <p class="text-2xl font-bold text-green-600">{{ $pemanenan }}</p>
                         </div>
                         <div class="bg-red-100 p-4 rounded-lg shadow">
                             <h3 class="text-lg font-semibold">Total Pengeluaran</h3>

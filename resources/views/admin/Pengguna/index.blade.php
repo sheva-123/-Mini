@@ -1,9 +1,9 @@
 <x-app-layout>
-    <header class="bg-gradient-to-r from-green-700 to-lime-500 py-6 px-8 shadow-lg rounded-lg mb-6 mt-4 mx-4 text-white">
+    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-extrabold">Data Pengguna</h1>
-                <p class="text-sm mt-1">Admin | Manajemen Pengguna</p>
+                <h1 class="text-2xl font-bold text-white">Data Pengguna</h1>
+                <p class="text-white text-sm mt-1">Admin | Pengguna</p>
             </div>
         </div>
     </header>
@@ -15,9 +15,9 @@
                     class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full"
                     onchange="this.form.submit()">
                     <option value="">Semua</option>
-                    <option value="false">Belum Diberikan</option>
-                    <option value="true">Sudah Diberikan</option>
-                    <option value="verif">Verifikasi</option>
+                    <option value="false" {{ request('filter') == 'false' ? 'selected' : '' }}>Belum Diberikan</option>
+                    <option value="true" {{ request('filter') == 'true' ? 'selected' : '' }}>Sudah Diberikan</option>
+                    <option value="verif" {{ request('filter') == 'verif' ? 'selected' : '' }}>Verifikasi</option>
                 </select>
             </form>
 
@@ -79,24 +79,30 @@
                                 @if ($user->roles->isEmpty())
                                 <form action="{{ route('pengguna.verifikasi', $user->id) }}" method="GET">
                                     @csrf
-                                    <button type="submit"
-                                        class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
+                                    <button type="submit" onclick="confirmUser(event)"
+                                        class=" text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
                                         Verifikasi
                                     </button>
                                 </form>
-                                @endif
-
-                                @if ($user->pertanian->isEmpty())
-                                <button type="button" onclick="openModal({{ $user->id }})"
-                                    class="bg-green-600 hover:bg-green-800 text-white px-5 py-2.5 rounded-full shadow-md transition-all duration-300 text-sm">
-                                    Beri lahan
-                                </button>
-                                @else
                                 <button type="button"
                                     class="bg-green-200 hover:bg-green-200 text-grey px-5 py-2.5 rounded-full text-sm">
                                     Beri lahan
                                 </button>
+                                @else
+                                    @if ($user->pertanian->isEmpty())
+                                    <button type="button" onclick="openModal({{ $user->id }})"
+                                        class="bg-green-600 hover:bg-green-800 text-white px-5 py-2.5 rounded-full shadow-md transition-all duration-300 text-sm">
+                                        Beri lahan
+                                    </button>
+                                    @else
+                                    <button type="button"
+                                        class="bg-green-200 hover:bg-green-200 text-grey px-5 py-2.5 rounded-full text-sm">
+                                        Beri lahan
+                                    </button>
+                                    @endif
                                 @endif
+
+
 
                             </td>
                         </tr>

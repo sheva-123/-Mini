@@ -50,15 +50,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($activityLogs as $log)
-                            <tr class="border-t">
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $log->user->name }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $log->activity }}</td>
-                                <td class="px-4 py-2 text-sm text-green-500">{{ $log->description }}</td>
-                                <td class="px-4 py-2 text-sm text-yellow-500">{{ $log->created_at->diffForHumans() }}</td>
-                            </tr>
-                            @endforeach
-
+                            @if ($activityLogs->isEmpty())
+                                <div class="text-center py-6">
+                                    <p class="text-gray-500">Tidak ada data.</p>
+                                </div>
+                            @else
+                                @foreach ($activityLogs as $log)
+                                    <tr class="border-t">
+                                        <td class="px-4 py-2 text-sm text-gray-700">{{ $log->user->name }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700">{{ $log->activity }}</td>
+                                        <td class="px-4 py-2 text-sm text-green-500">{{ $log->description }}</td>
+                                        <td class="px-4 py-2 text-sm text-yellow-500">{{ $log->created_at->diffForHumans() }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

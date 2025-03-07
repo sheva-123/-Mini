@@ -12,6 +12,7 @@ class Pertanian extends Model
         'nama_pertanian',
         'lokasi_pertanian',
         'luas_lahan',
+        'kondisi',
         'tanaman_id',
     ];
 
