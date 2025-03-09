@@ -37,7 +37,6 @@
                 </select>
                 <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
             </form>
-            <a href="{{ route('pengeluarans.create') }}" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Tambah</a>
         </div>
 
         <!-- Table Data -->
@@ -47,9 +46,9 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Tanggal Pengeluaran</th>
-                            <th scope="col" class="px-6 py-3">Jenis Pengeluaran</th>
-                            <th scope="col" class="px-6 py-3">Biaya</th>
+                            <th scope="col" class="px-6 py-3">Nama Penanaman</th>
+                            <th scope="col" class="px-6 py-3">Jumlah Tanaman</th>
+                            <th scope="col" class="px-6 py-3">Total Pengeluaran</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -57,24 +56,13 @@
                         @foreach ($pengeluarans as $pengeluaran)
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $pengeluaran->tanggal_pengeluaran }}</td>
-                            <td class="px-6 py-4">{{ $pengeluaran->jenis_pengeluaran }} </td>
-                            <td class="px-6 py-4">Rp {{ number_format($pengeluaran->biaya, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4">{{ $pengeluaran->nama }}</td>
+                            <td class="px-6 py-4">{{ $pengeluaran->jumlah_tanaman }} </td>
+                            <td class="px-6 py-4">Rp tes</td>
                             <td class="px-6 py-4 flex items-center space-x-4">
-                                <a href="{{ route('pengeluarans.edit', $pengeluaran) }}" class="text-yellow-500 hover:text-yellow-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 4.232l4.536 4.536-9 9H6v-4.768l9-9zM9 11l3 3" />
-                                    </svg>
+                                <a href="{{ route('pengeluarans.detail', $pengeluaran->id) }}" class="text-yellow-500 hover:text-yellow-700">
+                                    <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <form action="{{ route('pengeluarans.destroy', $pengeluaran->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="deleteRecord(event)">
-                                        <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M18 6L6 6M12 6v12m6 0H6" stroke="#ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemeliharaan;
 use App\Models\Penanaman;
 use App\Models\Pertanian;
+use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
@@ -109,6 +110,17 @@ class PemeliharaanController extends Controller
                                 ->withErrors($validator)
                                 ->withInput();
             }
+
+        if ($request->biaya > 0) {
+            Pengeluaran::create([
+                'pertanian_id' => $request->pertanian_id,
+                'penanaman_id' => $request->penanaman_id,
+                'tanggal_pengeluaran' => $request->tanggal_pemeliharaan,
+                'jenis_pengeluaran' => $request->jenis_pemeliharaan,
+                'biaya' => $request->biaya,
+            ]);
+        }
+
 
         Pemeliharaan::create([
             'pertanian_id' => $request->pertanian_id,

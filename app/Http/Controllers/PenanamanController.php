@@ -33,14 +33,13 @@ class PenanamanController extends Controller
             $query->where(function ($q) use ($search, $user) {
                 $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
                     $subQ->where('nama_pertanian', 'like', "%$search%")
-                    ->whereHas('users', function ($userQ) use ($user) {
-                        $userQ->where('users.id', $user->id);
-                    });
-                })->orWhereHas('tanaman', function ($subQ) use ($search) {
-                    $subQ->where('nama_tanaman', 'like', "%$search%");
-                })->orWhere('jumlah_tanaman', 'like', "%$search%");
+                        ->whereHas('users', function ($userQ) use ($user) {
+                            $userQ->where('users.id', $user->id);
+                        });
+                })
+                    ->orWhere('nama', 'like', "%$search%")
+                    ->orWhere('jumlah_tanaman', 'like', "%$search%");
             });
-            
         }
 
         if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {

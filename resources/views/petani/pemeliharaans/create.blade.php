@@ -36,7 +36,7 @@
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Penanaman</label>
                         <select name="penanaman_id" id="penanaman_id" class="w-full p-2 border rounded-lg">
                             @foreach ($penanaman as $penanaman)
                             <option value="{{ $penanaman->id }}">{{ $penanaman->nama }}</option>

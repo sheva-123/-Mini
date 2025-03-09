@@ -36,6 +36,12 @@
                         </select>
                     </div>
                     <div class="mb-4">
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Penanaman</label>
+                        <select name="penanaman_id" id="penanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
+                            <option value="{{ $penanamans->id }}">{{ $penanamans->nama }}</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label for="tanggal_pengeluaran" class="block text-sm font-medium text-gray-700">Tanggal Pengeluaran</label>
                         <input type="date" name="tanggal_pengeluaran" id="tanggal_pengeluaran" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
                     </div>
@@ -51,7 +57,7 @@
                         class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
                         Simpan
                     </button>
-                    <a href="{{ route('pengeluarans.index') }}">
+                    <a href="{{ url()->previous() }}">
                         <button type="button"
                             class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
                             Kembali
