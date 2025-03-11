@@ -8,6 +8,20 @@
         </div>
     </header>
 
+    <div class="flex flex-wrap justify-between items-center gap-4">
+        <form action="{{ route('admin.laporans.index') }}" method="get" class="flex flex-wrap gap-3 items-center w-full md:w-auto">
+            <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
+            <input type="date" name="tanggal_awal" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_awal') }}">
+            <input type="date" name="tanggal_akhir" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_akhir') }}">
+            <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
+                <option value="">Urutan Data</option>
+                <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
+                <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Terlama</option>
+            </select>
+            <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
+        </form>
+    </div>
+
     <div class="container mx-auto px-4">
         <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
             <div class="relative overflow-x-auto">
@@ -15,52 +29,49 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
-                            <th scope="col" class="px-6 py-3">Lahan</th>
-                            <th scope="col" class="px-6 py-3">Lokasi</th>
                             <th scope="col" class="px-6 py-3">Nama Pengguna</th>
-                            <th scope="col" class="px-6 py-3">Aksi</th>
+                            <th scope="col" class="px-6 py-3 text-center">Lahan</th>
+                            <th scope="col" class="px-6 py-3 text-center">Penanaman</th>
+                            <th scope="col" class="px-6 py-3 text-center">Tanaman</th>
+                            <th scope="col" class="px-6 py-3 text-center">Status Panen</th>
+                            <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($laporans as $user)
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">
-                                @foreach ($user->pertanian as $pertanian)
-                                {{ $pertanian->nama_pertanian }}
+                            <td class="px-6 py-4">{{ optional($user->pertanian->users->first())->name }}</td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->pertanian->nama_pertanian }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->nama }}
+                            </td>
+                            <td class="px-6 py-4 text-center">{{ $user->tanaman->nama_tanaman }}</td>
+                            <td class="px-6 py-4 text-center">@foreach ($user->pemanenan as $panen)
+                                <span class="{{ $panen->status_panen == 'Berhasil' ? 'text-green-500' : 'text-red-500' }}">
+                                    {{ $panen->status_panen }}
+                                </span>@if (!$loop->last), @endif
                                 @endforeach
                             </td>
-                            <td class="px-6 py-4">
-                                @foreach ($user->pertanian as $pertanian)
-                                {{ $pertanian->lokasi_pertanian }}
-                                @endforeach
-                            </td>
-                            <td class="px-6 py-4">{{ $user->name }}</td>
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <a href="{{ route('admin.laporans.show', $user->id) }}"
-                                    class="text-blue-500 hover:text-blue-700">
-                                    <svg fill="none" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
-                                        stroke="currentColor" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <title></title>
-                                            <path
-                                                d="M15,2A8,8,0,0,0,8.69,14.9l-6.4,6.4,1.41,1.41,6.4-6.4A8,8,0,1,0,15,2Zm0,14a6,6,0,1,1,6-6A6,6,0,0,1,15,16Z">
-                                            </path>
-                                            <rect height="2" width="2" x="14" y="6"></rect>
-                                            <rect height="5" width="2" x="14" y="9"></rect>
-                                        </g>
-                                    </svg>
+                                    class="text-yellow-500 hover:text-yellow-700">
+                                    <i class="fa-solid fa-eye"></i>
                                 </a>
+                                <a href=""
+                                    class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+
                             </td>
 
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @if ($users->isEmpty())
+                @if ($laporans->isEmpty())
                 <div class="text-center py-6">
                     <p class="text-gray-500">Tidak ada data yang tersedia.</p>
                 </div>

@@ -49,7 +49,8 @@ Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(funct
     Route::resource('pemeliharaans', PemeliharaanController::class)->names('pemeliharaans');
     Route::resource('pemanenans', PemanenanController::class);
     Route::resource('pengeluarans', PengeluaranController::class)->except(['create', 'show']);
-    Route::resource('laporans', LaporanController::class);
+    Route::resource('laporans', LaporanController::class)->except(['show']);
+    Route::get('/laporans/{id}', [LaporanController::class, 'detail'])->name('laporans.detail');
     Route::get('/laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
     Route::get('/pengeluaran/{id}', [PengeluaranController::class, 'detail'])->name('pengeluarans.detail');
     Route::get('/pengeluaran/{id}/create/', [PengeluaranController::class, 'create'])->name('pengeluarans.create');

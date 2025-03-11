@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use App\Models\Pertanian;
+use App\Models\Penanaman;
+use App\Models\Pemeliharaan;
+use App\Models\Pemanenan;
+use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
@@ -20,11 +24,12 @@ class LaporanController extends Controller
         $user = Auth::user();
 
 
-        $query = Laporan::whereHas('pertanian', function ($query) use ($user) {
+        $query = Penanaman::whereHas('pertanian', function ($query) use ($user) {
             $query->whereHas('users', function ($q) use ($user) {
                 $q->where('users.id', $user->id);
             });
-        });
+        })
+        ->with('pemanenan');
 
         // Pencarian berdasarkan tanggal_laporan
         if ($request->filled('search')) {
@@ -60,106 +65,37 @@ class LaporanController extends Controller
         return view('petani.laporans.index', compact('laporans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function detail($id)
     {
-        $user = Auth::user();
-        
+        $penanaman = Penanaman::where('id', $id)->first();
 
-        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
-            $query->where('users.id', $user->id);
+        $pemeliharaan = Pemeliharaan::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
         })
         ->get();
-        return view('petani.laporans.create', compact('pertanians'));
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'pertanian_id' => 'required|exists:pertanians,id',
-            'tanggal_laporan' => 'required|date',
-            'deskripsi' => 'required|string|max:255',
-        ],[
-            'tanggal_laporan.date' => 'Date Required',
-            'deskripsi.max:255' => 'Maximal string 255 character',
-        ]);
+        $pengeluaranJml = Pengeluaran::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+        ->sum('biaya');
 
-            if($validator->fails()) {
-                $error = $validator->errors();
-                return redirect()->route('laporans.index')
-                                ->withErrors($validator)
-                                ->withInput();
-            }
+        $pengeluaran = Pengeluaran::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+        ->get();
 
-        $validatedData = $request->validate([
-            'pertanian_id' => 'required',
-            'tanggal_laporan' => 'required|date',
-            'deskripsi' => 'required',
-        ]);
+        $pemanenan = Pemanenan::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+        ->first();
 
-        Laporan::create($validatedData);
+        $laporan = Laporan::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+        ->get();
 
-        return redirect()->route('laporans.index')->with('success', 'Laporan berhasil dibuat.');
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Laporan $laporan)
-    {
-        return view('petani.laporans.show', compact('laporan'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Laporan $laporan)
-    {
-        $pertanians = Pertanian::all();
-        return view('petani.laporans.edit', compact('laporan', 'pertanians'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Laporan $laporan)
-    {
-        $validator = Validator::make($request->all(), [
-            'pertanian_id' => 'required|exists:pertanians,id',
-            'tanggal_laporan' => 'required|date',
-            'deskripsi' => 'required|string|max:255',
-        ], [
-            'tanggal_laporan.date' => 'Date Required',
-            'deskripsi.max:255' => 'Maximal string 255 character',
-        ]);
-
-            if ($validator->fails()) {
-                $error = $validator->error();
-                return redirect()->route('laporans.index')
-                ->withErrors($validator)
-                    ->withInput();
-            }
-
-        $laporan->update($request->all());
-
-        return redirect()->route('laporans.index')->with('success', 'Laporan berhasil diperbarui.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Laporan $laporan)
-    {
-        try {
-            $laporan->delete();
-            return redirect()->route('laporans.index')->with('success', 'Laporan berhasil dihapus.');
-        } catch (\Exception $e) {
-            return redirect()->route('laporans.index')->with('error', 'Terjadi kesalahan saat menghapus laporan: ' . $e->getMessage());
-    }
+        // dd($penanaman->toArray());
+        return view('petani.laporans.detail', compact('penanaman', 'pemeliharaan', 'pengeluaran', 'pengeluaranJml', 'pemanenan', 'laporan'));
     }
 }

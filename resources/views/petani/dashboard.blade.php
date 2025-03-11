@@ -34,8 +34,8 @@
                             <p class="text-2xl font-bold text-green-600">{{ $pemanenan }}</p>
                         </div>
                         <div class="bg-red-100 p-4 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold">Total Pengeluaran</h3>
-                            <p class="text-2xl font-bold text-red-600">Rp {{ number_format($pengeluaran, 0, ',', '.') }}</p>
+                            <h3 class="text-lg font-semibold">Kondisi Lahan</h3>
+                            <p class="text-2xl font-bold text-red-600">{{ $lahan->kondisi }}</p>
                         </div>
                     </div>
 

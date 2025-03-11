@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengeluaran;
 use App\Models\Pertanian;
 use App\Models\Penanaman;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
@@ -118,13 +119,21 @@ class PengeluaranController extends Controller
                                 ->withInput();
             }
 
-        Pengeluaran::create([
+        $pengeluaran = Pengeluaran::create([
             'pertanian_id' => $request->pertanian_id,
             'penanaman_id' => $request->penanaman_id,
             'tanggal_pengeluaran' => $request->tanggal_pengeluaran,
             'jenis_pengeluaran' => $request->jenis_pengeluaran,
             'biaya' => $request->biaya,
         ]);
+
+        $lap = Laporan::create([
+            'pertanian_id' => $pengeluaran->pertanian_id,
+            'penanaman_id' => $pengeluaran->penanaman_id,
+            'pengeluaran_id' => $pengeluaran->id,
+        ]);
+
+        // dd($lap);
 
         $this->logActivity('Menambah Pengeluaran', 'Pengguna dengan nama'. $id->name . ' menambahkan pengeleuaran pada lahan yang dikelolanya');
 

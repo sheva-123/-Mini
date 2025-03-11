@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pertanian_id')->constrained('pertanians')->onDelete('cascade');
-            $table->date('tanggal_laporan');
-            $table->string('deskripsi');
+            $table->foreignId('pertanian_id')->nullable()->constrained('pertanians')->onDelete('cascade');
+            $table->foreignId('penanaman_id')->nullable()->constrained('penanamans')->onDelete('cascade');
+            $table->foreignId('pemeliharaan_id')->nullable()->constrained('pemeliharaans')->onDelete('cascade');
+            $table->foreignId('pemanenan_id')->nullable()->constrained('pemanenans')->onDelete('cascade');
+            $table->foreignId('pengeluaran_id')->nullable()->constrained('pengeluarans')->onDelete('cascade');
             $table->timestamps();
         });
     }

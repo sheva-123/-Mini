@@ -58,7 +58,7 @@
                     <div class="mb-4">
                         <label for="status_panen" class="block text-sm font-medium text-gray-700">Status Panen</label>
                         <select name="status_panen" id="status_panen" class="w-full p-2 border rounded-lg" required>
-                            <option value="" disabled selected>Pilih Status</option>
+                            <option value="" disabled selected>Pilih Status Panen</option>
                             <option value="Berhasil">Berhasil</option>
                             <option value="Gagal">Gagal</option>
                         </select>

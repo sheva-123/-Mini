@@ -37,7 +37,6 @@
                 </select>
                 <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
             </form>
-            <a href="{{ route('laporans.create') }}" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Tambah</a>
         </div>
 
         <!-- Table Data -->
@@ -47,9 +46,10 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th class="px-6 py-3">No</th>
-                            <th class="px-6 py-3">Pertanian</th>
-                            <th class="px-6 py-3">Tanggal Laporan</th>
-                            <th class="px-6 py-3">Deskripsi</th>
+                            <th class="px-6 py-3">Penanaman</th>
+                            <th class="px-6 py-3">Jumlah Tanaman</th>
+                            <th class="px-6 py-3">Jumlah Panen</th>
+                            <th class="px-6 py-3">Status</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -57,20 +57,32 @@
                         @foreach ($laporans as $laporan)
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $laporan->pertanian->nama_pertanian }}</td>
-                            <td class="px-6 py-4">{{ $laporan->tanggal_laporan }}</td>
-                            <td class="px-6 py-4">{{ $laporan->deskripsi }}</td>
+                            <td class="px-6 py-4">{{ $laporan->nama }}</td>
+                            <td class="px-6 py-4">{{ $laporan->jumlah_tanaman }}</td>
+                            <td class="px-6 py-4">
+                                @foreach ($laporan->pemanenan as $p)
+                                {{ $p->jumlah_hasil }}
+                                @endforeach
+                            </td>
+                            <td class="px-6 py-4">
+                                @foreach ($laporan->pemanenan as $pem)
+                                @if ($pem->status_panen === 'Berhasil')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                    Berhasil
+                                </span>
+                                @else
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                    Gagal
+                                </span>
+                                @endif
+                                @endforeach
+                            </td>
                             <td class="px-6 py-4 flex gap-3">
-                                <a href="{{ route('laporans.edit', $laporan->id) }}" class="text-yellow-500 hover:text-yellow-700">
-                                    <i class="fas fa-edit"></i>
+                                <a href="{{ route('laporans.detail', $laporan->id) }}" class="text-yellow-500 hover:text-yellow-700">
+                                    <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <form action="{{ route('laporans.destroy', $laporan->id) }}" method="POST" onclick="deleteRecord(event)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Dashboard</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-green-50">
@@ -78,28 +79,30 @@
     <!-- Scripts -->
 
     @if (session('success'))
-        <script>
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session('success') }}',
-                showConfirmButton: false,
-                timer: 3000
-            });
-        </script>
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '{{ session('
+            success ') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
     @endif
     @if (session('error'))
-        <script>
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: '{{ session('error') }}',
-                showConfirmButton: false,
-                timer: 3000
-            });
-        </script>
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: '{{ session('
+            error ') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
     @endif
 
     <script>
@@ -131,23 +134,23 @@
         }
 
         function deleteRecord(event) {
-        event.preventDefault();
-        const form = event.target.closest('form');
-        Swal.fire({
-            title: "Apakah kamu yakin menghapus data ini?",
-            text: "Anda tidak dapat mengembalikan data ini!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ya, hapus!",
-            cancelButtonText: "Batal"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit()
-            }
-        });
-    }
+            event.preventDefault();
+            const form = event.target.closest('form');
+            Swal.fire({
+                title: "Apakah kamu yakin menghapus data ini?",
+                text: "Anda tidak dapat mengembalikan data ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+                }
+            });
+        }
     </script>
 </body>
 

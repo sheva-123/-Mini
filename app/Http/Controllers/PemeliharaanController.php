@@ -6,6 +6,7 @@ use App\Models\Pemeliharaan;
 use App\Models\Penanaman;
 use App\Models\Pertanian;
 use App\Models\Pengeluaran;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
@@ -26,6 +27,9 @@ class PemeliharaanController extends Controller
                     $query->whereHas('users', function ($q) use ($user) {
                         $q->where('users.id', $user->id);
                     });
+                })
+                ->whereHas('penanaman', function ($pQ) {
+                    $pQ->where('status', 'Proses');
                 })
                 ->with('penanaman');
 
@@ -99,7 +103,7 @@ class PemeliharaanController extends Controller
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|integer|min:0',
             'kondisi' => 'required|in:Baik,Cukup,Buruk',
-            'kondisiLahan' => 'required|in:Kering,Basah,Lembab'
+            'kondisi_lahan' => 'required|in:Kering,Basah,Lembab'
         ], [
             'biaya.min' => 'Biaya Tidak Boleh Minus',
         ]);
@@ -112,7 +116,7 @@ class PemeliharaanController extends Controller
             }
 
         if ($request->biaya > 0) {
-            Pengeluaran::create([
+            $pengeluaran = Pengeluaran::create([
                 'pertanian_id' => $request->pertanian_id,
                 'penanaman_id' => $request->penanaman_id,
                 'tanggal_pengeluaran' => $request->tanggal_pemeliharaan,
@@ -122,7 +126,7 @@ class PemeliharaanController extends Controller
         }
 
 
-        Pemeliharaan::create([
+        $pemeliharaan = Pemeliharaan::create([
             'pertanian_id' => $request->pertanian_id,
             'penanaman_id' => $request->penanaman_id,
             'tanggal_pemeliharaan' => $request->tanggal_pemeliharaan,
@@ -134,9 +138,20 @@ class PemeliharaanController extends Controller
         $pertanian = Pertanian::find($request->pertanian_id);
         if ($pertanian) {
             $pertanian->update([
-                'kondisi' => $request->kondisiLahan,
+                'kondisi' => $request->kondisi_lahan,
             ]);
         }
+
+        // dd($pertanian);
+
+        $lap = Laporan::create([
+            'pertanian_id' => $pemeliharaan->pertanian_id,
+            'penanaman_id' => $pemeliharaan->penanaman_id,
+            'pemeliharaan_id' => $pemeliharaan->id,
+            'pengeluaran_id' => $pengeluaran->id,
+        ]);
+
+        // dd($lap);
 
         $this->logActivity('Tambah Pemeliharaan', 'Pengguna dengan nama ' . $id->name . ' menambahkan pemeliharaan pada lahan yang dikelolanya');
 

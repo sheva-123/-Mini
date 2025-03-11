@@ -4,20 +4,49 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use App\Models\User;
+use App\Models\Penanaman;
 use Illuminate\Http\Request;
 
 class AdminLaporanController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::whereHas('pertanian')
-                            ->with('pertanian')
-                            ->get();
+        $query = Penanaman::with('pertanian', 'pemanenan', 'pertanian.users', 'tanaman');
 
-        
-        
+        // Pencarian berdasarkan tanggal_laporan
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->whereHas('pertanian', function ($subQ) use ($search) {
+                    $subQ->where('nama_pertanian', 'like', "%$search%");
+                })
+                ->orWhereHas('pertanian.users', function ($userQ) use ($search) {
+                    $userQ->where('name', 'like', "%$search%");
+                })
+                ->orWhereHas('tanaman', function ($tQ) use ($search) {
+                    $tQ->where('nama_tanaman', 'like', "%$search%");
+                })
+                ->orWhere('nama', 'like', "%$search%")
+                ->orWhere('jumlah_tanaman', 'like', "%$search%");
+            });
+        }
 
-        return view('admin.laporans.index', compact('users'));
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $query->whereBetween('tanggal_tanam', [$request->tanggal_awal, $request->tanggal_akhir]);
+        }
+
+        if ($request->filled('sort')) {
+            $sort = $request->sort;
+            if ($sort === 'a-z') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'z-a') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
+
+        $laporans = $query->get();
+
+        return view('admin.laporans.index', compact('laporans'));
     }
 
     public function show(Request $request, $id)

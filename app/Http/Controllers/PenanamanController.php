@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Penanaman;
 use App\Models\Pertanian;
 use App\Models\Tanaman;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
@@ -110,13 +111,18 @@ class PenanamanController extends Controller
                                 ->withInput();
             }
 
-        Penanaman::create([
+        $penanaman = Penanaman::create([
             'pertanian_id' => $request->pertanian_id,
             'tanaman_id' => $request->tanaman_id,
             'nama' => $request->namaPenanaman,
             'tanggal_tanam' => $request->tanggal_tanam,
             'jumlah_tanaman' => $request->jumlah_tanaman,
             'status' => 'Proses',
+        ]);
+
+        Laporan::create([
+            'pertanian_id' => $penanaman->pertanian_id,
+            'penanaman_id' => $penanaman->id,
         ]);
 
         $this->logActivity('Tambah Penanaman', 'Pengguna dengan nama ' . $id->name . ' menanam tanaman di lahan yang dikelolanya.');

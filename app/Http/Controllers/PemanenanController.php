@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemanenan;
 use App\Models\Penanaman; // Model Penanaman
 use App\Models\Pertanian;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LogsActivity;
@@ -88,7 +89,7 @@ class PemanenanController extends Controller
             'penanaman_id' => 'required|exists:penanamans,id',
             'tanggal_pemanenan' => 'required|date',
             'jumlah_hasil' => 'required|integer|min:0',
-            'status_panen' => 'required|in:Berhasil,Gagal'
+            'status_panen' => 'required|in:Berhasil,Gagal',
         ],[
             'tanggal_pemanenan.date' => 'Tanggal Wajib Di Isi',
             'jumlah_hasil' => 'Jumlah Hasil Tidak Boleh Minus',
@@ -101,7 +102,9 @@ class PemanenanController extends Controller
             //                     ->withInput();
             // }
 
-        Pemanenan::create([
+            // dd($request->status_panen);
+
+        $pemanenan = Pemanenan::create([
             'pertanian_id' => $request->pertanian_id,
             'penanaman_id' => $request->penanaman_id,
             'tanggal_pemanenan' => $request->tanggal_pemanenan,
@@ -115,6 +118,14 @@ class PemanenanController extends Controller
                 'status' => 'Selesai',
             ]);
         }
+
+        Laporan::create([
+            'pertanian_id' => $pemanenan->pertanian_id,
+            'penanaman_id' => $pemanenan->penanaman_id,
+            'pemanenan_id' => $pemanenan->id,
+        ]);
+
+        // dd($lap);
 
         // dd($penanaman);
 

@@ -67,8 +67,8 @@
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label for="kondisiLahan" class="block text-sm font-medium text-gray-700">Kondisi Lahan</label>
-                        <select name="kondisiLahan" id="kondisiLahan" class="w-full p-2 border rounded-lg" required>
+                        <label for="kondisi_lahan" class="block text-sm font-medium text-gray-700">Kondisi Lahan</label>
+                        <select name="kondisi_lahan" id="kondisi_lahan" class="w-full p-2 border rounded-lg" required>
                             <option value="" disabled selected>Pilih Kondisi</option>
                             <option value="Kering">Kering</option>
                             <option value="Basah">Basah</option>
