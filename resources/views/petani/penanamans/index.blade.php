@@ -48,11 +48,11 @@
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
                             <th scope="col" class="px-6 py-3">Nama</th>
-                            <th scope="col" class="px-6 py-3">Tanaman</th>
-                            <th scope="col" class="px-6 py-3">Tanggal Tanam</th>
-                            <th scope="col" class="px-6 py-3">Perkiraan Panen</th>
-                            <th scope="col" class="px-6 py-3">Jumlah Tanaman</th>
-                            <th scope="col" class="px-6 py-3">Status</th>
+                            <th scope="col" class="px-6 py-3 text-center">Tanaman</th>
+                            <th scope="col" class="px-6 py-3 text-center">Tanggal Tanam</th>
+                            <th scope="col" class="px-6 py-3 text-center">Perkiraan Panen</th>
+                            <th scope="col" class="px-6 py-3 text-center">Jumlah Tanaman</th>
+                            <th scope="col" class="px-6 py-3 text-center">Status</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -61,11 +61,11 @@
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $p->nama }}</td>
-                            <td class="px-6 py-4">{{ $p->tanaman->nama_tanaman }}</td>
-                            <td class="px-6 py-4">{{ $p->tanggal_tanam }}</td>
-                            <td class="px-6 py-4">{{ $p->expired }}</td>
-                            <td class="px-6 py-4">{{ $p->jumlah_tanaman }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">{{ $p->tanaman->nama_tanaman }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->tanggal_tanam }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->expired }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->jumlah_tanaman }}</td>
+                            <td class="px-6 py-4 text-center">
                                 @if($p->status === 'Selesai')
                                 <span
                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">

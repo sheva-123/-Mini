@@ -45,10 +45,10 @@
                 <table class="w-full text-md text-left rtl:text-right text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                         <tr>
-                            <th scope="col" class="px-6 py-3">No</th>
+                            <th scope="col" class="px-6 py-3 text-left">No</th>
                             <th scope="col" class="px-6 py-3">Nama Penanaman</th>
-                            <th scope="col" class="px-6 py-3">Jumlah Tanaman</th>
-                            <th scope="col" class="px-6 py-3">Total Pengeluaran</th>
+                            <th scope="col" class="px-6 py-3 text-center">Jumlah Tanaman</th>
+                            <th scope="col" class="px-6 py-3 text-center">Status</th>
                             <th scope="col" class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -57,8 +57,8 @@
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $pengeluaran->nama }}</td>
-                            <td class="px-6 py-4">{{ $pengeluaran->jumlah_tanaman }} </td>
-                            <td class="px-6 py-4">Rp tes</td>
+                            <td class="px-6 py-4 text-center">{{ $pengeluaran->jumlah_tanaman }} </td>
+                            <td class="px-6 py-4 text-center">{{ $pengeluaran->status }}</td>
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <a href="{{ route('pengeluarans.detail', $pengeluaran->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fa-solid fa-eye"></i>

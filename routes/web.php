@@ -40,7 +40,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('tanamans', TanamanController::class);
     Route::resource('pengguna', UserController::class);
     Route::get('/admin/laporans', [AdminLaporanController::class, 'index'])->name('admin.laporans.index');
-    Route::get('/admin/laporans/{id}', [AdminLaporanController::class, 'show'])->name('admin.laporans.show');
+    Route::get('/admin/laporans/{id}', [AdminLaporanController::class, 'detail'])->name('admin.laporans.detail');
 });
 
 Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(function () {

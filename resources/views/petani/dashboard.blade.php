@@ -40,65 +40,109 @@
                     </div>
 
                     <!-- Tabel Lahan -->
-                    <div class="bg-white mt-8 rounded-lg shadow">
-                        <h2 class="p-5 text-xl font-bold mb-4">Lahan Anda</h2>
-
-                        <div class="p-3 overflow-x-auto">
-                            @if (is_null($lahan))
-                            <div class="text-center py-6">
-                                <p class="text-gray-500">Admin Belum Memberi Anda Lahan.</p>
-                            </div>
-                            @else
-                            <table class="min-w-full border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Nama Lahan</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Lokasi Lahan</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Luas Lahan</th>
+                    <div class="mt-6 bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-lg font-bold text-gray-800">Informasi Lahan</h3>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="min-w-full bg-white border">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Nama Lahan</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Lokasi</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Tanaman</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Umur Panen</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $lahan->nama_pertanian }}</td>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $lahan->lokasi_pertanian }}</td>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $lahan->luas_lahan }} ha</td>
+                                    @if (is_null($lahan))
+                                    <div class="text-center py-6">
+                                        <p class="text-white-500">Tidak ada data.</p>
+                                    </div>
+                                    @else
+                                    <tr class="border-t">
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $lahan->nama_pertanian }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $lahan->lokasi_pertanian }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">
+                                            {{ $lahan->tanaman->nama_tanaman }}
+                                        </td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $lahan->tanaman->umur_panen }} Hari</td>
                                     </tr>
+                                    @endif
                                 </tbody>
                             </table>
-                            @endif
-
                         </div>
                     </div>
 
-                    <!-- Tabel Tanaman -->
-                    <div class="bg-white mt-8 rounded-lg shadow">
-                        <h2 class="p-5 text-xl font-bold mb-4">Tanaman Anda</h2>
 
-                        <div class="p-3 overflow-x-auto">
-                            @if (is_null($tanaman))
-                            <div class="text-center py-6">
-                                <p class="text-gray-500">Tidak ada data yang tersedia.</p>
-                            </div>
-                            @else
-                            <table class="min-w-full border-collapse border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Nama Tanaman</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Jenis Tanaman</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Umur Panen</th>
-                                        <th class="border border-gray-200 px-4 py-2 text-left">Deskripsi Tanaman</th>
+                    <div class="mt-6 bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-lg font-bold text-gray-800">History Pemeliharaan</h3>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="min-w-full bg-white border">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">No</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Penanaman</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Jenis Pemeliharaan</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Biaya</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $tanaman->nama_tanaman }}</td>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $tanaman->jenis }}</td>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $tanaman->umur_panen }} Hari</td>
-                                        <td class="border border-gray-200 px-4 py-2">{{ $tanaman->deskripsi }}</td>
+                                    @if (is_null($pemeliharaan))
+                                    <div class="text-center py-6">
+                                        <p class="text-white-500">Tidak ada data.</p>
+                                    </div>
+                                    @else
+                                    @foreach ($pemeliharaan as $pem)
+                                    <tr class="border-t">
+                                        <td class="px-4 py-2 text-left text-sm text-white-500">{{ $loop->iteration }}</td>
+                                        <td class="px-4 py-2 text-left text-sm text-white-500">{{ $pem->penanaman->nama }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $pem->jenis_pemeliharaan }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">
+                                            {{ $pem->biaya }}
+                                        </td>
+                                        <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $pem->created_at->diffForHumans()}}</td>
                                     </tr>
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
-                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-lg font-bold text-gray-800">History Pengeluaran</h3>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="min-w-full bg-white border">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">No</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Penanaman</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Jenis Pengeluaran</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Biaya</th>
+                                        <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Tanggal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (is_null($pengeluaran))
+                                    <div class="text-center py-6">
+                                        <p class="text-white-500">Tidak ada data.</p>
+                                    </div>
+                                    @else
+                                    @foreach ($pengeluaran as $peng)
+                                    <tr class="border-t">
+                                        <td class="px-4 py-2 text-left text-sm text-white-500">{{ $loop->iteration }}</td>
+                                        <td class="px-4 py-2 text-left text-sm text-white-500">{{ $peng->penanaman->nama }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $peng->jenis_pengeluaran }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-white-500">
+                                            {{ $peng->biaya }}
+                                        </td>
+                                        <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $peng->created_at->diffForHumans() }}</td>
+                                    </tr>
+                                    @endforeach
+
+                                    @endif
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 

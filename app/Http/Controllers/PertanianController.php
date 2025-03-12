@@ -16,7 +16,7 @@ class PertanianController extends Controller
         if($search){
             $pertanians = Pertanian::where('nama_pertanian', 'like', '%'. $search . '%')->get();
         }else{
-            $pertanians = Pertanian::with('tanamans')->get();
+            $pertanians = Pertanian::with('tanaman')->get();
         }
 
         $filter = request()->input('filter');
@@ -31,7 +31,7 @@ class PertanianController extends Controller
 
     public function show(Pertanian $pertanian)
     {
-        $pertanians = Pertanian::with('tanamans')->get();
+        $pertanians = Pertanian::with('tanaman')->get();
         return view('admin.pertanians.show', compact('pertanian'));
     }
 

@@ -23,7 +23,6 @@ class LaporanController extends Controller
     {
         $user = Auth::user();
 
-
         $query = Penanaman::whereHas('pertanian', function ($query) use ($user) {
             $query->whereHas('users', function ($q) use ($user) {
                 $q->where('users.id', $user->id);
@@ -60,7 +59,7 @@ class LaporanController extends Controller
 
         $laporans = $query->get();
 
-        // dd($laporans);
+        // dd($pengeluaran);
 
         return view('petani.laporans.index', compact('laporans'));
     }

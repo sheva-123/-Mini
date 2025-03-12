@@ -48,9 +48,9 @@
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
                             <th scope="col" class="px-6 py-3">Nama Penanaman</th>
-                            <th scope="col" class="px-6 py-3">Jenis Pengeluaran</th>
-                            <th scope="col" class="px-6 py-3">Biaya</th>
-                            <th scope="col" class="px-6 py-3">Tanggal</th>
+                            <th scope="col" class="px-6 text-center py-3">Jenis Pengeluaran</th>
+                            <th scope="col" class="px-6 text-center py-3">Biaya</th>
+                            <th scope="col" class="px-6 text-center py-3">Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,9 +58,9 @@
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $pengeluaran->penanaman->nama }}</td>
-                            <td class="px-6 py-4">{{ $pengeluaran->jenis_pengeluaran }}</td>
-                            <td class="px-6 py-4">{{ $pengeluaran->biaya }}</td>
-                            <td class="px-6 py-4">{{ $pengeluaran->tanggal_pengeluaran }}</td>
+                            <td class="px-6 py-4 text-center">{{ $pengeluaran->jenis_pengeluaran }}</td>
+                            <td class="px-6 py-4 text-center">{{ $pengeluaran->biaya }}</td>
+                            <td class="px-6 py-4 text-center">{{ $pengeluaran->tanggal_pengeluaran }}</td>
                         </tr>
                         @endforeach
                     </tbody>

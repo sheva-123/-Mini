@@ -28,8 +28,9 @@
         <div class="flex flex-wrap justify-between items-center gap-4">
             <form action="{{ route('laporans.index') }}" method="get" class="flex flex-wrap gap-3 items-center w-full md:w-auto">
                 <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
-                <input type="date" name="tanggal_awal" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_awal') }}">
-                <input type="date" name="tanggal_akhir" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_akhir') }}">
+                <input type="date" name="tanggalAwal" id="tanggalAwal" class=" px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_awal') }}">
+                <!-- <span id="tanggalAwalPlaceholder" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: gray;">YYYY-MM-DD</span> -->
+                <input type="date" name="tanggalAkhir" id="tanggalAkhir" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_akhir') }}">
                 <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
                     <option value="">Urutan Data</option>
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
@@ -47,9 +48,9 @@
                         <tr>
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Penanaman</th>
-                            <th class="px-6 py-3">Jumlah Tanaman</th>
-                            <th class="px-6 py-3">Jumlah Panen</th>
-                            <th class="px-6 py-3">Status</th>
+                            <th class="px-6 py-3 text-center">Jumlah Tanaman</th>
+                            <th class="px-6 py-3 text-center">Jumlah Panen</th>
+                            <th class="px-6 py-3 text-center">Status</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -58,13 +59,13 @@
                         <tr class="bg-white border-b hover:bg-gray-100">
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $laporan->nama }}</td>
-                            <td class="px-6 py-4">{{ $laporan->jumlah_tanaman }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">{{ $laporan->jumlah_tanaman }}</td>
+                            <td class="px-6 py-4 text-center">
                                 @foreach ($laporan->pemanenan as $p)
                                 {{ $p->jumlah_hasil }}
                                 @endforeach
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 @foreach ($laporan->pemanenan as $pem)
                                 @if ($pem->status_panen === 'Berhasil')
                                 <span
@@ -79,7 +80,7 @@
                                 @endif
                                 @endforeach
                             </td>
-                            <td class="px-6 py-4 flex gap-3">
+                            <td class="px-6 py-4 flex gap-3 items-center">
                                 <a href="{{ route('laporans.detail', $laporan->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
@@ -97,6 +98,23 @@
             </div>
         </div>
     </div>
+
+    <!-- <script>
+        const tanggalAwal = document.getElementById('tanggalAwal');
+        const placeholderAwal = document.getElementById('tanggalAwalPlaceholder');
+
+        tanggalAwal.addEventListener('focus', function() {
+            placeholderAwal.style.display = 'none'; // Sembunyikan placeholder saat input fokus
+        });
+
+        tanggalAwal.addEventListener('blur', function() {
+            if (tanggalAwal.value === '') {
+                placeholderAwal.style.display = 'inline'; // Tampilkan kembali placeholder jika input kosong
+            }
+        });
+    </script> -->
 </body>
+
+
 
 </html>

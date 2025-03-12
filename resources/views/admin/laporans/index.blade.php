@@ -56,7 +56,7 @@
                                 @endforeach
                             </td>
                             <td class="px-6 py-4 flex items-center space-x-4">
-                                <a href="{{ route('admin.laporans.show', $user->id) }}"
+                                <a href="{{ route('admin.laporans.detail', $user->id) }}"
                                     class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>

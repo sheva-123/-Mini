@@ -13,7 +13,7 @@
 
 <body class="bg-gray-100 flex flex-wrap">
     <!-- User Sidebar -->
-    <x-usersidebar></x-usersidebar>
+    <x-sidebar></x-sidebar>
 
     <!-- Main Content -->
     <div class="flex-1 p-7 py-4 md:ml-64">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="bg-indigo-500 text-white p-4 rounded-lg">
                     <h3 class="text-lg font-semibold">Tanggal Panen</h3>
-                    <p class="text-2xl font-bold">{{ $pemanenan->tanggal_pemanenan }}</p>
+                    <p class="text-2xl font-bold">{{ $pemanenan->tanggal_pemanenan ?? 'Tidak Ada Data' }}</p>
                 </div>
                 <div class="bg-cyan-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Total Pengeluaran</h3>
@@ -48,11 +48,11 @@
                 </div>
                 <div class="bg-sky-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Total Panen</h3>
-                    <p class="text-2xl font-bold">{{ $pemanenan->jumlah_hasil }}</p>
+                    <p class="text-2xl font-bold">{{ $pemanenan->jumlah_hasil ?? 'Tidak Ada Data' }}</p>
                 </div>
                 <div class="bg-emerald-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Status Panen</h3>
-                    <p class="text-2xl font-bold">{{ $pemanenan->status_panen }}</p>
+                    <p class="text-2xl font-bold">{{ $pemanenan->status_panen ?? 'Tidak Ada Data' }}</p>
                 </div>
             </div>
         </div>

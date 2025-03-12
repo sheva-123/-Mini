@@ -49,9 +49,9 @@
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Lahan</th>
                             <th class="px-6 py-3">Penanaman</th>
-                            <th class="px-6 py-3">Jumlah</th>
-                            <th class="px-6 py-3">Tanggal Panen</th>
-                            <th class="px-6 py-3">Status</th>
+                            <th class="px-6 py-3 text-center">Jumlah</th>
+                            <th class="px-6 py-3 text-center">Tanggal Panen</th>
+                            <th class="px-6 py-3 text-center">Status</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -61,9 +61,9 @@
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $pemanenan->pertanian->nama_pertanian }}</td>
                             <td class="px-6 py-4">{{ $pemanenan->penanaman->nama }}</td>
-                            <td class="px-6 py-4">{{ $pemanenan->jumlah_hasil }}</td>
-                            <td class="px-6 py-4">{{ $pemanenan->tanggal_pemanenan }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">{{ $pemanenan->jumlah_hasil }}</td>
+                            <td class="px-6 py-4 text-center">{{ $pemanenan->tanggal_pemanenan }}</td>
+                            <td class="px-6 py-4 text-center">
                                 @if ($pemanenan->status_panen === 'Berhasil')
                                 <span
                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">

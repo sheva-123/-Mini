@@ -49,9 +49,9 @@
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Penanaman</th>
                             <th class="px-6 py-3">Jenis</th>
-                            <th class="px-6 py-3">Biaya</th>
-                            <th class="px-6 py-3">Tanggal</th>
-                            <th class="px-6 py-3">Kondisi</th>
+                            <th class="px-6 py-3 text-center">Biaya</th>
+                            <th class="px-6 py-3 text-center">Tanggal</th>
+                            <th class="px-6 py-3 text-center">Kondisi</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
@@ -61,9 +61,9 @@
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $pemeliharaan->penanaman->nama }}</td>
                             <td class="px-6 py-4">{{ $pemeliharaan->jenis_pemeliharaan }}</td>
-                            <td class="px-6 py-4">Rp {{ number_format($pemeliharaan->biaya, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4">{{ $pemeliharaan->tanggal_pemeliharaan }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">Rp {{ number_format($pemeliharaan->biaya, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 text-center">{{ $pemeliharaan->tanggal_pemeliharaan }}</td>
+                            <td class="px-6 py-4 text-center">
                                 @if($pemeliharaan->kondisi_tanaman === 'Baik')
                                 <span
                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
@@ -81,7 +81,7 @@
                                 </span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 flex gap-3">
+                            <td class="px-6 py-4 flex gap-3 text-center">
                                 <a href="{{ route('pemeliharaans.edit', $pemeliharaan->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fas fa-edit"></i>
                                 </a>

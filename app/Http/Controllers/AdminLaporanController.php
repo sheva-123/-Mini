@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use App\Models\User;
+use App\Models\Pemanenan;
+use App\Models\Pemeliharaan;
 use App\Models\Penanaman;
+use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 
 class AdminLaporanController extends Controller
@@ -49,44 +52,37 @@ class AdminLaporanController extends Controller
         return view('admin.laporans.index', compact('laporans'));
     }
 
-    public function show(Request $request, $id)
+    public function detail($id)
     {
+        $penanaman = Penanaman::where('id', $id)->first();
 
-        $query = Laporan::whereHas('pertanian', function ($query) use ($id) {
-                    $query->whereHas('users', function ($q) use ($id) {
-                        $q->where('users.id', $id);
-                    });
-                });
+        $pemeliharaan = Pemeliharaan::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+            ->get();
 
-        if($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search, $id) {
-                $q->whereHas('pertanian', function ($subQ) use ($search, $id) {
-                    $subQ->where('nama_pertanian', 'like', "%$search%")
-                    ->whereHas('users', function ($userQ) use ($id) {
-                        $userQ->where('users.id', $id);
-                    });
-                })
-                ->orWhere('deskripsi', 'like', "%$search%");
-            });
-        }
+        $pengeluaranJml = Pengeluaran::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+            ->sum('biaya');
 
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $query->whereBetween('tanggal_laporan', [$request->tanggal_awal, $request->tanggal_akhir]);
-        }
+        $pengeluaran = Pengeluaran::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+            ->get();
 
-        if ($request->filled('sort')) {
-            $sort = $request->sort;
-            if ($sort === 'a-z') {
-                $query->orderBy('created_at', 'desc');
-            } elseif ($sort === 'z-a') {
-                $query->orderBy('created_at', 'asc');
-            }
-        }
+        $pemanenan = Pemanenan::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+            ->first();
 
-        $laporan = $query->get();
-        // dd($user->toArray());
+        $laporan = Laporan::whereHas('penanaman', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+            ->get();
 
-        return view('admin.laporans.show', compact('laporan', 'id'));
+
+        // dd($penanaman->toArray());
+        return view('admin.laporans.detail', compact('penanaman', 'pemeliharaan', 'pengeluaran', 'pengeluaranJml', 'pemanenan', 'laporan'));
     }
 }

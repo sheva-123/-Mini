@@ -36,7 +36,7 @@ class Pertanian extends Model
         return $this->hasMany(Laporan::class);
     }
 
-    public function tanamans()
+    public function tanaman()
     {
         return $this->belongsTo(Tanaman::class, 'tanaman_id');
     }

@@ -51,7 +51,7 @@
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Nama Pengguna</th>
                             <th class="px-6 py-3">Email</th>
-                            <th class="px-6 py-3">Lahan</th>
+                            <th class="px-6 py-3 text-center">Lahan</th>
                             <th class="px-6 py-3 flex justify-center">Aksi</th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4 font-semibold">{{ $user->name }}</td>
                             <td class="px-6 py-4">{{ $user->email }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 @if ($user->pertanian->isEmpty())
                                 <span
                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
@@ -80,26 +80,22 @@
                                 <form action="{{ route('pengguna.verifikasi', $user->id) }}" method="GET">
                                     @csrf
                                     <button type="submit" onclick="confirmUser(event)"
-                                        class=" text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
+                                        class=" text-black bg-yellow-300 hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">
                                         Verifikasi
                                     </button>
                                 </form>
-                                <button type="button"
-                                    class="bg-green-200 hover:bg-green-200 text-grey px-5 py-2.5 rounded-full text-sm">
+                                @else
+                                @if ($user->pertanian->isEmpty())
+                                <button type="button" onclick="openModal({{ $user->id }})"
+                                    class="bg-green-600 hover:bg-green-800 text-white px-5 py-2.5 rounded-full shadow-md transition-all duration-300 text-sm">
                                     Beri lahan
                                 </button>
                                 @else
-                                    @if ($user->pertanian->isEmpty())
-                                    <button type="button" onclick="openModal({{ $user->id }})"
-                                        class="bg-green-600 hover:bg-green-800 text-white px-5 py-2.5 rounded-full shadow-md transition-all duration-300 text-sm">
-                                        Beri lahan
-                                    </button>
-                                    @else
-                                    <button type="button"
-                                        class="bg-green-200 hover:bg-green-200 text-grey px-5 py-2.5 rounded-full text-sm">
-                                        Beri lahan
-                                    </button>
-                                    @endif
+                                <button type="button"
+                                    class="bg-green-200 hover:bg-green-200 text-grey-600 px-5 py-2.5 rounded-full text-sm">
+                                    Beri lahan
+                                </button>
+                                @endif
                                 @endif
 
 

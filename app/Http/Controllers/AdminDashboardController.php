@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\SemuaJumlahCharts;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pertanian;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
 {
-    public function index()
+    public function index(SemuaJumlahCharts $charts)
     {
         $users = User::whereDoesntHave('roles', function ($query) {
             $query->where('name', 'admin');
@@ -28,6 +29,10 @@ class AdminDashboardController extends Controller
                         ->take(5)
                         ->get();
 
-        return view('admin.dashboard', compact('users', 'lahan', 'tanaman', 'activityLogs'));
+        $chart = $charts->build();
+
+        // dd($chart);
+
+        return view('admin.dashboard', compact('users', 'lahan', 'tanaman', 'activityLogs', 'chart'));
     }
 }

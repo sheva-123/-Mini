@@ -65,7 +65,7 @@ class PemanenanController extends Controller
         $pertanians= Pertanian::whereHas('users', function ($query) use ($user) {
             $query->where('users.id', $user->id);
         })
-        ->with('tanamans')
+        ->with('tanaman')
         ->get();
 
         $penanaman = Penanaman::whereHas('pertanian', function ($query) use ($user) {
@@ -142,7 +142,7 @@ class PemanenanController extends Controller
         $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
             $query->where('users.id', $user->id);
         })
-        ->with('tanamans')
+        ->with('tanaman')
         ->get();
         $penanaman = Penanaman::all();
         return view('petani.pemanenans.edit', compact('pemanenan', 'pertanians', 'penanaman'));
