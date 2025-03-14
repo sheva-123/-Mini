@@ -40,7 +40,7 @@
                                     </div>
 
                                     <div class="flex justify-center">
-                                        <x-primary-button class=" text-lg mt-4 w-[400px]">
+                                        <x-primary-button class="text-lg mt-4 w-[400px]">
                                             {{ __('Masuk') }}
                                         </x-primary-button>
                                     </div>
