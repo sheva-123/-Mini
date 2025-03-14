@@ -14,6 +14,18 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                leftCardAdmin: '#DBEAFE',
+                midCardAdmin: '#FFE396',
+                rightCardAdmin: '#D1FAE5',
+                leftFont: '#2563EB',
+                midFont: '#DFA400',
+                rightFont: '#099669',
+                hoverSidebar: '#04785766',
+                Primary: '#047857',
+                Secondary: '#C8DE00',
+                Thead: '#D1FAE5',
+            },
         },
     },
 

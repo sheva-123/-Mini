@@ -17,7 +17,7 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-7 py-4 md:ml-64">
-        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6">
+        <header class="bg-gradient-to-r from-Primary to-Secondary py-6 px-8 shadow-md rounded-lg mb-6">
             <div class="container mx-auto">
                 <h1 class="text-2xl font-bold text-white">Detail Data Laporan</h1>
                 <p class="text-white text-sm mt-1">User | Detail Laporan</p>
@@ -65,7 +65,7 @@
             <h3 class="text-lg font-bold text-gray-800">Data Pemeliharaan</h3>
             <div class="mt-4 overflow-x-auto">
                 <table class="min-w-full bg-white border">
-                    <thead class="bg-gray-200">
+                    <thead class="bg-Thead">
                         <tr>
                             <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">No</th>
                             <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">Jenis Pemeliharaan</th>
@@ -103,7 +103,7 @@
             <h3 class="text-lg font-bold text-gray-800">Data Pengeluaran</h3>
             <div class="mt-4 overflow-x-auto">
                 <table class="min-w-full bg-white border">
-                    <thead class="bg-gray-200">
+                    <thead class="bg-Thead">
                         <tr>
                             <th class="pl-4 pr-1 py-2 text-left text-sm font-medium text-gray-600">No</th>
                             <th class="py-2 text-left text-sm font-medium text-gray-600">Jenis Pengeluaran</th>

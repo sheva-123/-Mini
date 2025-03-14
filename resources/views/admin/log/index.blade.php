@@ -15,7 +15,7 @@
     <x-sidebar></x-sidebar>
 
     <div class="flex-1 p-3 py-1 md:ml-64">
-        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-6">
+        <header class="bg-gradient-to-r from-Primary to-Secondary py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-6">
             <div class="container mx-auto">
                 <h1 class="text-2xl font-bold text-white">Log Aktifitas Pengguna</h1>
                 <p class="text-white text-sm mt-1">Admin | Log Pengguna</p>
@@ -38,21 +38,20 @@
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
                     <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Terlama</option>
                 </select>
-                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
+                <button type="submit" class="bg-Primary text-white px-5 py-2 rounded-lg hover:bg-green-400">Filter</button>
             </form>
         </div>
 
         <!-- Tabel Data -->
-        <div class="mt-6 mx-6 bg-white shadow-md rounded-lg p-6">
-            <h3 class="text-lg font-bold text-gray-800">Aktifitas Pengguna</h3>
-            <div class="mt-4 overflow-x-auto">
-                <table class="min-w-full bg-white border">
-                    <thead class="bg-gray-200">
+        <div class="mt-7 mx-6 bg-white shadow-md rounded-lg p-6">
+            <div class="mt-1 overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-700 border-collapse">
+                    <thead class="text-md text-gray-900 uppercase bg-green-100 border-b">
                         <tr>
-                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nama Pengguna</th>
-                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-600">Aktifitas</th>
-                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-600">Deskripsi</th>
-                            <th class="px-4 py-2 text-center text-sm font-medium text-gray-600">Waktu</th>
+                            <th class="px-4 py-2 text-left text-gray-600">Nama Pengguna</th>
+                            <th class="px-4 py-2 text-center text-gray-600">Aktifitas</th>
+                            <th class="px-4 py-2 text-center text-gray-600">Deskripsi</th>
+                            <th class="px-4 py-2 text-center text-gray-600">Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,8 +59,8 @@
                         <tr class="border-t">
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $log->user->name }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $log->activity }}</td>
-                            <td class="px-4 py-2 text-sm text-green-500">{{ $log->description }}</td>
-                            <td class="px-4 py-2 text-sm text-yellow-500">{{ $log->created_at->diffForHumans() }}</td>
+                            <td class="px-4 py-2 text-sm text-gray-700">{{ $log->description }}</td>
+                            <td class="px-4 py-2 text-sm text-yellow-600">{{ $log->created_at->diffForHumans() }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -82,7 +81,7 @@
                         <li>
                             <a href="{{ $activityLogs->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
                                 <
-                            </a>
+                                    </a>
                         </li>
                         @endif
 

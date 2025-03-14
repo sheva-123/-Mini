@@ -17,7 +17,7 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-8 py-4 md:ml-64">
-        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6">
+        <header class="bg-gradient-to-r from-Primary to-Secondary py-6 px-8 shadow-md rounded-lg mb-6">
             <div class="container mx-auto">
                 <h1 class="text-2xl font-bold text-white">Data Laporan</h1>
                 <p class="text-white text-sm mt-1">User | Laporan</p>
@@ -33,7 +33,7 @@
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
                     <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Terlama</option>
                 </select>
-                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
+                <button type="submit" class="bg-Primary text-white px-5 py-2 rounded-lg hover:bg-green-400">Filter</button>
             </form>
         </div>
 
@@ -41,7 +41,7 @@
         <div class="mt-6 p-4 bg-white rounded-lg shadow-md">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <thead class="text-xs text-gray-700 uppercase bg-Thead">
                         <tr>
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Penanaman</th>

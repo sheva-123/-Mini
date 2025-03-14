@@ -21,6 +21,6 @@ class SemuaJumlahCharts
             ->setTitle('Chart Penanaman dan Pemanenan.')
             ->setSubtitle('Jumlah Tanaman Berdasarkan Penanaman Dan Pemanenan')
             ->addData([$penanaman, $pemanenan])
-            ->setLabels(['Jumlah Tanaman Penanaman', 'Jumlah Tanaman Pemanenan']);
+            ->setLabels(['Tanam', 'Panen']);
     }
 }

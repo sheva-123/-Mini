@@ -12,30 +12,27 @@ class PanenTanamanChart
 {
     public function build(): OriginalBarChart
     {
-        $today = Carbon::now();
-        $sixMonthsAgo = $today->copy()->subMonths(6);
+        $currentYear = Carbon::now()->year;
+        $startOfYear = Carbon::createFromDate($currentYear, 1, 1)->startOfDay();
+        $endOfYear = Carbon::createFromDate($currentYear, 12, 31)->endOfDay();
 
         $panenBerhasilPerBulan = Pemanenan::where('status_panen', 'Berhasil')
-            ->where('tanggal_pemanenan', '>=', $sixMonthsAgo)
+            ->whereYear('tanggal_pemanenan', $currentYear)
             ->select(
                 DB::raw('MONTH(tanggal_pemanenan) as bulan'),
-                DB::raw('YEAR(tanggal_pemanenan) as tahun'),
                 DB::raw('SUM(jumlah_hasil) as total_hasil')
             )
-            ->groupBy('tahun', 'bulan')
-            ->orderBy('tahun')
+            ->groupBy('bulan')
             ->orderBy('bulan')
             ->get();
 
         $panenGagalPerBulan = Pemanenan::where('status_panen', 'Gagal')
-            ->where('tanggal_pemanenan', '>=', $sixMonthsAgo)
+            ->whereYear('tanggal_pemanenan', $currentYear)
             ->select(
                 DB::raw('MONTH(tanggal_pemanenan) as bulan'),
-                DB::raw('YEAR(tanggal_pemanenan) as tahun'),
                 DB::raw('SUM(jumlah_hasil) as total_hasil')
             )
-            ->groupBy('tahun', 'bulan')
-            ->orderBy('tahun')
+            ->groupBy('bulan')
             ->orderBy('bulan')
             ->get();
 
@@ -43,42 +40,42 @@ class PanenTanamanChart
         $dataGagal = [];
         $dataBerhasil = [];
 
-        // Menyiapkan data untuk 6 bulan terakhir
-        for ($i = 0; $i < 6; $i++) {
-            $month = $sixMonthsAgo->copy()->addMonths($i);
-            $monthYear = $month->format('M Y');
-            $labels[] = $monthYear;
+        $monthNames = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'Mei',
+            'Jun',
+            'Jul',
+            'Agu',
+            'Sep',
+            'Okt',
+            'Nov',
+            'Des'
+        ];
 
-            // Default nilai 0 untuk setiap bulan
-            $bulanTahun = [
-                'bulan' => $month->month,
-                'tahun' => $month->year
-            ];
+        for ($month = 1; $month <= 12; $month++) {
+            $labels[] = $monthNames[$month - 1];
 
-            // Cari data berhasil untuk bulan ini
             $hasilBerhasil = $panenBerhasilPerBulan
-                ->where('bulan', $bulanTahun['bulan'])
-                ->where('tahun', $bulanTahun['tahun'])
+                ->where('bulan', $month)
                 ->first();
 
-            // Cari data gagal untuk bulan ini
             $hasilGagal = $panenGagalPerBulan
-                ->where('bulan', $bulanTahun['bulan'])
-                ->where('tahun', $bulanTahun['tahun'])
+                ->where('bulan', $month)
                 ->first();
 
-            // Tambahkan nilai ke array data
             $dataBerhasil[] = $hasilBerhasil ? $hasilBerhasil->total_hasil : 0;
             $dataGagal[] = $hasilGagal ? $hasilGagal->total_hasil : 0;
         }
 
         return (new OriginalBarChart)
             ->setTitle('Perbandingan Tanaman Yang Berhasil Panen dan Gagal Panen')
-            ->setSubtitle('Data 6 bulan terakhir')
+            ->setSubtitle('Data tahun ' . $currentYear)
             ->addData('Berhasil', $dataBerhasil)
             ->addData('Gagal', $dataGagal)
-            ->setXAxisOption(new XAxisOption($labels));
-
-            dd($dataBerhasil);
+            ->setXAxisOption(new XAxisOption($labels))
+            ->setHeight(340);
     }
 }

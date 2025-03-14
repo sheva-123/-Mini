@@ -17,7 +17,7 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-8 py-4 md:ml-64">
-        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6">
+        <header class="bg-gradient-to-r from-Primary to-Secondary py-6 px-8 shadow-md rounded-lg mb-6">
             <div class="container mx-auto">
                 <h1 class="text-2xl font-bold text-white">Data Pengguna</h1>
                 <p class="text-white text-sm mt-1">Admin | Pengguna</p>
@@ -39,7 +39,7 @@
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
                     <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Terlama</option>
                 </select>
-                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
+                <button type="submit" class="bg-Primary text-white px-5 py-2 rounded-lg hover:bg-green-400">Filter</button>
             </form>
         </div>
 

@@ -15,7 +15,7 @@
 
     <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-green-700 text-white w-64 h-[530px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4">
+        <div class="bg-Primary text-white w-64 h-[530px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4">
             <h2 class="text-xl font-semibold mb-8 text-center text-white">Manajemen Pertanian</h2>
 
             <div class="space-y-4">
@@ -101,8 +101,8 @@
         document.querySelectorAll('.sidebar-item').forEach(item => {
             const currentUrl = window.location.href;
             if (currentUrl.includes(item.getAttribute('href'))) {
-                item.classList.add('bg-green-600');
-                item.classList.remove('hover:bg-green-600');
+                item.classList.add('bg-green-400');
+                item.classList.remove('hover:bg-green-400');
             }
         });
 
