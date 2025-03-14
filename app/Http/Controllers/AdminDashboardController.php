@@ -27,6 +27,7 @@ class AdminDashboardController extends Controller
 
         // Membuat grafik berdasarkan chart yang diterima
         $semuaJumlahChart = $semuaJumlahCharts->build();
+        $panenTanamanChart = new PanenTanamanChart;
         $panenTanamanChart = $panenTanamanChart->build();
 
         // Mengembalikan view dengan data yang dibutuhkan
