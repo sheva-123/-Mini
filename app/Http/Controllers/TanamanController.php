@@ -11,26 +11,41 @@ class TanamanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $search = request()->input('search');
-        if ($search) {
-            $tanamans = Tanaman::where('nama_tanaman', 'like', '%' . $search . '%')->get();
-        } else {
-            $tanamans = Tanaman::all();
+        $query = Tanaman::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where('nama_tanaman', 'like', "%$search%")
+                ->orWhere('umur_panen', 'like', "%$search%");
         }
 
-        $filter = request()->input('filter');
-        if($filter === 'Herbal') {
-            $tanamans = Tanaman::where('jenis', 'Herbal')
-                                    ->get();
-        } elseif ($filter === 'Sayuran') {
-            $tanamans = Tanaman::where('jenis', 'Sayuran')
-                                    ->get();
-        } elseif ($filter === 'Buah') {
-            $tanamans = Tanaman::where('jenis', 'Buah')
-                                    ->get();
+        if ($request->filter) {
+            $filter = $request->filter;
+            if ($filter === 'Herbal') {
+                $query->where('jenis', 'Herbal');
+            } elseif ($filter === 'Sayuran') {
+                $query->where('jenis', 'Sayuran');
+            } elseif ($filter === 'Buah') {
+                $query->where('jenis', 'Buah');
+            }
         }
+
+        if ($request->filled('sort')) {
+            $sort = $request->sort;
+            if ($sort === 'a-z') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'z-a') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
+
+        $tanamans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'filter' => $request->filter,
+            'sort' => $request->sort,
+        ]);
         return view('admin.tanamans.index', compact('tanamans'));
     }
 

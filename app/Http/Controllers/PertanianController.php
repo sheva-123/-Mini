@@ -10,22 +10,36 @@ use Illuminate\Support\Facades\Validator;
 class PertanianController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $search = request()->input('search');
-        if($search){
-            $pertanians = Pertanian::where('nama_pertanian', 'like', '%'. $search . '%')->get();
-        }else{
-            $pertanians = Pertanian::with('tanaman')->get();
+        $query = Pertanian::with('tanaman');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_pertanian', 'like', "%$search%")
+                    ->orWhere('lokasi_pertanian', 'like', "%$search%")
+                    ->orWhereHas('tanaman', function ($subQ) use ($search) {
+                        $subQ->where('nama_tanaman', 'like', "%$search%");
+                    });
+            });
         }
 
-        $filter = request()->input('filter');
-        if ($filter) {
-            $pertanians = Pertanian::where('lokasi_pertanian', $filter )
-                                        ->get();
+        if ($request->filled('sort')) {
+            $sort = $request->sort;
+            if ($sort === 'a-z') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'z-a') {
+                $query->orderBy('created_at', 'asc');
+            }
         }
 
         $dataFilter = Pertanian::all();
+
+        $pertanians = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'sort' => $request->sort,
+        ]);
         return view('admin.pertanians.index', compact('pertanians', 'dataFilter'));
     }
 
@@ -84,7 +98,8 @@ class PertanianController extends Controller
 
     public function edit(Pertanian $pertanian)
     {
-        return view('admin.pertanians.edit', compact('pertanian'));
+        $tanamans = Tanaman::all();
+        return view('admin.pertanians.edit', compact('pertanian', 'tanamans'));
     }
 
 

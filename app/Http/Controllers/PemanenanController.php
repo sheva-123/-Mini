@@ -28,19 +28,25 @@ class PemanenanController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function ($q) use ($search, $user) {
-                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
-                    $subQ->where('nama_pertanian', 'like', "%$search%")
-                    ->whereHas('users', function ($userQ) use ($user) {
-                        $userQ->where('users.id', $user->id);
-                    });
-                })
-                    ->orWhere('jumlah_hasil', 'like', "%$search%");
+            $query->where(function ($q) use ($search) {
+                $q->Where('jumlah_hasil', 'like', "%$search%")
+                ->orWhereHas('penanaman', function ($puQ) use ($search) {
+                    $puQ->where('nama', 'like', "%$search%");
+                });
             });
         }
 
         if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
             $query->whereBetween('tanggal_pemanenan', [$request->tanggal_awal, $request->tanggal_akhir]);
+        }
+
+        if ($request->filled('status')) {
+            $status = $request->status;
+            if ($status === 'Berhasil') {
+                $query->where('status_panen', $status);
+            } elseif ($status === 'Gagal') {
+                $query->where('status_panen', $status);
+            }
         }
 
         if ($request->filled('sort')) {
@@ -52,7 +58,13 @@ class PemanenanController extends Controller
             }
         }
 
-        $pemanenans = $query->get();
+        $pemanenans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir,
+            'status' => $request->status,
+            'sort' => $request->status,
+        ]);
 
     return view('petani.pemanenans.index', compact('pemanenans'));
     }

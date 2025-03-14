@@ -42,6 +42,11 @@
                     <i class="fas fa-user"></i>
                     <span class="ml-3">Pengguna</span>
                 </a>
+                <a href="{{ route('logs.index') }}"
+                    class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
+                    <i class="fas fa-address-book"></i>
+                    <span class="ml-3">Log Pengguna</span>
+                </a>
                 <a href="{{ route('admin.laporans.index') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-file-alt"></i>
@@ -64,6 +69,31 @@
         <!-- Main Content -->
 
     </div>
+
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    @endif
+    @if (session('error'))
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: '{{ session('error') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    @endif
 
     <!-- Scripts -->
     <script>

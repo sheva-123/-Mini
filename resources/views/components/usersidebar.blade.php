@@ -50,7 +50,7 @@
                     <i class="fas fa-wallet"></i>
                     <span class="ml-3">Pengeluaran</span>
                 </a>
-                
+
                 <a href="{{ route('pemanenans.index') }}"
                     class="sidebar-item px-4 py-2 flex items-center text-white hover:bg-green-600 rounded-md transition">
                     <i class="fas fa-apple-alt"></i>
@@ -84,8 +84,7 @@
             toast: true,
             position: 'top-end',
             icon: 'success',
-            title: '{{ session('
-            success ') }}',
+            title: '{{ session('success') }}',
             showConfirmButton: false,
             timer: 3000
         });
@@ -97,8 +96,7 @@
             toast: true,
             position: 'top-end',
             icon: 'error',
-            title: '{{ session('
-            error ') }}',
+            title: '{{ session('error') }}',
             showConfirmButton: false,
             timer: 3000
         });

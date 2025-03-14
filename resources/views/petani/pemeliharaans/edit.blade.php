@@ -28,12 +28,23 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-4">
-                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Nama Lahan</label>
                         <select name="pertanian_id" id="pertanian_id" class="w-full p-2 border rounded-lg">
                             @foreach ($pertanians as $pertanian)
                             <option value="{{ $pertanian->id }}"
                                 {{ $pemeliharaan->pertanian_id == $pertanian->id ? 'selected' : '' }}>
                                 {{ $pertanian->nama_pertanian }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Nama Penanaman</label>
+                        <select name="penanaman_id" id="penanaman_id" class="w-full p-2 border rounded-lg">
+                            @foreach ($penanaman as $penanaman)
+                            <option value="{{ $pertanian->id }}"
+                                {{ $pemeliharaan->penanaman_id == $penanaman->id ? 'selected' : '' }}>
+                                {{ $penanaman->nama }}
                             </option>
                             @endforeach
                         </select>
@@ -52,6 +63,19 @@
                         <label for="biaya" class="block text-sm font-medium text-gray-700">Biaya</label>
                         <input type="number" name="biaya" id="biaya" value="{{ $pemeliharaan->biaya }}"
                             class="w-full p-2 border rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="kondisi" class="block text-sm font-medium text-gray-700">Kondisi Tanaman</label>
+                        <select name="kondisi" id="kondisi" class="w-full p-2 border rounded-lg" required>
+                            <option value="" disabled selected>Pilih Kondisi</option>
+                            <option value="Baik" {{ old('kondisi_tanaman', $pemeliharaan->kondisi_tanaman ?? '') == 'Baik' ? 'selected' : '' }}>Baik</option>
+                            <option value="Cukup" {{ old('kondisi_tanaman', $pemeliharaan->kondisi_tanaman ?? '') == 'Cukup' ? 'selected' : '' }}>Cukup</option>
+                            <option value="Buruk" {{ old('kondisi_tanaman', $pemeliharaan->kondisi_tanaman ?? '') == 'Buruk' ? 'selected' : '' }}>Buruk</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan (opsional)</label>
+                        <textarea id="keterangan" name="keterangan" rows="4" class="block p-2.5 w-full text-sm text-black rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-50 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan tambahan...">{{ old('keterangan', $pemeliharaan->keterangan ?? '') }}</textarea>
                     </div>
                     <button type="submit"
                         class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">

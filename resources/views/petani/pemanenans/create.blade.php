@@ -28,7 +28,7 @@
                     @csrf
                     @method('POST')
                     <div class="mb-4">
-                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Nama Lahan</label>
                         <select name="pertanian_id" id="pertanian_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
                             @foreach ($pertanians as $pertanian)
                             <option value="{{ $pertanian->id }}">{{ $pertanian->nama_pertanian }}</option>
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Penanaman</label>
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Nama Penanaman</label>
                         <select name="penanaman_id" id="penanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
                             @foreach ($penanaman as $penanaman)
                             <option value="{{ $penanaman->id }}">{{ $penanaman->nama }}, {{ $penanaman->jumlah_tanaman }} Tanaman</option>

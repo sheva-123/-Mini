@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\UserHomeController;
+use App\Http\Controllers\LogUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,10 +36,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/pengguna/{id}', [UserController::class, 'verifikasi'])->name('pengguna.verifikasi');
-    Route::get('/pengguna/filter', [UserController::class], 'filter')->name('pengguna.filter');
     Route::resource('pertanians', PertanianController::class)->names('pertanians');
     Route::resource('tanamans', TanamanController::class);
     Route::resource('pengguna', UserController::class);
+    Route::get('/logs', [LogUserController::class, 'index'])->name('logs.index');
     Route::get('/admin/laporans', [AdminLaporanController::class, 'index'])->name('admin.laporans.index');
     Route::get('/admin/laporans/{id}', [AdminLaporanController::class, 'detail'])->name('admin.laporans.detail');
 });
@@ -52,8 +53,8 @@ Route::middleware(['auth', 'ensureUserHasLand', 'role:user|admin'])->group(funct
     Route::resource('laporans', LaporanController::class)->except(['show']);
     Route::get('/laporans/{id}', [LaporanController::class, 'detail'])->name('laporans.detail');
     Route::get('/laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
-    Route::get('/pengeluaran/{id}', [PengeluaranController::class, 'detail'])->name('pengeluarans.detail');
-    Route::get('/pengeluaran/{id}/create/', [PengeluaranController::class, 'create'])->name('pengeluarans.create');
+    Route::get('/pengeluarans/{id}', [PengeluaranController::class, 'detail'])->name('pengeluarans.detail');
+    Route::get('/pengeluarans/{id}/create/', [PengeluaranController::class, 'create'])->name('pengeluarans.create');
 });
 
 Route::get('/api/pemeliharaan-bulanan', [AdminDashboardController::class, 'pemeliharaanBulanan']);

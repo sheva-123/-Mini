@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('jenis_pemeliharaan');
             $table->integer('biaya');
             $table->enum('kondisi_tanaman', ['Baik', 'Cukup', 'Buruk']);
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

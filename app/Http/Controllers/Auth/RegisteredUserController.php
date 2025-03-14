@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Traits\LogsActivity;
 use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
+    use LogsActivity;
     /**
      * Display the registration view.
      */
@@ -51,6 +53,8 @@ class RegisteredUserController extends Controller
         // dd($user);
 
         event(new Registered($user));
+        $id = Auth::user();
+        $this->logActivity('Register', 'Pengguna dengan nama ' . $id->name . ' melakukan register.');
 
         Auth::login($user);
 

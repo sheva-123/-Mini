@@ -35,15 +35,12 @@ class PemeliharaanController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function ($q) use ($search, $user) {
-                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
-                    $subQ->where('nama_pertanian', 'like', "%$search%")
-                    ->whereHas('users', function ($userQ) use ($user) {
-                        $userQ->where('users.id', $user->id);
+            $query->where(function ($puery) use ($search) {
+                $puery->where('jenis_pemeliharaan', 'like', "%$search%")
+                    ->orWhere('biaya', 'like', "%$search%")
+                    ->orWhereHas('penanaman', function ($puQ) use ($search) {
+                        $puQ->where('nama', 'like', "%$search%");
                     });
-                })
-                ->orWhere('jenis_pemeliharaan', 'like', "%$search%")
-                ->orWhere('biaya', 'like', "%$search%");
             });
         }
 
@@ -60,7 +57,12 @@ class PemeliharaanController extends Controller
             }
         }
 
-        $pemeliharaans = $query->get();
+        $pemeliharaans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir,
+            'sort' => $request->sort,
+        ]);
         return view('petani.pemeliharaans.index', compact('pemeliharaans'));
     }
 
@@ -103,10 +105,13 @@ class PemeliharaanController extends Controller
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|integer|min:0',
             'kondisi' => 'required|in:Baik,Cukup,Buruk',
-            'kondisi_lahan' => 'required|in:Kering,Basah,Lembab'
+            'kondisi_lahan' => 'required|in:Kering,Basah,Lembab',
+            'keterangan' => 'nullable|string|max:1000',
         ], [
             'biaya.min' => 'Biaya Tidak Boleh Minus',
         ]);
+
+        // dd($request->keterangan);
 
             if($validator->fails()) {
                 $error = $validator->errors();
@@ -133,6 +138,7 @@ class PemeliharaanController extends Controller
             'jenis_pemeliharaan' => $request->jenis_pemeliharaan,
             'biaya' => $request->biaya,
             'kondisi_tanaman' => $request->kondisi,
+            'keterangan' => $request->input('keterangan'),
         ]);
 
         $pertanian = Pertanian::find($request->pertanian_id);
@@ -169,7 +175,15 @@ class PemeliharaanController extends Controller
         $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
             $query->where('users.id', $user->id);
         })->get();
-        return view('petani.pemeliharaans.edit', compact('pertanians', 'pemeliharaan'));
+
+        $penanaman = Penanaman::whereHas('pertanian', function ($query) use ($user) {
+            $query->whereHas('users', function ($uQ) use ($user) {
+                $uQ->where('users.id', $user->id);
+            });
+        })
+            ->where('status', 'Proses')
+            ->get();
+        return view('petani.pemeliharaans.edit', compact('pertanians', 'pemeliharaan', 'penanaman'));
     }
 
     /**
@@ -177,14 +191,17 @@ class PemeliharaanController extends Controller
      */
     public function update(Request $request, Pemeliharaan $pemeliharaan)
     {
-        // dd($pemeliharaan);
+        // dd($request->toArray());
         $id = Auth::user();
 
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
+            'penanaman_id' => 'required|exist:penanamans,id',
             'tanggal_pemeliharaan' => 'required|date',
             'jenis_pemeliharaan' => 'required|string|max:255',
             'biaya' => 'required|integer|min:0',
+            'kondisi' => 'required|in:Baik,Cukup,Buruk',
+            'keterangan' => 'nullable|string|min:10|min:1000',
         ], [
             'biaya.min' => 'Biaya Tidak Boleh Minus',
         ]);
@@ -198,7 +215,14 @@ class PemeliharaanController extends Controller
 
             // dd($pemeliharaan);
 
-        $pemeliharaan->update($request->all());
+        $pemeliharaan->update([
+            'pertanian_id' => $request->pertanian_id,
+            'penanaman_id' => $request->penanaman_id,
+            'tanggal_pemeliharaan' => $request->tanggal_pemeliharaan,
+            'jenis_pemeliharaan' => $request->jenis_pemeliharaan,
+            'kondisi' => $request->kondisi,
+            'keterangan' => $request->keterangan,
+        ]);
 
         $this->logActivity('Edit Pemeliharaan', 'Pengguna dengan nama' . $id->name . ' mengedit data pemeliharaan lahan yang dikelolanya');
 

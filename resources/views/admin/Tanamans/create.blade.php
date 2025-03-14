@@ -1,73 +1,75 @@
-<x-app-layout>
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-3 mt-4 mx-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold text-white">Tambah Tanaman</h1>
-                <p class="text-white text-sm mt-1">Admin | Tanaman</p>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Tanaman</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-gray-100 flex flex-wrap">
+    <x-sidebar></x-sidebar>
+
+    <div class="flex-1 p-3 py-1 md:ml-64">
+        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-6">
+            <div class="container mx-auto">
+                <h1 class="text-2xl font-bold text-white">Tambah Data Tanaman</h1>
+                <p class="text-white text-sm mt-1">Admin | Tambah Tanaman</p>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <div class="container mx-auto mt-8 px-4">
-        <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-            <div id="loadingOverlay"
-                class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-                <div class="flex flex-col items-center">
-                    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
-                    <p class="text-white mt-4 text-lg">Sedang menyimpan...</p>
-                </div>
-            </div>
-            <form action="{{ route('tanamans.store') }}" method="POST" onsubmit="showLoading()">
-                @csrf
-                <div class="flex flex-col">
-                    <label for="nama_tanaman" class="text-lg font-medium text-gray-700">Nama Tanaman</label>
-                    <input type="text" name="nama_tanaman" id="nama_tanaman"
-                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
-                        placeholder="Masukkan nama tanaman" required>
-                </div>
-                <div class="flex flex-col">
-                    <label for="umur_panen" class="text-lg font-medium text-gray-700">Umur Panen Tanaman</label>
-                    <input type="number" name="umur_panen" id="umur_panen"
-                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
-                        placeholder="Masukkan Hari Umur Panen" required>
-                </div>
-                <div class="flex flex-col">
-                    <label for="jenis" class="text-lg font-medium text-gray-700">Jenis</label>
-                    <select name="jenis" id="jenis"
-                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-green-300 focus:border-green-500 transition"
-                        required>
-                        <option value="" disabled selected>Pilih jenis tanaman</option>
-                        @foreach (\App\Models\Tanaman::getJenisOptions() as $jenis)
-                        <option value="{{ $jenis }}">{{ $jenis }}</option>
-                        @endforeach
-
-                    </select>
-                </div>
-                <div class="flex flex-col">
-                    <label for="deskripsi" class="text-lg font-medium text-gray-700">Deskripsi</label>
-                    <textarea textarea rows="4"
-                        class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#98c01d]"
-                        type="text" name="deskripsi" required> </textarea>
-                </div>
-
-
-                <button type="submit"
-                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
-                    Simpan
-                </button>
-                <a href="{{ route('tanamans.index') }}">
-                    <button type="button"
-                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
-                        Kembali
+        <div class="mt-6 p-5 rounded-lg">
+            <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+                <form action="{{ route('tanamans.store') }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <div class="mb-4">
+                        <label for="nama_tanaman" class="block text-sm font-medium text-gray-700">Nama Tanaman</label>
+                        <input type="text" name="nama_tanaman" id="nama_tanaman"
+                            class="w-full p-2 border rounded-lg"
+                            placeholder="Masukkan nama tanaman" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="jenis" class="text-lg font-medium text-gray-700">Jenis</label>
+                        <select name="jenis" id="jenis"
+                            class="w-full p-2 border rounded-lg"
+                            required>
+                            <option value="" disabled selected>Pilih jenis tanaman</option>
+                            @foreach (\App\Models\Tanaman::getJenisOptions() as $jenis)
+                            <option value="{{ $jenis }}">{{ $jenis }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="umur_panen" class="block text-sm font-medium text-gray-700">Umur Panen</label>
+                        <input type="number" name="umur_panen" id="umur_panen"
+                            class="w-full p-2 border rounded-lg"
+                            placeholder="Masukkan umur panen tanaman" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="deskripsi" class="text-lg font-medium text-gray-700">Deskripsi</label>
+                        <textarea textarea rows="4"
+                            class="block p-2.5 w-full text-sm text-black rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-50 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500""
+                            type=" text" name="deskripsi" required> </textarea>
+                    </div>
+                    <button type="submit"
+                        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">
+                        Simpan
                     </button>
-                </a>
-            </form>
+                    <a href="{{ route('tanamans.index') }}">
+                        <button type="button"
+                            class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-transform transform hover:scale-95">
+                            Kembali
+                        </button>
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
+</body>
 
-    <script>
-        function showLoading() {
-            document.getElementById("loadingOverlay").classList.remove("hidden");
-        }
-    </script>
-</x-app-layout>
+</html>

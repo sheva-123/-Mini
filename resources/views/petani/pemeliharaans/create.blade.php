@@ -28,7 +28,7 @@
                     @csrf
                     @method('POST')
                     <div class="mb-4">
-                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Nama Lahan</label>
                         <select name="pertanian_id" id="pertanian_id" class="w-full p-2 border rounded-lg">
                             @foreach ($pertanians as $pertanian)
                             <option value="{{ $pertanian->id }}">{{ $pertanian->nama_pertanian }}</option>
@@ -36,7 +36,7 @@
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Penanaman</label>
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Nama Penanaman</label>
                         <select name="penanaman_id" id="penanaman_id" class="w-full p-2 border rounded-lg">
                             @foreach ($penanaman as $penanaman)
                             <option value="{{ $penanaman->id }}">{{ $penanaman->nama }}</option>
@@ -74,6 +74,10 @@
                             <option value="Basah">Basah</option>
                             <option value="Lembab">Lembab</option>
                         </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan (opsional)</label>
+                        <textarea id="keterangan" name="keterangan" rows="4" class="block p-2.5 w-full text-sm text-black rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-50 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan tambahan..."></textarea>
                     </div>
                     <button type="submit"
                         class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-95">

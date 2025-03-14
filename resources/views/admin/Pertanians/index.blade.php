@@ -1,129 +1,123 @@
-<x-app-layout>
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertanian</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-gray-100 flex flex-wrap">
+    <!-- User Sidebar -->
+    <x-sidebar></x-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8 py-4 md:ml-64">
+        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6">
+            <div class="container mx-auto">
                 <h1 class="text-2xl font-bold text-white">Data Pertanian</h1>
                 <p class="text-white text-sm mt-1">Admin | Pertanian</p>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <div class="container mx-auto px-6 flex justify-between items-center">
-        <div class="flex w-2/2 gap-3">
-            <form action="{{ route('pertanians.index') }}" method="get">
-                <select name="filter" id="filterLokasi"
-                    class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full"
-                    onchange="this.form.submit()">
-                    <option value="">Semua Lokasi</option>
-                    @foreach ($dataFilter->unique('lokasi_pertanian') as $pertanian)
-                    <option value="{{ $pertanian->lokasi_pertanian }}">{{ $pertanian->lokasi_pertanian }}</option>
-                    @endforeach
+        <!-- Filter & Search -->
+        <div class="flex flex-wrap justify-between items-center gap-4">
+            <form action="{{ route('pertanians.index') }}" method="get" class="flex flex-wrap gap-3 items-center w-full md:w-auto">
+                <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
+                <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
+                    <option value="">Urutan Data</option>
+                    <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
+                    <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Terlama</option>
                 </select>
+                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
             </form>
-            <!-- Dropdown icon -->
-            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                <i class="fas fa-chevron-down"></i>
-            </span>
-            <div class="flex border-1 border-gray-200 rounded-md focus-within:ring-2 ring-gray-500">
-                <form action="{{ route('pertanians.index') }}" method="GET" class="flex gap-2 w-full">
-                    <input type="text" name="search" placeholder=" Cari pertanian..."
-                        value="{{ request()->get('search') }}"
-                        class="w-[150px] p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500">
-                    <button type="submit" class="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block">
-                        <svg class="w-4 h-4 fill-current" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-            </div>
-            </form>
+            <a href="{{ route('pertanians.create') }}" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Tambah</a>
         </div>
-        <a href="{{ route('pertanians.create') }}"
-            class="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-800 transition-all duration-300 flex items-center gap-2"
-            onclick="showLoading()">
-            Tambah
-        </a>
-    </div>
 
-    <div class="container mx-auto mt-8 px-6">
-        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-            <div id="loadingOverlay"
-                class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-                <div class="flex flex-col items-center">
-                    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
-                    <p class="text-white mt-4 text-lg">Sedang memproses...</p>
+        <!-- Table Data -->
+        <div class="mt-6 p-4 bg-white rounded-lg shadow-md">
+            <div class="overflow-x-auto">
+                <table class="w-full text-md text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">No</th>
+                            <th scope="col" class="px-6 py-3">Nama Pertanian</th>
+                            <th scope="col" class="px-6 py-3 text-center">Tanaman</th>
+                            <th scope="col" class="px-6 py-3 text-center">Lokasi</th>
+                            <th scope="col" class="px-6 py-3 text-center">Luas Lahan</th>
+                            <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pertanians as $p)
+                        <tr class="bg-white border-b hover:bg-gray-100">
+                            <td class="px-6 py-4">{{ $pertanians->firstItem() + $loop->index }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->nama_pertanian }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->tanaman->nama_tanaman }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->lokasi_pertanian }}</td>
+                            <td class="px-6 py-4 text-center">{{ $p->luas_lahan }}</td>
+                            <td class="px-6 py-4 flex items-center justify-center space-x-4">
+                                <a href="{{ route('pertanians.edit', $p) }}" class="text-yellow-500 hover:text-yellow-700">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('pertanians.destroy', $p) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="deleteRecord(event)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @if ($pertanians->isEmpty())
+                <div class="text-center py-6">
+                    <p class="text-gray-500">Tidak ada data yang tersedia.</p>
+                </div>
+                @endif
+
+                <div class="mt-4 flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        @if ($pertanians->onFirstPage())
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-l-md cursor-not-allowed">
+                            <
+                                </li>
+                                @else
+                        <li>
+                            <a href="{{ $pertanians->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
+                                <
+                                    </a>
+                        </li>
+                        @endif
+
+                        @foreach ($pertanians->links()->elements[0] as $page => $url)
+                        @if ($pertanians->currentPage() == $page)
+                        <li class="px-2 py-1 text-white bg-green-600">{{ $page }}</li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="px-2 py-1 bg-white border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        @if ($pertanians->hasMorePages())
+                        <li>
+                            <a href="{{ $pertanians->appends(request()->query())->nextPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100">></a>
+                        </li>
+                        @else
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-r-md cursor-not-allowed">></li>
+                        @endif
+                    </ul>
                 </div>
             </div>
-            <table id="pertanianTable" class="w-full text-sm text-left text-gray-700 border-collapse">
-                <thead class="text-md text-gray-900 uppercase bg-green-100 border-b">
-                    <tr>
-                        <th class="px-6 py-3">No</th>
-                        <th class="px-6 py-3">Nama Pertanian</th>
-                        <th class="px-6 py-3 text-center">Lokasi</th>
-                        <th class="px-6 py-3 text-center">Luas Lahan</th>
-                        <th class="px-6 py-3 text-center">Tanaman</th>
-                        <th class="px-6 py-3 text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pertanians as $pertanian)
-                    <tr class="border-b hover:bg-green-50 transition-all">
-                        <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                        <td class="px-6 py-4 font-semibold">{{ $pertanian->nama_pertanian }}</td>
-                        <td class="px-6 py-4 text-center">{{ $pertanian->lokasi_pertanian }}</td>
-                        <td class="px-6 py-4 text-center">{{ $pertanian->luas_lahan }}</td>
-                        <td class="px-6 py-4 text-center">{{ $pertanian->tanaman->nama_tanaman }}</td>
-                        <td class="px-6 py-4 flex justify-center gap-4">
-                            <a href="{{ route('pertanians.show', $pertanian->id) }}"
-                                class="text-yellow-500 hover:text-yellow-700">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-                            <a href="{{ route('pertanians.edit', $pertanian->id) }}"
-                                class="text-yellow-500 hover:text-yellow-700">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('pertanians.destroy', $pertanian->id) }}" method="POST"
-                                onsubmit="showLoading()">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-700"
-                                    onclick="deleteRecord(event)">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @if ($pertanians->isEmpty())
-            <div class="text-center py-6">
-                <p class="text-gray-500">Tidak ada data yang tersedia.</p>
-            </div>
-            @endif
         </div>
     </div>
+</body>
 
-    <script>
-        function filterTable() {
-            let searchInput = document.getElementById("search").value.toLowerCase();
-            let lokasiFilter = document.getElementById("filterLokasi").value.toLowerCase();
-            let rows = document.querySelectorAll("#pertanianTable tbody tr");
-
-            rows.forEach(row => {
-                let text = row.textContent.toLowerCase();
-                let lokasi = row.querySelector(".lokasi").textContent.toLowerCase();
-                let matchSearch = text.includes(searchInput);
-                let matchLokasi = lokasiFilter === "" || lokasi.includes(lokasiFilter);
-                row.style.display = matchSearch && matchLokasi ? "" : "none";
-            });
-        }
-
-        function showLoading() {
-            document.getElementById("loadingOverlay").classList.remove("hidden");
-        }
-    </script>
-</x-app-layout>
+</html>

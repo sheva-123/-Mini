@@ -30,6 +30,11 @@
                 <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
                 <input type="date" name="tanggal_awal" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_awal') }}">
                 <input type="date" name="tanggal_akhir" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_akhir') }}">
+                <select name="status" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
+                    <option value="">Semua Status</option>
+                    <option value="Berhasil" {{ request('status') == 'Berhasil' ? 'selected' : '' }}>Berhasil</option>
+                    <option value="Gagal" {{ request('status') == 'Gagal' ? 'selected' : '' }}>Gagal</option>
+                </select>
                 <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
                     <option value="">Urutan Data</option>
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
@@ -47,7 +52,6 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th class="px-6 py-3">No</th>
-                            <th class="px-6 py-3">Lahan</th>
                             <th class="px-6 py-3">Penanaman</th>
                             <th class="px-6 py-3 text-center">Jumlah</th>
                             <th class="px-6 py-3 text-center">Tanggal Panen</th>
@@ -58,8 +62,7 @@
                     <tbody>
                         @foreach ($pemanenans as $pemanenan)
                         <tr class="bg-white border-b hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $pemanenan->pertanian->nama_pertanian }}</td>
+                            <td class="px-6 py-4">{{ $pemanenans->firstItem() + $loop->index }}</td>
                             <td class="px-6 py-4">{{ $pemanenan->penanaman->nama }}</td>
                             <td class="px-6 py-4 text-center">{{ $pemanenan->jumlah_hasil }}</td>
                             <td class="px-6 py-4 text-center">{{ $pemanenan->tanggal_pemanenan }}</td>
@@ -80,13 +83,6 @@
                                 <a href="{{ route('pemanenans.edit', $pemanenan->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('pemanenans.destroy', $pemanenan->id) }}" method="POST" onclick="deleteRecord(event)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -98,6 +94,40 @@
                     <p class="text-gray-500">Tidak ada data yang tersedia.</p>
                 </div>
                 @endif
+
+                <div class="mt-4 flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        @if ($pemanenans->onFirstPage())
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-l-md cursor-not-allowed">
+                            <
+                                </li>
+                                @else
+                        <li>
+                            <a href="{{ $pemanenans->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
+                                <
+                            </a>
+                        </li>
+                        @endif
+
+                        @foreach ($pemanenans->links()->elements[0] as $page => $url)
+                        @if ($pemanenans->currentPage() == $page)
+                        <li class="px-2 py-1 text-white bg-green-600">{{ $page }}</li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="px-2 py-1 bg-white border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        @if ($pemanenans->hasMorePages())
+                        <li>
+                            <a href="{{ $pemanenans->appends(request()->query())->nextPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100">></a>
+                        </li>
+                        @else
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-r-md cursor-not-allowed">></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -28,9 +28,6 @@
         <div class="flex flex-wrap justify-between items-center gap-4">
             <form action="{{ route('laporans.index') }}" method="get" class="flex flex-wrap gap-3 items-center w-full md:w-auto">
                 <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
-                <input type="date" name="tanggalAwal" id="tanggalAwal" class=" px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_awal') }}">
-                <!-- <span id="tanggalAwalPlaceholder" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: gray;">YYYY-MM-DD</span> -->
-                <input type="date" name="tanggalAkhir" id="tanggalAkhir" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_akhir') }}">
                 <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
                     <option value="">Urutan Data</option>
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
@@ -50,14 +47,14 @@
                             <th class="px-6 py-3">Penanaman</th>
                             <th class="px-6 py-3 text-center">Jumlah Tanaman</th>
                             <th class="px-6 py-3 text-center">Jumlah Panen</th>
-                            <th class="px-6 py-3 text-center">Status</th>
+                            <th class="px-6 py-3 text-center">Status Panen</th>
                             <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($laporans as $laporan)
                         <tr class="bg-white border-b hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $laporans->firstItem() + $loop->index }}</td>
                             <td class="px-6 py-4">{{ $laporan->nama }}</td>
                             <td class="px-6 py-4 text-center">{{ $laporan->jumlah_tanaman }}</td>
                             <td class="px-6 py-4 text-center">
@@ -95,6 +92,40 @@
                     <p class="text-gray-500">Tidak ada data yang tersedia.</p>
                 </div>
                 @endif
+
+                <div class="mt-4 flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        @if ($laporans->onFirstPage())
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-l-md cursor-not-allowed">
+                            <
+                                </li>
+                                @else
+                        <li>
+                            <a href="{{ $laporans->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
+                                <
+                            </a>
+                        </li>
+                        @endif
+
+                        @foreach ($laporans->links()->elements[0] as $page => $url)
+                        @if ($laporans->currentPage() == $page)
+                        <li class="px-2 py-1 text-white bg-green-600">{{ $page }}</li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="px-2 py-1 bg-white border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        @if ($laporans->hasMorePages())
+                        <li>
+                            <a href="{{ $laporans->appends(request()->query())->nextPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100">></a>
+                        </li>
+                        @else
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-r-md cursor-not-allowed">></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -28,8 +28,11 @@
         <div class="flex flex-wrap justify-between items-center gap-4">
             <form action="{{ route('pengeluarans.index') }}" method="get" class="flex flex-wrap gap-3 items-center w-full md:w-auto">
                 <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
-                <input type="date" name="tanggal_awal" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_awal') }}">
-                <input type="date" name="tanggal_akhir" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('tanggal_akhir') }}">
+                <select name="status" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
+                    <option value="">Semua Status</option>
+                    <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                    <option value="Proses" {{ request('status') == 'Proses' ? 'selected' : '' }}>Proses</option>
+                </select>
                 <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
                     <option value="">Urutan Data</option>
                     <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
@@ -55,10 +58,22 @@
                     <tbody>
                         @foreach ($pengeluarans as $pengeluaran)
                         <tr class="bg-white border-b hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $pengeluarans->firstItem() + $loop->index }}</td>
                             <td class="px-6 py-4">{{ $pengeluaran->nama }}</td>
                             <td class="px-6 py-4 text-center">{{ $pengeluaran->jumlah_tanaman }} </td>
-                            <td class="px-6 py-4 text-center">{{ $pengeluaran->status }}</td>
+                            <td class="px-6 py-4 text-center">
+                                @if ($pengeluaran->status === 'Selesai')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                    Selesai
+                                </span>
+                                @else
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                    Proses
+                                </span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <a href="{{ route('pengeluarans.detail', $pengeluaran->id) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fa-solid fa-eye"></i>
@@ -73,6 +88,40 @@
                     <p class="text-gray-500">Tidak ada data yang tersedia.</p>
                 </div>
                 @endif
+
+                <div class="mt-4 flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        @if ($pengeluarans->onFirstPage())
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-l-md cursor-not-allowed">
+                            <
+                                </li>
+                                @else
+                        <li>
+                            <a href="{{ $pengeluarans->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
+                                <
+                            </a>
+                        </li>
+                        @endif
+
+                        @foreach ($pengeluarans->links()->elements[0] as $page => $url)
+                        @if ($pengeluarans->currentPage() == $page)
+                        <li class="px-2 py-1 text-white bg-green-600">{{ $page }}</li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="px-2 py-1 bg-white border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        @if ($pengeluarans->hasMorePages())
+                        <li>
+                            <a href="{{ $pengeluarans->appends(request()->query())->nextPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100">></a>
+                        </li>
+                        @else
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-r-md cursor-not-allowed">></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

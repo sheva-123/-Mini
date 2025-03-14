@@ -28,9 +28,8 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-4">
-                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Nama Lahan</label>
                         <select name="pertanian_id" id="pertanian_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
-                            <option value="">Pilih Pertanian</option>
                             @foreach ($pertanians as $pertanian)
                             <option value="{{ $pertanian->id }}" {{ $pemanenan->pertanian_id == $pertanian->id ? 'selected' : '' }}>
                                 {{ $pertanian->nama_pertanian }}
@@ -43,11 +42,11 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tanaman_id" class="block text-sm font-medium text-gray-700">Tanaman</label>
-                        <select name="tanaman_id" id="tanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
-                            @foreach ($penanaman as $penam)
-                            <option value="{{ $penam->tanaman->id }}">
-                                {{ $penam->tanaman->nama_tanaman }}
+                        <label for="penanaman_id" class="block text-sm font-medium text-gray-700">Nama Penanaman</label>
+                        <select name="penanaman_id" id="penanaman_id" class="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
+                            @foreach ($penanaman as $penanaman)
+                            <option value="{{ $penanaman->id }}" {{ $pemanenan->penanaman_id == $pertanian->id ? 'selected' : '' }}>
+                                {{ $penanaman->nama }} | {{ $penanaman->jumlah_tanaman }} tanaman
                             </option>
                             @endforeach
                         </select>
@@ -69,6 +68,15 @@
                         @error('jumlah_hasil')
                         <span class="text-sm text-red-600">{{ $message }}</span>
                         @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="status_panen" class="block text-sm font-medium text-gray-700">Status Panen</label>
+                        <select name="status_panen" id="status_panen" class="w-full p-2 border rounded-lg" required>
+                            <option value="" disabled selected>Pilih Status Panen</option>
+                            <option value="Berhasil" @if(old('status_panen', $pemanenan->status_panen) == 'Berhasil') selected @endif>Berhasil</option>
+                            <option value="Gagal" @if(old('status_panen', $pemanenan->status_panen) == 'Gagal') selected @endif>Gagal</option>
+                        </select>
                     </div>
 
                     <button type="submit"

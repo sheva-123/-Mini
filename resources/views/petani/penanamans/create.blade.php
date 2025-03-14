@@ -32,7 +32,7 @@
                         <input type="text" name="namaPenanaman" id="namaPenanaman" class="w-full p-2 border rounded-lg" required>
                     </div>
                     <div class="mb-4">
-                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Pertanian</label>
+                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Nama Lahan</label>
                         <select name="pertanian_id" id="pertanian_id" class="w-full p-2 border rounded-lg">
                             @foreach ($pertanians as $pertanian)
                             <option value="{{ $pertanian->id }}">{{ $pertanian->nama_pertanian }}</option>

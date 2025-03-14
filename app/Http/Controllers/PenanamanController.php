@@ -54,9 +54,14 @@ class PenanamanController extends Controller
             } elseif ($sort === 'z-a') {
                 $query->orderBy('created_at', 'asc');
             }
-        }
+        }   
 
-        $penanamans = $query->get();
+        $penanamans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir,
+            'sort' => $request->sort,
+        ]);
 
 
         // dd($penanamans->toArray());  
@@ -135,8 +140,16 @@ class PenanamanController extends Controller
      */
     public function edit(Penanaman $penanaman)
     {
-        $pertanians = Pertanian::all();
-        $tanamans = Tanaman::all();
+        $user = Auth::user();
+
+        $pertanians = Pertanian::whereHas('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->get();
+        $tanamans = Tanaman::whereHas('pertanian', function ($query) use ($user) {
+            $query->whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        })->get();
         return view('petani.penanamans.edit', compact('penanaman', 'pertanians', 'tanamans'));
     }
 
@@ -150,8 +163,9 @@ class PenanamanController extends Controller
         $validator = Validator::make($request->all(), [
             'pertanian_id' => 'required|exists:pertanians,id',
             'tanaman_id' => 'required|exists:tanamans,id',
+            'namaPenanaman' => 'required|string|max:225',
             'tanggal_tanam' => 'required|date',
-            'jumlah_tanaman' => 'required|integer',
+            'jumlah_tanaman' => 'required|integer|min:0',
         ], [
             'tanggal_tanam.date' => 'Date Required',
         ]);
@@ -166,8 +180,10 @@ class PenanamanController extends Controller
         $penanaman->update([
             'pertanian_id' => $request->pertanian_id,
             'tanaman_id' => $request->tanaman_id,
+            'nama' => $request->namaPenanaman,
             'tanggal_tanam' => $request->tanggal_tanam,
             'jumlah_tanaman' => $request->jumlah_tanaman,
+            'status' => 'Proses',
         ]);
 
         $this->logActivity('Edit Penanaman', 'Pengguna dengan nama ' . $id->name . ' mengedit tanaman yang ditanam pada lahan yang dikelolanya.');

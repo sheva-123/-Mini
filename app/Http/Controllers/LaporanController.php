@@ -33,19 +33,8 @@ class LaporanController extends Controller
         // Pencarian berdasarkan tanggal_laporan
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function ($q) use ($search, $user) {
-                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
-                    $subQ->where('nama_pertanian', 'like', "%$search%")
-                    ->whereHas('users', function ($userQ) use ($user) {
-                        $userQ->where('users.id', $user->id);
-                    });
-                })
-                ->orWhere('deskripsi', 'like', "%$search%");
-            });
-        }
-
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $query->whereBetween('tanggal_laporan', [$request->tanggal_awal, $request->tanggal_akhir]);
+            $query->where('nama', 'like', "%$search%")
+                ->orWhere('jumlah_tanaman', 'like', "%$search%");
         }
 
         if ($request->filled('sort')) {
@@ -57,7 +46,10 @@ class LaporanController extends Controller
             }
         }
 
-        $laporans = $query->get();
+        $laporans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'sort' => $request->sort,
+        ]);
 
         // dd($pengeluaran);
 

@@ -1,49 +1,50 @@
-<x-app-layout>
-    <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6 mt-4 mx-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengguna</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-gray-100 flex flex-wrap">
+    <!-- User Sidebar -->
+    <x-sidebar></x-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8 py-4 md:ml-64">
+        <header class="bg-gradient-to-r from-green-600 to-teal-600 py-6 px-8 shadow-md rounded-lg mb-6">
+            <div class="container mx-auto">
                 <h1 class="text-2xl font-bold text-white">Data Pengguna</h1>
                 <p class="text-white text-sm mt-1">Admin | Pengguna</p>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <div class="container mx-auto px-6 flex justify-between items-center">
-        <div class="flex w-2/2 gap-3">
-            <form action="{{ route('pengguna.index') }}" method="get">
-                <select name="filter"
-                    class="p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500 appearance-none w-full"
-                    onchange="this.form.submit()">
-                    <option value="">Semua</option>
-                    <option value="false" {{ request('filter') == 'false' ? 'selected' : '' }}>Belum Diberikan</option>
-                    <option value="true" {{ request('filter') == 'true' ? 'selected' : '' }}>Sudah Diberikan</option>
-                    <option value="verif" {{ request('filter') == 'verif' ? 'selected' : '' }}>Verifikasi</option>
+        <!-- Filter & Search -->
+        <div class="flex flex-wrap justify-between items-center gap-4">
+            <form action="{{ route('pengguna.index') }}" method="get" class="flex flex-wrap gap-3 items-center w-full md:w-auto">
+                <input type="text" name="search" placeholder="Cari..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200" value="{{ request('search') }}">
+                <select name="filter" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
+                    <option value="">Status</option>
+                    <option value="true" {{ request('filter') == 'true' ? 'selected' : '' }}>Sudah Punya</option>
+                    <option value="false" {{ request('filter') == 'false' ? 'selected' : '' }}>Belum Punya</option>
+                    <option value="verif" {{ request('filter') == 'cerif' ? 'selected' : '' }}>Verifikasi</option>
                 </select>
-            </form>
-
-            <!-- Search Input (Now Second) -->
-            <div class="flex border-1 border-gray-200 rounded-md focus-within:ring-2 ring-gray-500">
-                <form action="{{ route('pengguna.index') }}" method="GET" class="flex gap-2 w-full">
-                    <input type="text" name="search" placeholder=" Cari pengguna..."
-                        value="{{ request()->get('search') }}"
-                        class="w-[150px] p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-500">
-                    <button type="submit" class="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block">
-                        <svg class="w-4 h-4 fill-current" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-            </div>
+                <select name="sort" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-200">
+                    <option value="">Urutan Data</option>
+                    <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>Terbaru</option>
+                    <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Terlama</option>
+                </select>
+                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Filter</button>
             </form>
         </div>
-    </div>
 
-
-    <!-- User Table -->
-    <div class="container mx-auto mt-8 px-6">
-        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <!-- Table Data -->
+        <div class="mt-6 bg-white shadow-md rounded-lg p-6">
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-700 border-collapse">
                     <thead class="text-md text-gray-900 uppercase bg-green-100 border-b">
@@ -58,7 +59,7 @@
                     <tbody>
                         @foreach ($users as $user)
                         <tr class="bg-white border-b hover:bg-green-50 transition-all">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $users->firstItem() + $loop->index }}</td>
                             <td class="px-6 py-4 font-semibold">{{ $user->name }}</td>
                             <td class="px-6 py-4">{{ $user->email }}</td>
                             <td class="px-6 py-4 text-center">
@@ -97,9 +98,6 @@
                                 </button>
                                 @endif
                                 @endif
-
-
-
                             </td>
                         </tr>
                         @endforeach
@@ -110,54 +108,88 @@
                     <p class="text-gray-500">Tidak ada data yang tersedia.</p>
                 </div>
                 @endif
+
+                <div class="mt-4 flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        @if ($users->onFirstPage())
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-l-md cursor-not-allowed">
+                            <
+                                </li>
+                                @else
+                        <li>
+                            <a href="{{ $users->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
+                                << /a>
+                        </li>
+                        @endif
+
+                        @foreach ($users->links()->elements[0] as $page => $url)
+                        @if ($users->currentPage() == $page)
+                        <li class="px-2 py-1 text-white bg-green-600">{{ $page }}</li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="px-2 py-1 bg-white border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        @if ($users->hasMorePages())
+                        <li>
+                            <a href="{{ $users->appends(request()->query())->nextPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100">></a>
+                        </li>
+                        @else
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-r-md cursor-not-allowed">></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Modal Beri Lahan -->
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <h2 class="text-xl font-extrabold mb-4">Berikan lahan</h2>
-            <form action="{{ route('pengguna.store') }}" method="POST">
-                @csrf
+        <!-- Modal Beri Lahan -->
+        <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                <h2 class="text-xl font-extrabold mb-4">Berikan lahan</h2>
+                <form action="{{ route('pengguna.store') }}" method="POST">
+                    @csrf
 
-                <!-- Input hidden untuk user_id -->
-                <input type="hidden" id="modal_user_id" name="user_id">
+                    <!-- Input hidden untuk user_id -->
+                    <input type="hidden" id="modal_user_id" name="user_id">
 
-                <div class="mb-4">
-                    <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Lahan</label>
-                    <select id="pertanian_id" name="pertanian_id"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                        @foreach ($lahan as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" onclick="closeModal()"
-                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
-                        Batal
-                    </button>
-                    <button type="submit"
-                        class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-                        Simpan
-                    </button>
-                </div>
-            </form>
+                    <div class="mb-4">
+                        <label for="pertanian_id" class="block text-sm font-medium text-gray-700">Lahan</label>
+                        <select id="pertanian_id" name="pertanian_id"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            @foreach ($lahan as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_pertanian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" onclick="closeModal()"
+                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+
+
+
+        <script>
+            function openModal(userId) {
+                document.getElementById('modal').classList.remove('hidden');
+                document.getElementById('modal_user_id').value = userId;
+            }
+
+            function closeModal() {
+                document.getElementById('modal').classList.add('hidden');
+            }
+        </script>
+
     </div>
+</body>
 
-
-
-    <script>
-        function openModal(userId) {
-            document.getElementById('modal').classList.remove('hidden');
-            document.getElementById('modal_user_id').value = userId;
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-        }
-    </script>
-
-
-</x-app-layout>
+</html>

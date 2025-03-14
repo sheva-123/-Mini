@@ -36,11 +36,11 @@
                 </div>
                 <div class="bg-indigo-500 text-white p-4 rounded-lg">
                     <h3 class="text-lg font-semibold">Tanggal Panen</h3>
-                    <p class="text-2xl font-bold">{{ $pemanenan->tanggal_pemanenan ?? 'Tidak Ada Data' }}</p>
+                    <p class="text-2xl font-bold">{{ $pemanenan->tanggal_pemanenan ?? 'Belum Panen' }}</p>
                 </div>
                 <div class="bg-cyan-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Total Pengeluaran</h3>
-                    <p class="text-2xl font-bold">Rp {{ number_format($pengeluaranJml, 0, ',', '.') }}</p>
+                    <p class="text-2xl font-bold">Rp {{ number_format($pengeluaranJml, 0, ',', '.') ?? 'Tidak Ada' }}</p>
                 </div>
                 <div class="bg-amber-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Jumlah Tanaman</h3>
@@ -48,11 +48,11 @@
                 </div>
                 <div class="bg-sky-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Total Panen</h3>
-                    <p class="text-2xl font-bold">{{ $pemanenan->jumlah_hasil ?? 'Tidak Ada Data' }}</p>
+                    <p class="text-2xl font-bold">{{ $pemanenan->jumlah_hasil ?? 'Belum Panen' }}</p>
                 </div>
                 <div class="bg-emerald-500 text-white p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Status Panen</h3>
-                    <p class="text-2xl font-bold">{{ $pemanenan->status_panen ?? 'Tidak Ada Data' }}</p>
+                    <p class="text-2xl font-bold">{{ $pemanenan->status_panen ?? 'Belum Panen' }}</p>
                 </div>
             </div>
         </div>
@@ -71,27 +71,30 @@
                             <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">Jenis Pemeliharaan</th>
                             <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Biaya</th>
                             <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Kondisi Tanaman</th>
+                            <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Keterangan</th>
                             <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($pemeliharaan->isEmpty())
-                        <div class="text-center py-6">
-                            <p class="text-gray-500">Tidak ada data.</p>
-                        </div>
-                        @else
                         @foreach ($pemeliharaan as $pem)
                         <tr class="border-t">
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $pem->jenis_pemeliharaan }}</td>
                             <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $pem->biaya }}</td>
                             <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $pem->kondisi_tanaman }}</td>
-                            <td class="px-4 py-2 text-center text-sm text-green-500">{{ $pem->tanggal_pemeliharaan }}</td>
+                            <td class="px-4 py-2 text-center text-sm text-green-500">{{ $pem->keterangan ?? 'Tidak ada keterangan.' }}</td>
+                            <td class="px-4 py-2 text-center text-sm text-gray-700">{{ $pem->tanggal_pemeliharaan }}</td>
                         </tr>
                         @endforeach
-                        @endif
                     </tbody>
                 </table>
+                @if ($pemeliharaan->isEmpty())
+                <tr>
+                    <div class="text-center py-7">
+                        <p class="text-gray-500">Tidak ada data.</p>
+                    </div>
+                </tr>
+                @endif
             </div>
         </div>
 
@@ -102,29 +105,30 @@
                 <table class="min-w-full bg-white border">
                     <thead class="bg-gray-200">
                         <tr>
-                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">No</th>
-                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Jenis Pengeluaran</th>
+                            <th class="pl-4 pr-1 py-2 text-left text-sm font-medium text-gray-600">No</th>
+                            <th class="py-2 text-left text-sm font-medium text-gray-600">Jenis Pengeluaran</th>
                             <th class="px-4 py-2 text-center text-sm font-medium text-gray-600">Biaya</th>
                             <th class="px-4 py-2 text-center text-sm font-medium text-gray-600">Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($pengeluaran->isEmpty())
-                        <div class="text-center py-6">
-                            <p class="text-gray-500">Tidak ada data.</p>
-                        </div>
-                        @else
                         @foreach ($pengeluaran as $pen)
                         <tr class="border-t">
-                            <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2 text-sm text-gray-700">{{ $pen->jenis_pengeluaran }}</td>
+                            <td class="pl-4 pr-1 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
+                            <td class="py-2 text-sm text-gray-700">{{ $pen->jenis_pengeluaran }}</td>
                             <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $pen->biaya }}</td>
                             <td class="px-4 py-2 text-center text-sm text-green-500">{{ $pen->tanggal_pengeluaran }}</td>
                         </tr>
                         @endforeach
-                        @endif
                     </tbody>
                 </table>
+                @if ($pengeluaran->isEmpty())
+                <tr>
+                    <div class="text-center py-7">
+                        <p class="text-gray-500">Tidak ada data.</p>
+                    </div>
+                </tr>
+                @endif
             </div>
         </div>
     </div>

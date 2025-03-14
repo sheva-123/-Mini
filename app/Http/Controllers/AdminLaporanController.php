@@ -34,10 +34,6 @@ class AdminLaporanController extends Controller
             });
         }
 
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $query->whereBetween('tanggal_tanam', [$request->tanggal_awal, $request->tanggal_akhir]);
-        }
-
         if ($request->filled('sort')) {
             $sort = $request->sort;
             if ($sort === 'a-z') {
@@ -47,7 +43,10 @@ class AdminLaporanController extends Controller
             }
         }
 
-        $laporans = $query->get();
+        $laporans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'sort' => $request->sort,
+        ]);
 
         return view('admin.laporans.index', compact('laporans'));
     }
@@ -59,6 +58,7 @@ class AdminLaporanController extends Controller
         $pemeliharaan = Pemeliharaan::whereHas('penanaman', function ($query) use ($id) {
             $query->where('id', $id);
         })
+            ->latest()
             ->get();
 
         $pengeluaranJml = Pengeluaran::whereHas('penanaman', function ($query) use ($id) {
@@ -69,6 +69,7 @@ class AdminLaporanController extends Controller
         $pengeluaran = Pengeluaran::whereHas('penanaman', function ($query) use ($id) {
             $query->where('id', $id);
         })
+            ->latest()
             ->get();
 
         $pemanenan = Pemanenan::whereHas('penanaman', function ($query) use ($id) {

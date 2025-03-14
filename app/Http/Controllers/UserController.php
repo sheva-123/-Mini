@@ -9,36 +9,37 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $search = request()->input('search');
-        if ($search) {
-            $users = User::where('name', 'like', '%' . $search . '%')->get();
-        } else {
-            $users = User::whereDoesntHave('roles', function ($query) {
-                $query->where('name', 'admin');
-            })
-            ->with('pertanian')
-            ->get();
+        $query = User::whereDoesntHave('roles', function ($query) {
+                    $query->where('name', 'admin');
+                })
+                ->with('pertanian');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%");
         }
 
-        $filter = request()->input('filter');
-        if($filter) {
+        if ($request->filled('filter')) {
+            $filter = $request->filter;
             if($filter === 'false') {
-                $users = User::whereDoesntHave('roles', function ($query) {
-                    $query->where('name', 'admin');
-                })
-                ->where('status_lahan', false)
-                ->get();
+                $query->where('status_lahan', false);
             } elseif ($filter === 'true') {
-                $users = User::whereDoesntHave('roles', function ($query) {
-                    $query->where('name', 'admin');
-                })
-                ->where('status_lahan', true)
-                ->get();
+                $query->where('status_lahan', true);
             } elseif ($filter === 'verif') {
-                $users = User::doesntHave('roles')->get();
+                $query->doesntHave('roles');
+            }
+        }
+
+        if ($request->filled('sort')) {
+            $sort = $request->sort;
+            if ($sort === 'a-z') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($sort === 'z-a') {
+                $query->orderBy('created_at', 'asc');
             }
         }
 
@@ -52,10 +53,13 @@ class UserController extends Controller
 
         $userVerif = User::doesntHave('roles')->get();
 
-        $belum = 0;
-        $sudah = 1;
+        $users = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'filter' => $request->filter,
+            'sort' => $request->sort,
+        ]);
 
-        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers', 'userVerif', 'belum', 'sudah'));
+        return view('admin.pengguna.index', compact('users', 'lahan', 'addUsers', 'userVerif'));
     }
 
     public function verifikasi($id)

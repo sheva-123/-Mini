@@ -26,16 +26,16 @@
                     <!-- Kartu Ringkasan -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-blue-100 p-4 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold">Total Penanaman</h3>
-                            <p class="text-2xl font-bold text-blue-600">{{ $penanaman }}</p>
+                            <h3 class="text-lg font-semibold">Total Tanaman yang Di Tanam</h3>
+                            <p class="text-2xl font-bold text-blue-600">{{ $penanaman ?? '' }}</p>
                         </div>
                         <div class="bg-green-100 p-4 rounded-lg shadow">
-                            <h3 class="text-lg font-semibold">Total Pemanenan</h3>
-                            <p class="text-2xl font-bold text-green-600">{{ $pemanenan }}</p>
+                            <h3 class="text-lg font-semibold">Total Tanaman yang Di Panen</h3>
+                            <p class="text-2xl font-bold text-green-600">{{ $pemanenan ?? '' }}</p>
                         </div>
                         <div class="bg-red-100 p-4 rounded-lg shadow">
                             <h3 class="text-lg font-semibold">Kondisi Lahan</h3>
-                            <p class="text-2xl font-bold text-red-600">{{ $lahan->kondisi }}</p>
+                            <p class="text-2xl font-bold text-red-600">{{ $lahan->kondisi ?? 'Tidak Ada' }}</p>
                         </div>
                     </div>
 
@@ -52,22 +52,27 @@
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Umur Panen</th>
                                     </tr>
                                 </thead>
+
+                                @if (is_null($lahan) || empty($lahan))
                                 <tbody>
-                                    @if (is_null($lahan))
-                                    <div class="text-center py-6">
-                                        <p class="text-white-500">Tidak ada data.</p>
-                                    </div>
-                                    @else
-                                    <tr class="border-t">
-                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $lahan->nama_pertanian }}</td>
-                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $lahan->lokasi_pertanian }}</td>
-                                        <td class="px-4 py-2 text-center text-sm text-white-500">
-                                            {{ $lahan->tanaman->nama_tanaman }}
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-6 text-center text-sm font-bold text-gray-500">
+                                            Admin Belum Memberikan Anda Lahan.
                                         </td>
-                                        <td class="px-4 py-2 text-center text-sm text-white-500">{{ $lahan->tanaman->umur_panen }} Hari</td>
                                     </tr>
-                                    @endif
                                 </tbody>
+                                @else
+                                <tbody>
+                                    <tr class="border-t">
+                                        <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $lahan->nama_pertanian ?? '' }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $lahan->lokasi_pertanian ?? '' }}</td>
+                                        <td class="px-4 py-2 text-center text-sm text-gray-600">
+                                            {{ $lahan->tanaman->nama_tanaman ?? '' }}
+                                        </td>
+                                        <td class="px-4 py-2 text-center text-sm text-gray-600">{{ $lahan->tanaman->umur_panen ?? '' }} Hari</td>
+                                    </tr>
+                                </tbody>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -86,12 +91,16 @@
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Tanggal</th>
                                     </tr>
                                 </thead>
+                                @if ($pemeliharaan->isEmpty())
                                 <tbody>
-                                    @if (is_null($pemeliharaan))
-                                    <div class="text-center py-6">
-                                        <p class="text-white-500">Tidak ada data.</p>
-                                    </div>
-                                    @else
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-6 text-center text-sm font-bold text-gray-500">
+                                            Tidak Ada Data.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                @else
+                                <tbody>
                                     @foreach ($pemeliharaan as $pem)
                                     <tr class="border-t">
                                         <td class="px-4 py-2 text-left text-sm text-white-500">{{ $loop->iteration }}</td>
@@ -103,8 +112,8 @@
                                         <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $pem->created_at->diffForHumans()}}</td>
                                     </tr>
                                     @endforeach
-                                    @endif
                                 </tbody>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -122,12 +131,16 @@
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Tanggal</th>
                                     </tr>
                                 </thead>
+                                @if ($pengeluaran->isEmpty())
                                 <tbody>
-                                    @if (is_null($pengeluaran))
-                                    <div class="text-center py-6">
-                                        <p class="text-white-500">Tidak ada data.</p>
-                                    </div>
-                                    @else
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-6 text-center text-sm font-bold text-gray-500">
+                                            Tidak Ada Data.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                @else
+                                <tbody>
                                     @foreach ($pengeluaran as $peng)
                                     <tr class="border-t">
                                         <td class="px-4 py-2 text-left text-sm text-white-500">{{ $loop->iteration }}</td>
@@ -139,9 +152,8 @@
                                         <td class="px-4 py-2 text-center text-sm text-yellow-500">{{ $peng->created_at->diffForHumans() }}</td>
                                     </tr>
                                     @endforeach
-
-                                    @endif
                                 </tbody>
+                                @endif
                             </table>
                         </div>
                     </div>

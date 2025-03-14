@@ -59,7 +59,7 @@
                     <tbody>
                         @foreach ($penanamans as $p)
                         <tr class="bg-white border-b hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $penanamans->firstItem() + $loop->index }}</td>
                             <td class="px-6 py-4">{{ $p->nama }}</td>
                             <td class="px-6 py-4 text-center">{{ $p->tanaman->nama_tanaman }}</td>
                             <td class="px-6 py-4 text-center">{{ $p->tanggal_tanam }}</td>
@@ -79,16 +79,14 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 flex items-center space-x-4">
+                                @if ($p->status === 'Proses')
                                 <a href="{{ route('penanamans.edit', $p) }}" class="text-yellow-500 hover:text-yellow-700">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('penanamans.destroy', $p) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="deleteRecord(event)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
+                                @else
+                                <i class="fas fa-edit"></i>
+                                @endif
+
                             </td>
                         </tr>
                         @endforeach
@@ -99,6 +97,40 @@
                     <p class="text-gray-500">Tidak ada data yang tersedia.</p>
                 </div>
                 @endif
+
+                <div class="mt-4 flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        @if ($penanamans->onFirstPage())
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-l-md cursor-not-allowed">
+                            <
+                        </li>
+                        @else
+                        <li>
+                            <a href="{{ $penanamans->appends(request()->query())->previousPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100">
+                                <
+                            </a>
+                        </li>
+                        @endif
+
+                        @foreach ($penanamans->links()->elements[0] as $page => $url)
+                        @if ($penanamans->currentPage() == $page)
+                        <li class="px-2 py-1 text-white bg-green-600">{{ $page }}</li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="px-2 py-1 bg-white border border-gray-300 hover:bg-gray-100">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        @if ($penanamans->hasMorePages())
+                        <li>
+                            <a href="{{ $penanamans->appends(request()->query())->nextPageUrl() }}" class="px-2 py-1 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100">></a>
+                        </li>
+                        @else
+                        <li class="px-2 py-1 text-gray-400 bg-gray-200 rounded-r-md cursor-not-allowed">></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

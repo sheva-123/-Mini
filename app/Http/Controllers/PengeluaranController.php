@@ -27,20 +27,19 @@ class PengeluaranController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function ($q) use ($search, $user) {
-                $q->whereHas('pertanian', function ($subQ) use ($search, $user) {
-                    $subQ->where('nama_pertanian', 'like', "%$search%")
-                        ->whereHas('users', function ($userQ) use ($user) {
-                            $userQ->where('users.id', $user->id);
-                        });
-                })
-                    ->orWhere('nama', 'like', "%$search%")
+            $query->where(function ($q) use ($search) {
+                $q->Where('nama', 'like', "%$search%")
                     ->orWhere('jumlah_tanaman', 'like', "%$search%");
             });
         }
 
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $query->whereBetween('tanggal_tanam', [$request->tanggal_awal, $request->tanggal_akhir]);
+        if ($request->filled('status')) {
+            $status = $request->status;
+            if ($status === 'Proses') {
+                $query->where('status', $status);
+            } elseif ($status === 'Selesai') {
+                $query->where('status', $status);
+            }
         }
 
         if ($request->filled('sort')) {
@@ -52,7 +51,12 @@ class PengeluaranController extends Controller
             }
         }
 
-        $pengeluarans = $query->get();
+
+        $pengeluarans = $query->latest()->paginate(5)->appends([
+            'search' => $request->search,
+            'status' => $request->status,
+            'sort' => $request->sort,
+        ]);
 
         return view('petani.pengeluarans.index', compact('pengeluarans'));
     }
@@ -61,6 +65,7 @@ class PengeluaranController extends Controller
     {
         $pengeluarans = Pengeluaran::where('penanaman_id', $id)
                                     ->with('penanaman')
+                                    ->latest()
                                     ->get();
 
 
