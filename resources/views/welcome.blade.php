@@ -1,67 +1,86 @@
 <x-guest-layout>
     <!-- nav bar section -->
-    <nav class="flex items-center justify-between py-1 px-3 bg-white fixed w-full z-10 top-0 border-b-2">
-        <!-- Logo di kiri -->
-        <div class="flex items-center flex-shrink-0 text-white">
-            <a href="#home">
-                <img src="assets/images/bg/LOGO MANAJEMEN.png" alt="logo nav" class="mix-blend-multiply"
-                    style="width: 50px; height: auto; object-fit: cover;" />
-            </a>
-        </div <!-- Navlinks di tengah -->
-        <div class="hidden md:flex flex-grow justify-center space-x-2 text-sm ml-7">
-            <a href="#home"
-                class="hover:text-[#047857] px-1 py-2 border-b-2 border-transparent hover:border-[#047857]">Beranda</a>
-            <a href="#services"
-                class="hover:text-[#047857] px-1 py-2 border-b-2 border-transparent hover:border-[#047857]">Tanaman</a>
-            <a href="#aboutus"
-                class="hover:text-[#047857] px-1 py-2 border-b-2 border-transparent hover:border-[#047857]">Tentang
-                Kami</a>
-            <a href="#gallery"
-                class="hover:text-[#047857] px-1 py-2 border-b-2 border-transparent hover:border-[#047857]">Galeri</a>
-            <a href="#contactUs"
-                class="hover:text-[#047857] px-1 py-2 border-b-2 border-transparent hover:border-[#047857]">Hubungi
-                Kami</a>
-        </div>
+    <nav id="navbar" class="fixed top-0 w-full z-10 transition duration-300 bg-transparent text-white">
+        <div class="flex items-center justify-between py-3 px-5">
+            <!-- Logo di kiri -->
+            <div>
+                <a href="#home">
+                    <img src="assets/images/bg/LOGO MANAJEMEN.png" alt="logo nav"
+                        class="mix-blend-multiply w-12 h-auto object-cover" />
+                </a>
+            </div>
 
-        <!-- Button Register & Login di kanan -->
-        <div class="hidden md:flex space-x-2">
-            <a href="/register"
-                class="flex items-center h-10 rounded-md bg-[#047857] hover:bg-green-700 text-white font-medium px-6 py-4">
-                Daftar
-            </a>
-            <a href="/login"
-                class="flex items-center h-10 text-[#047857] hover:text-[#047857] font-medium px-6 py-4 border border-[#047857] hover:border-[#047857] rounded-md">
-                <span>Masuk</span>
-            </a>
-        </div>
+            <!-- Navlinks di tengah -->
+            <div class="hidden md:flex space-x-4 text-sm">
+                <a href="#home"
+                    class="text-black hover:text-green-600 border-b-2 border-transparent hover:border-green-600">Beranda</a>
+                <a href="#services"
+                    class="text-black hover:text-green-600 border-b-2 border-transparent hover:border-green-600">Tanaman</a>
+                <a href="#aboutus"
+                    class="text-black hover:text-green-600 border-b-2 border-transparent hover:border-green-600">Tentang
+                    Kami</a>
+                <a href="#gallery"
+                    class="text-black hover:text-green-600 border-b-2 border-transparent hover:border-green-600">Galeri</a>
+                <a href="#contactUs"
+                    class="text-black hover:text-green-600 border-b-2 border-transparent hover:border-green-600">Hubungi
+                    Kami</a>
 
-        <!-- Hamburger menu untuk mobile -->
-        <div class="md:hidden">
-            <button id="hamburger">
-                <img class="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png"
-                    width="40" height="40" />
-            </button>
+            </div>
+
+            <!-- Button Register & Login di kanan -->
+            <div class="hidden md:flex space-x-2">
+                <a href="/register" class="bg-[#047857] hover:bg-[#047857] text-white font-inter px-6 py-2 rounded-md">
+                    Daftar
+                </a>
+                <a href="/login"
+                    class="text-[#047857] border border-[#047857] hover:text-[#047857] hover:border-[#047857] font-medium px-6 py-2 rounded-md">
+                    Masuk
+                </a>
+            </div>
+
+            <!-- Hamburger menu untuk mobile -->
+            <div class="md:hidden">
+                <button id="hamburger">
+                    <img src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40"
+                        height="40" />
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- hero seciton -->
-    <div class="relative" style="width: 100%; height: 590px;" id="home">
-        <div class="absolute inset-0">
-            <img src="assets/images/LP.png" alt="Background Image"
-                style="width: 100%; height: 100%;  object-position: top;" />
-        </div>
+    <!-- Hero section -->
+    <div class="relative w-full h-auto" id="home">
+        <img src="assets/images/LP.png" alt="Background Image"
+            class="w-full h-auto">
+        <!-- Efek gradasi bawah -->
+        <div class="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent to-[#f8f8f8]"></div>
+    </div>
 
-        <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
-            <div class="md:w-1/2 mb-4 md:mb-0 mt-10">
-                <h1 class="text-[#FFD836] font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian</h1>
-                <h1 class="text-[#ffffff] font-medium text-4xl md:text-5xl leading-tight mb-2">Pertanian Cerdas dan
-                    Berkelanjutan</h1>
-                <p class="font-regular text-xs mt-2 text-[#ffffff]">Pengelolaan sumber daya dalam sektor pertanian untuk
-                    mencapai efisiensi dan produktivitas yang optimal. Kami menghadirkan inovasi teknologi terkini,
-                    metode pertanian berkelanjutan, dan dukungan ahli untuk meningkatkan hasil panen Anda secara
-                    signifikan.</p>
-            </div>
+    <script>
+        window.addEventListener("scroll", function() {
+            var navbar = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("bg-white", "text-black", "backdrop-blur-md", "shadow-md");
+                navbar.classList.remove("bg-transparent", "text-white");
+            } else {
+                navbar.classList.add("bg-transparent", "text-white");
+                navbar.classList.remove("bg-white", "text-black", "backdrop-blur-md", "shadow-md");
+            }
+        });
+    </script>
+
+
+    <div class="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mb-4 md:mb-0 mt-10">
+            <h1 class="text-[#FFD836] font-medium text-4xl md:text-5xl leading-tight mb-2">Manajemen Pertanian</h1>
+            <h1 class="text-[#ffffff] font-medium text-4xl md:text-5xl leading-tight mb-2">Pertanian Cerdas dan
+                Berkelanjutan</h1>
+            <p class="font-regular text-xs mt-2 text-[#ffffff]">Pengelolaan sumber daya dalam sektor pertanian untuk
+                mencapai efisiensi dan produktivitas yang optimal. Kami menghadirkan inovasi teknologi terkini,
+                metode pertanian berkelanjutan, dan dukungan ahli untuk meningkatkan hasil panen Anda secara
+                signifikan.</p>
         </div>
+    </div>
     </div>
 
     <!-- our services section -->
@@ -405,7 +424,7 @@
                             </div>
                             <div class="border-t border-gray-200 px-6 py-4">
                                 <h3 class="text-lg font-medium text-gray-900">Jam Buka</h3>
-                                <p class="mt-1 text-gray-600">Minggu - Senin : 2pm - 9pm</p>
+                                <p class="mt-1 text-gray-600">Minggu - Senin : 14.00 - 21.00</p>
                             </div>
                         </div>
                     </div>
