@@ -45,7 +45,7 @@
                         <h3 class="text-lg font-bold text-gray-800">Informasi Lahan</h3>
                         <div class="mt-4 overflow-x-auto">
                             <table class="min-w-full bg-white border">
-                                <thead class="bg-gray-200">
+                                <thead class="bg-[#D1FAE5]">
                                     <tr>
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Nama Lahan</th>
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Lokasi</th>
@@ -83,7 +83,7 @@
                         <h3 class="text-lg font-bold text-gray-800">History Pemeliharaan</h3>
                         <div class="mt-4 overflow-x-auto">
                             <table class="min-w-full bg-white border">
-                                <thead class="bg-gray-200">
+                                <thead class="bg-[#D1FAE5]">
                                     <tr>
                                         <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">No</th>
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Penanaman</th>
@@ -123,7 +123,7 @@
                         <h3 class="text-lg font-bold text-gray-800">History Pengeluaran</h3>
                         <div class="mt-4 overflow-x-auto">
                             <table class="min-w-full bg-white border">
-                                <thead class="bg-gray-200">
+                                <thead class="bg-[#D1FAE5]">
                                     <tr>
                                         <th class="px-4 py-2 h-12 text-left text-sm font-medium text-gray-600">No</th>
                                         <th class="px-4 py-2 h-12 text-center text-sm font-medium text-gray-600">Penanaman</th>
