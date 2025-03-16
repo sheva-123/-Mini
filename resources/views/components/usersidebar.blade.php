@@ -14,7 +14,7 @@
 <body class="bg-green-50">
     <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-green-700 text-white w-64 h-[580px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4 overflow-y-auto">
+        <div class="bg-green-700 text-white w-64 h-[500px] fixed shadow-lg rounded-lg px-4 py-6 ml-4 mt-4 overflow-y-auto">
             <!-- Profile Section -->
             <div class="flex items-center space-x-4 mb-6">
                 <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Profile" class="w-16 h-16 rounded-full object-cover">
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <h2 class="text-2xl font-semibold mb-8 text-center text-white">Agri Management</h2>
+            <h2 class="text-xl font-inter mb-8 text-center text-white">Management Pertanian</h2>
             <!-- Sidebar Menu Items -->
             <div class="space-y-4">
                 <a href="{{ route('user.home') }}"

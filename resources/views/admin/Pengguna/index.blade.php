@@ -10,8 +10,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+<x-navbar></x-navbar>
 
-<body class="bg-gray-100 flex flex-wrap">
+<body class="bg-gray-100 flex flex-wrap pt-20">
     <!-- User Sidebar -->
     <x-sidebar></x-sidebar>
 
@@ -47,7 +48,7 @@
         <div class="mt-6 bg-white shadow-md rounded-lg p-6">
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-700 border-collapse">
-                    <thead class="text-md text-gray-900 uppercase bg-green-100 border-b">
+                    <thead class="text-md text-gray-900 uppercase bg-[#D1FAE5] border-b">
                         <tr>
                             <th class="px-6 py-3">No</th>
                             <th class="px-6 py-3">Nama Pengguna</th>

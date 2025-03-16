@@ -54,8 +54,9 @@
         }
     </style>
 </head>
+<x-navbar></x-navbar>
 
-<body class="bg-gray-100 flex flex-wrap">
+<body class="bg-gray-100 flex flex-wrap pt-20">
     <!-- User Sidebar -->
     <x-sidebar></x-sidebar>
 
