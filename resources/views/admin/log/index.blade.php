@@ -10,8 +10,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+<x-navbar></x-navbar>
 
-<body class="bg-gray-100 flex flex-wrap">
+<body class="bg-gray-100 flex flex-wrap pt-20">
     <x-sidebar></x-sidebar>
 
     <div class="flex-1 p-3 py-1 md:ml-64">
@@ -46,7 +47,7 @@
         <div class="mt-7 mx-6 bg-white shadow-md rounded-lg p-6">
             <div class="mt-1 overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-700 border-collapse">
-                    <thead class="text-md text-gray-900 uppercase bg-green-100 border-b">
+                    <thead class="text-md text-gray-900 uppercase bg-[#D1FAE5] border-b">
                         <tr>
                             <th class="px-4 py-2 text-left text-gray-600">Nama Pengguna</th>
                             <th class="px-4 py-2 text-center text-gray-600">Aktifitas</th>

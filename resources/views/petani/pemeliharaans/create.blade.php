@@ -10,8 +10,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+<x-navbar></x-navbar>
 
-<body class="bg-gray-100 flex flex-wrap">
+<body class="bg-gray-100 flex flex-wrap pt-20">
     <x-usersidebar></x-usersidebar>
 
     <div class="flex-1 p-3 py-1 md:ml-64">
